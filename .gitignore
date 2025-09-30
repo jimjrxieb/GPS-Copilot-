@@ -64,3 +64,8 @@ docker-volumes/
 
 # Backups
 GP-DATA/backups/
+
+# Large binaries (download separately)
+GP-TOOLS/binaries/kubescape
+GP-TOOLS/binaries/tfsec
+GP-TOOLS/binaries/gitleaks
