@@ -1,0 +1,42 @@
+# GP-Copilot Docker Requirements
+# All dependencies needed for GP-JADE AI Security Engine
+
+# Core Python dependencies
+PyYAML>=6.0
+pathlib2>=2.3.7
+
+# AI/ML dependencies
+torch>=2.0.0
+transformers>=4.36.0
+sentence-transformers>=2.2.2
+accelerate>=0.25.0
+bitsandbytes>=0.41.0  # For model quantization
+
+# Vector database
+chromadb>=0.4.18
+chromadb-client>=0.4.18
+
+# API framework
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+
+# Security scanning integration
+pyyaml>=6.0
+requests>=2.31.0
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-asyncio>=0.21.0
+
+# Utilities
+python-dotenv>=1.0.0
+tqdm>=4.66.0
+
+# OPA integration
+opa-python-client>=1.3.0
+
+# Additional utilities
+aiofiles>=23.2.1
+httpx>=0.25.0

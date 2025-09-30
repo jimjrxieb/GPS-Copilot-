@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # GP-JADE AI Security Engine
+  gp-jade:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gp-jade
+    ports:
+      - "8000:8000"  # API endpoint
+    volumes:
+      # Persistent vector database (can be pushed to GitHub)
+      - ./GP-DATA/vector-db:/app/GP-DATA/vector-db
+      # Hugging Face cache (downloads models locally)
+      - huggingface-cache:/root/.cache/huggingface
+      # Project files
+      - ./GP-AI:/app/GP-AI
+      - ./GP-PROJECTS:/app/GP-PROJECTS
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CUDA_VISIBLE_DEVICES=0
+      - HF_HOME=/root/.cache/huggingface
+      - TRANSFORMERS_CACHE=/root/.cache/huggingface
+      # OPA integration
+      - OPA_URL=http://opa:8181
+      - GATEKEEPER_ENABLED=true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    depends_on:
+      - opa
+    networks:
+      - gp-network
+
+  # Open Policy Agent (OPA)
+  opa:
+    image: openpolicyagent/opa:latest
+    container_name: gp-opa
+    ports:
+      - "8181:8181"
+    command:
+      - "run"
+      - "--server"
+      - "--addr=0.0.0.0:8181"
+      - "--log-level=info"
+      - "/policies"
+    volumes:
+      # OPA policies (can be pushed to GitHub)
+      - ./opa-policies:/policies
+    networks:
+      - gp-network
+
+  # Gatekeeper (Kubernetes admission controller - optional for K8s integration)
+  gatekeeper:
+    image: openpolicyagent/gatekeeper:v3.14.0
+    container_name: gp-gatekeeper
+    ports:
+      - "8443:8443"
+    volumes:
+      # Gatekeeper constraints and templates
+      - ./gatekeeper-policies:/gatekeeper
+    environment:
+      - GATEKEEPER_NAMESPACE=gatekeeper-system
+    networks:
+      - gp-network
+    profiles:
+      - kubernetes  # Only start if running with --profile kubernetes
+
+volumes:
+  # Hugging Face model cache (local only, not pushed to GitHub)
+  huggingface-cache:
+    driver: local
+
+networks:
+  gp-network:
+    driver: bridge

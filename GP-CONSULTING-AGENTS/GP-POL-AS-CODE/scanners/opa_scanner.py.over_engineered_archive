@@ -1,0 +1,522 @@
+#!/usr/bin/env python3
+"""
+OPA Scanner - Threat-Driven Policy Compliance and Security Analysis
+
+This scanner integrates with the comprehensive OPA policy framework.
+Not just checking configs - validating security engineering principles.
+
+Policy Framework: GP-CONSULTING-AGENTS/policies/
+- README.md: Engineering principles
+- THREAT_MODEL.md: Attack vectors and mitigations
+- COMPLIANCE_MAPPINGS.md: Regulatory requirements
+- opa/admission-control/: Kubernetes security policies
+"""
+
+import subprocess
+import json
+import os
+import sys
+import tempfile
+import yaml
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, List, Optional
+
+class OpaScanner:
+    """
+    Threat-model-driven OPA policy scanner
+
+    Understands WHY policies exist, not just WHAT they check.
+    """
+
+    def __init__(self):
+        # OPA binary location
+        self.tool_path = self._find_opa_binary()
+
+        # Policy framework location
+        self.framework_dir = Path(__file__).parent.parent / "policies"
+        self.policies_dir = self.framework_dir / "opa"
+
+        # Ensure framework exists
+        if not self.framework_dir.exists():
+            raise RuntimeError(
+                "OPA policy framework not found. Expected at: "
+                f"{self.framework_dir}\n"
+                "Run: See GP-CONSULTING-AGENTS/policies/README.md"
+            )
+
+        # Load threat model and compliance mappings
+        self.threat_model = self._load_threat_model()
+        self.compliance_mappings = self._load_compliance_mappings()
+
+    def scan(self, target_path: str) -> dict:
+        """
+        Run threat-model-driven policy evaluation
+
+        Returns findings with:
+        - Attack vector mapping
+        - Compliance control mapping
+        - Severity based on business impact
+        """
+        target = Path(target_path)
+        if not target.exists():
+            raise ValueError(f"Target does not exist: {target_path}")
+
+        print(f"🔍 OPA Policy Evaluation: {target_path}")
+        print(f"📚 Policy Framework: {self.framework_dir}")
+
+        findings = []
+        summary = {
+            "total": 0,
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "threat_vectors": set(),
+            "compliance_controls": set()
+        }
+
+        try:
+            # Find Kubernetes manifests and configs
+            k8s_files = self._find_kubernetes_files(target)
+            terraform_files = self._find_terraform_files(target)
+            docker_files = self._find_docker_files(target)
+
+            print(f"📄 Found: {len(k8s_files)} K8s, {len(terraform_files)} Terraform, {len(docker_files)} Docker files")
+
+            # Evaluate Kubernetes admission policies
+            if k8s_files:
+                print("🛡️  Evaluating Kubernetes security policies...")
+                for file_path in k8s_files:
+                    file_findings = self._evaluate_kubernetes_policies(file_path, target_path)
+                    findings.extend(file_findings)
+
+            # Evaluate Terraform policies
+            if terraform_files:
+                print("🏗️  Evaluating Terraform IaC policies...")
+                for file_path in terraform_files:
+                    file_findings = self._evaluate_terraform_policies(file_path, target_path)
+                    findings.extend(file_findings)
+
+            # Evaluate Docker policies
+            if docker_files:
+                print("🐳 Evaluating Docker security policies...")
+                for file_path in docker_files:
+                    file_findings = self._evaluate_docker_policies(file_path, target_path)
+                    findings.extend(file_findings)
+
+            # Aggregate findings
+            for finding in findings:
+                summary["total"] += 1
+                severity = finding.get("severity", "medium").lower()
+                if severity in summary:
+                    summary[severity] += 1
+
+                # Track threat vectors and compliance
+                if finding.get("threat_vector"):
+                    summary["threat_vectors"].add(finding["threat_vector"])
+                if finding.get("compliance_control"):
+                    summary["compliance_controls"].add(finding["compliance_control"])
+
+            # Convert sets to lists for JSON serialization
+            summary["threat_vectors"] = list(summary["threat_vectors"])
+            summary["compliance_controls"] = list(summary["compliance_controls"])
+
+            return {
+                "findings": findings,
+                "summary": summary,
+                "target": target_path,
+                "policies_evaluated": self._count_policies(),
+                "scan_timestamp": datetime.now().isoformat(),
+                "framework_version": self._get_framework_version()
+            }
+
+        except Exception as e:
+            raise RuntimeError(f"OPA policy evaluation failed: {e}")
+
+    def _evaluate_kubernetes_policies(self, file_path: Path, target_path: str) -> List[Dict]:
+        """Evaluate Kubernetes manifests against admission control policies"""
+        findings = []
+
+        try:
+            with open(file_path, 'r') as f:
+                # Handle multi-document YAML
+                docs = list(yaml.safe_load_all(f))
+
+            for doc in docs:
+                if not doc or not isinstance(doc, dict):
+                    continue
+
+                # Only evaluate Pod-related resources
+                kind = doc.get("kind", "")
+                if kind not in ["Pod", "Deployment", "StatefulSet", "DaemonSet", "Job", "CronJob"]:
+                    continue
+
+                # Create OPA input format (K8s admission review)
+                input_data = {
+                    "request": {
+                        "object": doc,
+                        "userInfo": {"username": "scanner"},
+                        "operation": "CREATE"
+                    }
+                }
+
+                # Evaluate against pod-security.rego
+                policy_file = self.policies_dir / "admission-control" / "pod-security.rego"
+                if policy_file.exists():
+                    violations = self._run_opa_eval(
+                        input_data,
+                        policy_file,
+                        query="data.kubernetes.admission.security.pods.violation"
+                    )
+
+                    for violation in violations:
+                        findings.append({
+                            "file": str(file_path.relative_to(Path(target_path))),
+                            "resource": f"{kind}/{doc.get('metadata', {}).get('name', 'unknown')}",
+                            "policy": "pod-security-standards",
+                            "message": violation.get("msg", "Security violation"),
+                            "severity": violation.get("severity", "medium").upper(),
+                            "control": violation.get("control", ""),
+                            "threat_vector": self._map_to_threat(violation.get("control", "")),
+                            "compliance_control": violation.get("control", ""),
+                            "remediation": self._get_remediation(violation.get("control", ""))
+                        })
+
+                # Evaluate against network-policies.rego
+                network_policy_file = self.policies_dir / "admission-control" / "network-policies.rego"
+                if network_policy_file.exists():
+                    network_violations = self._run_opa_eval(
+                        input_data,
+                        network_policy_file,
+                        query="data.kubernetes.admission.security.network.violation"
+                    )
+
+                    for violation in network_violations:
+                        findings.append({
+                            "file": str(file_path.relative_to(Path(target_path))),
+                            "resource": f"{kind}/{doc.get('metadata', {}).get('name', 'unknown')}",
+                            "policy": "network-segmentation",
+                            "message": violation.get("msg", "Network security violation"),
+                            "severity": violation.get("severity", "medium").upper(),
+                            "control": violation.get("control", ""),
+                            "threat_vector": "Lateral Movement / Data Exfiltration",
+                            "compliance_control": violation.get("control", "")
+                        })
+
+        except Exception as e:
+            findings.append({
+                "file": str(file_path.relative_to(Path(target_path))),
+                "policy": "evaluation_error",
+                "message": f"Failed to evaluate: {str(e)}",
+                "severity": "LOW"
+            })
+
+        return findings
+
+    def _evaluate_terraform_policies(self, file_path: Path, target_path: str) -> List[Dict]:
+        """Evaluate Terraform files for IaC security"""
+        findings = []
+
+        try:
+            with open(file_path, 'r') as f:
+                content = f.read()
+
+            # Infrastructure security checks
+            checks = [
+                {
+                    "pattern": 'cidr_blocks = ["0.0.0.0/0"]',
+                    "message": "Security Group allows unrestricted access (0.0.0.0/0)",
+                    "severity": "HIGH",
+                    "control": "CIS-AWS-1.2.1",
+                    "threat": "External Attack / Network Exposure"
+                },
+                {
+                    "pattern": 'encrypt = false',
+                    "message": "Encryption at rest disabled",
+                    "severity": "HIGH",
+                    "control": "CIS-AWS-2.1",
+                    "threat": "Data Breach / Unauthorized Access"
+                },
+                {
+                    "pattern": 'encrypted = false',
+                    "message": "Encryption disabled",
+                    "severity": "HIGH",
+                    "control": "CIS-AWS-2.1",
+                    "threat": "Data Breach"
+                },
+                {
+                    "pattern": 'map_public_ip_on_launch = true',
+                    "message": "Public subnet auto-assigns public IPs",
+                    "severity": "MEDIUM",
+                    "control": "CIS-AWS-4.1",
+                    "threat": "Network Exposure"
+                }
+            ]
+
+            for check in checks:
+                if check["pattern"] in content:
+                    findings.append({
+                        "file": str(file_path.relative_to(Path(target_path))),
+                        "policy": "terraform-iac-security",
+                        "message": check["message"],
+                        "severity": check["severity"],
+                        "control": check["control"],
+                        "threat_vector": check["threat"],
+                        "compliance_control": check["control"],
+                        "line": self._find_line_number(content, check["pattern"])
+                    })
+
+        except Exception:
+            pass
+
+        return findings
+
+    def _evaluate_docker_policies(self, file_path: Path, target_path: str) -> List[Dict]:
+        """Evaluate Dockerfile security"""
+        findings = []
+
+        try:
+            with open(file_path, 'r') as f:
+                lines = f.readlines()
+
+            for i, line in enumerate(lines, 1):
+                line_lower = line.lower().strip()
+
+                # Container security checks
+                if line_lower.startswith('user root') or line_lower == 'user 0':
+                    findings.append({
+                        "file": str(file_path.relative_to(Path(target_path))),
+                        "policy": "docker-security",
+                        "message": "Container runs as root user (UID 0)",
+                        "severity": "HIGH",
+                        "control": "CIS-5.2.6",
+                        "threat_vector": "Privilege Escalation / Container Escape",
+                        "compliance_control": "CIS-5.2.6",
+                        "line": i,
+                        "remediation": "Set USER to non-root UID (e.g., USER 1000)"
+                    })
+
+                if ':latest' in line_lower and line_lower.startswith('from'):
+                    findings.append({
+                        "file": str(file_path.relative_to(Path(target_path))),
+                        "policy": "docker-security",
+                        "message": "Using 'latest' tag - supply chain risk",
+                        "severity": "MEDIUM",
+                        "control": "SUPPLY-CHAIN",
+                        "threat_vector": "Supply Chain Attack",
+                        "line": i,
+                        "remediation": "Pin to specific image version (e.g., FROM image:1.2.3)"
+                    })
+
+        except Exception:
+            pass
+
+        return findings
+
+    def _run_opa_eval(self, input_data: dict, policy_file: Path, query: str) -> List[Dict]:
+        """Execute OPA evaluation and return violations"""
+        violations = []
+
+        try:
+            # Create temporary input file
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
+                json.dump(input_data, f)
+                input_file = f.name
+
+            cmd = [
+                self.tool_path,
+                "eval",
+                "-d", str(policy_file),
+                "-i", input_file,
+                "--format", "json",
+                query
+            ]
+
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+
+            if result.returncode == 0 and result.stdout:
+                opa_result = json.loads(result.stdout)
+
+                # Parse OPA result format
+                if opa_result.get("result"):
+                    for item in opa_result["result"]:
+                        expressions = item.get("expressions", [])
+                        for expr in expressions:
+                            value = expr.get("value", [])
+                            if isinstance(value, list):
+                                violations.extend(value)
+
+            # Clean up temp file
+            os.unlink(input_file)
+
+        except Exception as e:
+            print(f"⚠️  OPA evaluation error: {e}")
+
+        return violations
+
+    def _find_kubernetes_files(self, target: Path) -> List[Path]:
+        """Find Kubernetes manifest files"""
+        files = []
+        for ext in ['*.yaml', '*.yml']:
+            files.extend(target.glob(f"**/{ext}"))
+
+        # Filter to actual K8s manifests (have 'kind:' field)
+        k8s_files = []
+        for f in files[:50]:  # Limit
+            try:
+                with open(f) as file:
+                    if 'kind:' in file.read():
+                        k8s_files.append(f)
+            except:
+                pass
+
+        return k8s_files
+
+    def _find_terraform_files(self, target: Path) -> List[Path]:
+        """Find Terraform files"""
+        return list(target.glob("**/*.tf"))[:30]
+
+    def _find_docker_files(self, target: Path) -> List[Path]:
+        """Find Dockerfiles"""
+        return list(target.glob("**/Dockerfile")) + list(target.glob("**/*.dockerfile"))
+
+    def _find_opa_binary(self) -> str:
+        """Find OPA binary"""
+        candidates = [
+            "/home/jimmie/linkops-industries/James-OS/guidepoint/bin/opa",
+            "/usr/local/bin/opa",
+            "/usr/bin/opa"
+        ]
+
+        for path in candidates:
+            if os.path.exists(path):
+                return path
+
+        raise RuntimeError("OPA binary not found. Install from https://www.openpolicyagent.org/docs/latest/#running-opa")
+
+    def _load_threat_model(self) -> Dict:
+        """Load threat model mappings"""
+        threat_model_file = self.framework_dir / "THREAT_MODEL.md"
+        if threat_model_file.exists():
+            return {"loaded": True, "source": str(threat_model_file)}
+        return {"loaded": False}
+
+    def _load_compliance_mappings(self) -> Dict:
+        """Load compliance control mappings"""
+        compliance_file = self.framework_dir / "COMPLIANCE_MAPPINGS.md"
+        if compliance_file.exists():
+            return {"loaded": True, "source": str(compliance_file)}
+        return {"loaded": False}
+
+    def _map_to_threat(self, control: str) -> str:
+        """Map compliance control to threat vector"""
+        threat_map = {
+            "CIS-5.2.5": "Container Escape → Host Compromise",
+            "CIS-5.2.6": "Privilege Escalation",
+            "CIS-5.2.3": "Privilege Escalation",
+            "CIS-5.3.2": "Lateral Movement",
+            "CIS-5.7.3": "Resource Exhaustion / DoS"
+        }
+        return threat_map.get(control, "Security Misconfiguration")
+
+    def _get_remediation(self, control: str) -> str:
+        """Get remediation guidance"""
+        remediation_map = {
+            "CIS-5.2.5": "Set privileged: false in securityContext",
+            "CIS-5.2.6": "Set runAsUser: 1000 (non-root) in securityContext",
+            "CIS-5.2.3": "Set allowPrivilegeEscalation: false",
+            "CIS-5.3.2": "Create NetworkPolicy for namespace",
+            "CIS-5.7.3": "Add resource limits (cpu/memory)"
+        }
+        return remediation_map.get(control, "See policy documentation")
+
+    def _count_policies(self) -> int:
+        """Count loaded policies"""
+        if not self.policies_dir.exists():
+            return 0
+        return len(list(self.policies_dir.rglob("*.rego")))
+
+    def _get_framework_version(self) -> str:
+        """Get policy framework version"""
+        readme = self.framework_dir / "README.md"
+        if readme.exists():
+            return "threat-driven-v1.0"
+        return "unknown"
+
+    def _find_line_number(self, content: str, search_text: str) -> int:
+        """Find line number of text in content"""
+        for i, line in enumerate(content.split('\n'), 1):
+            if search_text in line:
+                return i
+        return 1
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python3 opa_scanner.py <target_path>")
+        print("\nThis scanner uses the threat-driven OPA policy framework.")
+        print("Framework location: GP-CONSULTING-AGENTS/policies/")
+        print("Documentation: See README.md, THREAT_MODEL.md, COMPLIANCE_MAPPINGS.md")
+        sys.exit(1)
+
+    try:
+        scanner = OpaScanner()
+        results = scanner.scan(sys.argv[1])
+
+        print(f"\n{'='*60}")
+        print(f"🎯 OPA POLICY SCAN RESULTS")
+        print(f"{'='*60}")
+        print(f"Target: {results['target']}")
+        print(f"Policies: {results['policies_evaluated']} loaded")
+        print(f"Framework: {results['framework_version']}")
+        print(f"\n📊 SUMMARY:")
+        print(f"  Total Issues: {results['summary']['total']}")
+
+        if results['summary']['total'] > 0:
+            print(f"  🔴 Critical: {results['summary']['critical']}")
+            print(f"  🟠 High: {results['summary']['high']}")
+            print(f"  🟡 Medium: {results['summary']['medium']}")
+            print(f"  🟢 Low: {results['summary']['low']}")
+
+            if results['summary']['threat_vectors']:
+                print(f"\n🎯 THREAT VECTORS DETECTED:")
+                for threat in results['summary']['threat_vectors']:
+                    print(f"  - {threat}")
+
+            if results['summary']['compliance_controls']:
+                print(f"\n📋 COMPLIANCE CONTROLS AFFECTED:")
+                for control in results['summary']['compliance_controls'][:5]:
+                    print(f"  - {control}")
+
+            print(f"\n🔍 TOP FINDINGS:")
+            for finding in results['findings'][:10]:
+                severity_icon = {
+                    "CRITICAL": "🔴",
+                    "HIGH": "🟠",
+                    "MEDIUM": "🟡",
+                    "LOW": "🟢"
+                }.get(finding.get('severity', 'MEDIUM'), "⚪")
+
+                print(f"\n  {severity_icon} [{finding.get('severity', 'MEDIUM')}] {finding.get('policy', 'unknown')}")
+                print(f"     File: {finding.get('file', 'unknown')}")
+                print(f"     Issue: {finding.get('message', 'No details')}")
+
+                if finding.get('threat_vector'):
+                    print(f"     Threat: {finding['threat_vector']}")
+
+                if finding.get('remediation'):
+                    print(f"     Fix: {finding['remediation']}")
+
+        else:
+            print("✅ No policy violations found!")
+
+        print(f"\n{'='*60}")
+        print(f"📚 For policy details, see:")
+        print(f"  - Threat model: GP-CONSULTING-AGENTS/policies/THREAT_MODEL.md")
+        print(f"  - Compliance: GP-CONSULTING-AGENTS/policies/COMPLIANCE_MAPPINGS.md")
+        print(f"{'='*60}\n")
+
+    except Exception as e:
+        print(f"❌ OPA Scanner Error: {e}", file=sys.stderr)
+        sys.exit(1)

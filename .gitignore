@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+*.egg-info/
+dist/
+build/
+
+# AI Models (too large for git)
+GP-DATA/ai-models/
+.cache/
+*.pth
+*.bin
+*.safetensors
+
+# Hugging Face cache
+.cache/huggingface/
+
+# Keep vector database (embeddings are small enough)
+# GP-DATA/vector-db/ <- NOT ignored, we want to commit this
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Secrets (NEVER commit)
+.env
+.env.local
+*.pem
+*.key
+credentials.json
+secrets.yaml
+
+# Node modules
+node_modules/
+
+# Docker volumes
+docker-volumes/
+
+# Backups
+GP-DATA/backups/

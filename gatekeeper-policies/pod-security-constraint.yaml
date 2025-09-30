@@ -1,0 +1,72 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8spodsecuritystandard
+  annotations:
+    description: "Enforce Pod Security Standards - GP-JADE Integration"
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sPodSecurityStandard
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            allowPrivileged:
+              type: boolean
+            allowHostNetwork:
+              type: boolean
+            allowedCapabilities:
+              type: array
+              items:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8spodsecuritystandard
+
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          container.securityContext.privileged
+          msg := sprintf("Privileged container '%s' not allowed", [container.name])
+        }
+
+        violation[{"msg": msg}] {
+          input.review.object.spec.hostNetwork
+          msg := "Host network not allowed"
+        }
+
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          not container.securityContext.runAsNonRoot
+          msg := sprintf("Container '%s' must run as non-root", [container.name])
+        }
+
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          has_dangerous_capability(container.securityContext.capabilities.add)
+          msg := sprintf("Container '%s' has dangerous capabilities", [container.name])
+        }
+
+        has_dangerous_capability(caps) {
+          dangerous := {"SYS_ADMIN", "NET_ADMIN", "SYS_MODULE"}
+          caps[_] == dangerous[_]
+        }
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPodSecurityStandard
+metadata:
+  name: pod-security-standard-restricted
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - default
+      - production
+  parameters:
+    allowPrivileged: false
+    allowHostNetwork: false
+    allowedCapabilities: []

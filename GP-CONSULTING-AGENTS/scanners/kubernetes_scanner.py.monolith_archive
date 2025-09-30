@@ -1,0 +1,365 @@
+#!/usr/bin/env python3
+"""
+Kubernetes Security Scanner - CKA/CKS Level Security Analysis
+Integrates kube-bench, polaris, and kube-hunter for comprehensive K8s security
+"""
+
+import json
+import subprocess
+import os
+import yaml
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, List, Any
+
+class KubernetesSecurityScanner:
+    def __init__(self, project_path: str):
+        self.project_path = Path(project_path)
+        self.bin_path = Path("/home/jimmie/linkops-industries/GP-copilot/GP-SEC-TOOLS-EXECUTION/bin")
+        self.results = {
+            "scan_timestamp": datetime.now().isoformat(),
+            "project": str(self.project_path),
+            "tools": {},
+            "total_issues": 0,
+            "critical_issues": 0,
+            "high_issues": 0,
+            "medium_issues": 0,
+            "low_issues": 0
+        }
+
+    def find_k8s_manifests(self) -> List[Path]:
+        """Find all Kubernetes YAML manifests in project"""
+        manifests = []
+        patterns = ['*.yaml', '*.yml']
+
+        for pattern in patterns:
+            for file_path in self.project_path.rglob(pattern):
+                if self._is_k8s_manifest(file_path):
+                    manifests.append(file_path)
+
+        return manifests
+
+    def _is_k8s_manifest(self, file_path: Path) -> bool:
+        """Check if file is a Kubernetes manifest"""
+        k8s_kinds = [
+            'Deployment', 'Service', 'ConfigMap', 'Secret', 'Pod',
+            'StatefulSet', 'DaemonSet', 'Job', 'CronJob', 'Ingress',
+            'NetworkPolicy', 'ServiceAccount', 'Role', 'RoleBinding',
+            'ClusterRole', 'ClusterRoleBinding', 'PersistentVolume',
+            'PersistentVolumeClaim', 'StorageClass', 'Namespace'
+        ]
+
+        try:
+            with open(file_path, 'r') as f:
+                content = yaml.safe_load(f)
+                if content and isinstance(content, dict):
+                    return content.get('kind') in k8s_kinds
+        except:
+            return False
+
+        return False
+
+    def run_kube_bench(self) -> Dict[str, Any]:
+        """Run kube-bench for CIS Kubernetes Benchmark validation"""
+        print("🔍 Running kube-bench CIS benchmark scan...")
+        kube_bench_path = self.bin_path / "kube-bench"
+
+        if not kube_bench_path.exists():
+            return {"error": "kube-bench not installed", "issues": []}
+
+        try:
+            # Run kube-bench with JSON output
+            cmd = [str(kube_bench_path), "--json", "--config-dir", str(self.bin_path / "cfg")]
+            result = subprocess.run(cmd, capture_output=True, text=True, cwd=str(self.project_path))
+
+            if result.returncode == 0 and result.stdout:
+                data = json.loads(result.stdout)
+
+                # Parse results
+                issues = []
+                for control in data.get('Controls', []):
+                    for test in control.get('tests', []):
+                        for result in test.get('results', []):
+                            if result.get('status') in ['FAIL', 'WARN']:
+                                issues.append({
+                                    "id": result.get('test_number', 'unknown'),
+                                    "severity": "high" if result.get('status') == 'FAIL' else "medium",
+                                    "title": result.get('test_desc', 'CIS Benchmark violation'),
+                                    "remediation": result.get('remediation', 'Review CIS Kubernetes Benchmark')
+                                })
+
+                return {
+                    "tool": "kube-bench",
+                    "issues_found": len(issues),
+                    "issues": issues
+                }
+            else:
+                # Fallback: Check for Kubernetes manifests and validate them
+                manifests = self.find_k8s_manifests()
+                if manifests:
+                    return self._validate_k8s_manifests(manifests)
+
+        except Exception as e:
+            print(f"⚠️ kube-bench error: {e}")
+
+        return {"tool": "kube-bench", "issues_found": 0, "issues": []}
+
+    def _validate_k8s_manifests(self, manifests: List[Path]) -> Dict[str, Any]:
+        """Validate Kubernetes manifests for security issues"""
+        issues = []
+
+        for manifest_path in manifests:
+            try:
+                with open(manifest_path, 'r') as f:
+                    content = yaml.safe_load(f)
+
+                    if not content:
+                        continue
+
+                    # Check for security issues
+                    if content.get('kind') in ['Deployment', 'StatefulSet', 'DaemonSet', 'Pod']:
+                        spec = content.get('spec', {})
+
+                        # Check pod spec or template
+                        pod_spec = spec
+                        if 'template' in spec:
+                            pod_spec = spec['template'].get('spec', {})
+
+                        # Security context checks
+                        if 'securityContext' not in pod_spec:
+                            issues.append({
+                                "file": str(manifest_path.relative_to(self.project_path)),
+                                "severity": "high",
+                                "title": "Missing pod security context",
+                                "remediation": "Add securityContext with runAsNonRoot: true"
+                            })
+
+                        # Container checks
+                        for container in pod_spec.get('containers', []):
+                            if 'securityContext' not in container:
+                                issues.append({
+                                    "file": str(manifest_path.relative_to(self.project_path)),
+                                    "severity": "high",
+                                    "title": f"Container {container.get('name', 'unnamed')} missing security context",
+                                    "remediation": "Add container securityContext with allowPrivilegeEscalation: false"
+                                })
+
+                            if 'resources' not in container:
+                                issues.append({
+                                    "file": str(manifest_path.relative_to(self.project_path)),
+                                    "severity": "medium",
+                                    "title": f"Container {container.get('name', 'unnamed')} missing resource limits",
+                                    "remediation": "Add resource requests and limits"
+                                })
+
+                    # NetworkPolicy checks
+                    if content.get('kind') == 'NetworkPolicy':
+                        if not content.get('spec', {}).get('policyTypes'):
+                            issues.append({
+                                "file": str(manifest_path.relative_to(self.project_path)),
+                                "severity": "medium",
+                                "title": "NetworkPolicy missing policyTypes",
+                                "remediation": "Specify policyTypes: [Ingress, Egress]"
+                            })
+
+            except Exception as e:
+                print(f"⚠️ Error parsing {manifest_path}: {e}")
+
+        return {
+            "tool": "kube-bench",
+            "manifests_scanned": len(manifests),
+            "issues_found": len(issues),
+            "issues": issues
+        }
+
+    def run_polaris(self) -> Dict[str, Any]:
+        """Run Polaris for Kubernetes best practices validation"""
+        print("🔍 Running Polaris best practices scan...")
+        polaris_path = self.bin_path / "polaris"
+
+        if not polaris_path.exists():
+            return {"error": "polaris not installed", "issues": []}
+
+        manifests = self.find_k8s_manifests()
+        if not manifests:
+            return {"tool": "polaris", "issues_found": 0, "issues": []}
+
+        all_issues = []
+
+        for manifest in manifests:
+            try:
+                cmd = [str(polaris_path), "audit", "--audit-path", str(manifest), "--format", "json"]
+                result = subprocess.run(cmd, capture_output=True, text=True)
+
+                if result.returncode == 0 and result.stdout:
+                    data = json.loads(result.stdout)
+
+                    # Parse Polaris results
+                    for resource in data.get('AuditData', {}).get('Results', []):
+                        for container in resource.get('PodResult', {}).get('ContainerResults', []):
+                            for check, result in container.get('Results', {}).items():
+                                if not result.get('Success', True):
+                                    all_issues.append({
+                                        "file": str(manifest.relative_to(self.project_path)),
+                                        "severity": result.get('Severity', 'medium').lower(),
+                                        "title": f"{check}: {result.get('Message', 'Best practice violation')}",
+                                        "container": container.get('Name', 'unknown'),
+                                        "remediation": result.get('Details', 'Review Kubernetes best practices')
+                                    })
+
+                        # Check pod-level results
+                        for check, result in resource.get('PodResult', {}).get('Results', {}).items():
+                            if not result.get('Success', True):
+                                all_issues.append({
+                                    "file": str(manifest.relative_to(self.project_path)),
+                                    "severity": result.get('Severity', 'medium').lower(),
+                                    "title": f"{check}: {result.get('Message', 'Best practice violation')}",
+                                    "remediation": result.get('Details', 'Review Kubernetes best practices')
+                                })
+
+            except Exception as e:
+                print(f"⚠️ Polaris error on {manifest}: {e}")
+
+        return {
+            "tool": "polaris",
+            "manifests_scanned": len(manifests),
+            "issues_found": len(all_issues),
+            "issues": all_issues
+        }
+
+    def run_kube_hunter(self) -> Dict[str, Any]:
+        """Run kube-hunter for penetration testing"""
+        print("🔍 Running kube-hunter penetration test simulation...")
+
+        try:
+            # Run kube-hunter in pod simulation mode
+            cmd = ["kube-hunter", "--pod", "--report", "json", "--log", "none"]
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+
+            if result.returncode == 0 and result.stdout:
+                data = json.loads(result.stdout)
+
+                issues = []
+                for vuln in data.get('vulnerabilities', []):
+                    issues.append({
+                        "severity": vuln.get('severity', 'medium').lower(),
+                        "title": vuln.get('vulnerability', 'Security weakness detected'),
+                        "description": vuln.get('description', ''),
+                        "remediation": vuln.get('evidence', 'Review cluster security configuration')
+                    })
+
+                return {
+                    "tool": "kube-hunter",
+                    "issues_found": len(issues),
+                    "issues": issues
+                }
+        except subprocess.TimeoutExpired:
+            print("⚠️ kube-hunter timeout - using static analysis")
+        except Exception as e:
+            print(f"⚠️ kube-hunter error: {e}")
+
+        # Fallback to static analysis
+        return self._static_penetration_analysis()
+
+    def _static_penetration_analysis(self) -> Dict[str, Any]:
+        """Static analysis for common Kubernetes security issues"""
+        issues = []
+        manifests = self.find_k8s_manifests()
+
+        for manifest in manifests:
+            try:
+                with open(manifest, 'r') as f:
+                    content = yaml.safe_load(f)
+
+                    if not content:
+                        continue
+
+                    # Check for exposed services
+                    if content.get('kind') == 'Service':
+                        if content.get('spec', {}).get('type') == 'NodePort':
+                            issues.append({
+                                "file": str(manifest.relative_to(self.project_path)),
+                                "severity": "medium",
+                                "title": "NodePort service exposes cluster",
+                                "remediation": "Consider using LoadBalancer or ClusterIP with Ingress"
+                            })
+
+                    # Check for privilege escalation
+                    if content.get('kind') in ['Role', 'ClusterRole']:
+                        rules = content.get('rules', [])
+                        for rule in rules:
+                            if '*' in rule.get('verbs', []) or '*' in rule.get('resources', []):
+                                issues.append({
+                                    "file": str(manifest.relative_to(self.project_path)),
+                                    "severity": "critical",
+                                    "title": "Overly permissive RBAC rule with wildcards",
+                                    "remediation": "Specify exact verbs and resources instead of wildcards"
+                                })
+
+            except Exception as e:
+                continue
+
+        return {
+            "tool": "kube-hunter",
+            "issues_found": len(issues),
+            "issues": issues
+        }
+
+    def analyze_results(self):
+        """Analyze and categorize all results"""
+        for tool_results in self.results['tools'].values():
+            for issue in tool_results.get('issues', []):
+                severity = issue.get('severity', 'low').lower()
+                if severity == 'critical':
+                    self.results['critical_issues'] += 1
+                elif severity == 'high':
+                    self.results['high_issues'] += 1
+                elif severity == 'medium':
+                    self.results['medium_issues'] += 1
+                else:
+                    self.results['low_issues'] += 1
+
+                self.results['total_issues'] += 1
+
+    def run_complete_scan(self) -> Dict[str, Any]:
+        """Run all Kubernetes security scans"""
+        print(f"🚀 Starting Kubernetes security scan on: {self.project_path}")
+
+        # Run each scanner
+        self.results['tools']['kube_bench'] = self.run_kube_bench()
+        self.results['tools']['polaris'] = self.run_polaris()
+        self.results['tools']['kube_hunter'] = self.run_kube_hunter()
+
+        # Analyze results
+        self.analyze_results()
+
+        # Save results
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        results_dir = Path("/home/jimmie/linkops-industries/James-OS/guidepoint/results/k8s_scans")
+        results_dir.mkdir(parents=True, exist_ok=True)
+
+        results_file = results_dir / f"k8s_scan_{timestamp}.json"
+        with open(results_file, 'w') as f:
+            json.dump(self.results, f, indent=2)
+
+        print(f"\n📊 Kubernetes Security Scan Complete:")
+        print(f"  Total Issues: {self.results['total_issues']}")
+        print(f"  Critical: {self.results['critical_issues']}")
+        print(f"  High: {self.results['high_issues']}")
+        print(f"  Medium: {self.results['medium_issues']}")
+        print(f"  Low: {self.results['low_issues']}")
+        print(f"  Results saved to: {results_file}")
+
+        return self.results
+
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) > 1:
+        project_path = sys.argv[1]
+    else:
+        project_path = "/home/jimmie/linkops-industries/James-OS/guidepoint/GP-Projects/Portfolio"
+
+    scanner = KubernetesSecurityScanner(project_path)
+    results = scanner.run_complete_scan()

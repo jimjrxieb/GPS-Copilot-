@@ -1,0 +1,425 @@
+.
+├── ARCHITECTURE.md
+├── GP-analyst
+│   ├── README.md
+│   ├── agent
+│   ├── config
+│   │   └── agent_config.yaml
+│   ├── data
+│   │   ├── assessments
+│   │   │   ├── active
+│   │   │   ├── completed
+│   │   │   └── templates
+│   │   ├── client_profiles
+│   │   │   └── templates
+│   │   └── meeting_notes
+│   │       └── 2025
+│   │           └── 09
+│   ├── integrations
+│   ├── reports
+│   │   ├── client_reports
+│   │   ├── internal_reports
+│   │   └── templates
+│   ├── templates
+│   │   ├── assessments
+│   │   ├── communications
+│   │   └── meetings
+│   │       └── security_review.md
+│   └── tests
+├── GP-devsecops
+│   ├── README.md
+│   ├── agent
+│   ├── config
+│   │   └── agent_config.yaml
+│   ├── pipelines
+│   │   └── github_actions
+│   │       └── workflows
+│   │           └── security_scan.yml
+│   ├── secrets
+│   │   ├── aws
+│   │   │   └── rotation_templates
+│   │   ├── azure
+│   │   ├── kubernetes
+│   │   │   └── sealed_secrets
+│   │   └── vault
+│   │       └── policies
+│   │           └── developer_policy.hcl
+│   └── templates
+│       └── security_checklists
+│           └── pre_deployment.md
+├── GP-docs-human
+│   ├── CODEBASE_AUDIT_REPORT.md
+│   ├── Client-support
+│   ├── DevSecOps
+│   ├── GP-policies
+│   ├── HONEST_ENGINEERING_VALIDATION.md
+│   ├── JAMES_TERRAFORM_TEST_COMPREHENSIVE_REPORT.md
+│   ├── MS_AGENTS_AUDIT_REPORT.md
+│   ├── PENTESTING_INTEGRATION_COMPLETE.md
+│   ├── POLICY_TEST_HARNESS_COMPLETE.md
+│   ├── PRODUCTION_READINESS_SUMMARY.md
+│   ├── Resercher
+│   ├── SESSION_SAVEPOINT_REALISTIC.md
+│   ├── api-referance.md
+│   ├── deployment-guide
+│   ├── scanner-domains
+│   │   ├── CKS.md
+│   │   ├── Compliance.md
+│   │   ├── IaC-security.md
+│   │   ├── Runtime-sec.md
+│   │   └── SAST.md
+│   └── testing
+│       ├── TESTING_METHODOLOGY.md
+│       └── comprehensive_test_results.json
+├── GP-remediation
+│   ├── 5-DOMAin-CONFIG.md
+│   ├── CKS
+│   ├── Compliance
+│   ├── FIX_EXECUTION_LOG_20250920.md
+│   ├── GP-SEC-INTEL-ANALYSIS
+│   │   ├── GP-data-machine
+│   │   │   ├── ai_interactions
+│   │   │   ├── ai_prompts
+│   │   │   ├── james_analysis
+│   │   │   │   └── analysis_a7c4c38f-ae65-4dad-88cf-3cfcf1c49b11.json
+│   │   │   └── scan-results
+│   │   │       ├── GP-fixes
+│   │   │       └── GP-results
+│   │   ├── GP-intelligence
+│   │   │   ├── notes
+│   │   │   │   └── security_knowledge.md
+│   │   │   ├── rag
+│   │   │   │   └── knowledge_retriever.py
+│   │   │   └── risk_quantification_engine.py
+│   │   ├── agents
+│   │   │   ├── README.md
+│   │   │   ├── __init__.py
+│   │   │   ├── checkov_agent.py
+│   │   │   ├── devsecops_agent
+│   │   │   │   └── agent.py
+│   │   │   ├── enhanced_security_agent.py
+│   │   │   ├── escalation_manager
+│   │   │   │   └── notification_router.py
+│   │   │   ├── github_agent
+│   │   │   │   └── real_github_integration.py
+│   │   │   ├── iac_policy_agent
+│   │   │   │   ├── agent.py
+│   │   │   │   └── tools
+│   │   │   ├── kubernetes_agent
+│   │   │   │   ├── agent.py
+│   │   │   │   └── tools
+│   │   │   ├── reporter_agent
+│   │   │   │   └── reporter.py
+│   │   │   ├── scanner_agent
+│   │   │   │   ├── SCAN_EXECUTION_LOG_20250920.md
+│   │   │   │   ├── agent.py
+│   │   │   │   └── tools
+│   │   │   └── secrets_agent
+│   │   │       └── agent.py
+│   │   ├── escalations
+│   │   │   ├── 5-DOMAIN-ESC.md
+│   │   │   ├── CKS
+│   │   │   │   ├── falco
+│   │   │   │   ├── kube-bench
+│   │   │   │   ├── kube-hunter
+│   │   │   │   └── polaris
+│   │   │   ├── Compliance
+│   │   │   │   ├── gitleaks
+│   │   │   │   ├── opa
+│   │   │   │   └── truffleHog
+│   │   │   ├── IaC-sec
+│   │   │   ├── Runtime-sec
+│   │   │   ├── SAST
+│   │   │   │   ├── bandit
+│   │   │   │   ├── npm-audit
+│   │   │   │   ├── safety
+│   │   │   │   └── semgrep
+│   │   │   ├── escalation_20250920_232914.json
+│   │   │   ├── escalation_20250920_232914_human_readable.md
+│   │   │   ├── escalation_20250920_233052.json
+│   │   │   ├── escalation_20250920_233052_human_readable.md
+│   │   │   ├── escalation_20250920_233950.json
+│   │   │   ├── escalation_20250920_233950_human_readable.md
+│   │   │   ├── escalation_20250920_234653.json
+│   │   │   ├── escalation_20250920_234653_human_readable.md
+│   │   │   ├── escalation_20250920_235635.json
+│   │   │   ├── escalation_20250920_235635_human_readable.md
+│   │   │   ├── escalation_20250921_000944.json
+│   │   │   ├── escalation_20250921_000944_human_readable.md
+│   │   │   ├── escalation_20250921_001341.json
+│   │   │   ├── escalation_20250921_001341_human_readable.md
+│   │   │   ├── escalation_20250921_005925.json
+│   │   │   ├── escalation_20250921_005925_human_readable.md
+│   │   │   ├── escalation_20250921_010133.json
+│   │   │   ├── escalation_20250921_010133_human_readable.md
+│   │   │   ├── escalation_20250921_010317.json
+│   │   │   ├── escalation_20250921_010317_human_readable.md
+│   │   │   ├── escalation_20250921_010502.json
+│   │   │   ├── escalation_20250921_010502_human_readable.md
+│   │   │   ├── escalation_20250921_010647.json
+│   │   │   ├── escalation_20250921_010647_human_readable.md
+│   │   │   ├── escalation_20250921_010832.json
+│   │   │   ├── escalation_20250921_010832_human_readable.md
+│   │   │   ├── escalation_20250921_100019.json
+│   │   │   ├── escalation_20250921_100019_human_readable.md
+│   │   │   ├── escalation_20250921_163501.json
+│   │   │   ├── escalation_20250921_163501_human_readable.md
+│   │   │   ├── escalation_20250921_170014.json
+│   │   │   ├── escalation_20250921_170014_human_readable.md
+│   │   │   ├── escalation_20250921_172252.json
+│   │   │   ├── escalation_20250921_172252_human_readable.md
+│   │   │   ├── escalation_20250921_172837.json
+│   │   │   ├── escalation_20250921_172837_human_readable.md
+│   │   │   ├── escalation_20250921_172945.json
+│   │   │   ├── escalation_20250921_172945_human_readable.md
+│   │   │   ├── escalation_20250921_173643.json
+│   │   │   ├── escalation_20250921_173643_human_readable.md
+│   │   │   ├── escalation_20250921_173721.json
+│   │   │   ├── escalation_20250921_173721_human_readable.md
+│   │   │   ├── escalation_20250921_173745.json
+│   │   │   ├── escalation_20250921_173745_human_readable.md
+│   │   │   ├── escalation_20250921_181534.json
+│   │   │   ├── escalation_20250921_181534_human_readable.md
+│   │   │   ├── escalation_20250921_181831.json
+│   │   │   ├── escalation_20250921_181831_human_readable.md
+│   │   │   ├── escalation_20250921_185845.json
+│   │   │   ├── escalation_20250921_185845_human_readable.md
+│   │   │   ├── escalation_20250921_195608.json
+│   │   │   ├── escalation_20250921_195608_human_readable.md
+│   │   │   ├── escalation_20250921_195623.json
+│   │   │   ├── escalation_20250921_195623_human_readable.md
+│   │   │   ├── escalation_20250921_200234.json
+│   │   │   ├── escalation_20250921_200234_human_readable.md
+│   │   │   ├── escalation_20250921_200312.json
+│   │   │   ├── escalation_20250921_200312_human_readable.md
+│   │   │   ├── escalation_20250921_203835.json
+│   │   │   ├── escalation_20250921_203835_human_readable.md
+│   │   │   ├── escalation_20250921_203854.json
+│   │   │   ├── escalation_20250921_203854_human_readable.md
+│   │   │   ├── escalation_20250921_225254.json
+│   │   │   ├── escalation_20250921_225254_human_readable.md
+│   │   │   ├── escalation_20250922_102652.json
+│   │   │   ├── escalation_20250922_102652_human_readable.md
+│   │   │   ├── escalation_20250922_103350.json
+│   │   │   ├── escalation_20250922_103350_human_readable.md
+│   │   │   ├── escalation_20250922_110525.json
+│   │   │   └── escalation_20250922_110525_human_readable.md
+│   │   ├── guidepoint_rag_integration.py
+│   │   ├── initialize_learning_patterns.py
+│   │   ├── james_analysis_request.json
+│   │   ├── james_intelligent_analysis.py
+│   │   ├── load_security_knowledge.py
+│   │   └── notifications
+│   │       ├── README.md
+│   │       ├── channels
+│   │       ├── config
+│   │       ├── engines
+│   │       ├── james_autonomous_task_20250922.txt
+│   │       ├── notify_20250920_233018.json
+│   │       ├── notify_20250920_233018_platform_engineering_team.md
+│   │       ├── notify_20250920_233018_security_architect.md
+│   │       ├── notify_20250920_233018_security_team.md
+│   │       ├── notify_20250920_233018_senior_devops_engineer.md
+│   │       ├── notify_20250920_233018_technical_lead.md
+│   │       ├── system_capability_update_20250922.json
+│   │       └── templates
+│   │           └── email
+│   ├── GP-SEC-TOOLS-EXECUTION
+│   │   ├── automation_engine
+│   │   │   ├── __init__.py
+│   │   │   └── automation
+│   │   │       ├── __init__.py
+│   │   │       └── remediation
+│   │   ├── bin
+│   │   │   ├── LICENSE
+│   │   │   ├── cfg
+│   │   │   │   ├── ack-1.0
+│   │   │   │   ├── aks-1.0
+│   │   │   │   ├── cis-1.20
+│   │   │   │   ├── cis-1.23
+│   │   │   │   ├── cis-1.24
+│   │   │   │   ├── cis-1.24-microk8s
+│   │   │   │   ├── cis-1.5
+│   │   │   │   ├── cis-1.6
+│   │   │   │   ├── cis-1.6-k3s
+│   │   │   │   ├── cis-1.7
+│   │   │   │   ├── cis-1.8
+│   │   │   │   ├── cis-1.9
+│   │   │   │   ├── config.yaml
+│   │   │   │   ├── eks-1.0.1
+│   │   │   │   ├── eks-1.1.0
+│   │   │   │   ├── eks-1.2.0
+│   │   │   │   ├── eks-stig-kubernetes-v1r6
+│   │   │   │   ├── gke-1.0
+│   │   │   │   ├── gke-1.2.0
+│   │   │   │   ├── k3s-cis-1.23
+│   │   │   │   ├── k3s-cis-1.24
+│   │   │   │   ├── k3s-cis-1.7
+│   │   │   │   ├── rh-0.7
+│   │   │   │   ├── rh-1.0
+│   │   │   │   ├── rke-cis-1.23
+│   │   │   │   ├── rke-cis-1.24
+│   │   │   │   ├── rke-cis-1.7
+│   │   │   │   ├── rke2-cis-1.23
+│   │   │   │   ├── rke2-cis-1.24
+│   │   │   │   ├── rke2-cis-1.7
+│   │   │   │   └── tkgi-1.2.53
+│   │   │   ├── contrib
+│   │   │   │   ├── asff.tpl
+│   │   │   │   ├── gitlab-codequality.tpl
+│   │   │   │   ├── gitlab.tpl
+│   │   │   │   ├── html.tpl
+│   │   │   │   └── junit.tpl
+│   │   │   ├── gitleaks
+│   │   │   ├── kube-bench
+│   │   │   ├── kubescape
+│   │   │   ├── nuclei
+│   │   │   ├── opa
+│   │   │   ├── polaris
+│   │   │   ├── runtime-security-scan
+│   │   │   ├── syft
+│   │   │   ├── terrascan
+│   │   │   ├── tfsec
+│   │   │   ├── trivy
+│   │   │   └── yq
+│   │   ├── enhanced_portfolio_scanner.py
+│   │   ├── install_security_tools.sh
+│   │   ├── james_enhanced_scanner.py
+│   │   ├── james_fix_engine.py
+│   │   ├── james_intelligent_scanner.py
+│   │   ├── james_json_scanner.py
+│   │   ├── james_security_remediation_engine.py
+│   │   ├── james_terraform_scanner.py
+│   │   ├── policies
+│   │   │   ├── README.md
+│   │   │   ├── config
+│   │   │   ├── engines
+│   │   │   ├── frameworks
+│   │   │   └── opa
+│   │   │       ├── kubernetes.rego
+│   │   │       ├── policies
+│   │   │       └── security.rego
+│   │   ├── procedures
+│   │   │   ├── aks_service_deploy.yaml
+│   │   │   ├── avd_provision_secure.yaml
+│   │   │   └── iac_security_scan.yaml
+│   │   ├── scan_jimmie_terraform.py
+│   │   ├── security_tools
+│   │   │   ├── install_missing_tools.sh
+│   │   │   ├── kubescape
+│   │   │   ├── nmap-standalone.tar.bz2
+│   │   │   ├── nuclei
+│   │   │   ├── opa
+│   │   │   ├── trivy
+│   │   │   └── vault
+│   │   ├── simple_guidepoint.py
+│   │   ├── simple_security_scanner.py
+│   │   ├── terraform_security_scanner.py
+│   │   └── tools
+│   │       ├── bin
+│   │       │   ├── LICENSE
+│   │       │   ├── bandit
+│   │       │   ├── gitleaks
+│   │       │   ├── kubescape
+│   │       │   ├── nuclei
+│   │       │   ├── tfsec
+│   │       │   ├── trivy
+│   │       │   └── yq
+│   │       ├── deployment_automation.py
+│   │       ├── policy_as_code.py
+│   │       ├── secrets_management.py
+│   │       ├── threat_intelligence.py
+│   │       └── tool_integration.py
+│   ├── GP-agents
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── checkov_agent.py
+│   │   ├── devsecops_agent
+│   │   │   └── agent.py
+│   │   ├── enhanced_security_agent.py
+│   │   ├── escalation_manager
+│   │   │   └── notification_router.py
+│   │   ├── github_agent
+│   │   │   └── real_github_integration.py
+│   │   ├── iac_policy_agent
+│   │   │   ├── agent.py
+│   │   │   └── tools
+│   │   ├── kubernetes_agent
+│   │   │   ├── agent.py
+│   │   │   ├── deploy_and_test.py
+│   │   │   └── tools
+│   │   ├── reporter_agent
+│   │   │   └── reporter.py
+│   │   ├── scanner_agent
+│   │   │   ├── SCAN_EXECUTION_LOG_20250920.md
+│   │   │   ├── agent.py
+│   │   │   └── tools
+│   │   └── secrets_agent
+│   │       └── agent.py
+│   ├── IaC-sec
+│   │   ├── terraform_fixer.py
+│   │   └── unified_terraform_fixer.py
+│   ├── PRODUCTION_DEPLOYMENT_SUCCESS_20250920.md
+│   ├── README.md
+│   ├── Runtime-sec
+│   │   └── trivy_fixer.py
+│   ├── SAST
+│   │   ├── npm_audit_fixer.py
+│   │   └── python_fixer.py
+│   ├── STRUCTURE.md
+│   ├── UNIFIED_FIXER_EXECUTION_LOG_20250920.md
+│   ├── agent
+│   ├── apply_all_fixes.py
+│   ├── architectural_escalation_engine.py
+│   ├── config
+│   │   └── agent_config.yaml
+│   ├── enhanced_security_workflow.py
+│   ├── fixers
+│   │   └── terraform
+│   ├── kics_remediation_patterns.py
+│   ├── patterns
+│   │   └── terraform
+│   ├── production_terraform_fixer.py
+│   ├── production_terraform_fixer_backup_20250920.py
+│   ├── simple_james_fixer.py
+│   ├── templates
+│   │   └── fix_reports
+│   │       └── executive_summary.md
+│   └── validation
+├── GP-scanner
+│   ├── CKS
+│   │   ├── kubernetes_security_scan.py
+│   │   └── scansmissing
+│   ├── Compliance
+│   │   ├── gitleaks_scanner.py
+│   │   └── opa_scanner.py
+│   ├── IaC-sec
+│   │   ├── checkov_scanner.py
+│   │   ├── scans missing
+│   │   └── tfsec_scanner.py
+│   ├── README.md
+│   ├── Runtime-sec
+│   │   ├── scans-missing
+│   │   └── trivy_scanner.py
+│   ├── SAST
+│   │   ├── bandit_scanner.py
+│   │   ├── npm_audit_scanner.py
+│   │   ├── scans missing
+│   │   └── semgrep_scanner.py
+│   ├── config
+│   │   └── agent_config.yaml
+│   ├── config_aware_scanner.py
+│   ├── parallel_scanner.py
+│   ├── policies
+│   │   └── opa
+│   │       ├── kubernetes.rego
+│   │       └── security.rego
+│   ├── run_all_scans.py
+│   ├── run_domain_scans.py
+│   └── templates
+│       └── scan_reports
+│           └── executive_summary.md
+├── README.md
+└── consulting-Tree.txt
+
+179 directories, 244 files

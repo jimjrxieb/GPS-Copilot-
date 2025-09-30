@@ -1,0 +1,13 @@
+# Guidepoint Security Automation Requirements
+# Minimal, production-ready dependencies
+
+# Core functionality
+PyYAML>=6.0
+pathlib2>=2.3.7
+
+# Development and testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Note: Trivy binary is included in ../bin/trivy
+# No additional dependencies required for vulnerability scanning

@@ -1,0 +1,6 @@
+bundles:
+  authz:
+    resource: bundle.tar.gz
+services:
+  authz:
+    url: http://localhost:8181
