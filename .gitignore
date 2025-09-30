@@ -62,10 +62,22 @@ node_modules/
 # Docker volumes
 docker-volumes/
 
-# Backups
+# Backups (too large for git)
 GP-DATA/backups/
+GP-DATA/archive/backups/
 
 # Large binaries (download separately)
 GP-TOOLS/binaries/kubescape
 GP-TOOLS/binaries/tfsec
 GP-TOOLS/binaries/gitleaks
+
+# Root-level duplicates (actual locations are in proper subdirectories)
+/james-config/
+/opa-policies/
+/gatekeeper-policies/
+/vector-db/
+
+# Nested git repositories (keep as separate projects)
+GP-PROJECTS/DVWA/
+GP-PROJECTS/LinkOps-MLOps/
+GP-PROJECTS/Terraform_CICD_Setup/

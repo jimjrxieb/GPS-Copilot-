@@ -51,7 +51,7 @@ services:
       - "/policies"
     volumes:
       # OPA policies (can be pushed to GitHub)
-      - ./opa-policies:/policies
+      - ./GP-CONSULTING-AGENTS/GP-POL-AS-CODE/policies:/policies
     networks:
       - gp-network
 
@@ -63,7 +63,7 @@ services:
       - "8443:8443"
     volumes:
       # Gatekeeper constraints and templates
-      - ./gatekeeper-policies:/gatekeeper
+      - ./GP-CONSULTING-AGENTS/GP-POL-AS-CODE/gatekeeper:/gatekeeper
     environment:
       - GATEKEEPER_NAMESPACE=gatekeeper-system
     networks:
