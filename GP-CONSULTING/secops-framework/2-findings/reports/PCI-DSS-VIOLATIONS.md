@@ -1,21 +1,13 @@
 # PCI-DSS Compliance Violations
 
-**Date:** 2025-10-08 21:30:51
-**Total PCI-DSS Violations:** 22
+**Date:** 2025-10-08 23:15:20
+**Total PCI-DSS Violations:** 98
 
 ## Violations by Requirement
 
 ### 3.4 - Render PAN unreadable (encryption)
-**Count:** 7
+**Count:** 3
 
-- **Bucket does not have encryption enabled** (HIGH)
-  - Location: `/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:72`
-- **Bucket does not have encryption enabled** (HIGH)
-  - Location: `/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:11`
-- **Bucket does not encrypt data with a customer managed key.** (HIGH)
-  - Location: `/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:72`
-- **Bucket does not encrypt data with a customer managed key.** (HIGH)
-  - Location: `/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:11`
 - **Ensure that CloudWatch Log Group is encrypted by KMS** (MEDIUM)
   - Location: `/cloudwatch.tf:8`
 - **Ensure that S3 buckets are encrypted with KMS by default** (MEDIUM)
@@ -24,8 +16,10 @@
   - Location: `/s3.tf:72`
 
 ### 8.2.1 - Strong authentication
-**Count:** 15
+**Count:** 95
 
+- **IAM policy document uses sensitive action 'secretsmanager:GetSecretValue' on wildcarded resource 'arn:aws:secretsmanager:*:*:secret:securebank/*'** (HIGH)
+  - Location: `/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/iam.tf:138`
 - **Ensure IAM policies does not allow credentials exposure** (MEDIUM)
   - Location: `/iam.tf:95`
 - **Ensure that Secrets Manager secret is encrypted using KMS CMK** (MEDIUM)
@@ -37,23 +31,181 @@
 - **Ensure Secrets Manager secrets should have automatic rotation enabled** (MEDIUM)
   - Location: `/secrets-manager.tf:39`
 - **Hardcoded secret: Generic API Key** (HIGH)
-  - Location: `backend/README.md:112`
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:9`
 - **Hardcoded secret: Generic API Key** (HIGH)
-  - Location: `backend/README.md:329`
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:28`
 - **Hardcoded secret: Generic API Key** (HIGH)
-  - Location: `backend/README.md:356`
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:29`
 - **Hardcoded secret: Generic API Key** (HIGH)
-  - Location: `backend/README.md:642`
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:49`
 - **Hardcoded secret: Generic API Key** (HIGH)
-  - Location: `backend/.env.example:34`
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:68`
 - **Hardcoded secret: Generic API Key** (HIGH)
-  - Location: `docker-compose.yml:47`
-- **Hardcoded secret: AWS** (HIGH)
-  - Location: `backend/services/aws.service.js:27`
-- **Hardcoded secret: AWS** (HIGH)
-  - Location: `docs/AWS-DEPLOYMENT-GUIDE.md:148`
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:69`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:88`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:89`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:108`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:109`
 - **Hardcoded secret: Stripe Access Token** (HIGH)
-  - Location: `infrastructure/k8s/deployment.yaml:235`
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:168`
+- **Hardcoded secret: Stripe Access Token** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:169`
 - **Hardcoded secret: AWS** (HIGH)
-  - Location: `infrastructure/k8s/deployment.yaml:115`
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:128`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:129`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:148`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:149`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:188`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/raw/gitleaks-results.json:189`
+- **Hardcoded secret: Stripe Access Token** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/reports/all-findings.json:865`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/reports/all-findings.json:839`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/reports/all-findings.json:852`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/reports/all-findings.json:878`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/reports/all-findings.json:774`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/reports/all-findings.json:800`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/reports/all-findings.json:813`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-CONSULTING/secops-framework/2-findings/reports/all-findings.json:826`
+- **Hardcoded secret: GitHub Personal Access Token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15347`
+- **Hardcoded secret: GitHub Personal Access Token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15351`
+- **Hardcoded secret: Stripe Access Token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15351`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:13721`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:13731`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15341`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15511`
+- **Hardcoded secret: npm access token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15467`
+- **Hardcoded secret: Slack Bot token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:12657`
+- **Hardcoded secret: Slack Bot token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:12661`
+- **Hardcoded secret: Slack Bot token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:12747`
+- **Hardcoded secret: Slack Bot token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:12751`
+- **Hardcoded secret: Slack Bot token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15437`
+- **Hardcoded secret: Slack Bot token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15441`
+- **Hardcoded secret: Slack Bot token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15451`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15427`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15447`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15457`
+- **Hardcoded secret: Slack Webhook** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15351`
+- **Hardcoded secret: JSON Web Token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:13267`
+- **Hardcoded secret: JSON Web Token** (HIGH)
+  - Location: `GP-DATA/active/scans/bandit_20250924_151819_404.json:15487`
+- **Hardcoded secret: Private Key** (HIGH)
+  - Location: `GP-RAG/processed/security-docs/semgrep_gitleaks_security_guide.md:172`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-RAG/processed/security-docs/semgrep_gitleaks_security_guide.md:196`
+- **Hardcoded secret: Private Key** (HIGH)
+  - Location: `GP-RAG/processed/semgrep_gitleaks_security_guide.md:172`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-RAG/processed/semgrep_gitleaks_security_guide.md:196`
+- **Hardcoded secret: Private Key** (HIGH)
+  - Location: `GP-RAG/processed/vector_counter.json:391`
+- **Hardcoded secret: Private Key** (HIGH)
+  - Location: `GP-RAG/processed/processing_report_20250928_021700.json:390`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-RAG/test_jade_comprehensive.py:186`
+- **Hardcoded secret: GitHub Personal Access Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_complete_enterprise_workflow.py:56`
+- **Hardcoded secret: JSON Web Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:50`
+- **Hardcoded secret: GitHub Personal Access Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:38`
+- **Hardcoded secret: GitHub Personal Access Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:39`
+- **Hardcoded secret: GitHub Personal Access Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:40`
+- **Hardcoded secret: GitHub Personal Access Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:93`
+- **Hardcoded secret: GitHub Personal Access Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:319`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:25`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:26`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:27`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:86`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:318`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:351`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:38`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_evidence_security.py:58`
+- **Hardcoded secret: GitHub Personal Access Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_real_workflow_creation.py:21`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_secrets_agent_validation.py:73`
+- **Hardcoded secret: GitHub Personal Access Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_secrets_agent_validation.py:76`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_secrets_agent_validation.py:74`
+- **Hardcoded secret: Private Key** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/integration/test_secrets_agent_validation.py:77`
+- **Hardcoded secret: JSON Web Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:64`
+- **Hardcoded secret: Slack Webhook** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:13`
+- **Hardcoded secret: GitHub Personal Access Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:12`
+- **Hardcoded secret: Stripe Access Token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:11`
+- **Hardcoded secret: Private Key** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:30`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:7`
+- **Hardcoded secret: AWS** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:81`
+- **Hardcoded secret: npm access token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:60`
+- **Hardcoded secret: Slack Bot token** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:43`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:27`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:40`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:44`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:48`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:51`
+- **Hardcoded secret: Generic API Key** (HIGH)
+  - Location: `GP-TESTING-VAL/tests/test_secrets.py:54`
 

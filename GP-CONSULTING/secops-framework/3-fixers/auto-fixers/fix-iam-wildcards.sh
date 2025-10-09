@@ -15,7 +15,15 @@ set -e
 echo "🔧 Auto-Fixer: IAM Wildcard Permissions"
 echo "═══════════════════════════════════════════════════════"
 
-TF_DIR="../../../../infrastructure/terraform"
+# Auto-detect project root (DON'T resolve symlinks with -P, so we stay in the project)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Walk up to find infrastructure/terraform directory
+CURRENT_DIR="$SCRIPT_DIR"
+while [[ ! -d "$CURRENT_DIR/infrastructure/terraform" && "$CURRENT_DIR" != "/" ]]; do
+    CURRENT_DIR="$(dirname "$CURRENT_DIR")"
+done
+PROJECT_ROOT="$CURRENT_DIR"
+TF_DIR="$PROJECT_ROOT/infrastructure/terraform"
 BACKUP_DIR="$TF_DIR.backup.$(date +%Y%m%d-%H%M%S)"
 
 # Validate

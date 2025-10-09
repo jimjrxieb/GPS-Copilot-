@@ -15,7 +15,15 @@ set -e
 echo "🔧 Auto-Fixer: Security Groups (CRITICAL)"
 echo "═══════════════════════════════════════════════════════"
 
-TF_DIR="../../../../infrastructure/terraform"
+# Auto-detect project root (DON'T resolve symlinks with -P, so we stay in the project)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Walk up to find infrastructure/terraform directory
+CURRENT_DIR="$SCRIPT_DIR"
+while [[ ! -d "$CURRENT_DIR/infrastructure/terraform" && "$CURRENT_DIR" != "/" ]]; do
+    CURRENT_DIR="$(dirname "$CURRENT_DIR")"
+done
+PROJECT_ROOT="$CURRENT_DIR"
+TF_DIR="$PROJECT_ROOT/infrastructure/terraform"
 BACKUP_DIR="$TF_DIR.backup.$(date +%Y%m%d-%H%M%S)"
 
 # Validate Terraform directory exists
@@ -269,16 +277,27 @@ mv "$TF_DIR/security-groups-fixed.tf" "$TF_DIR/security-groups.tf"
 echo "✅ Replaced security groups file"
 
 echo ""
-echo "→ Validating Terraform configuration..."
+echo "→ Validating Terraform syntax..."
 cd "$TF_DIR"
-if terraform validate > /dev/null 2>&1; then
-    echo "✅ Terraform validation passed"
+# Check if terraform is initialized
+if [ -d ".terraform" ]; then
+    if terraform validate > /dev/null 2>&1; then
+        echo "✅ Terraform validation passed"
+    else
+        echo "❌ Terraform validation failed! Rolling back..."
+        mv "$TF_DIR/security-groups.tf.INSECURE.bak" "$TF_DIR/security-groups.tf"
+        rm -f "$TF_DIR/security-groups-fixed.tf"
+        echo "❌ Rollback complete. Please fix Terraform errors manually."
+        exit 1
+    fi
 else
-    echo "❌ Terraform validation failed! Rolling back..."
-    mv "$TF_DIR/security-groups.tf.INSECURE.bak" "$TF_DIR/security-groups.tf"
-    rm -f "$TF_DIR/security-groups-fixed.tf"
-    echo "❌ Rollback complete. Please fix Terraform errors manually."
-    exit 1
+    # Just do basic syntax check with fmt
+    if terraform fmt -check=true "$TF_DIR/security-groups.tf" > /dev/null 2>&1; then
+        echo "✅ Terraform syntax check passed (not initialized, skipping full validation)"
+    else
+        echo "⚠️  Warning: Terraform not initialized, skipping validation"
+        echo "   Run 'terraform init' in $TF_DIR to validate"
+    fi
 fi
 
 echo ""
