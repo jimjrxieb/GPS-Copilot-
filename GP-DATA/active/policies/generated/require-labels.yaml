@@ -1,0 +1,27 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  annotations:
+    compliance: SOC2-CC6.1
+    description: Require compliance labels
+    generated-by: jade-policy-generator
+  name: k8srequiredlabels
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequiredLabels
+      validation:
+        openAPIV3Schema:
+          properties:
+            labels:
+              items:
+                type: string
+              type: array
+          type: object
+  targets:
+  - rego: "package k8srequiredlabels\n\nviolation[{\"msg\": msg}] {\n    required\
+      \ := input.parameters.labels[_]\n    provided := input.review.object.metadata.labels\n\
+      \    not provided[required]\n    msg := sprintf(\"Resource missing required\
+      \ label: %v\", [required])\n}"
+    target: admission.k8s.gatekeeper.sh

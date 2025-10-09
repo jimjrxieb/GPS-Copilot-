@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: insecure-pod
+  namespace: production
+spec:
+  containers:
+  - name: app
+    image: nginx:latest
+    securityContext:
+      privileged: true          # VIOLATION: Privileged container
+      runAsUser: 0              # VIOLATION: Running as root
+      allowPrivilegeEscalation: true  # VIOLATION: Allows privilege escalation
+    env:
+    - name: DEBUG
+      value: "true"             # VIOLATION: Debug enabled in production
+  hostNetwork: true             # VIOLATION: Using host network
+  hostPID: true                 # VIOLATION: Using host PID namespace
+  volumes:
+  - name: host-volume
+    hostPath:
+      path: /etc/passwd         # VIOLATION: Dangerous host path mount

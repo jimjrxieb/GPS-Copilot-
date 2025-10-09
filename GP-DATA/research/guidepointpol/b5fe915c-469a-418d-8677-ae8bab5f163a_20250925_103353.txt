@@ -1,0 +1,131 @@
+Title: GuidePoint Security
+Category: GuidePointPol
+Source: N/A
+Created: 2025-09-25T10:33:53.183226
+ID: b5fe915c-469a-418d-8677-ae8bab5f163a
+==================================================
+
+What is GuidePoint Security?
+
+A U.S.-based cybersecurity consulting, engineering, and managed services firm. 
+GuidePoint Security
++2
+GuidePoint Security
++2
+
+Founded in 2011 by veterans of the information security industry. 
+GuidePoint Security
++2
+CyberArk
++2
+
+They aim to act as a trusted advisor, rather than just a vendor—meaning they evaluate, recommend, and help operationalize best-fit security solutions for clients. 
+GuidePoint Security
++2
+GuidePoint Security
++2
+
+Core Capabilities & Service Areas
+
+Here’s where they lean in, technically and operationally:
+
+Domain	What They Do
+Risk / Strategy / Governance / Compliance	Security program reviews, alignment with standards (HIPAA, PCI, FedRAMP, etc.), third-party risk management 
+GuidePoint Security
++2
+GuidePoint Security
++2
+
+Cloud & App Security	Secure architecture, IaC review, container security, cloud governance 
+GuidePoint Security
++2
+GuidePoint Security
++2
+
+Identity & Access Management (IAM)	Identity governance, privileged access management, CIAM and PAM advisory & implementation 
+GuidePoint Security
++1
+
+Incident Response & Threat Intelligence	IR retainer, threat intel, hunting, adversary communications 
+GuidePoint Security
++2
+GuidePoint Security
++2
+
+Security Operations / SOC / Managed Services	Running or augmenting SOC, managed detection & response, continuous monitoring 
+GuidePoint Security
++2
+GuidePoint Security
++2
+
+Testing / Assessment / Vulnerability	Pen tests, red teaming, app scanning, vulnerability management 
+GuidePoint Security
++2
+GuidePoint Security
++2
+
+Training & Education	Internal & external security awareness, custom training, labs, workshops 
+GuidePoint Security
++1
+
+They also maintain a research and intelligence group called GRIT® (GuidePoint Research and Intelligence Team). 
+GuidePoint Security
++1
+
+Differentiators & Positioning
+
+Vendor-agnostic: They don’t push a particular security vendor’s products by default; instead, they “vet and compare” options to find the best fit. 
+GuidePoint Security
++1
+
+High expertise: Over 50% of their workforce are senior practitioners (architects, engineers, consultants). 
+GuidePoint Security
++1
+
+Deep public sector presence: They serve U.S. federal agencies, cabinet-level, and hold contracts (e.g. DOD, SeaPort-NxG). 
+GuidePoint Security
++1
+
+Flexible procurement: They offer “financing options” bundled with their services to simplify acquisition for clients. 
+GuidePoint Security
++1
+
+Client-centric structure: They emphasize that the people you work with before a sale are invested in your success post-sale. 
+CyberArk
++1
+
+Scale & Reach
+
+Serve over 4,200+ enterprise customers. 
+GuidePoint Security
++2
+GuidePoint Security
++2
+
+They claim penetration into ~50% of Fortune 50 and ~40% of Fortune 500 companies. 
+GuidePoint Security
++2
+GuidePoint Security
++2
+
+Operate across commercial & federal sectors, including government contracts and agency engagements. 
+GuidePoint Security
++2
+GuidePoint Security
++2
+
+Caveats & Things to Watch
+
+Even though they position as vendor-neutral, any consulting company tends to develop biases over time (due to partnerships, ease of integration, margins).
+
+Their success in large-scale execution will depend heavily on their talent retention, depth in niche security domains, and ability to scale technical delivery.
+
+In procurement-heavy environments (gov, federal), their financing and contract vehicles might be a competitive advantage or a risk, depending on how they're managed.
+
+==================================================
+TOPICS LEARNED:
+1. Guidepoint
+2. Security?
+3. U.s.-based
+4. Cybersecurity
+5. Consulting,

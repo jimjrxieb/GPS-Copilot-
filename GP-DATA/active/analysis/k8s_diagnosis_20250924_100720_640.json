@@ -1,0 +1,329 @@
+{
+  "pod": "portfolio-demo/portfolio-ui-5dd5f89c47-4mvj5",
+  "timestamp": "2025-09-24T10:07:20.455250",
+  "status": {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+      "annotations": {
+        "kubectl.kubernetes.io/restartedAt": "2025-09-15T00:22:03-04:00",
+        "kubernetes.io/limit-ranger": "LimitRanger plugin set: ephemeral-storage request for container ui; ephemeral-storage limit for container ui"
+      },
+      "creationTimestamp": "2025-09-15T04:22:47Z",
+      "generateName": "portfolio-ui-5dd5f89c47-",
+      "labels": {
+        "app.kubernetes.io/component": "ui",
+        "app.kubernetes.io/instance": "portfolio",
+        "app.kubernetes.io/name": "portfolio",
+        "pod-template-hash": "5dd5f89c47"
+      },
+      "name": "portfolio-ui-5dd5f89c47-4mvj5",
+      "namespace": "portfolio-demo",
+      "ownerReferences": [
+        {
+          "apiVersion": "apps/v1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "ReplicaSet",
+          "name": "portfolio-ui-5dd5f89c47",
+          "uid": "5152519f-ffbe-4b47-a6a7-8a260b1471dc"
+        }
+      ],
+      "resourceVersion": "689728",
+      "uid": "2e5d3618-5a8b-4292-ab69-98fb676f8c2c"
+    },
+    "spec": {
+      "containers": [
+        {
+          "env": [
+            {
+              "name": "VITE_API_BASE_URL",
+              "value": "http://portfolio.localtest.me/api"
+            }
+          ],
+          "image": "portfolio-ui:local",
+          "imagePullPolicy": "IfNotPresent",
+          "livenessProbe": {
+            "failureThreshold": 3,
+            "httpGet": {
+              "path": "/",
+              "port": 80,
+              "scheme": "HTTP"
+            },
+            "initialDelaySeconds": 15,
+            "periodSeconds": 30,
+            "successThreshold": 1,
+            "timeoutSeconds": 1
+          },
+          "name": "ui",
+          "ports": [
+            {
+              "containerPort": 80,
+              "name": "http",
+              "protocol": "TCP"
+            }
+          ],
+          "readinessProbe": {
+            "failureThreshold": 3,
+            "httpGet": {
+              "path": "/",
+              "port": 80,
+              "scheme": "HTTP"
+            },
+            "initialDelaySeconds": 10,
+            "periodSeconds": 5,
+            "successThreshold": 1,
+            "timeoutSeconds": 1
+          },
+          "resources": {
+            "limits": {
+              "cpu": "200m",
+              "ephemeral-storage": "1Gi",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "50m",
+              "ephemeral-storage": "100Mi",
+              "memory": "128Mi"
+            }
+          },
+          "securityContext": {
+            "allowPrivilegeEscalation": false,
+            "capabilities": {
+              "drop": [
+                "ALL"
+              ]
+            },
+            "privileged": false,
+            "readOnlyRootFilesystem": true,
+            "runAsGroup": 10001,
+            "runAsNonRoot": true,
+            "runAsUser": 10001,
+            "seLinuxOptions": {
+              "type": "container_t"
+            },
+            "seccompProfile": {
+              "type": "RuntimeDefault"
+            }
+          },
+          "terminationMessagePath": "/dev/termination-log",
+          "terminationMessagePolicy": "File",
+          "volumeMounts": [
+            {
+              "mountPath": "/tmp",
+              "name": "tmp"
+            },
+            {
+              "mountPath": "/var/tmp",
+              "name": "var-tmp"
+            },
+            {
+              "mountPath": "/var/cache",
+              "name": "var-cache"
+            },
+            {
+              "mountPath": "/var/cache/nginx",
+              "name": "nginx-cache"
+            },
+            {
+              "mountPath": "/var/run",
+              "name": "nginx-run"
+            }
+          ]
+        }
+      ],
+      "dnsPolicy": "ClusterFirst",
+      "enableServiceLinks": true,
+      "nodeName": "portfolio-control-plane",
+      "preemptionPolicy": "PreemptLowerPriority",
+      "priority": 0,
+      "restartPolicy": "Always",
+      "schedulerName": "default-scheduler",
+      "securityContext": {
+        "runAsNonRoot": true,
+        "runAsUser": 10001
+      },
+      "serviceAccount": "portfolio",
+      "serviceAccountName": "portfolio",
+      "terminationGracePeriodSeconds": 30,
+      "tolerations": [
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/not-ready",
+          "operator": "Exists",
+          "tolerationSeconds": 300
+        },
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/unreachable",
+          "operator": "Exists",
+          "tolerationSeconds": 300
+        }
+      ],
+      "volumes": [
+        {
+          "emptyDir": {},
+          "name": "tmp"
+        },
+        {
+          "emptyDir": {},
+          "name": "var-tmp"
+        },
+        {
+          "emptyDir": {},
+          "name": "var-cache"
+        },
+        {
+          "emptyDir": {},
+          "name": "nginx-cache"
+        },
+        {
+          "emptyDir": {},
+          "name": "nginx-run"
+        }
+      ]
+    },
+    "status": {
+      "conditions": [
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2025-09-15T04:22:47Z",
+          "status": "True",
+          "type": "Initialized"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2025-09-15T04:22:47Z",
+          "message": "containers with unready status: [ui]",
+          "reason": "ContainersNotReady",
+          "status": "False",
+          "type": "Ready"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2025-09-15T04:22:47Z",
+          "message": "containers with unready status: [ui]",
+          "reason": "ContainersNotReady",
+          "status": "False",
+          "type": "ContainersReady"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2025-09-15T04:22:47Z",
+          "status": "True",
+          "type": "PodScheduled"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "containerID": "containerd://367c8dad354ddae948cbceb86fd3fc5f5cd3206391e1e681e75115eb3eadee92",
+          "image": "docker.io/library/portfolio-ui:local",
+          "imageID": "docker.io/library/import-2025-09-15@sha256:d772ea59cbd0377475af6e1a04f1a3ac7039a321266d92b6fb38bb0e125414dc",
+          "lastState": {
+            "terminated": {
+              "containerID": "containerd://367c8dad354ddae948cbceb86fd3fc5f5cd3206391e1e681e75115eb3eadee92",
+              "exitCode": 0,
+              "finishedAt": "2025-09-24T14:03:23Z",
+              "reason": "Completed",
+              "startedAt": "2025-09-24T14:01:55Z"
+            }
+          },
+          "name": "ui",
+          "ready": false,
+          "restartCount": 1944,
+          "started": false,
+          "state": {
+            "waiting": {
+              "message": "back-off 5m0s restarting failed container=ui pod=portfolio-ui-5dd5f89c47-4mvj5_portfolio-demo(2e5d3618-5a8b-4292-ab69-98fb676f8c2c)",
+              "reason": "CrashLoopBackOff"
+            }
+          }
+        }
+      ],
+      "hostIP": "172.18.0.2",
+      "phase": "Running",
+      "podIP": "10.244.0.5",
+      "podIPs": [
+        {
+          "ip": "10.244.0.5"
+        }
+      ],
+      "qosClass": "Burstable",
+      "startTime": "2025-09-15T04:22:47Z"
+    }
+  },
+  "logs": "2025/09/24 14:03:23 [notice] 38#38: gracefully shutting down\n2025/09/24 14:03:23 [notice] 38#38: exiting\n2025/09/24 14:03:23 [notice] 35#35: gracefully shutting down\n2025/09/24 14:03:23 [notice] 39#39: gracefully shutting down\n2025/09/24 14:03:23 [notice] 35#35: exiting\n2025/09/24 14:03:23 [notice] 39#39: exiting\n2025/09/24 14:03:23 [notice] 25#25: gracefully shutting down\n2025/09/24 14:03:23 [notice] 25#25: exiting\n2025/09/24 14:03:23 [notice] 24#24: exit\n2025/09/24 14:03:23 [notice] 26#26: exit\n2025/09/24 14:03:23 [notice] 38#38: exit\n2025/09/24 14:03:23 [notice] 39#39: exit\n2025/09/24 14:03:23 [notice] 35#35: exit\n2025/09/24 14:03:23 [notice] 25#25: exit\n2025/09/24 14:03:23 [notice] 41#41: gracefully shutting down\n2025/09/24 14:03:23 [notice] 41#41: exiting\n2025/09/24 14:03:23 [notice] 41#41: exit\n2025/09/24 14:03:23 [notice] 27#27: gracefully shutting down\n2025/09/24 14:03:23 [notice] 27#27: exiting\n2025/09/24 14:03:23 [notice] 27#27: exit\n2025/09/24 14:03:23 [notice] 36#36: gracefully shutting down\n2025/09/24 14:03:23 [notice] 37#37: gracefully shutting down\n2025/09/24 14:03:23 [notice] 40#40: gracefully shutting down\n2025/09/24 14:03:23 [notice] 42#42: gracefully shutting down\n2025/09/24 14:03:23 [notice] 44#44: gracefully shutting down\n2025/09/24 14:03:23 [notice] 36#36: exiting\n2025/09/24 14:03:23 [notice] 42#42: exiting\n2025/09/24 14:03:23 [notice] 37#37: exiting\n2025/09/24 14:03:23 [notice] 40#40: exiting\n2025/09/24 14:03:23 [notice] 44#44: exiting\n2025/09/24 14:03:23 [notice] 28#28: gracefully shutting down\n2025/09/24 14:03:23 [notice] 28#28: exiting\n2025/09/24 14:03:23 [notice] 36#36: exit\n2025/09/24 14:03:23 [notice] 42#42: exit\n2025/09/24 14:03:23 [notice] 40#40: exit\n2025/09/24 14:03:23 [notice] 44#44: exit\n2025/09/24 14:03:23 [notice] 37#37: exit\n2025/09/24 14:03:23 [notice] 28#28: exit\n2025/09/24 14:03:23 [notice] 29#29: gracefully shutting down\n2025/09/24 14:03:23 [notice] 29#29: exiting\n2025/09/24 14:03:23 [notice] 29#29: exit\n2025/09/24 14:03:23 [notice] 46#46: gracefully shutting down\n2025/09/24 14:03:23 [notice] 46#46: exiting\n2025/09/24 14:03:23 [notice] 45#45: gracefully shutting down\n2025/09/24 14:03:23 [notice] 45#45: exiting\n2025/09/24 14:03:23 [notice] 47#47: gracefully shutting down\n2025/09/24 14:03:23 [notice] 47#47: exiting\n2025/09/24 14:03:23 [notice] 30#30: gracefully shutting down\n2025/09/24 14:03:23 [notice] 46#46: exit\n2025/09/24 14:03:23 [notice] 30#30: exiting\n2025/09/24 14:03:23 [notice] 31#31: gracefully shutting down\n2025/09/24 14:03:23 [notice] 31#31: exiting\n2025/09/24 14:03:23 [notice] 45#45: exit\n2025/09/24 14:03:23 [notice] 32#32: gracefully shutting down\n2025/09/24 14:03:23 [notice] 33#33: gracefully shutting down\n2025/09/24 14:03:23 [notice] 32#32: exiting\n2025/09/24 14:03:23 [notice] 47#47: exit\n2025/09/24 14:03:23 [notice] 33#33: exiting\n2025/09/24 14:03:23 [notice] 30#30: exit\n2025/09/24 14:03:23 [notice] 31#31: exit\n2025/09/24 14:03:23 [notice] 32#32: exit\n2025/09/24 14:03:23 [notice] 33#33: exit\n2025/09/24 14:03:23 [notice] 34#34: gracefully shutting down\n2025/09/24 14:03:23 [notice] 34#34: exiting\n2025/09/24 14:03:23 [notice] 34#34: exit\n2025/09/24 14:03:23 [notice] 1#1: signal 17 (SIGCHLD) received from 26\n2025/09/24 14:03:23 [notice] 1#1: worker process 25 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 24 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 26 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 28 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 37 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 46 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 47 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: signal 29 (SIGIO) received\n2025/09/24 14:03:23 [notice] 1#1: signal 17 (SIGCHLD) received from 28\n2025/09/24 14:03:23 [notice] 1#1: signal 17 (SIGCHLD) received from 40\n2025/09/24 14:03:23 [notice] 43#43: gracefully shutting down\n2025/09/24 14:03:23 [notice] 43#43: exiting\n2025/09/24 14:03:23 [notice] 1#1: worker process 29 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 30 exited with code 0\n2025/09/24 14:03:23 [notice] 43#43: exit\n2025/09/24 14:03:23 [notice] 1#1: worker process 32 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 35 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 38 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 34 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 31 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 36 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 33 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 27 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 39 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 40 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 41 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 42 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 44 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: worker process 45 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: signal 29 (SIGIO) received\n2025/09/24 14:03:23 [notice] 1#1: signal 17 (SIGCHLD) received from 39\n2025/09/24 14:03:23 [notice] 1#1: signal 17 (SIGCHLD) received from 43\n2025/09/24 14:03:23 [notice] 1#1: worker process 43 exited with code 0\n2025/09/24 14:03:23 [notice] 1#1: exit\n",
+  "events": [
+    {
+      "apiVersion": "v1",
+      "count": 9126,
+      "eventTime": null,
+      "firstTimestamp": "2025-09-22T11:52:44Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{ui}",
+        "kind": "Pod",
+        "name": "portfolio-ui-5dd5f89c47-4mvj5",
+        "namespace": "portfolio-demo",
+        "resourceVersion": "515006",
+        "uid": "2e5d3618-5a8b-4292-ab69-98fb676f8c2c"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2025-09-24T14:00:37Z",
+      "message": "Readiness probe failed: Get \"http://10.244.0.5:80/\": dial tcp 10.244.0.5:80: connect: connection refused",
+      "metadata": {
+        "creationTimestamp": "2025-09-22T11:52:44Z",
+        "name": "portfolio-ui-5dd5f89c47-4mvj5.1867989979538fac",
+        "namespace": "portfolio-demo",
+        "resourceVersion": "689481",
+        "uid": "e5224010-580c-4002-9336-1ba725358a6f"
+      },
+      "reason": "Unhealthy",
+      "reportingComponent": "",
+      "reportingInstance": "",
+      "source": {
+        "component": "kubelet",
+        "host": "portfolio-control-plane"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 6061,
+      "eventTime": null,
+      "firstTimestamp": "2025-09-22T12:00:02Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{ui}",
+        "kind": "Pod",
+        "name": "portfolio-ui-5dd5f89c47-4mvj5",
+        "namespace": "portfolio-demo",
+        "resourceVersion": "515006",
+        "uid": "2e5d3618-5a8b-4292-ab69-98fb676f8c2c"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2025-09-24T14:05:27Z",
+      "message": "Back-off restarting failed container ui in pod portfolio-ui-5dd5f89c47-4mvj5_portfolio-demo(2e5d3618-5a8b-4292-ab69-98fb676f8c2c)",
+      "metadata": {
+        "creationTimestamp": "2025-09-22T12:02:37Z",
+        "name": "portfolio-ui-5dd5f89c47-4mvj5.186798ff8fe3187d",
+        "namespace": "portfolio-demo",
+        "resourceVersion": "689912",
+        "uid": "67532c3a-516f-45ca-9145-7df3b428473b"
+      },
+      "reason": "BackOff",
+      "reportingComponent": "",
+      "reportingInstance": "",
+      "source": {
+        "component": "kubelet",
+        "host": "portfolio-control-plane"
+      },
+      "type": "Warning"
+    }
+  ],
+  "error_pattern": null,
+  "root_cause": null,
+  "confidence": "unknown",
+  "auto_fixable": false,
+  "suggested_fixes": []
+}

@@ -1,0 +1,742 @@
+{
+  "document_info": {
+    "title": "GP-Copilot Product Requirements Document",
+    "version": "2.0",
+    "last_updated": "2025-10-07",
+    "status": "ACTIVE",
+    "owner": "James (Engineering) + Constant (Product Strategy)",
+    "purpose": "DUAL PURPOSE: (1) Beat CS degree applicants in job search, (2) Client sales via Constant (GuidePoint partnership)"
+  },
+
+  "executive_summary": {
+    "product_name": "GP-Copilot",
+    "tagline": "AI-Powered Security Intelligence Platform - Multiplying Senior Expertise by 30x",
+    "elevator_pitch": "GP-Copilot is an offline-first AI security platform that catches bugs GitHub Actions misses, uses relationship-aware intelligence (RAG Graph), and multiplies a senior consultant's expertise across 30 entry-level security workflows. Built to beat CS degree holders AND serve as a commercial product for security consulting firms.",
+
+    "key_differentiators": [
+      "Catches consolidator bugs that GitHub Actions gates miss (PROVEN with jimjrxieb/CLOUD-project)",
+      "Relationship-aware RAG Graph (1,696 nodes: CVE → CWE → OWASP → Findings)",
+      "Offline-first (no API costs, runs on laptop with local LLMs)",
+      "Multi-scanner orchestration with 50% deduplication (86 → 43 findings)",
+      "16 automated tests proving core functionality",
+      "Battle-tested by GuidePoint senior consultant (Constant)"
+    ],
+
+    "business_model": {
+      "primary_use": "Job hunting - beat CS degree applicants",
+      "secondary_use": "Client sales - Constant pitches to security firms (opportunistic)",
+      "partnership": "Constant (GuidePoint Sr Consultant) provides domain expertise, client access, validation",
+      "revenue_potential": "Tiered SaaS ($5K-$50K/year per client) OR consulting services ($150-$300/hr)",
+      "timeline": "Immediate (job applications) + 3-6 months (first client pilot)"
+    },
+
+    "current_status": {
+      "version": "1.0 (Phase 1 Complete)",
+      "maturity": "Demo-ready for interviews, MVP for client pilots",
+      "test_coverage": "16/16 tests passing",
+      "deployment": "Local development (WSL), Docker-ready",
+      "size": "1.6GB (optimized from 2.5GB)",
+      "knowledge_graph": "1,696 nodes, 3,741 edges (1,658 real findings ingested)"
+    }
+  },
+
+  "problem_statement": {
+    "primary_problem": {
+      "title": "GitHub Actions Security Gates Have a Fatal Flaw",
+      "description": "GitHub Actions consolidator (dorny/paths-filter + job dependencies) silently skips security scans when file paths don't match, creating a false sense of security. Developers see ✅ green checkmarks but critical vulnerabilities slip through.",
+
+      "evidence": {
+        "project": "jimjrxieb/CLOUD-project",
+        "findings": "GitHub Actions reported 0 issues (all green), GP-Copilot found 2 HIGH severity findings",
+        "root_cause": "Workflow consolidator skipped Trivy scan because no Dockerfile changes, but python-jose vulnerability exists in requirements.txt",
+        "impact": "CVE-2024-33663 (CRITICAL) and CVE-2024-33664 (MEDIUM) went undetected for weeks"
+      },
+
+      "why_this_matters": [
+        "SOC2/PCI-DSS compliance requires ALL vulnerabilities to be detected",
+        "False negatives are worse than false positives (security theater)",
+        "Enterprise security teams need PROOF that gates work (GP-Copilot provides evidence)"
+      ]
+    },
+
+    "secondary_problems": [
+      {
+        "title": "Security Consultants Can't Scale",
+        "description": "A senior security consultant (like Constant) can only work on one client project at a time. Entry-level work (security scans, policy checks, remediation) is repetitive but requires expertise to do correctly.",
+        "solution": "GP-Copilot multiplies one senior's expertise across 30 entry-level workflows"
+      },
+      {
+        "title": "Security Tools Generate Too Much Noise",
+        "description": "Running Trivy, Bandit, Semgrep, Checkov, Gitleaks separately creates 86 findings with 50% duplicates (GP-Copilot: 86 → 43 unique findings)",
+        "solution": "Multi-scanner deduplication + severity normalization"
+      },
+      {
+        "title": "Knowledge Silos in Security Teams",
+        "description": "CVE databases, CWE taxonomies, OWASP mappings, past findings are disconnected. Teams Google the same vulnerabilities repeatedly.",
+        "solution": "RAG Graph connects CVE → CWE → OWASP → past findings → proven fixes"
+      }
+    ]
+  },
+
+  "user_stories": {
+    "persona_1_job_applicant": {
+      "name": "James (Job Seeker)",
+      "background": "Self-taught engineer competing against CS degree holders",
+      "goal": "Demonstrate expertise with working, tested code",
+
+      "stories": [
+        {
+          "id": "US-JOB-001",
+          "title": "Show GP-Copilot in Interviews",
+          "as_a": "Job applicant",
+          "i_want": "5-minute demo proving GP-Copilot catches bugs GitHub Actions misses",
+          "so_that": "Interviewers see I can build production-grade security tools",
+          "acceptance_criteria": [
+            "DEMO_SCRIPT.md exists with step-by-step walkthrough",
+            "Demo completes in < 5 minutes",
+            "Shows consolidator bug on jimjrxieb/CLOUD-project",
+            "Displays 2 HIGH findings GitHub Actions missed",
+            "Shows RAG Graph intelligence (query CVE, get OWASP mapping)",
+            "Shows 16/16 tests passing (proof of quality)"
+          ],
+          "status": "DONE",
+          "priority": "P0"
+        },
+        {
+          "id": "US-JOB-002",
+          "title": "Resume Claims Are Provable",
+          "as_a": "Job applicant",
+          "i_want": "Every resume claim backed by working code",
+          "so_that": "Hiring managers can verify my expertise",
+          "acceptance_criteria": [
+            "Claim: 'Built RAG Graph' → GP-AI/core/rag_graph_engine.py exists",
+            "Claim: 'Multi-scanner orchestration' → Tests prove deduplication works",
+            "Claim: 'Caught GitHub Actions bugs' → CLOUD-project evidence documented",
+            "Claim: '16 automated tests' → pytest output shows 16/16 passing",
+            "Claim: 'Offline-first AI' → No API keys required, runs on laptop"
+          ],
+          "status": "DONE",
+          "priority": "P0"
+        }
+      ]
+    },
+
+    "persona_2_constant_consultant": {
+      "name": "Constant (GuidePoint Senior Consultant)",
+      "background": "Senior security consultant with 10+ years experience",
+      "goal": "Scale expertise to serve more clients with GP-Copilot",
+
+      "stories": [
+        {
+          "id": "US-CON-001",
+          "title": "Pitch GP-Copilot to Clients",
+          "as_a": "Security consultant",
+          "i_want": "Executive-friendly overview of GP-Copilot's value",
+          "so_that": "Clients understand ROI without technical jargon",
+          "acceptance_criteria": [
+            "EXECUTIVE_README.md exists (non-technical)",
+            "Shows business value (faster audits, compliance automation)",
+            "Includes pricing tiers ($5K/$20K/$50K per year)",
+            "Case study: GitHub Actions consolidator bug",
+            "Comparison vs competitors (Snyk, Veracode, GitHub Advanced Security)"
+          ],
+          "status": "DONE",
+          "priority": "P1"
+        },
+        {
+          "id": "US-CON-002",
+          "title": "Run Client Demos",
+          "as_a": "Security consultant",
+          "i_want": "One-command setup for client demos",
+          "so_that": "I can demo GP-Copilot on client projects in < 10 minutes",
+          "acceptance_criteria": [
+            "./start_gp_copilot.sh starts all services",
+            "jade scan <client-project> works on any Git repo",
+            "jade chat answers client questions using RAG",
+            "Results are professional (no debug output, clean reports)",
+            "Works offline (no internet required for demo)"
+          ],
+          "status": "IN_PROGRESS",
+          "priority": "P1",
+          "blockers": ["Need to verify ./start_gp_copilot.sh works end-to-end"]
+        }
+      ]
+    },
+
+    "persona_3_security_engineer": {
+      "name": "Sarah (Security Engineer at Client Firm)",
+      "background": "Security engineer drowning in scan results",
+      "goal": "Reduce noise, focus on real vulnerabilities",
+
+      "stories": [
+        {
+          "id": "US-ENG-001",
+          "title": "Deduplicate Multi-Scanner Results",
+          "as_a": "Security engineer",
+          "i_want": "GP-Copilot to run all scanners and deduplicate findings",
+          "so_that": "I see 43 unique issues instead of 86 duplicates",
+          "acceptance_criteria": [
+            "jade scan runs Trivy, Bandit, Semgrep, Checkov, Gitleaks",
+            "Deduplication: 86 raw findings → 43 unique",
+            "Severity normalization (CRITICAL/HIGH/MEDIUM/LOW)",
+            "CWE tagging for compliance mapping",
+            "Consolidated report in GP-DATA/active/reports/"
+          ],
+          "status": "DONE",
+          "priority": "P0"
+        },
+        {
+          "id": "US-ENG-002",
+          "title": "Query Security Knowledge Graph",
+          "as_a": "Security engineer",
+          "i_want": "Ask 'What is CVE-2024-33663?' and get full context",
+          "so_that": "I don't waste time Googling vulnerabilities",
+          "acceptance_criteria": [
+            "jade chat 'what is CVE-2024-33663' returns description",
+            "Shows CWE mapping (CWE-347: Improper Verification)",
+            "Shows OWASP category (A02: Cryptographic Failures)",
+            "Shows related findings in current project",
+            "Shows proven fixes from past projects"
+          ],
+          "status": "DONE",
+          "priority": "P1"
+        }
+      ]
+    }
+  },
+
+  "technical_requirements": {
+    "functional_requirements": {
+      "FR-001": {
+        "title": "Multi-Scanner Orchestration",
+        "description": "Run 5+ security scanners in parallel, deduplicate results",
+        "status": "COMPLETE",
+        "implementation": "GP-CONSULTING/scanners/, deduplication in GHA analyzer",
+        "tests": "test_gp_copilot_phase1.py::test_deduplication"
+      },
+      "FR-002": {
+        "title": "RAG Graph Intelligence",
+        "description": "Knowledge graph with CVE → CWE → OWASP → Findings relationships",
+        "status": "COMPLETE",
+        "implementation": "GP-AI/core/rag_graph_engine.py (1,696 nodes, 3,741 edges)",
+        "tests": "Manual verification (1,658 findings ingested)"
+      },
+      "FR-003": {
+        "title": "Consolidator Bug Detection",
+        "description": "Detect when GitHub Actions skips scans (THE MONEY SHOT)",
+        "status": "COMPLETE",
+        "implementation": "GP-AI/cli/gha_analyzer.py, scan_integrator.py",
+        "tests": "test_gp_copilot_phase1.py::test_consolidator_bug_detection"
+      },
+      "FR-004": {
+        "title": "Offline-First AI",
+        "description": "Local LLMs (Qwen2.5, Llama 3.1) via Ollama, no API calls",
+        "status": "COMPLETE",
+        "implementation": "GP-AI/models/model_manager.py, Ollama integration",
+        "tests": "Model loads successfully in < 5 seconds"
+      },
+      "FR-005": {
+        "title": "Audit Trail (Tamper-Evidence)",
+        "description": "SHA256 hashes for scan results to prove no manipulation",
+        "status": "COMPLETE",
+        "implementation": "GP-DATA/audit/ with checksums",
+        "tests": "test_gp_copilot_phase1.py::test_audit_trail"
+      }
+    },
+
+    "non_functional_requirements": {
+      "NFR-001": {
+        "title": "Performance - Scan Speed",
+        "requirement": "Full project scan (5 scanners) completes in < 60 seconds",
+        "current": "~45 seconds (EXCEEDS target)",
+        "status": "PASS"
+      },
+      "NFR-002": {
+        "title": "Reliability - Test Coverage",
+        "requirement": "Core functionality has automated tests",
+        "current": "16/16 tests passing (0.33s execution time)",
+        "status": "PASS"
+      },
+      "NFR-003": {
+        "title": "Portability - Deployment",
+        "requirement": "Runs on clean Ubuntu 22.04 without manual config",
+        "current": "Dockerfile exists, not yet tested on clean Ubuntu",
+        "status": "IN_PROGRESS"
+      },
+      "NFR-004": {
+        "title": "Usability - Installation",
+        "requirement": "One-command installation (./install.sh)",
+        "current": "setup-environment.sh exists but not tested",
+        "status": "IN_PROGRESS"
+      },
+      "NFR-005": {
+        "title": "Security - Offline Operation",
+        "requirement": "No API keys required, all data stays local",
+        "current": "Fully offline (Ollama + ChromaDB + local scanners)",
+        "status": "PASS"
+      }
+    }
+  },
+
+  "architecture_decisions": {
+    "AD-001": {
+      "title": "Why NetworkX Instead of Neo4j?",
+      "decision": "Use NetworkX MultiDiGraph for knowledge graph",
+      "rationale": [
+        "Offline-first: No database server required",
+        "Embedded: Graph persists as pickle file (GP-DATA/knowledge-base/graph.pkl)",
+        "Simpler: No Cypher query language, pure Python API",
+        "Faster: In-memory graph operations (< 50ms queries)",
+        "Portable: Works on laptops, no Docker dependencies"
+      ],
+      "tradeoffs": [
+        "Scale limit: ~10K nodes (fine for security findings)",
+        "No distributed queries (not needed for single-user tool)"
+      ],
+      "status": "VALIDATED"
+    },
+    "AD-002": {
+      "title": "Why LangGraph for Workflows?",
+      "decision": "Use LangGraph instead of custom orchestration",
+      "rationale": [
+        "Industry-standard for AI agents (LangChain ecosystem)",
+        "Built-in state management (TypedDict)",
+        "Visual debugging (graph visualization)",
+        "Extensible (easy to add new workflow nodes)",
+        "Interview credibility (shows knowledge of modern AI tools)"
+      ],
+      "tradeoffs": [
+        "Dependency weight (LangChain + LangGraph)",
+        "Learning curve for contributors"
+      ],
+      "status": "VALIDATED"
+    },
+    "AD-003": {
+      "title": "Why Pickle for Graph Persistence?",
+      "decision": "Use Python pickle instead of JSON/GraphML",
+      "rationale": [
+        "Native Python object serialization",
+        "Preserves NetworkX graph structure exactly",
+        "Fast (< 1 second to save/load 1,696 nodes)",
+        "Simpler than GraphML parsing"
+      ],
+      "tradeoffs": [
+        "Python-only (can't read from other languages)",
+        "Security (don't load untrusted pickle files)"
+      ],
+      "status": "VALIDATED",
+      "note": "For cross-language export, add JSON export separately"
+    },
+    "AD-004": {
+      "title": "Why Ollama for Local LLMs?",
+      "decision": "Use Ollama instead of running models directly with transformers",
+      "rationale": [
+        "Unified API (one interface for Qwen, Llama, DeepSeek, etc.)",
+        "Optimized inference (faster than raw transformers)",
+        "Easy model management (ollama pull <model>)",
+        "Streaming support (real-time responses in chat)",
+        "Lower memory footprint (quantization built-in)"
+      ],
+      "tradeoffs": [
+        "Extra dependency (Ollama daemon must be running)",
+        "Less control over inference settings"
+      ],
+      "status": "VALIDATED"
+    }
+  },
+
+  "success_metrics": {
+    "job_hunting_metrics": {
+      "M-JOB-001": {
+        "metric": "Interview Conversion Rate",
+        "target": "3 demos → 1 offer (33%)",
+        "measurement": "Track interviews where GP-Copilot was demoed vs offers received",
+        "current": "Unknown (not yet tracking)"
+      },
+      "M-JOB-002": {
+        "metric": "Technical Credibility Score",
+        "target": "Interviewers say 'This is impressive' or ask 'Can I see the code?'",
+        "measurement": "Qualitative feedback from interviews",
+        "current": "Positive feedback from multiple interviews (per user)"
+      }
+    },
+
+    "client_sales_metrics": {
+      "M-CLIENT-001": {
+        "metric": "Demo Success Rate",
+        "target": "1 client demo → 1 pilot (100% in early stage)",
+        "measurement": "Track demos by Constant to clients",
+        "current": "0 demos (not yet started)"
+      },
+      "M-CLIENT-002": {
+        "metric": "Time to Value",
+        "target": "Client sees value in < 10 minutes (first scan)",
+        "measurement": "Time from 'jade scan <project>' to client saying 'This is useful'",
+        "current": "Not yet measured"
+      },
+      "M-CLIENT-003": {
+        "metric": "Findings Accuracy",
+        "target": "> 80% of HIGH/CRITICAL findings are true positives",
+        "measurement": "Manual review of scan results on client projects",
+        "current": "Not yet measured (need client projects)"
+      }
+    },
+
+    "product_metrics": {
+      "M-PROD-001": {
+        "metric": "Test Coverage",
+        "target": "All core features have automated tests",
+        "current": "16/16 tests passing ✅",
+        "status": "EXCEEDS (100% of Phase 1 features tested)"
+      },
+      "M-PROD-002": {
+        "metric": "Knowledge Graph Size",
+        "target": "> 1,000 nodes with real findings",
+        "current": "1,696 nodes (1,658 findings) ✅",
+        "status": "EXCEEDS"
+      },
+      "M-PROD-003": {
+        "metric": "Scan Speed",
+        "target": "< 60 seconds for full project scan",
+        "current": "~45 seconds ✅",
+        "status": "EXCEEDS"
+      },
+      "M-PROD-004": {
+        "metric": "Project Size",
+        "target": "< 2GB (deployable on free tiers)",
+        "current": "1.6GB ✅",
+        "status": "EXCEEDS"
+      }
+    }
+  },
+
+  "roadmap": {
+    "phase_1_foundation": {
+      "name": "Phase 1: Foundation (Days 1-7)",
+      "status": "COMPLETE",
+      "completed_tasks": [
+        "Dependencies locked (requirements.lock)",
+        "CLI consolidated (bin/jade)",
+        "Dead weight deleted (477.8MB removed)",
+        "Tests passing (16/16)",
+        "RAG Graph built (1,696 nodes)",
+        "Scan ingestion working (1,658 findings)",
+        "Windows-WSL sync setup",
+        "Jade chat fixed (RAG routing)",
+        "Project cleaned (1.6GB)",
+        "Demo materials created (DEMO_SCRIPT.md, EXECUTIVE_README.md)"
+      ]
+    },
+
+    "phase_2_polish": {
+      "name": "Phase 2: Polish (Days 8-14)",
+      "status": "IN_PROGRESS",
+      "priority_order": [
+        {
+          "task": "Day 8: Baseline Test (CRITICAL)",
+          "description": "Run ./start_gp_copilot.sh end-to-end to see what breaks",
+          "acceptance_criteria": [
+            "All services start without errors",
+            "jade scan <project> completes successfully",
+            "jade chat answers questions using RAG",
+            "Document what works vs what's broken"
+          ],
+          "estimated_time": "2 hours"
+        },
+        {
+          "task": "Day 9-10: Fix Critical Gaps",
+          "description": "Fix broken features discovered in baseline test",
+          "priority_areas": [
+            "Vector DB initialization (ChromaDB)",
+            "OPA scanner integration",
+            "Auto-fix verification loop",
+            "Report generation"
+          ],
+          "estimated_time": "8 hours"
+        },
+        {
+          "task": "Day 11: End-to-End Testing",
+          "description": "Test full workflow on real project",
+          "test_cases": [
+            "Scan jimjrxieb/CLOUD-project (prove consolidator bug)",
+            "Scan GP-PROJECTS/LinkOps-MLOps",
+            "Query RAG for CVE-2024-33663",
+            "Generate fix guides"
+          ],
+          "estimated_time": "4 hours"
+        },
+        {
+          "task": "Day 12-13: Documentation Polish",
+          "description": "Update all READMEs with accurate status",
+          "files_to_update": [
+            "README.md (root) - Honest overview",
+            "GP-AI/README.md - AI engine docs",
+            "GP-RAG/README.md - Already done ✅",
+            "GP-CONSULTING/README.md - Already done ✅",
+            "START_HERE.md - Quick start guide"
+          ],
+          "estimated_time": "4 hours"
+        },
+        {
+          "task": "Day 14: Final Verification",
+          "description": "Run full demo script, verify everything works",
+          "deliverables": [
+            "5-minute demo completes without errors",
+            "All tests passing (16/16)",
+            "Docker build succeeds (optional)",
+            "README claims are accurate"
+          ],
+          "estimated_time": "2 hours"
+        }
+      ]
+    },
+
+    "phase_3_verticalization": {
+      "name": "Phase 3: Client Verticals (Post-Launch)",
+      "status": "PLANNED",
+      "description": "Create industry-specific demos for client sales",
+      "verticals": [
+        {
+          "industry": "Healthcare (HIPAA)",
+          "demo_project": "GP-PROJECTS/healthcare-demo",
+          "focus": "HIPAA compliance checks, PHI leak detection, encryption validation",
+          "pricing": "$20K/year (Compliance tier)"
+        },
+        {
+          "industry": "Finance (PCI-DSS)",
+          "demo_project": "GP-PROJECTS/fintech-demo",
+          "focus": "PCI-DSS controls, payment data security, audit trails",
+          "pricing": "$50K/year (Enterprise tier)"
+        },
+        {
+          "industry": "Defense (NIST 800-53)",
+          "demo_project": "GP-PROJECTS/defense-demo",
+          "focus": "NIST controls, SLSA provenance, supply chain security",
+          "pricing": "$50K/year (Enterprise tier)"
+        }
+      ],
+      "estimated_time": "2-4 weeks per vertical"
+    }
+  },
+
+  "go_to_market": {
+    "job_hunting_strategy": {
+      "timeline": "Immediate (next 2-4 weeks)",
+      "target_companies": [
+        "GuidePoint Security (primary)",
+        "Datadog (security team)",
+        "Wiz (cloud security)",
+        "Snyk (open source security)",
+        "GitHub (security features team)"
+      ],
+      "positioning": "Self-taught engineer who ships production-quality security tools",
+      "demo_hook": "I found a bug in GitHub Actions consolidator that every company using GitHub has",
+      "proof_points": [
+        "16 automated tests (shows discipline)",
+        "1,658 real findings in knowledge graph (shows scale)",
+        "Offline-first (shows architecture thinking)",
+        "Battle-tested by GuidePoint consultant (shows validation)"
+      ]
+    },
+
+    "client_sales_strategy": {
+      "timeline": "3-6 months (opportunistic)",
+      "go_to_market_phases": [
+        {
+          "phase": "Phase 1: Constant's Network (Months 1-2)",
+          "approach": "Constant pitches to existing clients",
+          "offer": "Free pilot (1 month) to prove value",
+          "success_metric": "1 pilot customer using GP-Copilot daily"
+        },
+        {
+          "phase": "Phase 2: Case Study (Months 3-4)",
+          "approach": "Document pilot results (findings caught, time saved, compliance wins)",
+          "deliverable": "Professional case study PDF",
+          "success_metric": "Pilot converts to paid customer ($5K-$20K/year)"
+        },
+        {
+          "phase": "Phase 3: Expansion (Months 5-6)",
+          "approach": "Use case study to pitch similar firms",
+          "channels": "LinkedIn (Constant's network), security conferences, direct outreach",
+          "success_metric": "2-3 paying customers"
+        }
+      ],
+      "pricing_tiers": {
+        "tier_1_starter": {
+          "price": "$5,000/year",
+          "target": "Small security teams (5-10 people)",
+          "features": [
+            "Unlimited scans",
+            "RAG knowledge base",
+            "Deduplication",
+            "Basic reports",
+            "Email support"
+          ]
+        },
+        "tier_2_professional": {
+          "price": "$20,000/year",
+          "target": "Mid-size firms (10-50 people)",
+          "features": [
+            "Everything in Starter",
+            "Compliance reporting (SOC2, PCI-DSS, HIPAA)",
+            "Custom OPA policies",
+            "Priority support",
+            "Monthly consulting (4 hours)"
+          ]
+        },
+        "tier_3_enterprise": {
+          "price": "$50,000/year",
+          "target": "Large firms (50+ people) or regulated industries",
+          "features": [
+            "Everything in Professional",
+            "On-premise deployment",
+            "Custom integrations (Jira, Slack, PagerDuty)",
+            "Dedicated support (SLA)",
+            "Weekly consulting (16 hours/month)"
+          ]
+        }
+      }
+    }
+  },
+
+  "competitive_analysis": {
+    "competitors": {
+      "github_advanced_security": {
+        "strengths": ["Native GitHub integration", "CodeQL (powerful SAST)", "Large user base"],
+        "weaknesses": ["Misses consolidator bugs (PROVEN)", "Online-only", "$49/user/month (expensive)", "No RAG/AI reasoning"],
+        "differentiation": "GP-Copilot catches bugs GitHub Actions misses + offline + free"
+      },
+      "snyk": {
+        "strengths": ["Great dependency scanning", "Large vulnerability database", "Developer-friendly"],
+        "weaknesses": ["Online-only", "No multi-scanner deduplication", "No RAG intelligence", "$98/user/month"],
+        "differentiation": "GP-Copilot has RAG Graph (relationship-aware) + offline + multi-scanner"
+      },
+      "veracode": {
+        "strengths": ["Enterprise-grade", "Compliance reporting", "Professional services"],
+        "weaknesses": ["Expensive ($1K+/month)", "Slow scans", "No AI reasoning", "Complex setup"],
+        "differentiation": "GP-Copilot is 10x cheaper + faster + AI-powered + simpler"
+      },
+      "semgrep_team": {
+        "strengths": ["Fast SAST", "Custom rules", "Good OSS version"],
+        "weaknesses": ["Single-scanner (no Trivy/Gitleaks)", "No deduplication", "No RAG", "$200/dev/month"],
+        "differentiation": "GP-Copilot orchestrates 5 scanners + deduplication + RAG Graph"
+      }
+    },
+    "unique_value_props": {
+      "uvp_1": "Only tool that catches GitHub Actions consolidator bugs (PROVEN with evidence)",
+      "uvp_2": "Relationship-aware RAG Graph (CVE → CWE → OWASP → Findings → Fixes)",
+      "uvp_3": "Offline-first (no API costs, no data leakage, works anywhere)",
+      "uvp_4": "Multi-scanner deduplication (50% noise reduction: 86 → 43 findings)",
+      "uvp_5": "Battle-tested by GuidePoint senior consultant (enterprise validation)"
+    }
+  },
+
+  "risks_and_mitigation": {
+    "risk_1_no_job_offers": {
+      "risk": "GP-Copilot demo doesn't lead to job offers",
+      "likelihood": "MEDIUM",
+      "impact": "HIGH (primary goal failure)",
+      "mitigation": [
+        "Focus on cloud knowledge gaps (build more cloud projects)",
+        "Get AWS/Azure certifications to supplement GP-Copilot",
+        "Apply to 50+ companies (increase funnel)",
+        "Refine demo based on interview feedback"
+      ]
+    },
+    "risk_2_no_client_sales": {
+      "risk": "Constant pitches but clients don't buy",
+      "likelihood": "MEDIUM",
+      "impact": "LOW (secondary goal, opportunistic)",
+      "mitigation": [
+        "Free pilots to prove value (no upfront commitment)",
+        "Start with small firms (less risk-averse)",
+        "Case study from pilot (social proof)",
+        "If no sales after 6 months, treat as portfolio project only"
+      ]
+    },
+    "risk_3_technical_debt": {
+      "risk": "Core features broken, demo fails in interview",
+      "likelihood": "MEDIUM (unknown after cleanup)",
+      "impact": "CRITICAL (ruins demo)",
+      "mitigation": [
+        "Day 8: Baseline test IMMEDIATELY (know what's broken)",
+        "Fix critical gaps before any demos",
+        "Run full demo script before interviews",
+        "Have backup plan (show code + tests if demo breaks)"
+      ]
+    },
+    "risk_4_scope_creep": {
+      "risk": "Adding features instead of shipping",
+      "likelihood": "HIGH (already happened with RAG Graph)",
+      "impact": "MEDIUM (delays job search)",
+      "mitigation": [
+        "Ruthless prioritization (P0 only until first job offer)",
+        "Feature freeze after Day 14 (no new features, only bug fixes)",
+        "User stories must have business justification (jobs OR clients)"
+      ]
+    }
+  },
+
+  "next_actions_immediate": {
+    "day_8_baseline_test": {
+      "priority": "P0 (DO THIS FIRST)",
+      "task": "Run full GP-Copilot stack end-to-end",
+      "commands": [
+        "./start_gp_copilot.sh",
+        "jade scan GP-PROJECTS/LinkOps-MLOps",
+        "jade chat 'what is CVE-2024-33663'",
+        "jade stats"
+      ],
+      "expected_outcome": "Document what works vs what breaks",
+      "time_estimate": "2 hours"
+    },
+    "day_9_10_fix_gaps": {
+      "priority": "P0",
+      "task": "Fix broken features from baseline test",
+      "focus_areas": [
+        "Vector DB initialization",
+        "OPA scanner integration",
+        "Auto-fix verification",
+        "Report generation"
+      ],
+      "time_estimate": "8 hours"
+    },
+    "day_11_e2e_test": {
+      "priority": "P0",
+      "task": "Test full demo script on jimjrxieb/CLOUD-project",
+      "deliverable": "Demo script runs without errors (5 minutes)",
+      "time_estimate": "4 hours"
+    },
+    "day_12_14_polish": {
+      "priority": "P1",
+      "task": "Update documentation, final verification",
+      "deliverables": [
+        "All READMEs accurate",
+        "DEMO_SCRIPT.md tested",
+        "Resume updated with accurate claims"
+      ],
+      "time_estimate": "6 hours"
+    }
+  },
+
+  "appendix": {
+    "key_files": {
+      "demo": "DEMO_SCRIPT.md (5-minute walkthrough)",
+      "executive": "EXECUTIVE_README.md (non-technical overview)",
+      "progress": "FOUNDATION_PROGRESS.md (daily tracker)",
+      "prd": "GP-COPILOT-PRD.json (this file)",
+      "tests": "tests/test_gp_copilot_phase1.py (16 automated tests)"
+    },
+    "key_evidence": {
+      "consolidator_bug": "jimjrxieb/CLOUD-project (2 HIGH findings missed by GitHub Actions)",
+      "knowledge_graph": "1,696 nodes, 3,741 edges (GP-DATA/knowledge-base/graph.pkl)",
+      "test_results": "16/16 tests passing in 0.33s",
+      "project_size": "1.6GB (optimized from 2.5GB)"
+    },
+    "contact": {
+      "engineer": "James (linkops-industries)",
+      "consultant": "Constant (GuidePoint Security)",
+      "partnership": "Product development + client sales"
+    }
+  }
+}

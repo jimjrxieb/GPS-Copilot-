@@ -1,0 +1,17 @@
+{
+  "research_id": "041d414a-f46b-46be-b844-df6aa4e63e52",
+  "title": "FastAPI Overview",
+  "content": "FastAPI is a modern Python web framework for building APIs with automatic OpenAPI documentation and async support.",
+  "category": "ai_ml",
+  "source": "FastAPI Documentation",
+  "topics": [
+    "Python",
+    "Building",
+    "Fastapi",
+    "Framework",
+    "Modern"
+  ],
+  "timestamp": "2025-09-25T10:29:53.029887",
+  "created_by": "james-ui",
+  "version": "1.0"
+}

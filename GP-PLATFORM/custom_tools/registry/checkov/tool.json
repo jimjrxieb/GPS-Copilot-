@@ -1,0 +1,24 @@
+{
+  "name": "checkov",
+  "version": "3.2.57",
+  "type": "docker",
+  "image": "bridgecrew/checkov:3.2.57",
+  "capabilities": ["scan.iac", "scan.secrets", "scan.sca"],
+  "entrypoints": {
+    "iac": ["checkov", "--framework", "all", "--output", "json", "--quiet", "-d", "."],
+    "dockerfile": ["checkov", "--framework", "dockerfile", "--output", "json", "--quiet", "-d", "."],
+    "terraform": ["checkov", "--framework", "terraform", "--output", "json", "--quiet", "-d", "."],
+    "kubernetes": ["checkov", "--framework", "kubernetes", "--output", "json", "--quiet", "-d", "."]
+  },
+  "outputs": {
+    "format": "json",
+    "path_template": "outputs/checkov/{run_id}/raw.json"
+  },
+  "normalizer": "adapters/normalize.py",
+  "schema_version": "1.0",
+  "description": "Infrastructure as Code security and compliance scanner",
+  "tags": ["security", "iac", "compliance", "terraform", "kubernetes"],
+  "env_allowlist": ["CHECKOV_LOG_LEVEL", "BC_API_KEY"],
+  "working_dir": "/work",
+  "timeout_seconds": 600
+}

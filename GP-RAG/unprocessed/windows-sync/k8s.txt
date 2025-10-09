@@ -1,0 +1,397 @@
+{
+  "tasks_and_errors": [
+    {
+      "task": "Create a Kubernetes Pod",
+      "description": "Define a basic Pod configuration to run a containerized application.",
+      "example": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "metadata": {
+          "name": "example-pod"
+        },
+        "spec": {
+          "containers": [
+            {
+              "name": "nginx",
+              "image": "nginx:latest"
+            }
+          ]
+        }
+      },
+      "common_error": "Pod fails to start due to invalid image name",
+      "fix": "Verify the image name and tag exist in the registry (e.g., docker.io/nginx:latest). Use `kubectl describe pod` to check events."
+    },
+    {
+      "task": "Deploy a Deployment",
+      "description": "Create a Deployment to manage multiple Pod replicas.",
+      "example": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "metadata": {
+          "name": "my-app"
+        },
+        "spec": {
+          "replicas": 3,
+          "selector": {
+            "matchLabels": {
+              "app": "my-app"
+            }
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "my-app"
+              }
+            },
+            "spec": {
+              "containers": [
+                {
+                  "name": "app",
+                  "image": "my-app:1.0"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "common_error": "Pods stuck in Pending state",
+      "fix": "Check if nodes have sufficient resources (CPU/memory) using `kubectl describe node`. Adjust resource limits or increase cluster capacity."
+    },
+    {
+      "task": "Expose a Service",
+      "description": "Create a Service to expose a Deployment internally or externally.",
+      "example": {
+        "apiVersion": "v1",
+        "kind": "Service",
+        "metadata": {
+          "name": "my-service"
+        },
+        "spec": {
+          "selector": {
+            "app": "my-app"
+          },
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 80,
+              "targetPort": 8080
+            }
+          ],
+          "type": "ClusterIP"
+        }
+      },
+      "common_error": "Service not routing traffic",
+      "fix": "Ensure selector labels match Pod labels. Use `kubectl get endpoints` to verify endpoints are registered."
+    },
+    {
+      "task": "Create a ConfigMap",
+      "description": "Store configuration data as key-value pairs for Pods.",
+      "example": {
+        "apiVersion": "v1",
+        "kind": "ConfigMap",
+        "metadata": {
+          "name": "app-config"
+        },
+        "data": {
+          "database_url": "mysql://user:pass@localhost:3306/db"
+        }
+      },
+      "common_error": "Pod cannot access ConfigMap",
+      "fix": "Verify ConfigMap is mounted correctly in Pod spec using `volumeMounts` and `volumes`. Check namespace consistency."
+    },
+    {
+      "task": "Set up a Secret",
+      "description": "Store sensitive data like passwords or API keys.",
+      "example": {
+        "apiVersion": "v1",
+        "kind": "Secret",
+        "metadata": {
+          "name": "app-secret"
+        },
+        "type": "Opaque",
+        "data": {
+          "api_key": "c2VjcmV0S2V5" // Base64 encoded
+        }
+      },
+      "common_error": "Invalid Secret data format",
+      "fix": "Ensure data values are base64-encoded. Use `echo -n 'secret' | base64` to encode values."
+    },
+    {
+      "task": "Scale a Deployment",
+      "description": "Adjust the number of replicas in a Deployment.",
+      "example": "kubectl scale deployment my-app --replicas=5",
+      "common_error": "Scaling fails due to resource constraints",
+      "fix": "Check node resources with `kubectl top nodes`. Adjust resource requests/limits or add nodes."
+    },
+    {
+      "task": "Roll out a Deployment Update",
+      "description": "Update a Deployment with a new container image.",
+      "example": "kubectl set image deployment/my-app app=my-app:2.0",
+      "common_error": "Pods fail to update due to image pull errors",
+      "fix": "Verify image exists in registry and imagePullSecrets are configured if private registry is used."
+    },
+    {
+      "task": "Create a Namespace",
+      "description": "Organize resources in isolated namespaces.",
+      "example": {
+        "apiVersion": "v1",
+        "kind": "Namespace",
+        "metadata": {
+          "name": "dev"
+        }
+      },
+      "common_error": "Resources not found in namespace",
+      "fix": "Ensure resources are created in the correct namespace using `--namespace` flag or `metadata.namespace`."
+    },
+    {
+      "task": "Set Resource Limits",
+      "description": "Define CPU and memory limits for containers.",
+      "example": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "metadata": {
+          "name": "resource-pod"
+        },
+        "spec": {
+          "containers": [
+            {
+              "name": "app",
+              "image": "app:1.0",
+              "resources": {
+                "limits": {
+                  "cpu": "500m",
+                  "memory": "512Mi"
+                },
+                "requests": {
+                  "cpu": "200m",
+                  "memory": "256Mi"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "common_error": "Pod evicted due to resource limits",
+      "fix": "Increase limits or optimize application resource usage. Monitor with `kubectl top pod`."
+    },
+    {
+      "task": "Create an Ingress",
+      "description": "Manage external access to services using an Ingress controller.",
+      "example": {
+        "apiVersion": "networking.k8s.io/v1",
+        "kind": "Ingress",
+        "metadata": {
+          "name": "example-ingress"
+        },
+        "spec": {
+          "rules": [
+            {
+              "host": "example.com",
+              "http": {
+                "paths": [
+                  {
+                    "path": "/",
+                    "pathType": "Prefix",
+                    "backend": {
+                      "service": {
+                        "name": "my-service",
+                        "port": {
+                          "number": 80
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "common_error": "Ingress not routing traffic",
+      "fix": "Ensure Ingress controller (e.g., nginx) is installed and running. Verify host and path configurations."
+    },
+    {
+      "task": "Enable Pod Autoscaling",
+      "description": "Automatically scale Pods based on CPU/memory usage.",
+      "example": "kubectl autoscale deployment my-app --min=2 --max=10 --cpu-percent=80",
+      "common_error": "Autoscaler not scaling",
+      "fix": "Ensure metrics-server is installed and running. Verify resource metrics with `kubectl top pod`."
+    },
+    {
+      "task": "Create a PersistentVolumeClaim",
+      "description": "Request storage for stateful applications.",
+      "example": {
+        "apiVersion": "v1",
+        "kind": "PersistentVolumeClaim",
+        "metadata": {
+          "name": "data-pvc"
+        },
+        "spec": {
+          "accessModes": [
+            "ReadWriteOnce"
+          ],
+          "resources": {
+            "requests": {
+              "storage": "1Gi"
+            }
+          }
+        }
+      },
+      "common_error": "PVC stuck in Pending state",
+      "fix": "Ensure a matching PersistentVolume or StorageClass exists. Check with `kubectl describe pvc`."
+    },
+    {
+      "task": "Run a CronJob",
+      "description": "Schedule recurring tasks using a CronJob.",
+      "example": {
+        "apiVersion": "batch/v1",
+        "kind": "CronJob",
+        "metadata": {
+          "name": "backup-job"
+        },
+        "spec": {
+          "schedule": "0 0 * * *",
+          "jobTemplate": {
+            "spec": {
+              "template": {
+                "spec": {
+                  "containers": [
+                    {
+                      "name": "backup",
+                      "image": "backup-tool:latest"
+                    }
+                  ],
+                  "restartPolicy": "OnFailure"
+                }
+              }
+            }
+          }
+        }
+      },
+      "common_error": "CronJob fails to execute",
+      "fix": "Check Job logs with `kubectl logs` and ensure the container command is correct."
+    },
+    {
+      "task": "Monitor Cluster Events",
+      "description": "View events to troubleshoot issues.",
+      "example": "kubectl get events --namespace=default",
+      "common_error": "Events not descriptive enough",
+      "fix": "Use `kubectl describe <resource>` for detailed error information."
+    },
+    {
+      "task": "Apply Node Selector",
+      "description": "Schedule Pods on specific nodes.",
+      "example": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "metadata": {
+          "name": "node-pod"
+        },
+        "spec": {
+          "nodeSelector": {
+            "disktype": "ssd"
+          },
+          "containers": [
+            {
+              "name": "app",
+              "image": "app:1.0"
+            }
+          ]
+        }
+      },
+      "common_error": "Pod not scheduled",
+      "fix": "Ensure nodes have the specified labels using `kubectl label node <node> disktype=ssd`."
+    },
+    {
+      "task": "Configure Taints and Tolerations",
+      "description": "Control Pod scheduling with taints and tolerations.",
+      "example": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "metadata": {
+          "name": "toleration-pod"
+        },
+        "spec": {
+          "tolerations": [
+            {
+              "key": "dedicated",
+              "operator": "Equal",
+              "value": "app",
+              "effect": "NoSchedule"
+            }
+          ],
+          "containers": [
+            {
+              "name": "app",
+              "image": "app:1.0"
+            }
+          ]
+        }
+      },
+      "common_error": "Pod rejected due to taint",
+      "fix": "Add matching toleration to Pod spec or remove taint with `kubectl taint nodes <node> dedicated-`."
+    },
+    {
+      "task": "Create a ServiceAccount",
+      "description": "Provide an identity for Pods to interact with the Kubernetes API.",
+      "example": {
+        "apiVersion": "v1",
+        "kind": "ServiceAccount",
+        "metadata": {
+          "name": "app-sa"
+        }
+      },
+      "common_error": "Permission denied for API access",
+      "fix": "Bind ServiceAccount to a Role/ClusterRole using a RoleBinding. Verify with `kubectl describe sa`."
+    },
+    {
+      "task": "Drain a Node",
+      "description": "Safely evict Pods from a node for maintenance.",
+      "example": "kubectl drain <node> --ignore-daemonsets",
+      "common_error": "Pods not evicted",
+      "fix": "Ensure `--ignore-daemonsets` is used for DaemonSet Pods and check for PodDisruptionBudgets."
+    },
+    {
+      "task": "Set up a DaemonSet",
+      "description": "Run a Pod on every node in the cluster.",
+      "example": {
+        "apiVersion": "apps/v1",
+        "kind": "DaemonSet",
+        "metadata": {
+          "name": "monitoring-agent"
+        },
+        "spec": {
+          "selector": {
+            "matchLabels": {
+              "app": "monitoring"
+            }
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "monitoring"
+              }
+            },
+            "spec": {
+              "containers": [
+                {
+                  "name": "agent",
+                  "image": "monitoring-agent:1.0"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "common_error": "DaemonSet Pods not running on all nodes",
+      "fix": "Check node taints and tolerations. Verify image availability."
+    },
+    {
+      "task": "Troubleshoot DNS Issues",
+      "description": "Resolve DNS resolution problems in Pods.",
+      "example": "kubectl exec -it <pod> -- nslookup kubernetes.default",
+      "common_error": "DNS resolution fails",
+      "fix": "Ensure CoreDNS is running with `kubectl get pods -n kube-system`. Check Service DNS configuration."
+    }
+  ]
+}

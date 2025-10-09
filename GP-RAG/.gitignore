@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+ai-env/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/*.json
+
+# OLD deprecated vector databases (DO NOT RECREATE)
+jade_vector_db/
+vector-db/
+
+# Keep only the production vector store
+!vector-store/
+
+# Temporary files
+*.tmp
+*.bak
+.DS_Store
+
+# Training outputs
+training/jade-security-*/
+training/*.log
+training/outputs/
+
+# ChromaDB
+chroma.sqlite3-*

@@ -1,0 +1,22 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sDenyPrivileged
+metadata:
+  annotations:
+    generated-by: jade-policy-generator
+  name: deny-privileged-production
+spec:
+  enforcementAction: deny
+  match:
+    excludedNamespaces:
+    - kube-system
+    - gatekeeper-system
+    kinds:
+    - apiGroups:
+      - ''
+      - apps
+      kinds:
+      - Pod
+      - Deployment
+    namespaces:
+    - production
+    - staging

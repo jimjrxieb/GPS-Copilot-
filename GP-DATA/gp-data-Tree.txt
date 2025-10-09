@@ -1,0 +1,100 @@
+.
+├── GP_DATA_ARCHITECTURE.md
+├── README.md
+├── analysis
+├── baselines
+│   └── package.json.backup.20250923_005909
+├── dynamic-data
+│   ├── client-context
+│   ├── project-status
+│   ├── scan-results
+│   └── threat-intelligence
+├── escalations
+│   ├── escalation_20250923_005912.json
+│   └── escalation_20250923_005912_human_readable.md
+├── fixes
+│   ├── fixes_20250923_005912.json
+│   └── fixes_20250924_011645.json
+├── gp-data-Tree.txt
+├── notes
+├── processed
+├── reports
+│   ├── executive_summary_LinkOps-MLOps_20250923_002337.md
+│   ├── executive_summary_Portfolio_20250923_002254.md
+│   ├── executive_summary_Portfolio_20250923_004804.md
+│   ├── executive_summary_Portfolio_20250923_012236.md
+│   ├── portfolio
+│   │   └── PORTFOLIO_SECURITY_REMEDIATION_REPORT.md
+│   ├── rag_summary_LinkOps-MLOps_20250923_002337.md
+│   ├── rag_summary_Portfolio_20250923_002254.md
+│   ├── rag_summary_Portfolio_20250923_004804.md
+│   ├── rag_summary_Portfolio_20250923_012236.md
+│   ├── technical_report_LinkOps-MLOps_20250923_002337.md
+│   ├── technical_report_Portfolio_20250923_002254.md
+│   ├── technical_report_Portfolio_20250923_004804.md
+│   └── technical_report_Portfolio_20250923_012236.md
+├── research
+├── scans
+│   ├── checkov_20250924_084032_726.json
+│   ├── checkov_20250924_084042_059.json
+│   ├── checkov_latest.json
+│   ├── gitleaks_20250924_084348_811.json
+│   ├── gitleaks_20250924_084355_926.json
+│   ├── gitleaks_20250924_084408_332.json
+│   ├── gitleaks_latest.json
+│   ├── k8s_scans_archive
+│   │   ├── k8s_scan_20250922_235622.json
+│   │   ├── k8s_scan_20250922_235845.json
+│   │   ├── k8s_scan_20250923_004600.json
+│   │   ├── k8s_scan_20250923_005123.json
+│   │   ├── k8s_scan_20250923_005157.json
+│   │   ├── k8s_scan_20250923_010227.json
+│   │   ├── k8s_scan_20250923_010820.json
+│   │   ├── k8s_scan_20250923_081036.json
+│   │   ├── k8s_scan_20250923_081354.json
+│   │   ├── k8s_scan_20250923_082326.json
+│   │   ├── k8s_scan_20250923_083001.json
+│   │   ├── k8s_scan_20250923_083118.json
+│   │   ├── k8s_scan_20250923_085305.json
+│   │   ├── k8s_scan_20250923_091613.json
+│   │   ├── k8s_scan_20250923_120747.json
+│   │   └── k8s_scan_20250923_122641.json
+│   ├── kube_hunter_20250924_084942_617.json
+│   ├── kube_hunter_latest.json
+│   ├── manifests
+│   │   └── scan_session_20250924_082804_97357ac9.json
+│   ├── npm_audit_20250924_085538_691.json
+│   ├── npm_audit_latest.json
+│   ├── opa_20250924_085850_962.json
+│   ├── opa_20250924_085908_601.json
+│   ├── opa_latest.json
+│   ├── processed
+│   │   └── bandit
+│   │       └── bandit_scanners_20250924_082711_2283d81b_processed.json
+│   ├── raw
+│   │   └── bandit
+│   │       └── bandit_scanners_20250924_082711_2283d81b_raw.json
+│   ├── scan_20250923_001437.json
+│   ├── scan_20250923_001511.json
+│   ├── scan_20250923_002254.json
+│   ├── scan_20250923_002336.json
+│   ├── scan_20250923_002337.json
+│   ├── scan_20250923_004739.json
+│   ├── scan_20250923_005336.json
+│   ├── scan_20250923_010409.json
+│   ├── scan_20250923_233153.json
+│   ├── scan_20250924_012003.json
+│   ├── scan_20250924_023305.json
+│   ├── scan_manifest.py
+│   ├── semgrep_20250924_091902_186.json
+│   ├── semgrep_latest.json
+│   ├── tfsec_20250924_092231_990.json
+│   ├── tfsec_latest.json
+│   ├── trivy_20250924_092708_801.json
+│   └── trivy_latest.json
+├── workflow_20250923_002253_complete.json
+├── workflow_20250923_002335_complete.json
+├── workflow_20250923_004804_complete.json
+└── workflow_20250923_012235_complete.json
+
+22 directories, 76 files

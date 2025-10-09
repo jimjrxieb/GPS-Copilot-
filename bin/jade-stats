@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+"""
+Jade Stats - View Jade observability metrics
+"""
+
+import sys
+from pathlib import Path
+
+# Add platform to path
+sys.path.insert(0, str(Path(__file__).parent.parent / "GP-PLATFORM" / "core"))
+
+from jade_logger import get_logger
+import json
+
+
+def main():
+    logger = get_logger()
+
+    print("\n" + "="*60)
+    print("JADE OBSERVABILITY DASHBOARD")
+    print("="*60 + "\n")
+
+    print(f"📝 Evidence Log: {logger.log_path}")
+    print(f"   File size: {logger.log_path.stat().st_size / 1024:.2f} KB\n")
+
+    # Get stats
+    stats = logger.get_stats()
+
+    print("📊 Overall Statistics:")
+    print(f"   Total events logged: {stats['total_events']}")
+    print(f"   Error rate: {stats['error_rate']}%")
+
+    if stats['avg_llm_confidence']:
+        print(f"   Avg LLM confidence: {stats['avg_llm_confidence']}")
+
+    if stats['fix_success_rate']:
+        print(f"   Fix success rate: {stats['fix_success_rate']}%")
+
+    print(f"\n🎯 Actions Breakdown:")
+    for action, count in sorted(stats['actions'].items(), key=lambda x: x[1], reverse=True):
+        print(f"   {action:20} {count:5} times")
+
+    if stats['total_findings'] > 0:
+        print(f"\n🔍 Security Findings:")
+        print(f"   Total findings: {stats['total_findings']}")
+        print(f"   Fixes proposed: {stats['fixes_proposed']}")
+        print(f"   Fixes validated: {stats['fixes_valid']}")
+
+    # Recent events
+    print(f"\n📋 Recent Events (last 10):")
+    recent = logger.get_recent_events(limit=10)
+    for event in recent[-10:]:
+        timestamp = event.get("timestamp", "")[:19]  # Trim milliseconds
+        action = event.get("action", "unknown")
+        target = event.get("target", "")[:40]  # Truncate long targets
+        status = "✅" if event.get("status") == "success" else "❌"
+
+        findings = f" | {event['findings']} findings" if event.get("findings") is not None else ""
+        conf = f" | conf:{event['llm_confidence']}" if event.get("llm_confidence") else ""
+
+        print(f"   {status} {timestamp} | {action:15} | {target}{findings}{conf}")
+
+    # Integrity check
+    print(f"\n🔒 Log Integrity:")
+    integrity = logger.verify_integrity()
+    print(f"   Valid events: {integrity['valid_events']}/{integrity['total_events']}")
+    print(f"   Integrity rate: {integrity['integrity_rate']}%")
+
+    if integrity['tampered']:
+        print(f"   ⚠️  Warning: {len(integrity['tampered'])} events may be tampered!")
+
+    print(f"\n💡 Commands:")
+    print(f"   View raw log: cat {logger.log_path}")
+    print(f"   View JSON: cat {logger.log_path} | jq .")
+    print(f"   Recent scans: cat {logger.log_path} | jq 'select(.action==\"scan\")'")
+    print(f"   Errors only: cat {logger.log_path} | jq 'select(.error!=null)'")
+
+    print()
+
+
+if __name__ == "__main__":
+    main()

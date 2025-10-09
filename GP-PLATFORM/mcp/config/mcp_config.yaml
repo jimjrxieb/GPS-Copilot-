@@ -1,0 +1,312 @@
+# GuidePoint MCP (Model Context Protocol) Configuration
+
+mcp_server:
+  name: "guidepoint-consulting"
+  version: "1.0.0"
+  host: "0.0.0.0"
+  port: 8001
+  max_connections: 100
+  timeout: 30
+
+capabilities:
+  agent_orchestration:
+    enabled: true
+    features:
+      - multi_agent_coordination
+      - context_sharing
+      - dynamic_tool_registration
+      - performance_monitoring
+      - resource_management
+
+  model_integration:
+    enabled: true
+    features:
+      - james_mlops_integration
+      - openai_integration
+      - anthropic_integration
+      - local_model_support
+      - multi_model_ensemble
+
+  security_consulting:
+    enabled: true
+    features:
+      - vulnerability_analysis
+      - risk_assessment
+      - compliance_validation
+      - remediation_planning
+      - business_impact_analysis
+
+  tool_management:
+    enabled: true
+    features:
+      - dynamic_tool_registration
+      - tool_discovery
+      - schema_validation
+      - version_management
+      - dependency_resolution
+
+agents:
+  consulting_remediation_agent:
+    enabled: true
+    class: "ConsultingRemediationAgent"
+    capabilities:
+      - vulnerability_analysis
+      - remediation_planning
+      - fix_validation
+      - business_impact_assessment
+
+  client_intelligence_agent:
+    enabled: true
+    class: "ClientIntelligenceAgent"
+    capabilities:
+      - risk_assessment
+      - threat_intelligence
+      - compliance_analysis
+      - business_intelligence
+
+  implementation_planning_agent:
+    enabled: true
+    class: "ImplementationPlanningAgent"
+    capabilities:
+      - strategic_planning
+      - resource_planning
+      - timeline_optimization
+      - risk_mitigation
+
+  scanner_integration_agent:
+    enabled: true
+    class: "ScannerIntegrationAgent"
+    capabilities:
+      - scan_result_processing
+      - finding_correlation
+      - priority_assessment
+      - alert_management
+
+  remediation_integration_agent:
+    enabled: true
+    class: "RemediationIntegrationAgent"
+    capabilities:
+      - fix_coordination
+      - validation_tracking
+      - rollback_management
+      - success_monitoring
+
+tools:
+  security_analysis_tools:
+    enabled: true
+    tools:
+      - vulnerability_analyzer
+      - risk_calculator
+      - compliance_checker
+      - threat_assessor
+
+  business_intelligence_tools:
+    enabled: true
+    tools:
+      - impact_analyzer
+      - cost_calculator
+      - roi_assessor
+      - dashboard_generator
+
+  reporting_tools:
+    enabled: true
+    tools:
+      - executive_report_generator
+      - technical_report_generator
+      - compliance_report_generator
+      - dashboard_creator
+
+  integration_tools:
+    enabled: true
+    tools:
+      - api_connector
+      - data_transformer
+      - webhook_manager
+      - notification_sender
+
+model_connectors:
+  james_mlops:
+    enabled: true
+    endpoint: "http://localhost:8005"
+    api_key: "${JAMES_MLOPS_API_KEY}"
+    timeout: 10
+    retry_attempts: 3
+
+  openai:
+    enabled: false
+    api_key: "${OPENAI_API_KEY}"
+    model: "gpt-4"
+    timeout: 30
+    max_tokens: 4000
+
+  anthropic:
+    enabled: false
+    api_key: "${ANTHROPIC_API_KEY}"
+    model: "claude-3-sonnet"
+    timeout: 30
+    max_tokens: 4000
+
+  local_models:
+    enabled: true
+    ollama_endpoint: "http://localhost:11434"
+    models:
+      - llama3
+      - mistral
+      - james
+
+context_management:
+  session_timeout: 3600  # 1 hour
+  max_context_size: 10000
+  context_persistence: true
+  context_encryption: true
+
+  memory_settings:
+    short_term_memory: 1000
+    long_term_memory: 10000
+    conversation_history: 100
+    agent_memory_sharing: true
+
+  context_sources:
+    - security_scan_results
+    - business_context
+    - historical_data
+    - compliance_requirements
+    - threat_intelligence
+
+performance:
+  request_processing:
+    max_concurrent_requests: 50
+    request_timeout: 30
+    batch_processing: true
+    async_processing: true
+
+  resource_management:
+    max_memory_usage: "2GB"
+    max_cpu_usage: "80%"
+    connection_pool_size: 20
+    cache_size: "500MB"
+
+  monitoring:
+    performance_metrics: true
+    response_time_tracking: true
+    error_rate_monitoring: true
+    resource_utilization_tracking: true
+
+security:
+  authentication:
+    enabled: true
+    method: "api_key"
+    api_keys:
+      - name: "guidepoint_admin"
+        key: "${GP_ADMIN_API_KEY}"
+        permissions: ["admin", "read", "write"]
+      - name: "guidepoint_client"
+        key: "${GP_CLIENT_API_KEY}"
+        permissions: ["read", "write"]
+
+  authorization:
+    enabled: true
+    rbac: true
+    permissions:
+      admin:
+        - agent_management
+        - tool_management
+        - configuration_management
+        - monitoring_access
+      client:
+        - agent_interaction
+        - tool_usage
+        - report_generation
+      read_only:
+        - status_monitoring
+        - report_viewing
+
+  data_protection:
+    encryption_at_rest: true
+    encryption_in_transit: true
+    pii_detection: true
+    data_anonymization: true
+
+  audit_logging:
+    enabled: true
+    log_level: "detailed"
+    retention_days: 365
+    immutable_logs: true
+
+monitoring:
+  metrics_collection:
+    enabled: true
+    prometheus_integration: true
+    custom_metrics: true
+    business_metrics: true
+
+  alerting:
+    enabled: true
+    channels:
+      - type: "slack"
+        webhook_url: "${SLACK_WEBHOOK_URL}"
+        channel: "#mcp-alerts"
+      - type: "email"
+        recipients: ["mcp-team@guidepoint.com"]
+
+  health_checks:
+    enabled: true
+    interval: 30  # seconds
+    timeout: 5
+    endpoints:
+      - "/health"
+      - "/agents/health"
+      - "/tools/health"
+
+logging:
+  level: "INFO"
+  format: "json"
+  output:
+    - type: "file"
+      path: "/logs/mcp.log"
+      rotation: "daily"
+      max_size: "100MB"
+    - type: "stdout"
+      structured: true
+
+  categories:
+    agent_operations: "INFO"
+    tool_execution: "INFO"
+    security_events: "WARNING"
+    performance_metrics: "DEBUG"
+
+integration:
+  gp_scanner:
+    enabled: true
+    endpoint: "http://localhost:8002"
+    real_time_integration: true
+
+  gp_remediation:
+    enabled: true
+    endpoint: "http://localhost:8003"
+    automated_coordination: true
+
+  gp_intelligence:
+    enabled: true
+    endpoint: "http://localhost:8004"
+    risk_analysis_integration: true
+
+  gp_escalation:
+    enabled: true
+    endpoint: "http://localhost:8006"
+    escalation_management: true
+
+  external_apis:
+    enabled: true
+    rate_limiting: true
+    timeout: 30
+    retry_policy:
+      max_attempts: 3
+      backoff_strategy: "exponential"
+
+development:
+  debug_mode: false
+  verbose_logging: false
+  test_mode: false
+  mock_agents: false
+  performance_profiling: false

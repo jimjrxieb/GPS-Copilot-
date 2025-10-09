@@ -1,0 +1,145 @@
+{
+  "scanner_configurations": {
+    "trivy": {
+      "enabled": true,
+      "version": "latest",
+      "scan_types": ["vuln", "config", "secret", "license"],
+      "severity_levels": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+      "ignore_unfixed": false,
+      "timeout": "5m",
+      "cache_dir": "/tmp/trivy-cache",
+      "options": {
+        "skip_update": false,
+        "format": "json",
+        "exit_code": 1
+      }
+    },
+    "bandit": {
+      "enabled": true,
+      "version": "latest",
+      "confidence_level": "medium",
+      "severity_level": "medium",
+      "skip_tests": [],
+      "exclude_paths": [
+        "*/test/*",
+        "*/tests/*",
+        "*/.venv/*"
+      ],
+      "options": {
+        "recursive": true,
+        "format": "json",
+        "verbose": false
+      }
+    },
+    "semgrep": {
+      "enabled": true,
+      "version": "latest",
+      "config": "auto",
+      "rulesets": [
+        "p/security-audit",
+        "p/owasp-top-ten",
+        "p/cwe-top-25"
+      ],
+      "exclude_patterns": [
+        "*.test.js",
+        "*.spec.js",
+        "node_modules/"
+      ],
+      "options": {
+        "json_output": true,
+        "metrics": "off",
+        "no_git_ignore": false
+      }
+    },
+    "checkov": {
+      "enabled": true,
+      "version": "latest",
+      "frameworks": [
+        "terraform",
+        "cloudformation",
+        "kubernetes",
+        "helm",
+        "dockerfile",
+        "secrets"
+      ],
+      "skip_checks": [],
+      "compact": false,
+      "options": {
+        "output": "json",
+        "quiet": false,
+        "download_external_modules": true
+      }
+    },
+    "gitleaks": {
+      "enabled": true,
+      "version": "latest",
+      "depth": 0,
+      "config": "default",
+      "redact": true,
+      "options": {
+        "verbose": false,
+        "report_format": "json",
+        "no_git": false
+      }
+    },
+    "opa": {
+      "enabled": true,
+      "version": "latest",
+      "policy_paths": [
+        "../GP-CONSULTING-AGENTS/policies/opa/"
+      ],
+      "data_paths": [],
+      "bundle_mode": false,
+      "decision_logging": true,
+      "options": {
+        "format": "json",
+        "fail_on_undefined": true,
+        "strict_mode": true
+      }
+    },
+    "custom_scanners": {
+      "iac_policy_agent": {
+        "enabled": false,
+        "script_path": "../GP-CONSULTING-AGENTS/agents/iac_policy_agent.py",
+        "config": {
+          "compliance_frameworks": ["CIS", "SOC2"],
+          "custom_rules_path": "./custom_rules/"
+        }
+      }
+    }
+  },
+  "scan_profiles": {
+    "quick": {
+      "description": "Fast security scan for CI/CD",
+      "scanners": ["bandit", "gitleaks"],
+      "parallel": true
+    },
+    "comprehensive": {
+      "description": "Full security assessment",
+      "scanners": ["trivy", "bandit", "semgrep", "checkov", "gitleaks", "opa"],
+      "parallel": false
+    },
+    "compliance": {
+      "description": "Compliance-focused scanning",
+      "scanners": ["checkov", "opa"],
+      "parallel": false
+    },
+    "secrets": {
+      "description": "Secret and credential scanning only",
+      "scanners": ["gitleaks", "trivy"],
+      "parallel": true
+    }
+  },
+  "scheduling": {
+    "daily_scan": {
+      "profile": "comprehensive",
+      "time": "02:00",
+      "enabled": false
+    },
+    "ci_scan": {
+      "profile": "quick",
+      "trigger": "on_commit",
+      "enabled": false
+    }
+  }
+}

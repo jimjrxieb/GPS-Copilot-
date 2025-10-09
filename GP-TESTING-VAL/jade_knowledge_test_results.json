@@ -1,0 +1,465 @@
+{
+  "timestamp": "2025-10-06 21:00:19",
+  "total_tests": 91,
+  "passed": 83,
+  "failed": 8,
+  "errors": 0,
+  "knowledge_score": 91.20879120879121,
+  "results": [
+    {
+      "test": "Linux: File permissions awareness",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, scan"
+    },
+    {
+      "test": "Linux: Process management",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: system, running, stats"
+    },
+    {
+      "test": "Linux: Service management",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: agent"
+    },
+    {
+      "test": "Linux: Network security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: port, security, policy"
+    },
+    {
+      "test": "Linux: Package management",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: trivy"
+    },
+    {
+      "test": "Linux: User management",
+      "status": "FAIL",
+      "message": "Expected knowledge keywords not found: user, rbac, permission"
+    },
+    {
+      "test": "Linux: Log analysis",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: finding, result, scan"
+    },
+    {
+      "test": "Linux: Shell scripting",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: command, scan"
+    },
+    {
+      "test": "Linux: Cron/automation",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: automation, agent, run"
+    },
+    {
+      "test": "Linux: Security hardening",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, compliance, policy"
+    },
+    {
+      "test": "Linux: SSH security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: gitleaks"
+    },
+    {
+      "test": "Linux: Audit logging",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: audit, finding, scan"
+    },
+    {
+      "test": "Linux: Container runtime",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: trivy"
+    },
+    {
+      "test": "Linux: SELinux/AppArmor",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, policy, opa"
+    },
+    {
+      "test": "Linux: System monitoring",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: stats, system"
+    },
+    {
+      "test": "OPA: Policy language",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy, check"
+    },
+    {
+      "test": "OPA: Terraform validation",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: terraform, policy"
+    },
+    {
+      "test": "OPA: K8s admission control",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy"
+    },
+    {
+      "test": "OPA: Gatekeeper",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: gatekeeper, agent, policy"
+    },
+    {
+      "test": "OPA: Conftest",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy"
+    },
+    {
+      "test": "OPA: Policy-as-Code",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy, automation, compliance"
+    },
+    {
+      "test": "OPA: Compliance mapping",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: compliance, policy"
+    },
+    {
+      "test": "OPA: Policy testing",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy, check"
+    },
+    {
+      "test": "OPA: Decision logs",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: result, finding, policy"
+    },
+    {
+      "test": "OPA: Constraint templates",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: gatekeeper, policy"
+    },
+    {
+      "test": "OPA: CI/CD integration",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: gate, automation, agent"
+    },
+    {
+      "test": "OPA: RBAC policies",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy, security"
+    },
+    {
+      "test": "OPA: Terraform validation",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: terraform, policy"
+    },
+    {
+      "test": "Terraform: IaC basics",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: terraform"
+    },
+    {
+      "test": "Terraform: Security scanning",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: terraform, scan, security"
+    },
+    {
+      "test": "Terraform: State management",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: terraform, plan"
+    },
+    {
+      "test": "Terraform: Policy validation",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: terraform, policy"
+    },
+    {
+      "test": "Terraform: Drift detection",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: plan, terraform"
+    },
+    {
+      "test": "Terraform: Module security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: terraform, security, scan"
+    },
+    {
+      "test": "Terraform: Provider security",
+      "status": "FAIL",
+      "message": "Expected knowledge keywords not found: provider, cloud, aws"
+    },
+    {
+      "test": "Terraform: Sentinel policies",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy, terraform"
+    },
+    {
+      "test": "Terraform: CI/CD",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: automation, terraform, agent"
+    },
+    {
+      "test": "Terraform: Compliance",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: compliance, check, policy"
+    },
+    {
+      "test": "Terraform: Secret management",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: gitleaks"
+    },
+    {
+      "test": "Terraform: Remediation",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: terraform, issue"
+    },
+    {
+      "test": "Python: Bandit scanning",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: bandit, security, scan"
+    },
+    {
+      "test": "Python: Injection vulns",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, bandit"
+    },
+    {
+      "test": "Python: Dependency scanning",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: trivy"
+    },
+    {
+      "test": "Python: Secret detection",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: gitleaks"
+    },
+    {
+      "test": "Python: Code quality",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: scan, semgrep, bandit"
+    },
+    {
+      "test": "Python: Cryptography",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security"
+    },
+    {
+      "test": "Python: Deserialization",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, bandit"
+    },
+    {
+      "test": "Python: XSS prevention",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, web"
+    },
+    {
+      "test": "Python: Authentication",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security"
+    },
+    {
+      "test": "Python: SAST tools",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: bandit, semgrep"
+    },
+    {
+      "test": "Python: Automated fixing",
+      "status": "FAIL",
+      "message": "Expected knowledge keywords not found: fix, fixer, automated"
+    },
+    {
+      "test": "Python: Best practices",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, compliance"
+    },
+    {
+      "test": "K8s: Pod security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, policy"
+    },
+    {
+      "test": "K8s: RBAC",
+      "status": "FAIL",
+      "message": "Expected knowledge keywords not found: rbac, role, binding"
+    },
+    {
+      "test": "K8s: Network policies",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy, security"
+    },
+    {
+      "test": "K8s: Secrets management",
+      "status": "FAIL",
+      "message": "Expected knowledge keywords not found: secret, kubernetes, vault"
+    },
+    {
+      "test": "K8s: Admission control",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: gatekeeper, policy"
+    },
+    {
+      "test": "K8s: Image security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, trivy"
+    },
+    {
+      "test": "K8s: Resource limits",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy"
+    },
+    {
+      "test": "K8s: Service mesh",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security"
+    },
+    {
+      "test": "K8s: CIS benchmarks",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: compliance"
+    },
+    {
+      "test": "K8s: Runtime security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security"
+    },
+    {
+      "test": "K8s: Cluster hardening",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, policy"
+    },
+    {
+      "test": "K8s: Audit logging",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: audit, finding"
+    },
+    {
+      "test": "K8s: Vulnerability scanning",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: scan, trivy"
+    },
+    {
+      "test": "K8s: Policy enforcement",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy, gatekeeper"
+    },
+    {
+      "test": "K8s: GitOps security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: automation"
+    },
+    {
+      "test": "Cloud: AWS security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security"
+    },
+    {
+      "test": "Cloud: Azure security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security"
+    },
+    {
+      "test": "Cloud: GCP security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security"
+    },
+    {
+      "test": "Cloud: IAM policies",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy"
+    },
+    {
+      "test": "Cloud: Compliance",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: compliance"
+    },
+    {
+      "test": "Cloud: Encryption",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, data"
+    },
+    {
+      "test": "Cloud: Network security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, policy"
+    },
+    {
+      "test": "Cloud: Identity federation",
+      "status": "FAIL",
+      "message": "Expected knowledge keywords not found: identity, federation, sso"
+    },
+    {
+      "test": "Cloud: Container security",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, trivy"
+    },
+    {
+      "test": "Cloud: Serverless",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security"
+    },
+    {
+      "test": "Cloud: Infrastructure scanning",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: scan, terraform, security"
+    },
+    {
+      "test": "Cloud: Zero Trust",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security, policy"
+    },
+    {
+      "test": "GenAI: AI analysis",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: ai, llm, analysis"
+    },
+    {
+      "test": "GenAI: RAG knowledge",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: knowledge, query"
+    },
+    {
+      "test": "GenAI: Automated remediation",
+      "status": "FAIL",
+      "message": "Expected knowledge keywords not found: automated, fix, remediation"
+    },
+    {
+      "test": "GenAI: Natural language",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: scan, project, security"
+    },
+    {
+      "test": "GenAI: Recommendations",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: tip, fix, fixer"
+    },
+    {
+      "test": "GenAI: Pattern recognition",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: finding, security, scan"
+    },
+    {
+      "test": "GenAI: Agent orchestration",
+      "status": "FAIL",
+      "message": "Expected knowledge keywords not found: agent, orchestration, automation"
+    },
+    {
+      "test": "GenAI: Dynamic learning",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: knowledge, ai"
+    },
+    {
+      "test": "GenAI: Code generation",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: policy, fix"
+    },
+    {
+      "test": "GenAI: Threat intelligence",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: security"
+    },
+    {
+      "test": "GenAI: Contextual awareness",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: project"
+    },
+    {
+      "test": "GenAI: Workflow automation",
+      "status": "PASS",
+      "message": "Demonstrated knowledge: automation, agent"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "scan_id": "trivy-dockerfile-vulnerable-20250917",
+  "target": "Dockerfile.vulnerable",
+  "scan_type": "container",
+  "timestamp": "2025-09-17T10:30:15Z",
+  "summary": {
+    "total_vulnerabilities": 47,
+    "critical": 12,
+    "high": 18,
+    "medium": 17,
+    "low": 0
+  },
+  "critical_vulnerabilities": [
+    {
+      "cve_id": "CVE-2018-16845",
+      "severity": "CRITICAL",
+      "cvss_score": 9.8,
+      "package": "nginx",
+      "version": "1.14.0",
+      "fixed_version": "1.16.0",
+      "description": "nginx before 1.15.6 and 1.14.x before 1.14.1 has a vulnerability in the ngx_http_mp4_module",
+      "remediation": "Update nginx to version 1.16.0 or later"
+    },
+    {
+      "cve_id": "CVE-2019-9511",
+      "severity": "CRITICAL",
+      "cvss_score": 9.3,
+      "package": "nginx",
+      "version": "1.14.0",
+      "fixed_version": "1.16.1",
+      "description": "HTTP/2 implementation vulnerable to Data Dribble attack",
+      "remediation": "Update to nginx 1.16.1 or disable HTTP/2"
+    }
+  ],
+  "security_issues": [
+    {
+      "check": "USER_ROOT",
+      "severity": "HIGH",
+      "description": "Container runs as root user",
+      "remediation": "Create and use non-root user"
+    },
+    {
+      "check": "EXPOSED_PORTS",
+      "severity": "HIGH",
+      "description": "SSH port 22 exposed unnecessarily",
+      "remediation": "Remove port 22 from EXPOSE directive"
+    },
+    {
+      "check": "UNNECESSARY_PACKAGES",
+      "severity": "MEDIUM",
+      "description": "netcat and telnet installed - potential attack vectors",
+      "remediation": "Remove unnecessary packages"
+    }
+  ],
+  "base_image_analysis": {
+    "image": "nginx:1.14.0",
+    "os": "debian:stretch",
+    "end_of_life": "2022-07-01",
+    "recommendation": "Use nginx:1.26.2-alpine for minimal attack surface"
+  },
+  "risk_assessment": {
+    "overall_score": 2.4,
+    "exploitability": "HIGH",
+    "impact": "CRITICAL",
+    "likelihood": "HIGH",
+    "business_risk": "Container compromise leading to lateral movement"
+  }
+}

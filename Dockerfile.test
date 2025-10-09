@@ -1,0 +1,164 @@
+# Dockerfile.test - Lightweight test environment for GP-Copilot
+# Purpose: Verify GP-Copilot runs on clean Ubuntu (portability test)
+#
+# Usage:
+#   docker build -f Dockerfile.test -t gp-copilot:test .
+#   docker run --rm gp-copilot:test
+
+FROM ubuntu:22.04
+
+LABEL maintainer="jimmie@linkops"
+LABEL description="GP-Copilot Test Environment - Minimal Ubuntu for testing portability"
+LABEL version="1.0"
+
+# Prevent interactive prompts during apt install
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Set working directory
+WORKDIR /app
+
+# ============================================================================
+# SYSTEM DEPENDENCIES
+# ============================================================================
+RUN apt-get update && apt-get install -y \
+    # Python
+    python3.10 \
+    python3-pip \
+    python3-dev \
+    # Build tools (needed for some Python packages)
+    build-essential \
+    gcc \
+    g++ \
+    # Version control
+    git \
+    # Utilities
+    curl \
+    wget \
+    tree \
+    jq \
+    # Cleanup
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# ============================================================================
+# PYTHON ENVIRONMENT
+# ============================================================================
+# Upgrade pip, setuptools, wheel
+RUN pip3 install --no-cache-dir --upgrade \
+    pip==23.3.1 \
+    setuptools==69.0.2 \
+    wheel==0.42.0
+
+# Create symlink for python -> python3
+RUN ln -sf /usr/bin/python3 /usr/bin/python
+
+# ============================================================================
+# INSTALL SECURITY TOOLS (Minimal for testing)
+# ============================================================================
+# Install Bandit (Python SAST)
+RUN pip3 install --no-cache-dir bandit==1.7.5
+
+# Install Trivy (Container/IaC scanner)
+RUN wget -qO /tmp/trivy.tar.gz \
+    https://github.com/aquasecurity/trivy/releases/download/v0.48.0/trivy_0.48.0_Linux-64bit.tar.gz \
+    && tar -xzf /tmp/trivy.tar.gz -C /usr/local/bin \
+    && chmod +x /usr/local/bin/trivy \
+    && rm /tmp/trivy.tar.gz
+
+# Install Gitleaks (Secrets scanner)
+RUN wget -qO /tmp/gitleaks.tar.gz \
+    https://github.com/gitleaks/gitleaks/releases/download/v8.18.0/gitleaks_8.18.0_linux_x64.tar.gz \
+    && tar -xzf /tmp/gitleaks.tar.gz -C /usr/local/bin \
+    && chmod +x /usr/local/bin/gitleaks \
+    && rm /tmp/gitleaks.tar.gz
+
+# ============================================================================
+# COPY APPLICATION FILES
+# ============================================================================
+# Copy requirements first (for Docker layer caching)
+COPY requirements.txt /app/requirements.txt
+COPY requirements.lock /app/requirements.lock
+
+# Install Python dependencies from requirements.txt
+# (Using requirements.txt not .lock for flexibility across platforms)
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY GP-AI/ /app/GP-AI/
+COPY GP-RAG/ /app/GP-RAG/
+COPY GP-PLATFORM/ /app/GP-PLATFORM/
+COPY GP-CONSULTING/ /app/GP-CONSULTING/
+COPY GP-DATA/ /app/GP-DATA/
+COPY tests/ /app/tests/
+
+# Copy bin scripts
+COPY bin/ /app/bin/
+RUN chmod +x /app/bin/*
+
+# Note: Skip copying root-level *.py and *.sh files - not needed for tests
+# (Docker doesn't support shell redirection in COPY commands)
+
+# ============================================================================
+# ENVIRONMENT SETUP
+# ============================================================================
+# Set Python path to include app directories
+ENV PYTHONPATH=/app:/app/GP-AI:/app/GP-PLATFORM:/app/GP-RAG
+
+# Add bin to PATH
+ENV PATH=/app/bin:$PATH
+
+# Set test environment variables
+ENV GP_ENV=test
+ENV GP_LOG_LEVEL=INFO
+
+# Create necessary directories
+RUN mkdir -p \
+    /app/GP-DATA/active \
+    /app/GP-DATA/archive \
+    /app/GP-DATA/knowledge-base \
+    /app/GP-DATA/metadata \
+    /app/GP-RAG/processed \
+    /app/GP-RAG/unprocessed \
+    /root/.cache/huggingface
+
+# ============================================================================
+# TESTING SETUP
+# ============================================================================
+# Install test dependencies
+RUN pip3 install --no-cache-dir \
+    pytest==7.4.3 \
+    pytest-timeout==2.2.0 \
+    pytest-mock==3.12.0 \
+    pytest-cov==4.1.0
+
+# Verify installations
+RUN echo "=== Verifying Installations ===" && \
+    python --version && \
+    pip --version && \
+    pytest --version && \
+    bandit --version && \
+    trivy version && \
+    gitleaks version && \
+    echo "=== All tools installed successfully ==="
+
+# ============================================================================
+# HEALTH CHECK
+# ============================================================================
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+    CMD python -c "import sys; print('GP-Copilot Test Environment OK')" || exit 1
+
+# ============================================================================
+# DEFAULT COMMAND
+# ============================================================================
+# By default, run pytest tests
+CMD ["pytest", "tests/", "-v", "--tb=short", "--color=yes"]
+
+# ============================================================================
+# BUILD INFO
+# ============================================================================
+# To build: docker build -f Dockerfile.test -t gp-copilot:test .
+# To run tests: docker run --rm gp-copilot:test
+# To run bash: docker run --rm -it gp-copilot:test bash
+# To run specific test: docker run --rm gp-copilot:test pytest tests/test_gp_copilot_phase1.py -v

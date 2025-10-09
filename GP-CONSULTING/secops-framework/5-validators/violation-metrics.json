@@ -1,0 +1,51 @@
+{
+  "before": {
+    "total": 3,
+    "by_severity": {
+      "CRITICAL": 2,
+      "HIGH": 1
+    },
+    "by_category": {
+      "infrastructure": 3
+    },
+    "by_scanner": {
+      "tfsec": 2,
+      "checkov": 1
+    }
+  },
+  "after": {
+    "total": 1,
+    "by_severity": {
+      "MEDIUM": 1
+    },
+    "by_category": {
+      "infrastructure": 1
+    },
+    "by_scanner": {
+      "checkov": 1
+    }
+  },
+  "comparison": {
+    "fixed_count": 3,
+    "remaining_count": 1,
+    "new_count": 1,
+    "fixed_ids": [
+      "RDS-002",
+      "RDS-001",
+      "S3-001"
+    ],
+    "remaining_ids": [
+      "LOG-001"
+    ],
+    "new_ids": [
+      "LOG-001"
+    ]
+  },
+  "reduction_percentage": 66.67,
+  "by_severity_reduction": {
+    "CRITICAL": 100.0,
+    "HIGH": 100.0,
+    "MEDIUM": 0,
+    "LOW": 0
+  }
+}

@@ -1,0 +1,198 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                   🤖 JADE AI - QUICK COMMANDS                              ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 AGENTIC MODE (LangGraph + RAG + Specialized Agents) ⭐ NEW!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   jade agent "kubernetes pod crashlooping"
+   jade agent "terraform state lock error"
+   jade agent "how to fix OPA policy errors"
+   jade agent                                    # Interactive mode
+
+   • Multi-step reasoning with LangGraph
+   • Queries 240 knowledge docs (RAG)
+   • Routes to specialized troubleshooting agents
+   • Provides analysis + suggestions + commands
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 CHAT MODE (Natural Language Interface)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   jade chat
+
+   Interactive chatbot interface with pattern matching:
+   > "I want to scan my project quickly"
+   > "Check my Terraform for policy violations"
+   > "What security issues did we find?"
+   > "help"                                      # Show all commands
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🧠 DYNAMIC LEARNING (Drop Files → Jade Learns) ⭐ NEW!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   jade learn                                    # Sync new knowledge
+   jade learn --watch                            # File watcher mode
+   ./INTERVIEW_DEMO.sh                           # Run interview demo
+
+   Drop files into GP-RAG/unprocessed/ subdirectories:
+     • client-docs/     - Client requirements
+     • compliance/      - Compliance policies
+     • policies/        - Security policies
+     • scan-results/    - Scan outputs
+     • security-docs/   - Security guides
+
+   Jade automatically chunks, categorizes, and indexes!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 KNOWLEDGE BASE (RAG Queries)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   jade query "terraform state lock fix"
+   jade query "kubernetes RBAC best practices"
+   jade query "OPA policy testing workflow"
+   jade query "ACME corporation requirements"   # Dynamically learned!
+
+   • Searches 323 documents (30 docs + 208 troubleshooting + 83 dynamic)
+   • 4 collections: documentation, scan_findings, troubleshooting, dynamic_learning
+   • Semantic search with ChromaDB
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔍 SECURITY SCANNING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   jade scan GP-PROJECTS/DVWA
+   ./gp-security scan GP-PROJECTS/LinkOps-MLOps
+   ./gp-security scan GP-PROJECTS/Terraform_CICD_Setup -s bandit trivy
+
+   Scanners: Bandit, Trivy, Semgrep, Gitleaks, OPA
+   Output: GP-DATA/active/scans/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 AUTO-REMEDIATION (Scan + Fix + PR) ⭐ NEW!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   jade remediate /project                         # Scan + fix
+   jade remediate /project --scanners trivy        # Specific scanners
+   jade remediate /project --create-pr             # Auto-create PR
+   jade remediate /project --dry-run               # Preview fixes
+
+   • Scans with bandit, trivy, semgrep
+   • Auto-generates fixes for vulnerabilities
+   • Creates git branch + commits
+   • Opens pull request (with --create-pr)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🛡️ POLICY AUDITING (OPA/Gatekeeper) ⭐ NEW!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   jade audit                                      # Audit entire cluster
+   jade audit pod --namespace production           # Audit specific resource
+   jade audit --policy cis-benchmark               # Specific policy
+   jade audit terraform                            # Audit Terraform (coming soon)
+
+   • Live Kubernetes cluster auditing (via kubectl)
+   • OPA policy enforcement
+   • Compliance reporting (CIS, NIST, SOC2)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 PROJECT MANAGEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   jade projects                                 # List GP-PROJECTS (4 projects)
+   jade stats                                    # System statistics
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🤖 SPECIALIZED AGENTS (Direct)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   # Kubernetes troubleshooter
+   python3 GP-CONSULTING-AGENTS/agents/kubernetes_troubleshooter.py
+
+   # Available agents (14 total)
+   ls GP-CONSULTING-AGENTS/agents/
+
+   Agents: kubernetes_troubleshooter, secrets_agent, sast_agent, cks_agent,
+           devsecops_agent, dfir_agent, iac_agent, qa_agent, research_agent, etc.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📖 DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   cat QUICK_START.md                           # Getting started
+   cat GP-DOCS/JADE_CAPABILITIES_REFERENCE.md   # Full capabilities
+   cat GP-DOCS/JADE_RAG_AND_TROUBLESHOOTING.md  # RAG + troubleshooting
+   cat GP-DOCS/LANGGRAPH_AGENT_COMPLETE.md      # LangGraph agentic workflow
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 MAINTENANCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   # Sync knowledge base
+   cd GP-DATA && python3 simple_sync.py
+
+   # Check RAG stats
+   python3 -c "
+   import sys
+   sys.path.insert(0, 'GP-DATA')
+   from simple_rag_query import SimpleRAGQuery
+   rag = SimpleRAGQuery()
+   print(rag.get_stats())
+   "
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 EXAMPLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   # Agentic troubleshooting
+   jade agent "kubernetes pod crashlooping"
+   jade agent "terraform state lock conflicts"
+   jade agent "OPA policy evaluation failed"
+
+   # Chat mode
+   jade chat
+   > scan my project
+   > do we have any pods running?
+   > summarize latest security findings
+
+   # Query knowledge
+   jade query "how to fix CVE vulnerabilities"
+   jade query "terraform best practices"
+
+   # Scan project
+   jade scan GP-PROJECTS/DVWA
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 SYSTEM INFO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   RAG Database: 240 documents
+     - Documentation: 30 files
+     - Troubleshooting: 208 knowledge chunks
+     - Scan findings: 0 (pending format fix)
+
+   Projects: 4
+     - DVWA (Security Testing)
+     - LinkOps-MLOps (Python/ML)
+     - Terraform_CICD_Setup (Terraform/CI/CD)
+     - test-k8s (Kubernetes/YAML)
+
+   Agents: 14 specialized agents
+   Scanners: Bandit, Trivy, Semgrep, Gitleaks, OPA, Checkov, etc.
+   Fixers: 12 auto-remediation tools
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 RECOMMENDED WORKFLOW:
+
+   1. jade agent "your question"                 # Start with agentic mode
+   2. jade chat                                  # Or use chat for quick commands
+   3. jade scan GP-PROJECTS/{project}            # Run security scans
+   4. jade query "issue from scan"               # Query knowledge base
+   5. cat GP-DATA/active/scans/*_latest.json     # View scan results
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Version: 2.0.0 (Agentic)
+Last Updated: 2025-10-03

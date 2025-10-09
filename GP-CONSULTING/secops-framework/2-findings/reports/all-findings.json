@@ -1,0 +1,907 @@
+[
+  {
+    "id": "AVD-AWS-0104",
+    "severity": "CRITICAL",
+    "title": "Security group rule allows egress to multiple public internet addresses.",
+    "description": "aws-ec2-no-public-egress-sgr",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf:27",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0107",
+    "severity": "CRITICAL",
+    "title": "Security group rule allows ingress from public internet.",
+    "description": "aws-ec2-no-public-ingress-sgr",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf:19",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0164",
+    "severity": "HIGH",
+    "title": "Subnet associates public IP address.",
+    "description": "aws-ec2-no-public-ip-subnet",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf:34",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0164",
+    "severity": "HIGH",
+    "title": "Subnet associates public IP address.",
+    "description": "aws-ec2-no-public-ip-subnet",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf:23",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0178",
+    "severity": "MEDIUM",
+    "title": "VPC Flow Logs is not enabled for VPC ",
+    "description": "aws-ec2-require-vpc-flow-logs-for-all-vpcs",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf:8",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0057",
+    "severity": "HIGH",
+    "title": "IAM policy document uses wildcarded action '*'",
+    "description": "aws-iam-no-policy-wildcards",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/iam.tf:100",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0057",
+    "severity": "HIGH",
+    "title": "IAM policy document uses sensitive action '*' on wildcarded resource '*'",
+    "description": "aws-iam-no-policy-wildcards",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/iam.tf:100",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0086",
+    "severity": "HIGH",
+    "title": "Public access block does not block public ACLs",
+    "description": "aws-s3-block-public-acls",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:87",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0086",
+    "severity": "HIGH",
+    "title": "Public access block does not block public ACLs",
+    "description": "aws-s3-block-public-acls",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:32",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0087",
+    "severity": "HIGH",
+    "title": "Public access block does not block public policies",
+    "description": "aws-s3-block-public-policy",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:88",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0087",
+    "severity": "HIGH",
+    "title": "Public access block does not block public policies",
+    "description": "aws-s3-block-public-policy",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:33",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0088",
+    "severity": "HIGH",
+    "title": "Bucket does not have encryption enabled",
+    "description": "aws-s3-enable-bucket-encryption",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:72",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "3.4 - Render PAN unreadable (encryption)",
+      "soc2": "CC6.1 - Logical and physical access controls",
+      "cis": "2.3.1 - Ensure RDS encryption is enabled"
+    }
+  },
+  {
+    "id": "AVD-AWS-0088",
+    "severity": "HIGH",
+    "title": "Bucket does not have encryption enabled",
+    "description": "aws-s3-enable-bucket-encryption",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:11",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "3.4 - Render PAN unreadable (encryption)",
+      "soc2": "CC6.1 - Logical and physical access controls",
+      "cis": "2.3.1 - Ensure RDS encryption is enabled"
+    }
+  },
+  {
+    "id": "AVD-AWS-0089",
+    "severity": "MEDIUM",
+    "title": "Bucket does not have logging enabled",
+    "description": "aws-s3-enable-bucket-logging",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:72",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0089",
+    "severity": "MEDIUM",
+    "title": "Bucket does not have logging enabled",
+    "description": "aws-s3-enable-bucket-logging",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:11",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0090",
+    "severity": "MEDIUM",
+    "title": "Bucket does not have versioning enabled",
+    "description": "aws-s3-enable-versioning",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:72",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0090",
+    "severity": "MEDIUM",
+    "title": "Bucket does not have versioning enabled",
+    "description": "aws-s3-enable-versioning",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:64",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0132",
+    "severity": "HIGH",
+    "title": "Bucket does not encrypt data with a customer managed key.",
+    "description": "aws-s3-encryption-customer-key",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:72",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "3.4 - Render PAN unreadable (encryption)",
+      "soc2": "CC6.1 - Logical and physical access controls",
+      "cis": "2.3.1 - Ensure RDS encryption is enabled"
+    }
+  },
+  {
+    "id": "AVD-AWS-0132",
+    "severity": "HIGH",
+    "title": "Bucket does not encrypt data with a customer managed key.",
+    "description": "aws-s3-encryption-customer-key",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:11",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "3.4 - Render PAN unreadable (encryption)",
+      "soc2": "CC6.1 - Logical and physical access controls",
+      "cis": "2.3.1 - Ensure RDS encryption is enabled"
+    }
+  },
+  {
+    "id": "AVD-AWS-0091",
+    "severity": "HIGH",
+    "title": "Public access block does not ignore public ACLs",
+    "description": "aws-s3-ignore-public-acls",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:89",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0091",
+    "severity": "HIGH",
+    "title": "Public access block does not ignore public ACLs",
+    "description": "aws-s3-ignore-public-acls",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:34",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0093",
+    "severity": "HIGH",
+    "title": "Public access block does not restrict public buckets",
+    "description": "aws-s3-no-public-buckets",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:90",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "AVD-AWS-0093",
+    "severity": "HIGH",
+    "title": "Public access block does not restrict public buckets",
+    "description": "aws-s3-no-public-buckets",
+    "location": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf:35",
+    "scanner": "tfsec",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_158",
+    "severity": "MEDIUM",
+    "title": "Ensure that CloudWatch Log Group is encrypted by KMS",
+    "description": "Ensure that CloudWatch Log Group is encrypted by KMS",
+    "location": "/cloudwatch.tf:8",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "3.4 - Render PAN unreadable (encryption)",
+      "soc2": "CC6.1 - Logical and physical access controls",
+      "cis": "2.3.1 - Ensure RDS encryption is enabled"
+    }
+  },
+  {
+    "id": "CKV_AWS_338",
+    "severity": "MEDIUM",
+    "title": "Ensure CloudWatch log groups retains logs for at least 1 year",
+    "description": "Ensure CloudWatch log groups retains logs for at least 1 year",
+    "location": "/cloudwatch.tf:8",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_289",
+    "severity": "MEDIUM",
+    "title": "Ensure IAM policies does not allow permissions management / resource exposure without constraints",
+    "description": "Ensure IAM policies does not allow permissions management / resource exposure without constraints",
+    "location": "/iam.tf:95",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_288",
+    "severity": "MEDIUM",
+    "title": "Ensure IAM policies does not allow data exfiltration",
+    "description": "Ensure IAM policies does not allow data exfiltration",
+    "location": "/iam.tf:95",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_62",
+    "severity": "MEDIUM",
+    "title": "Ensure IAM policies that allow full \"*-*\" administrative privileges are not created",
+    "description": "Ensure IAM policies that allow full \"*-*\" administrative privileges are not created",
+    "location": "/iam.tf:95",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_286",
+    "severity": "MEDIUM",
+    "title": "Ensure IAM policies does not allow privilege escalation",
+    "description": "Ensure IAM policies does not allow privilege escalation",
+    "location": "/iam.tf:95",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_290",
+    "severity": "MEDIUM",
+    "title": "Ensure IAM policies does not allow write access without constraints",
+    "description": "Ensure IAM policies does not allow write access without constraints",
+    "location": "/iam.tf:95",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_63",
+    "severity": "MEDIUM",
+    "title": "Ensure no IAM policies documents allow \"*\" as a statement's actions",
+    "description": "Ensure no IAM policies documents allow \"*\" as a statement's actions",
+    "location": "/iam.tf:95",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_287",
+    "severity": "MEDIUM",
+    "title": "Ensure IAM policies does not allow credentials exposure",
+    "description": "Ensure IAM policies does not allow credentials exposure",
+    "location": "/iam.tf:95",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "CKV_AWS_355",
+    "severity": "MEDIUM",
+    "title": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+    "description": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+    "location": "/iam.tf:95",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_55",
+    "severity": "MEDIUM",
+    "title": "Ensure S3 bucket has ignore public ACLs enabled",
+    "description": "Ensure S3 bucket has ignore public ACLs enabled",
+    "location": "/s3.tf:29",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_53",
+    "severity": "MEDIUM",
+    "title": "Ensure S3 bucket has block public ACLS enabled",
+    "description": "Ensure S3 bucket has block public ACLS enabled",
+    "location": "/s3.tf:29",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_54",
+    "severity": "MEDIUM",
+    "title": "Ensure S3 bucket has block public policy enabled",
+    "description": "Ensure S3 bucket has block public policy enabled",
+    "location": "/s3.tf:29",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_56",
+    "severity": "MEDIUM",
+    "title": "Ensure S3 bucket has 'restrict_public_buckets' enabled",
+    "description": "Ensure S3 bucket has 'restrict_public_buckets' enabled",
+    "location": "/s3.tf:29",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_70",
+    "severity": "MEDIUM",
+    "title": "Ensure S3 bucket does not allow an action with any Principal",
+    "description": "Ensure S3 bucket does not allow an action with any Principal",
+    "location": "/s3.tf:38",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_55",
+    "severity": "MEDIUM",
+    "title": "Ensure S3 bucket has ignore public ACLs enabled",
+    "description": "Ensure S3 bucket has ignore public ACLs enabled",
+    "location": "/s3.tf:84",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_53",
+    "severity": "MEDIUM",
+    "title": "Ensure S3 bucket has block public ACLS enabled",
+    "description": "Ensure S3 bucket has block public ACLS enabled",
+    "location": "/s3.tf:84",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_54",
+    "severity": "MEDIUM",
+    "title": "Ensure S3 bucket has block public policy enabled",
+    "description": "Ensure S3 bucket has block public policy enabled",
+    "location": "/s3.tf:84",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_56",
+    "severity": "MEDIUM",
+    "title": "Ensure S3 bucket has 'restrict_public_buckets' enabled",
+    "description": "Ensure S3 bucket has 'restrict_public_buckets' enabled",
+    "location": "/s3.tf:84",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_149",
+    "severity": "MEDIUM",
+    "title": "Ensure that Secrets Manager secret is encrypted using KMS CMK",
+    "description": "Ensure that Secrets Manager secret is encrypted using KMS CMK",
+    "location": "/secrets-manager.tf:9",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management",
+      "cis": "2.3.1 - Ensure RDS encryption is enabled"
+    }
+  },
+  {
+    "id": "CKV_AWS_149",
+    "severity": "MEDIUM",
+    "title": "Ensure that Secrets Manager secret is encrypted using KMS CMK",
+    "description": "Ensure that Secrets Manager secret is encrypted using KMS CMK",
+    "location": "/secrets-manager.tf:39",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management",
+      "cis": "2.3.1 - Ensure RDS encryption is enabled"
+    }
+  },
+  {
+    "id": "CKV_AWS_382",
+    "severity": "MEDIUM",
+    "title": "Ensure no security groups allow egress from 0.0.0.0:0 to port -1",
+    "description": "Ensure no security groups allow egress from 0.0.0.0:0 to port -1",
+    "location": "/security-groups.tf:8",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_25",
+    "severity": "MEDIUM",
+    "title": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389",
+    "description": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389",
+    "location": "/security-groups.tf:8",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_260",
+    "severity": "MEDIUM",
+    "title": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80",
+    "description": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80",
+    "location": "/security-groups.tf:8",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_24",
+    "severity": "MEDIUM",
+    "title": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22",
+    "description": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22",
+    "location": "/security-groups.tf:8",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_130",
+    "severity": "MEDIUM",
+    "title": "Ensure VPC subnets do not assign public IP by default",
+    "description": "Ensure VPC subnets do not assign public IP by default",
+    "location": "/vpc.tf:19",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_130",
+    "severity": "MEDIUM",
+    "title": "Ensure VPC subnets do not assign public IP by default",
+    "description": "Ensure VPC subnets do not assign public IP by default",
+    "location": "/vpc.tf:30",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_145",
+    "severity": "MEDIUM",
+    "title": "Ensure that S3 buckets are encrypted with KMS by default",
+    "description": "Ensure that S3 buckets are encrypted with KMS by default",
+    "location": "/s3.tf:11",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "3.4 - Render PAN unreadable (encryption)",
+      "soc2": "CC6.1 - Logical and physical access controls",
+      "cis": "2.3.1 - Ensure RDS encryption is enabled"
+    }
+  },
+  {
+    "id": "CKV_AWS_145",
+    "severity": "MEDIUM",
+    "title": "Ensure that S3 buckets are encrypted with KMS by default",
+    "description": "Ensure that S3 buckets are encrypted with KMS by default",
+    "location": "/s3.tf:72",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "3.4 - Render PAN unreadable (encryption)",
+      "soc2": "CC6.1 - Logical and physical access controls",
+      "cis": "2.3.1 - Ensure RDS encryption is enabled"
+    }
+  },
+  {
+    "id": "CKV2_AWS_30",
+    "severity": "MEDIUM",
+    "title": "Ensure Postgres RDS as aws_db_instance has Query Logging enabled",
+    "description": "Ensure Postgres RDS as aws_db_instance has Query Logging enabled",
+    "location": "/rds.tf:23",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV2_AWS_62",
+    "severity": "MEDIUM",
+    "title": "Ensure S3 buckets should have event notifications enabled",
+    "description": "Ensure S3 buckets should have event notifications enabled",
+    "location": "/s3.tf:11",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV2_AWS_62",
+    "severity": "MEDIUM",
+    "title": "Ensure S3 buckets should have event notifications enabled",
+    "description": "Ensure S3 buckets should have event notifications enabled",
+    "location": "/s3.tf:72",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV2_AWS_57",
+    "severity": "MEDIUM",
+    "title": "Ensure Secrets Manager secrets should have automatic rotation enabled",
+    "description": "Ensure Secrets Manager secrets should have automatic rotation enabled",
+    "location": "/secrets-manager.tf:9",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "CKV2_AWS_57",
+    "severity": "MEDIUM",
+    "title": "Ensure Secrets Manager secrets should have automatic rotation enabled",
+    "description": "Ensure Secrets Manager secrets should have automatic rotation enabled",
+    "location": "/secrets-manager.tf:39",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "CKV2_AWS_12",
+    "severity": "MEDIUM",
+    "title": "Ensure the default security group of every VPC restricts all traffic",
+    "description": "Ensure the default security group of every VPC restricts all traffic",
+    "location": "/vpc.tf:8",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV2_AWS_60",
+    "severity": "MEDIUM",
+    "title": "Ensure RDS instance with copy tags to snapshots is enabled",
+    "description": "Ensure RDS instance with copy tags to snapshots is enabled",
+    "location": "/rds.tf:23",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_18",
+    "severity": "MEDIUM",
+    "title": "Ensure the S3 bucket has access logging enabled",
+    "description": "Ensure the S3 bucket has access logging enabled",
+    "location": "/s3.tf:11",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_18",
+    "severity": "MEDIUM",
+    "title": "Ensure the S3 bucket has access logging enabled",
+    "description": "Ensure the S3 bucket has access logging enabled",
+    "location": "/s3.tf:72",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_144",
+    "severity": "MEDIUM",
+    "title": "Ensure that S3 bucket has cross-region replication enabled",
+    "description": "Ensure that S3 bucket has cross-region replication enabled",
+    "location": "/s3.tf:11",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_144",
+    "severity": "MEDIUM",
+    "title": "Ensure that S3 bucket has cross-region replication enabled",
+    "description": "Ensure that S3 bucket has cross-region replication enabled",
+    "location": "/s3.tf:72",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV2_AWS_11",
+    "severity": "MEDIUM",
+    "title": "Ensure VPC flow logging is enabled in all VPCs",
+    "description": "Ensure VPC flow logging is enabled in all VPCs",
+    "location": "/vpc.tf:8",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV2_AWS_40",
+    "severity": "MEDIUM",
+    "title": "Ensure AWS IAM policy does not allow full IAM privileges",
+    "description": "Ensure AWS IAM policy does not allow full IAM privileges",
+    "location": "/iam.tf:95",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV2_AWS_6",
+    "severity": "MEDIUM",
+    "title": "Ensure that S3 bucket has a Public Access block",
+    "description": "Ensure that S3 bucket has a Public Access block",
+    "location": "/s3.tf:11",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV2_AWS_6",
+    "severity": "MEDIUM",
+    "title": "Ensure that S3 bucket has a Public Access block",
+    "description": "Ensure that S3 bucket has a Public Access block",
+    "location": "/s3.tf:72",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_21",
+    "severity": "MEDIUM",
+    "title": "Ensure all data stored in the S3 bucket have versioning enabled",
+    "description": "Ensure all data stored in the S3 bucket have versioning enabled",
+    "location": "/s3.tf:11",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV_AWS_21",
+    "severity": "MEDIUM",
+    "title": "Ensure all data stored in the S3 bucket have versioning enabled",
+    "description": "Ensure all data stored in the S3 bucket have versioning enabled",
+    "location": "/s3.tf:72",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV2_AWS_61",
+    "severity": "MEDIUM",
+    "title": "Ensure that an S3 bucket has a lifecycle configuration",
+    "description": "Ensure that an S3 bucket has a lifecycle configuration",
+    "location": "/s3.tf:11",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "CKV2_AWS_61",
+    "severity": "MEDIUM",
+    "title": "Ensure that an S3 bucket has a lifecycle configuration",
+    "description": "Ensure that an S3 bucket has a lifecycle configuration",
+    "location": "/s3.tf:72",
+    "scanner": "checkov",
+    "category": "infrastructure",
+    "compliance": {}
+  },
+  {
+    "id": "SECRET-generic-api-key",
+    "severity": "HIGH",
+    "title": "Hardcoded secret: Generic API Key",
+    "description": "api_key\": \"sk_live_abc123...\"",
+    "location": "backend/README.md:112",
+    "scanner": "gitleaks",
+    "category": "secrets",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "SECRET-generic-api-key",
+    "severity": "HIGH",
+    "title": "Hardcoded secret: Generic API Key",
+    "description": "KEY=0123456789abcdef0123456789abcdef",
+    "location": "backend/README.md:329",
+    "scanner": "gitleaks",
+    "category": "secrets",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "SECRET-generic-api-key",
+    "severity": "HIGH",
+    "title": "Hardcoded secret: Generic API Key",
+    "description": "token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"",
+    "location": "backend/README.md:356",
+    "scanner": "gitleaks",
+    "category": "secrets",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "SECRET-generic-api-key",
+    "severity": "HIGH",
+    "title": "Hardcoded secret: Generic API Key",
+    "description": "KEY=0123456789abcdef0123456789abcdef ",
+    "location": "backend/README.md:642",
+    "scanner": "gitleaks",
+    "category": "secrets",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "SECRET-generic-api-key",
+    "severity": "HIGH",
+    "title": "Hardcoded secret: Generic API Key",
+    "description": "KEY=0123456789abcdef0123456789abcdef",
+    "location": "backend/.env.example:34",
+    "scanner": "gitleaks",
+    "category": "secrets",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "SECRET-generic-api-key",
+    "severity": "HIGH",
+    "title": "Hardcoded secret: Generic API Key",
+    "description": "KEY: 0123456789abcdef0123456789abcdef",
+    "location": "docker-compose.yml:47",
+    "scanner": "gitleaks",
+    "category": "secrets",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "SECRET-aws-access-token",
+    "severity": "HIGH",
+    "title": "Hardcoded secret: AWS",
+    "description": "AKIAIOSFODNN7EXAMPLE",
+    "location": "backend/services/aws.service.js:27",
+    "scanner": "gitleaks",
+    "category": "secrets",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "SECRET-aws-access-token",
+    "severity": "HIGH",
+    "title": "Hardcoded secret: AWS",
+    "description": "AKIAIOSFODNN7EXAMPLE",
+    "location": "docs/AWS-DEPLOYMENT-GUIDE.md:148",
+    "scanner": "gitleaks",
+    "category": "secrets",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "SECRET-stripe-access-token",
+    "severity": "HIGH",
+    "title": "Hardcoded secret: Stripe Access Token",
+    "description": "sk_live_abc123xyz789",
+    "location": "infrastructure/k8s/deployment.yaml:235",
+    "scanner": "gitleaks",
+    "category": "secrets",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "SECRET-aws-access-token",
+    "severity": "HIGH",
+    "title": "Hardcoded secret: AWS",
+    "description": "AKIAIOSFODNN7EXAMPLE",
+    "location": "infrastructure/k8s/deployment.yaml:115",
+    "scanner": "gitleaks",
+    "category": "secrets",
+    "compliance": {
+      "pci_dss": "8.2.1 - Strong authentication",
+      "soc2": "CC6.1 - Credential management"
+    }
+  },
+  {
+    "id": "javascript.express.security.audit.express-check-csurf-middleware-usage.express-check-csurf-middleware-usage",
+    "severity": "INFO",
+    "title": "A CSRF middleware was not detected in your express application. Ensure you are either using one such as `csurf` or `csrf` (see rule references) and/or you are properly doing CSRF validation in your routes with a token or cookies.",
+    "description": "A CSRF middleware was not detected in your express application. Ensure you are either using one such as `csurf` or `csrf` (see rule references) and/or you are properly doing CSRF validation in your routes with a token or cookies.",
+    "location": "../../backend/server.js:13",
+    "scanner": "semgrep",
+    "category": "code",
+    "compliance": {}
+  },
+  {
+    "id": "typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml",
+    "severity": "WARNING",
+    "title": "Detection of dangerouslySetInnerHTML from non-constant definition. This can inadvertently expose users to cross-site scripting (XSS) attacks if this comes from user-provided input. If you have to use dangerouslySetInnerHTML, consider using a sanitization library such as DOMPurify to sanitize your HTML.",
+    "description": "Detection of dangerouslySetInnerHTML from non-constant definition. This can inadvertently expose users to cross-site scripting (XSS) attacks if this comes from user-provided input. If you have to use dangerouslySetInnerHTML, consider using a sanitization library such as DOMPurify to sanitize your HTML.",
+    "location": "../../frontend/src/components/TransactionCard.tsx:77",
+    "scanner": "semgrep",
+    "category": "code",
+    "compliance": {}
+  }
+]

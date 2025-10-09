@@ -1,0 +1,114 @@
+{"task":"Create a Kubernetes Pod","description":"Define a basic Pod configuration to run a containerized application.","example":{"apiVersion":"v1","kind":"Pod","metadata":{"name":"example-pod"},"spec":{"containers":[{"name":"nginx","image":"nginx:latest"}]}},"common_error":"Pod fails to start due to invalid image name","fix":"Verify the image name and tag exist in the registry (e.g., docker.io/nginx:latest). Use `kubectl describe pod` to check events."}
+{"task":"Deploy a Deployment","description":"Create a Deployment to manage multiple Pod replicas.","example":{"apiVersion":"apps/v1","kind":"Deployment","metadata":{"name":"my-app"},"spec":{"replicas":3,"selector":{"matchLabels":{"app":"my-app"}},"template":{"metadata":{"labels":{"app":"my-app"}},"spec":{"containers":[{"name":"app","image":"my-app:1.0"}]}}}},"common_error":"Pods stuck in Pending state","fix":"Check if nodes have sufficient resources (CPU/memory) using `kubectl describe node`. Adjust resource limits or increase cluster capacity."}
+{"task":"Expose a Service","description":"Create a Service to expose a Deployment internally or externally.","example":{"apiVersion":"v1","kind":"Service","metadata":{"name":"my-service"},"spec":{"selector":{"app":"my-app"},"ports":[{"protocol":"TCP","port":80,"targetPort":8080}],"type":"ClusterIP"}},"common_error":"Service not routing traffic","fix":"Ensure selector labels match Pod labels. Use `kubectl get endpoints` to verify endpoints are registered."}
+{"task":"Create a ConfigMap","description":"Store configuration data as key-value pairs for Pods.","example":{"apiVersion":"v1","kind":"ConfigMap","metadata":{"name":"app-config"},"data":{"database_url":"mysql://user:pass@localhost:3306/db"}},"common_error":"Pod cannot access ConfigMap","fix":"Verify ConfigMap is mounted correctly in Pod spec using `volumeMounts` and `volumes`. Check namespace consistency."}
+{"task":"Set up a Secret","description":"Store sensitive data like passwords or API keys.","example":{"apiVersion":"v1","kind":"Secret","metadata":{"name":"app-secret"},"type":"Opaque","data":{"api_key":"c2VjcmV0S2V5"}},"common_error":"Invalid Secret data format","fix":"Ensure data values are base64-encoded. Use `echo -n 'secret' | base64` to encode values."}
+{"task":"Scale a Deployment","description":"Adjust the number of replicas in a Deployment.","example":"kubectl scale deployment my-app --replicas=5","common_error":"Scaling fails due to resource constraints","fix":"Check node resources with `kubectl top nodes`. Adjust resource requests/limits or add nodes."}
+{"task":"Roll out a Deployment Update","description":"Update a Deployment with a new container image.","example":"kubectl set image deployment/my-app app=my-app:2.0","common_error":"Pods fail to update due to image pull errors","fix":"Verify image exists in registry and imagePullSecrets are configured if private registry is used."}
+{"task":"Create a Namespace","description":"Organize resources in isolated namespaces.","example":{"apiVersion":"v1","kind":"Namespace","metadata":{"name":"dev"}},"common_error":"Resources not found in namespace","fix":"Ensure resources are created in the correct namespace using `--namespace` flag or `metadata.namespace`."}
+{"task":"Set Resource Limits","description":"Define CPU and memory limits for containers.","example":{"apiVersion":"v1","kind":"Pod","metadata":{"name":"resource-pod"},"spec":{"containers":[{"name":"app","image":"app:1.0","resources":{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"200m","memory":"256Mi"}}}]}}, "common_error":"Pod evicted due to resource limits","fix":"Increase limits or optimize application resource usage. Monitor with `kubectl top pod`."}
+{"task":"Create an Ingress","description":"Manage external access to services using an Ingress controller.","example":{"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"name":"example-ingress"},"spec":{"rules":[{"host":"example.com","http":{"paths":[{"path":"/","pathType":"Prefix","backend":{"service":{"name":"my-service","port":{"number":80}}}}]}}]}},"common_error":"Ingress not routing traffic","fix":"Ensure Ingress controller (e.g., nginx) is installed and running. Verify host and path configurations."}
+{"task":"Enable Pod Autoscaling","description":"Automatically scale Pods based on CPU/memory usage.","example":"kubectl autoscale deployment my-app --min=2 --max=10 --cpu-percent=80","common_error":"Autoscaler not scaling","fix":"Ensure metrics-server is installed and running. Verify resource metrics with `kubectl top pod`."}
+{"task":"Create a PersistentVolumeClaim","description":"Request storage for stateful applications.","example":{"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"name":"data-pvc"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"1Gi"}}}},"common_error":"PVC stuck in Pending state","fix":"Ensure a matching PersistentVolume or StorageClass exists. Check with `kubectl describe pvc`."}
+{"task":"Run a CronJob","description":"Schedule recurring tasks using a CronJob.","example":{"apiVersion":"batch/v1","kind":"CronJob","metadata":{"name":"backup-job"},"spec":{"schedule":"0 0 * * *","jobTemplate":{"spec":{"template":{"spec":{"containers":[{"name":"backup","image":"backup-tool:latest"}],"restartPolicy":"OnFailure"}}}}}},"common_error":"CronJob fails to execute","fix":"Check Job logs with `kubectl logs` and ensure the container command is correct."}
+{"task":"Monitor Cluster Events","description":"View events to troubleshoot issues.","example":"kubectl get events --namespace=default","common_error":"Events not descriptive enough","fix":"Use `kubectl describe <resource>` for detailed error information."}
+{"task":"Apply Node Selector","description":"Schedule Pods on specific nodes.","example":{"apiVersion":"v1","kind":"Pod","metadata":{"name":"node-pod"},"spec":{"nodeSelector":{"disktype":"ssd"},"containers":[{"name":"app","image":"app:1.0"}]}},"common_error":"Pod not scheduled","fix":"Ensure nodes have the specified labels using `kubectl label node <node> disktype=ssd`."}
+{"task":"Configure Taints and Tolerations","description":"Control Pod scheduling with taints and tolerations.","example":{"apiVersion":"v1","kind":"Pod","metadata":{"name":"toleration-pod"},"spec":{"tolerations":[{"key":"dedicated","operator":"Equal","value":"app","effect":"NoSchedule"}],"containers":[{"name":"app","image":"app:1.0"}]}},"common_error":"Pod rejected due to taint","fix":"Add matching toleration to Pod spec or remove taint with `kubectl taint nodes <node> dedicated-`."}
+{"task":"Create a ServiceAccount","description":"Provide an identity for Pods to interact with the Kubernetes API.","example":{"apiVersion":"v1","kind":"ServiceAccount","metadata":{"name":"app-sa"}},"common_error":"Permission denied for API access","fix":"Bind ServiceAccount to a Role/ClusterRole using a RoleBinding. Verify with `kubectl describe sa`."}
+{"task":"Drain a Node","description":"Safely evict Pods from a node for maintenance.","example":"kubectl drain <node> --ignore-daemonsets","common_error":"Pods not evicted","fix":"Ensure `--ignore-daemonsets` is used for DaemonSet Pods and check for PodDisruptionBudgets."}
+{"task":"Set up a DaemonSet","description":"Run a Pod on every node in the cluster.","example":{"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"name":"monitoring-agent"},"spec":{"selector":{"matchLabels":{"app":"monitoring"}},"template":{"metadata":{"labels":{"app":"monitoring"}},"spec":{"containers":[{"name":"agent","image":"monitoring-agent:1.0"}]}}}},"common_error":"DaemonSet Pods not running on all nodes","fix":"Check node taints and tolerations. Verify image availability."}
+{"task":"Troubleshoot DNS Issues","description":"Resolve DNS resolution problems in Pods.","example":"kubectl exec -it <pod> -- nslookup kubernetes.default","common_error":"DNS resolution fails","fix":"Ensure CoreDNS is running with `kubectl get pods -n kube-system`. Check Service DNS configuration."}
+
+
+---
+
+{
+  "instruction": "Design an Internal Developer Portal (IDP) structure that supports microservices and platform teams",
+  "input": "",
+  "output": "```markdown\nAn effective IDP for a microservices organization should include:\n\n1. **Service Catalog**: Auto-populated from Git repositories with metadata (e.g., owner, runtime, version, deployment status).\n2. **Golden Path Templates**: Standardized templates for onboarding, deploying, and monitoring services.\n3. **Self-Service Workflows**: GitHub Actions-based automations for provisioning databases, requesting secrets, etc.\n4. **RBAC-aware Interfaces**: Integrations with LDAP or OIDC for team-based permissions.\n5. **Tech Radar + Scorecards**: For guidance and governance on tech adoption.\n\nTools: Port.io (IDP), Backstage (alternative), ArgoCD, GitHub Actions, Keycloak, Terraform.\n```"
+}
+{
+  "instruction": "Create a Golden Path template for deploying a Python microservice to Kubernetes using Helm and GitOps",
+  "input": "",
+  "output": "```yaml\napiVersion: argoproj.io/v1alpha1\nkind: Application\nmetadata:\n  name: python-service-dev\nspec:\n  project: default\n  source:\n    repoURL: 'https://github.com/org/python-service'\n    targetRevision: HEAD\n    path: helm/\n    helm:\n      valueFiles:\n        - values-dev.yaml\n  destination:\n    server: 'https://kubernetes.default.svc'\n    namespace: dev\n  syncPolicy:\n    automated:\n      prune: true\n      selfHeal: true\n```"
+}
+{
+  "instruction": "Integrate Trivy vulnerability scanning into a GitHub Actions CI pipeline",
+  "input": "",
+  "output": "```yaml\nname: CI Security Scan\non: [push, pull_request]\njobs:\n  trivy-scan:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v3\n      - name: Run Trivy\n        uses: aquasecurity/trivy-action@master\n        with:\n          image-ref: 'ghcr.io/org/app:latest'\n          format: 'table'\n          exit-code: '1'\n```"
+}
+{
+  "instruction": "Automate creation of Airflow DAGs from YAML spec via the IDP",
+  "input": "",
+  "output": "```python\n# generate_dag.py\nfrom airflow import DAG\nfrom airflow.operators.python import PythonOperator\nimport yaml\nfrom datetime import datetime\n\nwith open('pipeline_spec.yaml') as f:\n    config = yaml.safe_load(f)\n\ndef run_task(**kwargs):\n    print(\"Running\", kwargs['task_name'])\n\ndag = DAG(\n    config['dag_id'],\n    start_date=datetime(2024, 1, 1),\n    schedule_interval=config['schedule']\n)\n\nfor task in config['tasks']:\n    PythonOperator(\n        task_id=task['name'],\n        python_callable=run_task,\n        op_kwargs={'task_name': task['name']},\n        dag=dag\n    )\n```"
+}
+{
+  "instruction": "Troubleshoot a failing ArgoCD sync that is stuck in 'OutOfSync' state",
+  "input": "Symptoms: Sync fails, Argo UI shows 'OutOfSync', logs indicate Helm value mismatch.",
+  "output": "```markdown\nTroubleshooting Steps:\n\n1. **Check ArgoCD Logs**: Run `kubectl logs -n argocd deployment/argocd-repo-server`\n2. **Validate Helm Values**:\n   - Compare `values.yaml` in repo vs live config in `kubectl get deployment -o yaml`\n   - Look for immutable fields like `volumeClaimTemplates`\n3. **Manual Diff**: Use ArgoCD UI → App → Diff tab\n4. **Fix Config Drift**: Rebase `values.yaml`, commit and push\n5. **Force Sync**: `argocd app sync <app-name> --force`\n```"
+}
+{
+  "instruction": "Generate RBAC policy for namespace-level developer access",
+  "input": "Developers need access to deploy but not manage system components.",
+  "output": "```yaml\nkind: Role\napiVersion: rbac.authorization.k8s.io/v1\nmetadata:\n  namespace: dev\n  name: dev-role\nrules:\n  - apiGroups: [\"\"]\n    resources: [\"pods\", \"services\", \"deployments\"]\n    verbs: [\"get\", \"watch\", \"list\", \"create\", \"update\", \"patch\", \"delete\"]\n---\nkind: RoleBinding\napiVersion: rbac.authorization.k8s.io/v1\nmetadata:\n  name: dev-role-binding\n  namespace: dev\nsubjects:\n  - kind: Group\n    name: developers\n    apiGroup: rbac.authorization.k8s.io\nroleRef:\n  kind: Role\n  name: dev-role\n  apiGroup: rbac.authorization.k8s.io\n```"
+}
+{
+  "instruction": "Set up a GitLab CI/CD pipeline that deploys to Kubernetes using Kubeconfig stored in CI variables",
+  "input": "",
+  "output": "```yaml\nstages:\n  - build\n  - deploy\n\nbuild:\n  stage: build\n  script:\n    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG .\n    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG\n\ndeploy:\n  stage: deploy\n  image: bitnami/kubectl\n  script:\n    - echo \"$KUBECONFIG_CONTENT\" > kubeconfig\n    - export KUBECONFIG=$CI_PROJECT_DIR/kubeconfig\n    - kubectl apply -f k8s/\n  only:\n    - main\n```"
+}
+{
+  "instruction": "Embed developer documentation directly into IDP using Markdown and OpenAPI integration",
+  "input": "",
+  "output": "```markdown\n### Example Developer Service Docs\n\n**Overview:**\nThis service exposes a REST API to fetch user analytics.\n\n**OpenAPI Spec:**\nUse `/openapi.yaml` as the source of truth. Preview it using Swagger-UI plugin in IDP.\n\n**Deployment Instructions:**\n```bash\ngit clone https://github.com/org/analytics-service\ncd analytics-service && helm upgrade --install analytics .\n```\n```"
+}
+{
+  "instruction": "Configure Port.io to automatically onboard new GitHub repositories as services",
+  "input": "",
+  "output": "```yaml\n# port.yaml\nblueprint: service\nproperties:\n  repo: github.com/org/{{ repo.name }}\n  team: {{ repo.team }}\nautomations:\n  - on: github.repository.created\n    action: port.create_entity\n    payload:\n      blueprint: service\n      properties:\n        repo: github.com/{{ repo.name }}\n        team: {{ repo.team }}\n```"
+}
+{
+  "instruction": "Implement ServiceNow automation to open incidents from failing pipeline jobs",
+  "input": "",
+  "output": "```python\nimport requests\n\ndef open_incident(job_name, failure_reason):\n    url = \"https://servicenow.company.com/api/now/table/incident\"\n    headers = {\n        \"Content-Type\": \"application/json\",\n        \"Authorization\": \"Bearer $SERVICENOW_TOKEN\"\n    }\n    payload = {\n        \"short_description\": f\"CI/CD failure: {job_name}\",\n        \"description\": failure_reason,\n        \"urgency\": \"2\",\n        \"impact\": \"2\"\n    }\n    response = requests.post(url, json=payload, headers=headers)\n    return response.status_code\n```"
+}
+{
+  "instruction": "Design a compliance-as-code check for container base image approval",
+  "input": "",
+  "output": "```yaml\n# policy.yaml\npolicies:\n  - name: approved-base-image\n    description: \"Only allow approved base images\"\n    match:\n      resources:\n        kinds: [\"Pod\", \"Deployment\"]\n    validate:\n      message: \"Use approved base images from ghcr.io/org\"\n      pattern:\n        spec:\n          containers:\n            - image: \"ghcr.io/org/*\"\n```"
+}
+{
+  "instruction": "Explain how to securely store secrets in GitOps workflow using Sealed Secrets",
+  "input": "",
+  "output": "```markdown\nSteps to secure secrets with Sealed Secrets:\n\n1. **Install kubeseal** CLI.\n2. **Encrypt secret**:\n```bash\nkubectl create secret generic db-creds --from-literal=password=supersecret --dry-run=client -o yaml |\nkubeseal --controller-name=sealed-secrets-controller --format yaml > db-creds-sealed.yaml\n```\n3. **Commit sealed secret** to Git repo.\n4. **Apply via ArgoCD**.\n\nSealed Secrets ensure the actual secret is never committed as plaintext.\n```"
+}
+{
+  "instruction": "Compare Backstage vs Port.io for building an IDP",
+  "input": "",
+  "output": "```markdown\n| Feature              | Backstage                   | Port.io                    |\n|----------------------|-----------------------------|----------------------------|\n| Hosting              | Self-hosted                 | SaaS                       |\n| Plugin Ecosystem     | Large OSS community         | Closed/curated             |\n| GitOps Integration   | Requires plugins            | Native                     |\n| RBAC                 | Via plugins or Keycloak     | Native                     |\n| Developer UX         | Customizable UI             | Guided UX                  |\n\nUse Port.io if you want a turnkey solution.\nUse Backstage if you want full control and OSS extensibility.\n```"
+}
+{
+  "instruction": "Add compliance scanning to Docker build process using Dockle",
+  "input": "",
+  "output": "```bash\n# Dockerfile build + security\nFROM python:3.10-slim\n...\nRUN pip install -r requirements.txt\n...\n# Run Dockle in CI\n$ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock goodwithtech/dockle:latest --exit-code 1 <image-name>\n```"
+}
+{
+  "instruction": "Create a centralized Kafka topic schema registration process using Confluent Schema Registry",
+  "input": "",
+  "output": "```bash\n# Register schema\ncurl -X POST http://schema-registry:8081/subjects/user-topic-value/versions \\\n-H \"Content-Type: application/vnd.schemaregistry.v1+json\" \\\n-d '{\"schema\": \"{\\\"type\\\":\\\"record\\\",\\\"name\\\":\\\"User\\\",\\\"fields\\\":[{\\\"name\\\":\\\"id\\\",\\\"type\\\":\\\"string\\\"}]}\"}'\n```"
+}
+{
+  "instruction": "Create a developer feedback loop in the IDP to surface friction points",
+  "input": "",
+  "output": "```markdown\n**Strategy for Developer Feedback Loop**:\n\n- Embed thumbs up/down in IDP UI on all templates and tools\n- Auto-log negative feedback to GitHub issues via webhook\n- Weekly dashboard summarizing top issues\n- Follow-up with short form survey every 2 weeks\n\nThis helps improve the developer experience iteratively.\n```"
+}
+{
+  "instruction": "Set up Kubernetes audit logging and forward to centralized logging via Fluent Bit",
+  "input": "",
+  "output": "```yaml\n# Fluent Bit config snippet\n[SERVICE]\n    Flush        1\n    Daemon       Off\n    Log_Level    info\n\n[INPUT]\n    Name tail\n    Path /var/log/kubernetes/audit.log\n    Tag kube.audit\n\n[OUTPUT]\n    Name  stdout\n    Match *\n    # or Elasticsearch / Loki as needed\n```"
+}
+{
+  "instruction": "Generate a reusable Terraform module for provisioning namespaces with RBAC",
+  "input": "",
+  "output": "```hcl\nmodule \"team_namespace\" {\n  source      = \"./modules/namespace\"\n  name        = \"dev-team\"\n  role_groups = [\"devs\", \"qa\"]\n}\n\n# ./modules/namespace/main.tf\nresource \"kubernetes_namespace\" \"ns\" {\n  metadata {\n    name = var.name\n  }\n}\n\nresource \"kubernetes_role_binding\" \"rb\" {\n  for_each = toset(var.role_groups)\n  metadata {\n    name      = \"${each.key}-binding\"\n    namespace = var.name\n  }\n  ...\n}\n```"
+}

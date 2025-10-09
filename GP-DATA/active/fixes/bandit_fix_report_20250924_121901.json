@@ -1,0 +1,270 @@
+{
+  "status": "success",
+  "timestamp": "2025-09-24T12:19:01.198636",
+  "scan_file": "test_bandit_output.json",
+  "project": ".",
+  "statistics": {
+    "total_findings": 36,
+    "fixes_applied": 18,
+    "fixes_skipped": 18,
+    "files_modified": 1,
+    "backups_created": 1
+  },
+  "applied_fixes": [
+    {
+      "file": "test_bandit_issues.py",
+      "line": 137,
+      "issue": "B110",
+      "severity": "LOW",
+      "fix_applied": "try_except_pass"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 127,
+      "issue": "B102",
+      "severity": "MEDIUM",
+      "fix_applied": "exec_used"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 124,
+      "issue": "B101",
+      "severity": "LOW",
+      "fix_applied": "assert_used"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 105,
+      "issue": "B608",
+      "severity": "MEDIUM",
+      "fix_applied": "hardcoded_sql_expressions"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 96,
+      "issue": "B608",
+      "severity": "MEDIUM",
+      "fix_applied": "hardcoded_sql_expressions"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 87,
+      "issue": "B605",
+      "severity": "HIGH",
+      "fix_applied": "start_process_with_a_shell"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 81,
+      "issue": "B602",
+      "severity": "HIGH",
+      "fix_applied": "subprocess_popen_with_shell_equals_true"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 77,
+      "issue": "B602",
+      "severity": "HIGH",
+      "fix_applied": "subprocess_popen_with_shell_equals_true"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 73,
+      "issue": "B506",
+      "severity": "MEDIUM",
+      "fix_applied": "yaml_load"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 65,
+      "issue": "B501",
+      "severity": "HIGH",
+      "fix_applied": "request_with_no_cert_validation"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 50,
+      "issue": "B311",
+      "severity": "LOW",
+      "fix_applied": "blacklist_random"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 49,
+      "issue": "B311",
+      "severity": "LOW",
+      "fix_applied": "blacklist_random"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 36,
+      "issue": "B201",
+      "severity": "HIGH",
+      "fix_applied": "flask_debug_true"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 29,
+      "issue": "B108",
+      "severity": "MEDIUM",
+      "fix_applied": "hardcoded_tmp"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 23,
+      "issue": "B106",
+      "severity": "LOW",
+      "fix_applied": "hardcoded_password_funcarg"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 20,
+      "issue": "B105",
+      "severity": "LOW",
+      "fix_applied": "hardcoded_password_string"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 19,
+      "issue": "B105",
+      "severity": "LOW",
+      "fix_applied": "hardcoded_password_string"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 16,
+      "issue": "B104",
+      "severity": "MEDIUM",
+      "fix_applied": "hardcoded_bind_all_interfaces"
+    }
+  ],
+  "skipped_fixes": [
+    {
+      "file": "test_bandit_issues.py",
+      "line": 144,
+      "issue": "B112",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 130,
+      "issue": "B307",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 119,
+      "issue": "B308",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 114,
+      "issue": "B702",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 105,
+      "issue": "B611",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 101,
+      "issue": "B610",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 90,
+      "issue": "B607",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 90,
+      "issue": "B603",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 84,
+      "issue": "B607",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 84,
+      "issue": "B603",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 69,
+      "issue": "B504",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 65,
+      "issue": "B113",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 61,
+      "issue": "B324",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 46,
+      "issue": "B324",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 43,
+      "issue": "B324",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 40,
+      "issue": "B301",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 7,
+      "issue": "B403",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "test_bandit_issues.py",
+      "line": 6,
+      "issue": "B404",
+      "reason": "No fix pattern available"
+    }
+  ],
+  "backup_files": [
+    "test_bandit_issues.py.bak.20250924_121901"
+  ],
+  "fix_summary": {
+    "B110": 1,
+    "B102": 1,
+    "B101": 1,
+    "B608": 2,
+    "B605": 1,
+    "B602": 2,
+    "B506": 1,
+    "B501": 1,
+    "B311": 2,
+    "B201": 1,
+    "B108": 1,
+    "B106": 1,
+    "B105": 2,
+    "B104": 1
+  }
+}

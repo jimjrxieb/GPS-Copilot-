@@ -1,0 +1,65 @@
+{
+  "fix_info": {
+    "target": "/home/jimmie/linkops-industries/GP-copilot/GP-Projects/Portfolio",
+    "scan_results_file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS-RESULTS/scans/scan_20250923_233153.json",
+    "start_time": "2025-09-24T01:16:42.137221",
+    "fixers": [
+      "terraform",
+      "python",
+      "npm_audit",
+      "trivy"
+    ],
+    "end_time": "2025-09-24T01:16:45.391033"
+  },
+  "results": {
+    "terraform": {
+      "fixes_applied": [],
+      "errors": [],
+      "summary": {
+        "total_fixes": 0,
+        "total_errors": 0
+      }
+    },
+    "python": {
+      "fixes_applied": [],
+      "errors": [],
+      "summary": {
+        "total_fixes": 0,
+        "total_errors": 0
+      }
+    },
+    "npm_audit": {
+      "fixes_applied": [
+        {
+          "tool": "npm_audit",
+          "project_dir": "/home/jimmie/linkops-industries/GP-copilot/GP-Projects/Portfolio",
+          "fix_description": "Applied npm audit fix to update vulnerable dependencies",
+          "timestamp": "2025-09-24T01:16:42.889449",
+          "output": "\nup to date, audited 90 packages in 688ms\n\n40 packages are looking for funding\n  run `npm fund` for details\n\nfound 0 vulnerabilities\n"
+        }
+      ],
+      "errors": [],
+      "summary": {
+        "total_fixes": 1,
+        "total_errors": 0
+      }
+    },
+    "trivy": {
+      "fixes_applied": [],
+      "errors": [],
+      "summary": {
+        "total_fixes": 0,
+        "total_errors": 0
+      }
+    }
+  },
+  "escalations": {
+    "escalation_info": {
+      "id": "escalation_20250924_011645",
+      "target": "/home/jimmie/linkops-industries/GP-copilot/GP-Projects/Portfolio",
+      "timestamp": "2025-09-24T01:16:45.390872",
+      "total_escalations": 0
+    },
+    "escalations": []
+  }
+}

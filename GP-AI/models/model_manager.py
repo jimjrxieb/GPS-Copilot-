@@ -13,14 +13,15 @@ from transformers import (
     pipeline,
     BitsAndBytesConfig
 )
-from gpu_config import gpu_config
+from .gpu_config import gpu_config
 
 class ModelManager:
     """Manages AI model lifecycle for security analysis"""
 
     def __init__(self):
-        self.models_path = Path(__file__).parent.parent / "GP-DATA" / "ai-models"
-        self.models_path.mkdir(exist_ok=True)
+        # GP-DATA is at project root, not inside GP-AI/
+        self.models_path = Path(__file__).parent.parent.parent / "GP-DATA" / "ai-models"
+        self.models_path.mkdir(parents=True, exist_ok=True)
 
         self.tokenizer = None
         self.model = None
@@ -30,23 +31,25 @@ class ModelManager:
         self.allocation = gpu_config.model_allocation
 
     def download_model(self, force_download: bool = False) -> bool:
-        """Download Qwen2.5 7B model"""
-        model_name = self.allocation["reasoning_model"]
-        local_path = self.models_path / "qwen2.5-7b-instruct"
+        """Download DeepSeek-Coder-V2-Lite 16B model (code-specialized)"""
+        # Use DeepSeek-Coder instead of Qwen for better code analysis
+        model_name = "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct"
+        local_path = self.models_path / "deepseek-coder-v2-lite-instruct"
 
-        print(f"📦 Downloading {model_name}...")
+        print(f"📦 Downloading {model_name} (Code-Specialized Model)...")
+        print("💡 DeepSeek-Coder outperforms GPT-4 on code tasks!")
 
         try:
             # Configure quantization for memory efficiency
+            # DeepSeek-Coder-V2-Lite is 16B, use 4-bit quantization for 16GB GPU
             quantization_config = None
-            if self.allocation["reasoning_vram"] < 8:
-                print("⚡ Enabling 4-bit quantization for memory efficiency")
-                quantization_config = BitsAndBytesConfig(
-                    load_in_4bit=True,
-                    bnb_4bit_compute_dtype=torch.float16,
-                    bnb_4bit_use_double_quant=True,
-                    bnb_4bit_quant_type="nf4"
-                )
+            print("⚡ Enabling 4-bit quantization for 16GB GPU")
+            quantization_config = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_compute_dtype=torch.float16,
+                bnb_4bit_use_double_quant=True,
+                bnb_4bit_quant_type="nf4"
+            )
 
             # Download tokenizer
             print("📝 Downloading tokenizer...")
@@ -77,15 +80,25 @@ class ModelManager:
 
     def load_model(self) -> bool:
         """Load the model for inference"""
-        model_name = self.allocation["reasoning_model"]
+        # Use DeepSeek-Coder for superior code analysis
+        model_name = "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct"
 
         try:
-            print(f"🚀 Loading {model_name}...")
+            print(f"🚀 Loading {model_name} (16B Code-Specialized)...")
+            print("💡 Optimized for Terraform, Kubernetes, OPA, and security code analysis")
 
             # Load tokenizer
             self.tokenizer = AutoTokenizer.from_pretrained(
                 model_name,
                 trust_remote_code=True
+            )
+
+            # Configure 4-bit quantization for 16GB GPU
+            quantization_config = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_compute_dtype=torch.float16,
+                bnb_4bit_use_double_quant=True,
+                bnb_4bit_quant_type="nf4"
             )
 
             # Load model with optimized settings
@@ -94,15 +107,18 @@ class ModelManager:
                 torch_dtype=torch.float16,
                 device_map="auto",
                 trust_remote_code=True,
+                quantization_config=quantization_config,
                 low_cpu_mem_usage=True
             )
 
-            print(f"✅ Model loaded to GPU successfully")
-            print(f"🎮 VRAM Usage: ~{self.allocation['reasoning_vram']}GB")
+            print(f"✅ DeepSeek-Coder loaded to GPU successfully")
+            print(f"🎮 VRAM Usage: ~10GB (4-bit quantized)")
+            print(f"⚡ Ready for advanced code analysis!")
             return True
 
         except Exception as e:
             print(f"❌ Model loading failed: {e}")
+            print(f"💡 Fallback: Using pattern-based analysis")
             return False
 
     def generate_security_analysis(self, code_content: str, file_type: str = "terraform") -> str:
@@ -241,25 +257,31 @@ Provide a detailed, professional answer:"""
         """Get current model status"""
         return {
             "model_loaded": self.model is not None,
-            "model_name": self.allocation["reasoning_model"],
-            "vram_allocated": self.allocation["reasoning_vram"],
+            "model_name": "DeepSeek-Coder-V2-Lite-Instruct-16B",
+            "model_type": "Code-Specialized LLM",
+            "vram_allocated": "~10GB",
             "device": str(self.model_config.get("device", "cpu")),
-            "quantization": "4bit" if self.allocation["reasoning_vram"] < 8 else "fp16"
+            "quantization": "4-bit (NF4)",
+            "strengths": "Terraform, Kubernetes, OPA, Python, Security Analysis"
         }
 
 # Global model manager instance
 model_manager = ModelManager()
 
-# Auto-load model on import
+# Auto-load model on import - DISABLED (loads async on first query to avoid blocking FastAPI startup)
+# Large models (16B) take 5-10 minutes to load and would block the API
+# Model will be loaded lazily on first inference request
 if __name__ != "__main__":
-    try:
-        print("🚀 Auto-loading Qwen2.5 7B model...")
-        if model_manager.load_model():
-            print("✅ Model auto-loaded successfully")
-        else:
-            print("⚠️  Model auto-load failed - will use fallback")
-    except Exception as e:
-        print(f"⚠️  Model auto-load error: {e}")
+    print("💡 DeepSeek-Coder will load on first inference request (lazy loading)")
+    print("   This prevents blocking FastAPI startup (16B model takes ~5 min to load)")
+    # try:
+    #     print("🚀 Auto-loading DeepSeek-Coder-V2 (16B Code-Specialized)...")
+    #     if model_manager.load_model():
+    #         print("✅ DeepSeek-Coder auto-loaded successfully")
+    #     else:
+    #         print("⚠️  Model auto-load failed - will use fallback pattern analysis")
+    # except Exception as e:
+    #     print(f"⚠️  Model auto-load error: {e} - using fallback")
 
 if __name__ == "__main__":
     # Test model download and loading

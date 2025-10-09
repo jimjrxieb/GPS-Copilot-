@@ -1,0 +1,28 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  annotations:
+    description: Require resource limits on containers
+    generated-by: jade-policy-generator
+  name: k8srequireresourcelimits
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequireResourceLimits
+      validation:
+        openAPIV3Schema:
+          properties:
+            cpu:
+              type: string
+            memory:
+              type: string
+          type: object
+  targets:
+  - rego: "package k8srequireresourcelimits\n\nviolation[{\"msg\": msg}] {\n    container\
+      \ := input.review.object.spec.containers[_]\n    not container.resources.limits.memory\n\
+      \    msg := sprintf(\"Container %v must specify memory limits\", [container.name])\n\
+      }\n\nviolation[{\"msg\": msg}] {\n    container := input.review.object.spec.containers[_]\n\
+      \    not container.resources.limits.cpu\n    msg := sprintf(\"Container %v must\
+      \ specify CPU limits\", [container.name])\n}"
+    target: admission.k8s.gatekeeper.sh

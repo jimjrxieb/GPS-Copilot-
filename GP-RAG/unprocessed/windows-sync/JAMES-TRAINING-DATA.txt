@@ -1,0 +1,29 @@
+JAMES TRAINING DATA!!!
+
+
+You are an AI assistant helping me train a large language model assistant (LLM) named "James". 
+
+I need structured instruction-based training data for fine-tuning James. The data should be based on the following job description for a DevSecOps platform engineer working on an internal developer portal (IDP). Focus on real-world tasks, decisions, tool usage, and secure DevOps automation workflows.
+
+Please generate 10 high-quality instruction-based training samples in JSONL format. Use this structure:
+
+{
+  "instruction": "Clearly stated task (e.g., 'Create a Kubernetes deployment template using GitOps best practices')",
+  "input": "Optional context or details (can be empty if not needed)",
+  "output": "Ideal assistant response in Markdown or YAML format, including code, DevSecOps logic, tool usage, or decision rationale"
+}
+
+Topics to cover (based on job responsibilities):
+
+1. Internal Developer Portal design and management
+2. Golden Path templates for app deployment and infrastructure
+3. CI/CD pipeline integration (GitHub Actions, GitLab, ArgoCD, etc.)
+4. Kubernetes, Kafka, Airflow, RBAC, ServiceNow automation
+5. DevSecOps principles (security in pipelines, compliance scanning, etc.)
+6. Tool selection and workflow automation
+7. Troubleshooting IDP-related infrastructure
+8. Documentation generation and best practices
+9. Developer experience improvement strategies
+10. Examples using Port.io (or similar IDP platforms)
+
+Generate the dataset in JSONL format, with real-world and high-signal content suitable for fine-tuning a local LLM agent for DevSecOps automation.

@@ -1,0 +1,726 @@
+{
+  "status": "success",
+  "timestamp": "2025-09-24T12:25:23.123255",
+  "scan_file": "test_checkov_output.json",
+  "project": ".",
+  "statistics": {
+    "total_findings": 105,
+    "fixes_applied": 51,
+    "fixes_skipped": 54,
+    "files_modified": 1,
+    "backups_created": 1
+  },
+  "applied_fixes": [
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_ecr_repository.no_lifecycle_ecr",
+      "check_id": "CKV_AWS_51",
+      "fix_applied": "ecr_lifecycle_policy",
+      "description": "Configure ECR lifecycle policy"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_ecr_repository.no_scanning_ecr",
+      "check_id": "CKV_AWS_51",
+      "fix_applied": "ecr_lifecycle_policy",
+      "description": "Configure ECR lifecycle policy"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_lambda_function.no_env_encryption_lambda",
+      "check_id": "CKV_AWS_50",
+      "fix_applied": "lambda_env_encryption",
+      "description": "Enable Lambda environment encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_lambda_function.no_env_encryption_lambda",
+      "check_id": "CKV_AWS_115",
+      "fix_applied": "lambda_dlq",
+      "description": "Configure Lambda DLQ"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_lambda_function.no_tracing_lambda",
+      "check_id": "CKV_AWS_50",
+      "fix_applied": "lambda_env_encryption",
+      "description": "Enable Lambda environment encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_lambda_function.no_tracing_lambda",
+      "check_id": "CKV_AWS_115",
+      "fix_applied": "lambda_dlq",
+      "description": "Configure Lambda DLQ"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.no_logging_eks",
+      "check_id": "CKV_AWS_37",
+      "fix_applied": "eks_public_access",
+      "description": "Restrict EKS public endpoint access"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.no_logging_eks",
+      "check_id": "CKV_AWS_38",
+      "fix_applied": "eks_control_plane_logging",
+      "description": "Enable EKS control plane logging"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.no_logging_eks",
+      "check_id": "CKV_AWS_58",
+      "fix_applied": "eks_secrets_encryption",
+      "description": "Enable EKS secrets encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.public_eks",
+      "check_id": "CKV_AWS_37",
+      "fix_applied": "eks_public_access",
+      "description": "Restrict EKS public endpoint access"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.public_eks",
+      "check_id": "CKV_AWS_38",
+      "fix_applied": "eks_control_plane_logging",
+      "description": "Enable EKS control plane logging"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.public_eks",
+      "check_id": "CKV_AWS_58",
+      "fix_applied": "eks_secrets_encryption",
+      "description": "Enable EKS secrets encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.unencrypted_eks",
+      "check_id": "CKV_AWS_37",
+      "fix_applied": "eks_public_access",
+      "description": "Restrict EKS public endpoint access"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.unencrypted_eks",
+      "check_id": "CKV_AWS_38",
+      "fix_applied": "eks_control_plane_logging",
+      "description": "Enable EKS control plane logging"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.unencrypted_eks",
+      "check_id": "CKV_AWS_58",
+      "fix_applied": "eks_secrets_encryption",
+      "description": "Enable EKS secrets encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.no_backup_db",
+      "check_id": "CKV_AWS_161",
+      "fix_applied": "rds_iam_authentication",
+      "description": "Enable IAM authentication for RDS"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.no_backup_db",
+      "check_id": "CKV_AWS_16",
+      "fix_applied": "rds_encryption",
+      "description": "Enable RDS encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.unencrypted_db",
+      "check_id": "CKV_AWS_161",
+      "fix_applied": "rds_iam_authentication",
+      "description": "Enable IAM authentication for RDS"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.unencrypted_db",
+      "check_id": "CKV_AWS_16",
+      "fix_applied": "rds_encryption",
+      "description": "Enable RDS encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_kms_key.no_rotation_key",
+      "check_id": "CKV_AWS_7",
+      "fix_applied": "kms_key_rotation",
+      "description": "Enable KMS key rotation"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_sns_topic.unencrypted_topic",
+      "check_id": "CKV_AWS_26",
+      "fix_applied": "sns_encryption",
+      "description": "Enable SNS topic encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_sqs_queue.unencrypted_queue",
+      "check_id": "CKV_AWS_27",
+      "fix_applied": "sqs_encryption",
+      "description": "Enable SQS queue encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_security_group.rdp_from_anywhere",
+      "check_id": "CKV_AWS_25",
+      "fix_applied": "sg_unrestricted_egress",
+      "description": "Restrict security group egress"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_security_group.rdp_from_anywhere",
+      "check_id": "CKV_AWS_23",
+      "fix_applied": "sg_ssh_restricted",
+      "description": "Restrict SSH access to specific IPs"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_security_group.ssh_from_anywhere",
+      "check_id": "CKV_AWS_23",
+      "fix_applied": "sg_ssh_restricted",
+      "description": "Restrict SSH access to specific IPs"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_security_group.ssh_from_anywhere",
+      "check_id": "CKV_AWS_24",
+      "fix_applied": "sg_unrestricted_ingress",
+      "description": "Restrict security group ingress"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_security_group.wide_open_sg",
+      "check_id": "CKV_AWS_25",
+      "fix_applied": "sg_unrestricted_egress",
+      "description": "Restrict security group egress"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_security_group.wide_open_sg",
+      "check_id": "CKV_AWS_23",
+      "fix_applied": "sg_ssh_restricted",
+      "description": "Restrict SSH access to specific IPs"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_security_group.wide_open_sg",
+      "check_id": "CKV_AWS_260",
+      "fix_applied": "sg_rdp_restricted",
+      "description": "Restrict RDP access to specific IPs"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_security_group.wide_open_sg",
+      "check_id": "CKV_AWS_24",
+      "fix_applied": "sg_unrestricted_ingress",
+      "description": "Restrict security group ingress"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_instance.no_user_data_encryption",
+      "check_id": "CKV_AWS_126",
+      "fix_applied": "ec2_detailed_monitoring",
+      "description": "Enable detailed monitoring for EC2"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_instance.no_user_data_encryption",
+      "check_id": "CKV_AWS_79",
+      "fix_applied": "ec2_imdsv2",
+      "description": "Enforce IMDSv2 for EC2 instances"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_instance.no_user_data_encryption",
+      "check_id": "CKV_AWS_135",
+      "fix_applied": "ec2_ebs_optimized",
+      "description": "Enable EBS optimization for EC2"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_instance.no_user_data_encryption",
+      "check_id": "CKV_AWS_8",
+      "fix_applied": "ec2_ebs_encryption",
+      "description": "Enable EBS encryption for EC2 instances"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_instance.insecure_instance",
+      "check_id": "CKV_AWS_126",
+      "fix_applied": "ec2_detailed_monitoring",
+      "description": "Enable detailed monitoring for EC2"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_instance.insecure_instance",
+      "check_id": "CKV_AWS_79",
+      "fix_applied": "ec2_imdsv2",
+      "description": "Enforce IMDSv2 for EC2 instances"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_instance.insecure_instance",
+      "check_id": "CKV_AWS_135",
+      "fix_applied": "ec2_ebs_optimized",
+      "description": "Enable EBS optimization for EC2"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_instance.insecure_instance",
+      "check_id": "CKV_AWS_8",
+      "fix_applied": "ec2_ebs_encryption",
+      "description": "Enable EBS encryption for EC2 instances"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_kms_bucket",
+      "check_id": "CKV_AWS_18",
+      "fix_applied": "s3_bucket_logging",
+      "description": "Enable S3 bucket access logging"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_kms_bucket",
+      "check_id": "CKV_AWS_145",
+      "fix_applied": "s3_bucket_kms",
+      "description": "Use KMS encryption for S3 bucket"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_kms_bucket",
+      "check_id": "CKV_AWS_21",
+      "fix_applied": "s3_bucket_encryption",
+      "description": "Enable S3 bucket encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_logging_bucket",
+      "check_id": "CKV_AWS_18",
+      "fix_applied": "s3_bucket_logging",
+      "description": "Enable S3 bucket access logging"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_logging_bucket",
+      "check_id": "CKV_AWS_145",
+      "fix_applied": "s3_bucket_kms",
+      "description": "Use KMS encryption for S3 bucket"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_logging_bucket",
+      "check_id": "CKV_AWS_21",
+      "fix_applied": "s3_bucket_encryption",
+      "description": "Enable S3 bucket encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.unencrypted_bucket",
+      "check_id": "CKV_AWS_18",
+      "fix_applied": "s3_bucket_logging",
+      "description": "Enable S3 bucket access logging"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.unencrypted_bucket",
+      "check_id": "CKV_AWS_145",
+      "fix_applied": "s3_bucket_kms",
+      "description": "Use KMS encryption for S3 bucket"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.unencrypted_bucket",
+      "check_id": "CKV_AWS_21",
+      "fix_applied": "s3_bucket_encryption",
+      "description": "Enable S3 bucket encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.insecure_bucket",
+      "check_id": "CKV_AWS_18",
+      "fix_applied": "s3_bucket_logging",
+      "description": "Enable S3 bucket access logging"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.insecure_bucket",
+      "check_id": "CKV_AWS_145",
+      "fix_applied": "s3_bucket_kms",
+      "description": "Use KMS encryption for S3 bucket"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.insecure_bucket",
+      "check_id": "CKV_AWS_21",
+      "fix_applied": "s3_bucket_encryption",
+      "description": "Enable S3 bucket encryption"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.insecure_bucket",
+      "check_id": "CKV_AWS_20",
+      "fix_applied": "s3_bucket_versioning",
+      "description": "Enable S3 bucket versioning"
+    }
+  ],
+  "skipped_fixes": [
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_ecr_repository.no_lifecycle_ecr",
+      "check_id": "CKV_AWS_136",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_ecr_repository.no_lifecycle_ecr",
+      "check_id": "CKV_AWS_163",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_ecr_repository.no_scanning_ecr",
+      "check_id": "CKV_AWS_136",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_ecr_repository.no_scanning_ecr",
+      "check_id": "CKV_AWS_163",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_lambda_function.no_env_encryption_lambda",
+      "check_id": "CKV_AWS_117",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_lambda_function.no_env_encryption_lambda",
+      "check_id": "CKV_AWS_272",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_lambda_function.no_env_encryption_lambda",
+      "check_id": "CKV_AWS_116",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_lambda_function.no_env_encryption_lambda",
+      "check_id": "CKV_AWS_173",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_lambda_function.no_tracing_lambda",
+      "check_id": "CKV_AWS_117",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_lambda_function.no_tracing_lambda",
+      "check_id": "CKV_AWS_272",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_lambda_function.no_tracing_lambda",
+      "check_id": "CKV_AWS_116",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.no_logging_eks",
+      "check_id": "CKV_AWS_39",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.public_eks",
+      "check_id": "CKV_AWS_39",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_eks_cluster.unencrypted_eks",
+      "check_id": "CKV_AWS_39",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "cbfdac6008f9cab4083784cbd1874f76618d2a97",
+      "check_id": "CKV_SECRET_6",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.no_backup_db",
+      "check_id": "CKV_AWS_133",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.no_backup_db",
+      "check_id": "CKV_AWS_129",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.no_backup_db",
+      "check_id": "CKV_AWS_226",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.no_backup_db",
+      "check_id": "CKV_AWS_353",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.no_backup_db",
+      "check_id": "CKV_AWS_293",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.no_backup_db",
+      "check_id": "CKV_AWS_118",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.no_backup_db",
+      "check_id": "CKV_AWS_157",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.no_backup_db",
+      "check_id": "CKV2_AWS_30",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.no_backup_db",
+      "check_id": "CKV2_AWS_60",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.unencrypted_db",
+      "check_id": "CKV_AWS_129",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.unencrypted_db",
+      "check_id": "CKV_AWS_226",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.unencrypted_db",
+      "check_id": "CKV_AWS_353",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.unencrypted_db",
+      "check_id": "CKV_AWS_293",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.unencrypted_db",
+      "check_id": "CKV_AWS_118",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.unencrypted_db",
+      "check_id": "CKV_AWS_157",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.unencrypted_db",
+      "check_id": "CKV2_AWS_30",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_db_instance.unencrypted_db",
+      "check_id": "CKV2_AWS_60",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_kms_key.no_rotation_key",
+      "check_id": "CKV2_AWS_64",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_security_group.rdp_from_anywhere",
+      "check_id": "CKV2_AWS_5",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_security_group.ssh_from_anywhere",
+      "check_id": "CKV2_AWS_5",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_security_group.wide_open_sg",
+      "check_id": "CKV2_AWS_5",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_instance.no_user_data_encryption",
+      "check_id": "CKV2_AWS_41",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_instance.insecure_instance",
+      "check_id": "CKV2_AWS_41",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_kms_bucket",
+      "check_id": "CKV2_AWS_6",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_kms_bucket",
+      "check_id": "CKV2_AWS_61",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_kms_bucket",
+      "check_id": "CKV2_AWS_62",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_kms_bucket",
+      "check_id": "CKV_AWS_144",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_logging_bucket",
+      "check_id": "CKV2_AWS_6",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_logging_bucket",
+      "check_id": "CKV2_AWS_61",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_logging_bucket",
+      "check_id": "CKV2_AWS_62",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.no_logging_bucket",
+      "check_id": "CKV_AWS_144",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.unencrypted_bucket",
+      "check_id": "CKV2_AWS_6",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.unencrypted_bucket",
+      "check_id": "CKV2_AWS_61",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.unencrypted_bucket",
+      "check_id": "CKV2_AWS_62",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.unencrypted_bucket",
+      "check_id": "CKV_AWS_144",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.insecure_bucket",
+      "check_id": "CKV2_AWS_6",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.insecure_bucket",
+      "check_id": "CKV2_AWS_61",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.insecure_bucket",
+      "check_id": "CKV2_AWS_62",
+      "reason": "No fix pattern available"
+    },
+    {
+      "file": "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf",
+      "resource": "aws_s3_bucket.insecure_bucket",
+      "check_id": "CKV_AWS_144",
+      "reason": "No fix pattern available"
+    }
+  ],
+  "backup_files": [
+    "/home/jimmie/linkops-industries/GP-copilot/test_terraform_issues.tf.bak.20250924_122523"
+  ],
+  "fix_summary": {
+    "CKV_AWS_51": 2,
+    "CKV_AWS_50": 2,
+    "CKV_AWS_115": 2,
+    "CKV_AWS_37": 3,
+    "CKV_AWS_38": 3,
+    "CKV_AWS_58": 3,
+    "CKV_AWS_161": 2,
+    "CKV_AWS_16": 2,
+    "CKV_AWS_7": 1,
+    "CKV_AWS_26": 1,
+    "CKV_AWS_27": 1,
+    "CKV_AWS_25": 2,
+    "CKV_AWS_23": 3,
+    "CKV_AWS_24": 2,
+    "CKV_AWS_260": 1,
+    "CKV_AWS_126": 2,
+    "CKV_AWS_79": 2,
+    "CKV_AWS_135": 2,
+    "CKV_AWS_8": 2,
+    "CKV_AWS_18": 4,
+    "CKV_AWS_145": 4,
+    "CKV_AWS_21": 4,
+    "CKV_AWS_20": 1
+  }
+}

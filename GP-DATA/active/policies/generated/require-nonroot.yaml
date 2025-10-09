@@ -1,0 +1,26 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  annotations:
+    compliance: CIS-5.2.6
+    description: Require containers to run as non-root
+    generated-by: jade-policy-generator
+  name: k8srequirenonroot
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequireNonRoot
+      validation:
+        openAPIV3Schema:
+          type: object
+  targets:
+  - rego: "package k8srequirenonroot\n\nviolation[{\"msg\": msg}] {\n    container\
+      \ := input.review.object.spec.containers[_]\n    has_field(container.securityContext,\
+      \ \"runAsUser\")\n    container.securityContext.runAsUser == 0\n    msg := sprintf(\"\
+      Container %v cannot run as root (UID 0)\", [container.name])\n}\n\nviolation[{\"\
+      msg\": msg}] {\n    container := input.review.object.spec.containers[_]\n  \
+      \  not container.securityContext.runAsNonRoot\n    not container.securityContext.runAsUser\n\
+      \    msg := sprintf(\"Container %v must set runAsNonRoot or runAsUser\", [container.name])\n\
+      }\n\nhas_field(object, field) {\n    object[field]\n}"
+    target: admission.k8s.gatekeeper.sh

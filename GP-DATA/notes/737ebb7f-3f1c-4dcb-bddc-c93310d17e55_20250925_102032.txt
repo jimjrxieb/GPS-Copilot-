@@ -1,0 +1,598 @@
+Title: rag implementation for documents
+Created: 2025-09-25T10:20:32.809103
+ID: 737ebb7f-3f1c-4dcb-bddc-c93310d17e55
+==================================================
+
+Transcript
+
+
+Introduction to RAG Tutorial
+Everyone's talking about RAG. If you feel left out, this is the only video you need to watch to catch up. In this
+video, we'll learn Rag in a super simplified manner with visualizations that will make it easy for anyone to
+understand. No background knowledge in AI or AI models or coding or programming required. We'll start with the simplest
+explanation of rag there is. Then we'll look into when to and when not to rag. We'll then look into what is rag. We'll
+then understand some of the prerequisites such as vector search versus semantic search, embedding models, vector DB, chunking using a
+simple use case, and finally bring all of that together into rack architecture. We'll then look into caching,
+monitoring, and error handling techniques, and close with exploring a brief setup of deploying rack in
+production. But that's not all. This is not just a theory course. We have hands-on labs after each lecture that
+will help you practice what you learned. Our labs open up instantly right in the browser. So there is no need to spend
+time setting up an environment. These labs are staged with challenges that will help you think and learn by doing
+and it comes absolutely free with this course. I'll let you know how to go about the labs when we hit our first lab
+session. For now, let's start with the first topic. Let's start with the simplest explanation of rag. Say you
+Simplest RAG Explanation
+were to ask Chad WT what's the reimbursement policy for home office setup. You already know when you ask
+this question that Chad GBT is going to give an incorrect answer because it doesn't have access to our policy
+document that's private to our company. So an LLM like GPT would hallucinate and
+provide an incorrect or generic answer that's common to most companies. The problem here is that it doesn't have the
+necessary context of what you're asking about. So what do you do? You look up
+your internal policy document and get the section of the policy that describes home office setup by yourself. Then you
+add that to your prompt and tell Chad GBT to refer to this policy. Now with
+this additional information, Chad Gibbt is able to generate more accurate
+responses and that is the simplest explanation of rack that stands for retrieval augmented
+generation. The part where you look up your internal policy documents and retrieve the relevant information is
+known as retrieval. The part where you improve or augment your prompt with the
+retrieved information is known as augmenting. And the part where LLM generates a response based on the
+augmented prompt is known as generation. And that is something you've done unknowingly many times. Now, of course,
+that is a very simplified explanation of rag. And when we talk about rag systems, that is not what we typically refer to.
+So let's see what that is next. Now, you don't want your users to have to locate
+and retrieve relevant information by themselves. Instead, you want your users to simply ask the question, what's the
+reimbursement policy of home office setup? And our system that's based on rag should be able to do the lookup and
+retrieval of relevant information, improve or augment the user's prompt and
+get an LLM to generate the right response. Now, how exactly do we retrieve relevant information? How do we
+augment and how do we generate? And that's what we're going to discuss throughout the rest of this video. Now,
+one of the common mistakes people make is to consider rag as the solution for everything. Rack is not the solution to
+When not to RAG?
+all problems. At the end of the day, we're all trying to get AI to generate better responses and there are different
+ways to do that. We can prompt better. That's called prompt engineering. We can fine-tune models. And then there's rag.
+When to use what? Let's take a simple use case to understand these better. So, back to our use case. We've started to
+notice a lot of people copy pasting company policies into chat GBT to get answers. So we decided to build an
+internal chatbot that can answer people's questions. We call it the policy copilot. It is a system that
+users can simply ask a question such as what's the reimbursement policy and our chatbot system should be able to locate
+the necessary information from the internal policy documents and then generate accurate responses and send
+that back to the user. Now we also want to add some restrictions and limitations. We don't want the chatbot
+to answer everything. Some questions should be off limits like performance review appeals or salary discussions.
+And when those topics come up, we want to direct users to HR directly instead of giving them answers in the chat. We
+also want our chatbot to have a specific voice and style. So our CEO has this
+warm Scottish accent and a particular way of speaking that makes people feel certain way. We want our policy co-pilot
+to sound just like that, authoritative and distinctly Scottish. So when the
+users ask what's the reimbursement policy for home office setup, it responds when the users ask how many
+sick days do I get per year? It says when the user asks can I work from home
+permanently? It says and when the users ask when are performance reviews conducted it
+responds as you can see it's not just the Scottish accent there's this what should
+I say refreshing candandor that tells it like it is let's look at how to solve each of these areas the restrictions and
+security requires us to define how the chatbot responds what it must reveal and what it must not so these are strict
+instructions provided to the LLM to control its behavior based on users request such is never to reveal personal
+employee information or confidential details. If someone asks about sensitive topics, politely redirect them to HR.
+Prompt engineering best practices are a good solution to this. Think of it as the rule book that keeps our chatbot
+safe and professional. Next, we look at how to solve the problem of voice, style, and language. Now, we know if we
+asked Chad GBT to simply respond to me in a Scottish accent, it would. But the accent, as we saw earlier, is not simply
+what we are going after here. We wanted to speak like our Scottish CEO, use words he usually uses, the tone, the
+language. So, we take all of his past speeches, he's given, emails written by him, blog post, videos created, and
+fine-tune a new model that can respond in the same language and tone. A good solution for this is fine-tuning.
+Fine-tuning is the process where you provide a model hundreds of sample questions and sample answers and have it
+respond to you in that way all the time. Now, you might be wondering, why can't
+fine-tuning solve this information problem? Why can't we train a model with all of the questions a user might ask
+and answers it can generate? The problems are the policies can change constantly and when they do, you need to
+retrain the model every time and trainings are not easy. They're expensive and slow. Retraining takes
+time and computational resources. Users can't verify where the answers came from, so there's no citations possible.
+The larger the training data, the lower the accuracy. And then there's knowledge cutoff. The model only knows what was in
+the training data. Fine-tuning is great for stable unchanging patterns like communication style, but terrible for
+dynamic factual information. And finally, the best solution to get the most accurate responses is rag. Rag
+works because it retrieves information dynamically at query time, not at training time because the whole point of
+rag is retrieving the most relevant information for the user's query real time. Next, we'll look at rag in more
+detail. Let's now look at what rag is in the first place. So far, we've decided
+What is RAG?
+that we're going to build our policy copilot system where employees can ask question and it retrieves the relevant
+information, augments prompts, and generates a response. We'll now see how each of these work. Let's look at
+retrieval first. Retrieval is a process of retrieving relevant information. But how do you do that? There may be
+hundreds of policy documents. How do you find which one is the right one that has context related to the user's question?
+And what do you search for within these files? First, we identify a few keywords from the user's question. In this case,
+we've identified reimbursement and home office to be the relevant keywords. One of the simplest ways is to use a GREP
+command to search for specific terms in these files such as reimbursement or home office and hope that one of these
+files will have these terms. Alternatively, if these files were stored in a database, you could run a
+query against it like this. Now, these would only return content that exactly matches the keywords we are looking for
+and the chances of getting accurate information every time is low. This approach of searching the documents with
+the exact words is known as keyword search and it is a very popular technique that's used by many of the
+search platforms. To explain it simply, this approach goes through all the documents, identifies keywords and ranks
+them based on their frequency. In this case, it counts the occurrences of reimbursement in all documents and
+records them. So we have three occurrences in the first document, none in the middle two, but another three in
+the third one. It then does the same for home office and we see that it's only present in the home office setup
+document. Combining these two columns is now able to identify the document that
+has the maximum occurrences of these two keywords and thus able to rightly select the document that has these keywords.
+Now that was a super simplified explanation. Keyword search is a science in itself and has a lot of complex
+calculations that go in and there are multiple proven approaches available. Two of the most popular techniques used
+are known as TF and BM25. We won't go into the specifics of how these work.
+We'll just see how to work with them. Let's see each of these in action. First, we import the TF vectorzer from
+the scikitlearn open-source Python library. Think of the scikit library as a toolbox with pre-built algorithms that
+you can use without having to write them from scratch. We then define three sample documents. The documents are
+simple sentences for now. you could read the contents of a file in. We then create the TF ID of analyzer and we'll
+call that analyzer. The word scores can then be calculated by running the fit transform method. We then print the
+results on screen. The word scores show a bi-dimensional array with the importance of each word in each
+sentence. The word office appears in all sentences. So they get a score of 0.4. The first sentence identifies words,
+equipment, and policy and gives them a score of 0.7 and 0.5. The second sentence identifies the words furniture
+and guidelines and the third identifies the words travel and policy. Now that the vectors are created, we run a query.
+We use the analyzer to transform to query the word furniture. What it does is it returns an array that returns a
+score that compares the query word furniture to each document. Now let's see the same with the BM25 techniques.
+We use the rank BM25 library which is a popular library that implements a BM25 algorithm. We then create what is known
+as the BM25 index and then get the word scores. In this case, we can see some differences. The word office gets a
+score of zero because the BM25 algorithm is a bit more strict in assigning scores. And because this word is present
+in all documents, it doesn't see it to be very relevant. It then continues to assign a score for the most important
+and unique words in sentences like equipment in the first sentence, furniture and guidelines in the second,
+and travel in the third. And as before, we run a query, but this time using the get scores method and print the array.
+We can see it's again identified the second document to be the relevant document here the right way. Well, it's
+time to gain some hands-on practice on what we just learned. Follow the link in the description below
+Free Lab 1: Keyword Search (TF-IDF & BM25)
+to gain free access to the labs associated with this course. Create a free account and click on enroll to
+start the labs. On the left side of the screen, you will see the list of labs. Only start the lab when I ask you to.
+We'll do only one lab at a time. Let's start with the first lab. Click on start to launch the lab. Give it a few seconds
+to load. Once loaded, familiarize yourself with the lab environment. On the left hand side, you have a questions
+portal that gives you the task to do. On the right hand side, you have a VS Code editor and terminal to the system.
+Remember that this lab gives you access to a real Linux system. Click on okay to proceed to the first task. The first
+task requires you to explore the document collection. Open the TechCorp documents in the VS Code editor. On the
+right, we see there is a TechCorp docs folder. Expand it to reveal the subfolders. The ask is to count how many
+documents are in the employee handbook. This is what I call a warm-up question that will help you explore and
+familiarize yourself with the lab. The real tasks are coming up. In this case, it's three, so I select three as the
+answer. Then proceed to the next task. This is about performing a basic GP search. As we discussed in the lecture,
+we'll run a GP command to search for anything related to holiday in the folder and store the results in a file
+named extracted content. To open the terminal, click anywhere in the panel below and select terminal. This creates
+a new file with the results. Click check to check your work and continue to the next task. The next task is to set up a
+Python virtual environment and install dependencies. I'll let you do that yourself.
+We'll move to the next task now. Here we explore the TF script. Here we first
+import the TF vectorzer from the scikitle learn library. We then transform the dogs. Then we compare
+using cosine similarities or cosine is one approach of comparing two vectors to identify similarities. And then we
+finally print the results. We now execute the script and then we view the results. And for now we'll just click
+check to proceed to the next step. We then move to the next step. Here the question is to analyze the score printed
+and identify the score of the top results. So the ask is to search for pet policy docs and identify the score for
+the top result. Here we see the top result is rightly identified as the pet
+policy.md file with a score of 0.4676 whereas the other files have a score
+less than 0.1. So the answer to this question is 0.4676.
+The next task is to review and execute the BM25 script. Open the BM25 search.py
+file and inspect it. You'll see that we import the rank BM25 uh package. We then
+create an index and then for each query called the BM25.get scores method and from the results we get the top three
+results and we go through each result and print that. Finally, there is a hybrid approach that combines TF and
+BM25 techniques using a weighted approach. I'll let you explore that by yourself. Let's get back to the next
+topic. We just looked at vector search. Let's now understand semantic search.
+What are Semantic Search?
+Now, one of the challenge with keyword search is that if the exact keyword isn't there, the search fails. For
+example, instead of reimbursement, if we say allowance, it tries to find the exact word allowance. And instead of
+home office, if the user asks work from home, it's unable to find that anywhere.
+These combination of keywords aren't found in the documents and thus the document is not found. In our example
+code, say we say desk instead of furniture is not going to be able to find any matches in scores and thus
+unable to find any matching document. That's the limitation of keyword search and that's where we need semantic
+search. Semantic search searches documents based on the meaning of words and thus have higher chances of locating
+the right documents based on the inputs and that's what we will look at next. So what exactly is semantic search? Think
+of it as search that understands meaning not just words. When you search for allowance, semantic search can find
+documents about allowance or reimbursements or anything that has similar meaning even if those exact
+words aren't used. Similarly, if you search for home office or work from home, it can find documents that has
+anything to do with remote work. The magic happens through something called embeddings. We convert both your search
+query and all the documents into mathematical vectors. Think of them as coordinates in a highdimensional space.
+Documents with similar meanings end up close together in this space. So, when you search, we find the closest matches
+based on the meaning, not just word overlap. We can measure how similar two pieces of text are by calculating the
+distance between their vectors. The closer the vectors, the more similar the meaning. So reimbursement and allowance
+would have vectors that are close together even though they're different words. We'll see this in more detail
+next. Let's now understand embedding models. So if you look at machine learning models, they can be categorized
+Understanding Embedding Models
+at a high level based on use case such as computer vision, NLPs or natural language processing, audio among many
+others. And within each category, you have a number of models available. This
+is as shown on hugging face which is a popular platform where you can discover models, data sets and applications. Our
+interest here is the sentence similarity within natural language processing. And within sentence similarity, one of
+the popular models is sentence transformers all mini LM L6V2.
+This model map sentences and paragraphs to a 384 dimensional dense vector space
+and can be used for clustering and semantic search. It is also a 22 million parameter model. Now, what does that
+mean? The parameter size reflects the brain power of the model. Think of parameters
+as the learned knowledge stored in the AI's memory. Each parameter is a number
+that the model learned during training to understand language patterns. 22 million parameters means this model has
+22 million learned values that help it understand how words relate to each other, what sentences mean semantically,
+which concepts are similar or different. Let's compare that to things we already know like GPT models. Let's compare this
+model to GPT 3.5 and GPD4 model that we use. The 22 million parameter size of
+our all mini LLM model is very small compared to the 175 billion parameters
+of GPD 3.5 and 1.8 trillion parameter size of GPD4. The size of the model is
+proportional to that too. The all mini model is 90 mgabytes in size. As such,
+it can be used locally in our laptops and the size of GPT 3.5 and 4 are 350GB
+and 3.6TB respectively. and thus the use case differs. The all mini LM model is a
+perfect fit as an embedding model for our use case whereas the GBT models are used for text generation and reasoning.
+Embeddings and Vectors
+So we just mentioned embeddings. What are they actually? As its simplest form, an embedding model takes text and
+converts it into numbers that represent meaning. So sentence like dogs are
+allowed in the office is converted into an array of numbers known as vectors.
+When you give the model a sentence like dogs are allowed in the office, it doesn't just look at the words. Instead,
+it thinks about what this sentence actually means. Is it about animals? Is it about workplace policies? Is it about
+permissions? The model then creates a list of numbers that captures all these different aspects of meanings.
+Each number represents something that model learned about language. Maybe the first number captures how animal related
+the text is. The second number captures how workspace related it is and so on.
+And it then plots that in a graph. So dogs get a number 0.00005597
+and is added to a section of the graph that represents animals and pets also
+fall into the same category. However, remote does not go there. Similarly,
+office falls into the workplace area. So, our first sentence moves closer into
+the workplace section and so does the second sentence because it is also related to work. And the same applies to
+the last sentence as that's also related to the workplace. We then compute the distance between these points. The
+shorter the distance, the closer they match. So, finally, if you look at these two sentences, you'll see that the first
+two are similar. That's a similarity search explained in the most simplest of forms. And this explanation only works
+for a two-dimensional array. But in most cases the dimensions are too many that we can't even imagine how it would look
+visually. In this case the model we are using uses 384 dimensions. So we don't
+even know how to imagine this or plot that on a graph. So then how do we calculate similarities between them?
+This is where the magic of mathematics comes in. Since we can't visualize 384 dimensions, we need a mathematical way
+The Dot Product
+to measure how close two points are in this highdimensional space. The solution is something called the dot product.
+Think of it as a mathematical ruler that can measure distance in any number of dimensions, even ones we can't see. So
+here's how it works in simple terms. For the sake of simplicity, I'll convert the vectors for each sentence into
+two-dimensional vectors of simple numbers. So dogs are allowed in the office gets a vector value of 1, 5. The
+second sentence gets 2 and four and the third one gets 6 and 1. The process
+involves multiplying the vectors, adding them, and then normalizing them. Let's
+look at the first two. We first multiply the values in the vectors. So, we multiply 1 * 2 to get 2 and 5 * 4 to get
+20. We do the same for the other two pairs. We multiply 1 5 with 6 and 1 to get 6 5.
+And then we multiply 2A 4 with 6 and 1 to get 12A 4. We then add the multiplied
+numbers together. So 2 + 20 gives us 22. And we get 30 and 16 for the others. And
+finally, these go through a normalization process to convert these numbers into anything between 0 and 1.
+That also takes into consideration the total size of the vectors among other things. Finally, the pair with the value
+closest to one are similar and away from one are dissimilar. So that's a basic
+explanation of how sentences are compared for similarity. Now, of course, you don't have to do all
+of that math by yourself. We have libraries that does that for you. Numpy is a powerful Python library for working
+with numbers and mathematical operations. We import numpy as np and
+then we call the np dot method and pass in the vectors for it to calculate the dotproduct between the two vectors. It
+returns a similarity score between zero and one. So let's take a closer look at that. So
+first we install the required libraries such as the sentence transformers and numpy library. So the sentence
+transformers as we saw provides the sentence transformer class and the all mini lm model. The numpy provides the np
+function for calculating dotproducts between vectors. So here we can see the complete code in action. We first import
+the sentence transformers library and the numpy library. Then we load the all
+mini LM L6V2 model that we've been discussing. What it does is it downloads
+the model, loads the 22 million parameters into memory, prepares a model to convert text into embeddings. We then
+define our three test sentences about dogs, pets, and remote work. And we then
+encode these sentences into embeddings using the embedding model. And finally,
+we calculate the similarity between each pair of sentences using NumPai's dotproduct function. Now, let's see what
+happens when we run this code. We print out the similarity scores between each pair of sentences. And the results are
+quite interesting. Looking at the results, dogs versus pets shows 73.3%
+similarity. That makes sense because both are talking about animals in the workplace. Dogs versus remote shows only
+36.2% similarity. That makes sense, too, because one is about animals, the other is about work arrangements. Pets versus
+remote shows 33.8% similarity. Again, these are quite different topics. This demonstrates exactly what we've been
+talking about. The model can understand semantic meaning, not just word matching. Even though dogs and pets are
+different words, the model recognizes they're both about animals in the workplace context. And it correctly
+identifies that remote work policies are quite different from animal policies. And this is the foundation of how rack
+systems are built. They can find semantically similar content even when the exact words don't match. This is
+what makes rag so powerful compared to traditional keyboard search. So, so far we've been looking at sentence
+transformers and the all mini LM L6V2 model. But sentence transformers are just one example of embedding models.
+There are many other popular embedding models out there that you can choose from depending on your use case. Now,
+let me clarify an important distinction. The sentence transformers we've been using are local models. They run on your
+local machine. They're completely free and they don't require an internet connection. But there are also remote or
+API models like OpenAI's embeddings that run on external servers where you pay
+use and need an internet connection. In this sample code, you can see how we use the OpenAI library and use the
+embeddings API endpoint to create a new embedding. The model is text embedding 3
+small and it returns the embedding vector for it. There's also this leaderboard of top embedding models
+posted by HuggingFace. We can see some of the most popular ones here. Gemini topping the chart with Quen 3 and others
+that are following. Well, that's all for now. Head over to the labs and practice working with embedding models. All
+Lab 2: Embedding Models
+right, we're now going to look into the second lab. This is called embedding models. So, I'm just going to click on
+start lab to start the lab. We'll give it a few minutes to load. Okay, so in this lab, we're going to look at uh
+embedding models. We'll explore semantic search using embedded models which are the foundation of modern uh rag systems.
+So let's uh go to the first task. So the first task is about keyword uh search
+limitations. So first we navigate to the project. We create a new virtual environment and install the requirements.
+I go to the terminal and we're going to uh set up the virtual environment.
+So our project is within this uh folder called rag project. And here we have the
+virtual environment uh that's being set up. Okay. Okay, we now run the um the next
+step once the once the virtual environment is set up, the next step is to run the keyword limitation demo. If
+you go to the rag project, you'll see the keyword limitation uh demo script. So, this is a simple script that
+searches for a word or keyword that does not exist in in the documents and proves
+that uh pure keyword based uh search uh are less likely to yield the right
+results. For example, in this case, the query is distributed workforce policies and the none of the documents have
+something that's exactly like that, right? So, let's try running the script.
+And if you look at the script, most of the scores are zero because um the keywords distributed workforce policies
+does not really exist in any of the scripts. So, the correct answer here is
+missing synonyms and context. All right.
+The next task is to install embedding dependencies. So we go to the rack project. So we're already in that project.
+We source the uh virtual environment. We install the embedding packages. So I'm going to copy copy this command install
+it. So the packages are sentence transformers hacking phase hub and open AI.
+The next question is to run the local embedding scripts. So if you see the script name is semantic search demo. So
+let's look at the semantic search uh demo script. And if you look into this, we can see that the first step is loading the documents. And then we load
+the local embedding model which is the all mini LML L6V2. And then we generate embeddings by calling the method model.
+And then we pass in the docs. And then we have the query which is the same query we used before which is distributed workflows policies. And then
+we generate embeddings for the query. And then we calculate u the similarities using the np uh method. And then we
+print the results. So let's uh run the script. Twitter uv run python semantic
+search demo. Now as you can see in the same set of
+documents the script has now identified the relevant uh documents uh which has
+the meaning that's closer to the distributed workforce policies query that we are looking for. So if you see that for each document is uh given a
+rating and that means that it's able to identify the document that has the closest semantic results. We'll go to
+the next question. So the task is to uh look at the results
+and then say look at the semantic search results and what is the similarity score between remote work policy and distributed work policies. If you look
+at the first score say 0.3982 and that is the score for remote work policy.
+The next question is a multiple choice question. So this basically confirms our learning. So the question is based on
+the comparison between semantic search and keyboard search which is a TF IDF and BM25 that we saw earlier. Which
+approach better understands the meaning of queries? Of course we know that semantic search understands uh the meaning of queries better. And that's
+basically about uh this lab. In the next lab we'll explore um vector databases. Let's now understand vector databases.
+Vector Databases Explained
+So far we saw how we could use the sentence transformer libraries and load simple sentences into it to create
+embeddings and then compare those embeddings to each other in a super simple way. However, we have a bigger
+task at hand. Our policy co-pilot system and it has hundreds or thousands of large policy documents. Let's say we
+have 500 policy documents each with multiple sections. When a user asks, "What's the reimbursement policy for
+home office setup? Our system needs to search through all of these documents to find the most relevant ones." Now, if we
+were to do this the naive way, comparing the query embedding with every single stored embedding, we'd have a big
+problem because with 500 documents, each with 384 dimensions, that's 192,000
+calculations for every single query. This is like searching through a phone book page by page. It works for a small
+phone book, but imagine trying to find a specific number in a phone book with millions of entries. You'd be there all
+day. That's where vector databases comes in. Think of them as having a smart librarian who knows exactly where to
+look. Vector databases can retrieve relevant results instantly. They efficiently use resources. They're
+scalable and they do that by using smart indexing algorithms. What does indexing
+mean? Earlier we saw how we represented documents or sentences on a vector graph
+and then compared their similarities. But when there are thousands of such policies, it's going to be impossible to
+compare them. And that's where indexing comes in. Instead of checking every single vector, we pre-organize them into
+neighborhoods. In this case, the animal policies are grouped together. All health benefits are grouped together.
+All remote work policies are grouped together. That way, when someone asks about bringing their dog to work, we
+don't search the entire space. we go directly to the animal policies neighborhood and only search there.
+Let's look at the three most popular indexing algorithms used by vector databases. HNSW or hierarchical
+navigable small world is the most widely used algorithm. It creates a graph
+structure where each vector is connected to its most similar neighbors. So when searching, it starts from a random point
+and follows the connections to find the closest matches. It's fast and accurate, which is why most vector databases use
+it by default. IVF or inverted file and LSH or locally sensitive hashing are
+other examples of the same. Let's now look at some of the popular vector DB implementations. Chroma is perfect for
+learning because it's open- source and Python friendly. We can install it on your computer and start experimenting
+immediately. It's free, which makes it great for students and small projects. Pine cone is a managed service, meaning
+they handle all the infrastructure for you. You just send your data and queries and they take care of everything else.
+It's used by big companies in production, but you pay per use. There are other great options too. VV8 with
+its GraphQL API is another example. But for learning, I recommend starting with Chroma. So the best approach is to start
+with Chroma for learning and experimentation and then move up to Pine Cone or similar services for production
+use case. So first we install the required library such as the Chroma database. Then we
+ChromaDB Tutorial
+import the Chroma DBA library. We connect to the client. We create a collection called policies. Chroma
+creates a new collection in memory. Sets up the default embedding model. The all mini LM embedding model. Prepares
+storage for vectors and metadata. We then add policy documents to the collection using the collection add
+command. So this converts text to 384dimensional vector that we spoke
+about earlier. Saves the vector in the collection, adds the vector to the hnsw
+index structure. The document is immediately searchable. To search, we run the collection.query method and pass
+the query string. Now let's talk about some important Chromb concepts. First, the default behavior of Chromadb is that
+it's not persistent. When you create a client with just chromadb.client, client, it stores everything in memory.
+This means when your program stops, all your data is lost. This is fine for learning and experimentation but not for
+production. To make Chromb persistent, you need to use persistent client instead of client. You specify a path
+where you want to store the database files. This way, your data survives program restarts and you can build up
+your vector database over time. You can also change the embedding model that Chromma DB uses. By default, it uses the
+all mini LM model, but you might want to use a different model for better performance or to match what you used
+during training. You can use OpenAI's embedding models or even create a custom embedding function using any model you
+want. In this case, we pass in a new parameter called embedding function that passes in OpenAI's embedding function as
+a parameter along with the API key. Let's head over to the labs and gain hands-on experience.
+Lab 3: Vector Databases
+Okay, let's now look at the uh lab on vector DB. So I'm going to start the lab
+now. Okay. So the lab has uh what I'm going to do is I'm going I'm just going to go through a high level overview of
+the lab and I'll leave you to do most of it but I'll just explain how the lab functions. Right. So uh in this lab
+we're going to learn how to scale the semantic search with vector databases. So let's get that going.
+So the first task is to simply understand the uh concepts. So before we
+start building, let's uh understand what vector databases are. So we already discussed that in the video, but here's
+a quick uh description of what it is and what it can help us do. And there's a question on um what is the primary
+advantage of using a vector database or strong embedding models um in memory. So
+I'll uh let you answer that uh yourself. The next step is to navigate to the project directory which is right here.
+And then um we again activate the virtual environment and we install the embedding uh model package which is
+sentence transformers which we also did in the last lab. And then the next step is to install the vector database. In
+this case we're going to use chromb. So um the task is to install the chromb package.
+Again I'll just skip through that for now. Uh the next task is to initialize a chromb vector database. So um if you go
+here there's a script called init vector DB and if you look into the script we first import the chromb package. We also
+have the sentence transformers. Um we then uh create uh the chromb client
+using the chromadb.client method. And then we create a collection. We'll call it techcorp docs. And then uh we load
+the embedding model which is all mini LM L6 model. And then we um
+test the model with a sample document. So we have identified a test doc which
+is really just a sentence that's given here. Um we'll then add the test
+document to the collection using the collection add method and we'll print the results and then uh we'll print the
+count of uh documents within the collection. And that's basically it. So that's a a quick uh beginner level uh
+script. In the next one, there are a couple of questions that are being asked. So uh
+you can answer those questions based on the results of the script. The next one is uh called as store documents. So this
+is where we store actual documents within the chromob uh database. Again, this is another script that starts off
+and loads the model and client as we did before. uh but in this case we're reading the tech corp docs um documents
+using the tech corp docs method which we have in the utilities function. So that's what loads all the uh documents
+that are in the tech corp uh docs folder. So now we're loading actual documents
+and then we follow the same approach of adding those documents to the collection and then we verify the collection. So
+again just uh another uh layer to that uh script the basic script. In this case
+we're just storing documents. We'll continue to the next task. This is where we do perform uh a vector search
+against the documents. So um the script this time is vector search uh demo. So
+click on the vector search demo script. And here we have uh some sample documents um there are sentences and
+then there's a query. Let's now understand chunking. Now that we understood how vector databases work, we
+Chunking Explained
+have a new challenge. We've been working with simple sentences like dogs are allowed in the office on Fridays. But
+what happens when we have real policy documents? What if we have a 50page employee handbook that we want to add to
+our vector database? Let's think about this practically. We have an employee handbook, 50 pages of policy content,
+multiple sections per page, complex policies with detailed explanations.
+What happens when we try to add this entire document to Chromob as a single entry? Well, it would work. Technically,
+Chromob would create an embedding for the entire document, but when someone asks what's the remote work policy,
+they'd get back with the entire 50page handbook. That's not very helpful.
+This is what I call the precision problem. Without chunking, when someone asks what's the remote work policy, they
+get the entire 50page handbook. The user gets overwhelmed with irrelevant information. They have to search through
+everything to find what they actually need. But with chunking, we break that
+handbook into smaller focused pieces. Now, when someone asks about remote work, they get back just the specific
+policy sections that are relevant. The user gets exactly what they asked for. clear focused answers. Now, how do we
+Document Chunking Strategies
+actually break documents into chunks? There are several strategies, but we'll focus on some of the simplest ones. With
+fixed size chunks, we simply take 500 characters per chunk. This is simple and
+reliable for most use cases. We just split the document into equals sized pieces, which makes it easy to
+understand and implement. But there's a problem with this approach. What happens when we split
+right in the middle of a sentence? We might end up with dogs are allowed in one chunk and on Fridays in the other.
+This breaks the meaning and makes it hard for the system to understand the complete information. That's where
+overlap comes in. We add a 50 character overlap between the chunks. So the end
+of one chunk overlaps with the beginning of the next. This way if we do split the sentence, the important context is
+preserved in both chunks. Now there are other methods of chunking
+like sentencebased chunking. This is where every sentence is split into a
+separate chunk or paragraph based chunking where each paragraph becomes a
+single chunk. Chunking might sound simple but it's actually quite tricky. The main challenge is finding the right
+balance. If chunks are too small we lose context. So as we saw earlier, if one chunk has docs are allowed and on the
+other chunk has on Fridays, the user would get incomplete information. We'd have poor understanding because we're
+missing important details and the information would be fragmented. On the other hand, if chunks are too
+large, we have poor precision. If we put an entire policy in one chunk, we're back to the same problem we started
+with. The search would be inefficient because there's too much irrelevant content and the results would be
+overwhelming. So it's important to choose the right strategy based on your requirements. Apart from the fixed size
+chunking, there are other methods like sentencebased chunking and paragraph that we saw, but even others like semantic chunking and agentic chunking
+that is for now out out of scopes of this video. Now let's build a simple
+chunking function. This function takes a document and splits it into overlapping chunks. The key features are it tries to
+break at sentence boundaries when possible. It maintains the overlap for context and it handles the end of the
+document properly. Now this is a simple chunking done by a Python library. Now let's see how chunking integrates with
+our vector database. The complete workflow is that we chunk our large policy document, add each chunks to the
+vector database with a unique ID and then when we query we get back with the specific chunks that are most relevant.
+This gives us the best of both worlds. We can handle large documents, but we get precise, relevant answers. Instead
+of searching through entire documents, we are searching through focused chunks that contain exactly what the user is
+looking for. Let me share some key principles for effective chunking. For size guidelines, 200 to 500 characters
+is a good balance of context and position. With 50 to 100 characters overlap to maintain continuity, you
+might need to adjust based on your content. Technical documents might need different chunk sizes than general policies. For boundary rules, always try
+to split at sentences to maintain grammatical integrity. Avoid midword breaks to keep words intact and preserve
+paragraphs to maintain logical structure. Finally, always test the real queries to ensure your chunks actually
+answer questions. Verify that the overlap reserves meaning and monitor your search results to see if you need
+to adjust the chunk size. Remember, chunking is all about finding the right balance between context and precision.
+It's not just about breaking documents into pieces. It's about breaking them in a way that makes sense for your users.
+All right, let's look into the next lab on document chunking. Okay, in this lab,
+Lab 4: Document Chunking
+we're going to look at uh chunking techniques. So, we'll learn how to optimize rack performance by breaking
+documents into focused searchable chunks.
+So, first we activate the virtual environment. So, this is something we have uh already done many times.
+All right. Uh, so first we're going to look at this chunking problem demo script. So if you expand
+the rack project, there should be a script called as chunking problem demo script. The thing is uh this script
+demonstrates the core problem of searching a large documents in rack systems. It creates a sample employee
+handbook and shows how searching for specific information like u internet speed requirements returns the entire
+document instead of just the relevant section. So uh we'll see uh a large document stored as a single chunk search
+queries that should be that should find specific sections or results that return the entire document. So here you can see
+there's a sample document um that has multiple sections and uh we're adding
+that document to the uh collection chrom and then we're doing a query for
+internet speed requirements. So let's run the script and see
+how it works. So the script runs now. As you can see,
+it returns the entire document. It's truncated here, but uh the result shows the uh entire document. So that's the
+problem uh with this uh approach. So the answer to this is large documents return irrelevant uh results. Next uh we will
+look at some of the uh dependencies, libraries and dependencies that we'll be using. So first um we have what is known
+as lang chain. So if you uh don't know what lang chain is, we have other videos
+that are on our platform. We have a future course that's coming up that will be for lang chain end to end. So do
+remember to subscribe to our channel to be notified when it comes out. So lang chain is a powerful framework for
+building rag applications. It provides recursive character text splitter for smart uh document chunking and there's
+also the uh spacy which is an advanced natural language processing library and it provides uh it also provides a spacey
+text splitter for sentence aware chunking. So we'll use spacy for sentence um aware chunking and it uh
+these libraries take care of chunk sizes overlaps operators etc. And we'll
+install the lang chain and spacey dependencies. Okay, we'll go to the next
+question and we'll first look at basic chunking. So if you open the basic uh chunking
+script, you'll see that it uses the lang chain uh text splitter um from which we have the recursive
+character text splitter uh library. So here we have a sample document and uh
+this is where we are doing the splitting. So as you can see we specify the chunk size 200, the chunk overlap is
+50. So that's the uh 50 characters that's going to be overlap between each chunks or some of these se separators
+that are defined. So we then do a splitter.split text to split the text into different chunks and
+then we have we just go through the chunks and print them. So I'll let you do that yourself. We'll
+go to the next one and there's uh a bunch of questions uh that are asked
+that you can you have to read the script and understand and answer. So I'll let you do that uh by yourself.
+The next one we'll look at is sentence chunking. So in sentence chunking again uh if you look at the script we're using
+spacy as a library. And then we have um a question that's based on the output of
+that script. And then finally we looked at chunked search. So this is a another
+script that performs a chunked vector search uh demo that kind of connects
+everything we have uh learned so far together. So first we chunk the documents and then we add these chunk
+documents to a collection uh and there's comparison between chunked no chunking a collection with no chunking and
+collection with chunking and then uh we'll see the difference between the two. Again I'll let you u go through
+that by yourself and there's a question that's based on that. So, yep, that's u a quick lab on chunking and I'll see you
+in the video. Let's now bring it all together to build our rack system. Now that we understand all the individual
+components of racks, that's retrieval, augmentation, and generation. It's time to see how they all work together in a
+real system. We've been building our policy copilot system piece by piece. But what does it look like when
+everything is connected and running in production? So, we know the basic flow. User query goes to retrieval, then
+augmentation, then generation, and finally response. But this is just the highle view. In a real system, there are
+many more components working behind the scenes to make this happen smoothly, efficiently, and reliably. Now,
+everything we spoke about so far, such as chunking, creating embeddings, storing it in vector DB, etc. are things
+that need to be done before the user starts asking questions. because loading
+thousands of documents, chunking and storing them in DB and creating embeddings out of them and scoring them
+all of that takes a lot of time and so they go together before this stage called as a rag pipeline. Let's take a
+Build your RAG Architecture
+closer look at that simple rag pipeline. The rag pipeline gets the policy
+documents, chunks them into small pieces using a chunk size of 500 with an
+overlap of 50 characters, then converts them into embeddings using OpenAI's
+embedding models and then finally loads them into a vector DB.
+Now, when a query comes in, we search the rag pipeline and it gives us the
+necessary chunks of document. We then augment that document along with the
+user's query and sends that to the LLM to generate a response. So that's a
+super simplistic rack pipeline. Let's head over to the labs and see this in action. All right. So this is the last
+Lab 5: Complete RAG Pipeline
+lab in this course and this one is about building a complete rag pipeline. So uh
+we'll learn how document chunking integrates with vector search, how query processing connects to retrieval, how
+context augmentation feeds into response generation, and how the complete rag pipeline works end to end. So this
+basically combines everything from the first four labs that we've just done.
+All right. So first we start with setting up the virtual environment. So the environment is already set up. You
+just need to activate it. All right. So, first we start by looking
+at the complete rack demo script. So, we have a single script now that combines
+everything we've done so far. And uh we'll start looking at it uh
+section by section. So, there's the first section that has the document loading and chunking. And there's the a function for that. We have some sample
+documents. And then we have a text splitter. And we have all the uh chunks
+that are created here. And then we have section two which is a vector database setup. Here you can see we set up a chromb vector database and store the
+document chunks there. And then we have the uh user query processing section.
+This is where we actually process the user queries. And then we do the actual search. And finally we have the context
+augmentation. This is where we build augmented prompt with retrieved context for LLMs.
+And so here you can see how uh a prompt is generated with the uh context in
+place which is the basically the policies that were retrieved and then you have the actual question the user's question itself and some additional uh
+prompt engineering and then finally we have the generate response function that generates a
+response using LLM and finally we have the complete rag
+pipeline that calls each of those functions. funs that we have written
+before and then there's the main function. Well, I'll let you explore this uh lab
+by yourself. There's a lot of uh interesting questions and challenges throughout.
+Caching, Monitoring and Error Handling
+This section covers the essential production concerns. Caching to make systems fast, monitoring to know what's
+happening, and error handling to keep systems running when things go wrong. Let's start with a fundamental problem.
+Rag systems are slow. Every query involves multiple expensive operations.
+Generating embeddings, searching vector databases, calling LLM APIs. Without optimization, a single query can take
+nearly a second. But here's the thing. Most queries are repeated or are very
+similar. People ask the same questions over and over. What's the reimbursement policy for home office setup? Gets asked
+dozens of times. Caching solves this by storing the results of expensive
+operations and reusing them. Instead of taking 950 milliseconds, a cache
+response might then just take just 5 seconds. That's 190 times faster. The
+key insight is that we don't need to recomputee everything for every query. We can cache at multiple levels, the
+embeddings, the search results, or even the final answers. So there are four main types of caching that we can
+implement in rag systems. each solving a different performance bottleneck. Query cache is the simplest. We store complete
+question answer pairs. When someone asks what's the remote work policy, again, we return the exact same answer instantly.
+This works great for frequently asked questions. Embedding cache stores the computed vectors for text. This is
+useful because generating embeddings is expensive and we often process the same text multiple times like policy chunks
+that appear in multiple searches. Vector search cache stores the results of database queries. This helps when
+similar queries return the same results. Remote work and working from home might return identical chunks. Llm response
+cache stores the generated answers. This is the most expensive operation to cache but also the most valuable since LLM
+calls are typically the slowest part of the pipeline. The key is to cache at the
+right level, not too granular, not too broad, and with appropriate expiration times. Let's look at how to actually
+implement caching. Well, Reddis is a popular caching tool because it's fast, supports different data types, and has
+built-in expiration. The example shows a simple but effective caching strategy. We create a unique cache key by hashing
+the query and context together. This ensures that different queries can get different cache entries, but similar
+queries can share the same entry. We check the cache first. If we find a cache response, we return it
+immediately. If not, we generate the response using our normal rack pipeline,
+then store it in the cache with an expiration time. The TTL or time to live
+is crucial. We want to cache to we want to cache long enough to get performance
+benefits, but not so long that the data becomes stale. For policy documents and R might be appropriate for more dynamic
+content, we might use shorter times. You can't manage what you don't measure. In
+production, we need to monitor everything to understand how our rag system is performing and when problems
+occur. The best metrics are response time, how fast we answer questions, throughput, how many queries we handle
+per second, error rate, what percentage of requests fail, but rack systems have
+their own specific metrics we need to track. Retrieval quality measures how relevant the return chunks are to the
+user's question. Embedding performance tracks how long it takes to generate vectors. Chunking efficiencies monitors
+how well we're breaking up documents. We set alerting thresholds to know immediately when something goes wrong.
+So if response time exceeds 2 seconds, there's uh there's a performance issue. If error rate goes above 5%, then
+there's a system problem. So the key is to set realistic thresholds based on
+actual performance, not theoretical targets. So we want alerts that indicate real problems, not false alarms that
+cause alert fatigue. Now things will go wrong in production. Vector databases will go down. Llm services will be
+unavailable. Networks will have timeouts and we need to handle these failures gracefully. The goal is graceful
+degradation. The system should still work even if not at full capacity. So users should get some answer rather than
+an entire error message. So the example uh shows a cascading fallback strategy.
+If the full rack pipeline fails, we try keyword search. If that fails, we return
+the retrieved chunks directly. If even that fails, we use simple text matching.
+And as a last resort, we return a helpful error message. And we periodically test if the service is back
+by sending a few requests. And this is uh the halfopen state. So if those succeed, we close the circuit and resume
+normal operation. Let's now bring it all together to build our rag system. Now that we understand the core rack
+RAG in Production
+architecture, we need to talk about what happens when we put these systems into production. Real world rack systems face
+challenges that don't exist in our simple examples. Performance issues, failures, and the need to handle
+thousands of users. So this diagram shows a complete production rack system running on Kubernetes. And let me walk
+you through each layer. So we have a data layer, a rag pipeline layer, and the application layer, and a monitoring
+stack. So the data layer includes all our storage systems. So Chromad for vectors, Red is for caching, PostgresQL
+for metadata. The rag pipeline layer contains the core rack functionality broken down into microservices. So query
+processing, chunking, embedding, generation, retrieval, augmentation and generation. And each service can scale
+independently based on demand. The application layer contains all the userfacing services. So there's the web
+UI, there's the mobile app back end if there's any the admin interface etc. These services handle users interactions
+and present the rack capabilities through different interfaces and then we have our complete monitoring stack.
+Prometheus for metrics, graphana for dashboards, Jerger for tracing and the ELK stack for logging. Now this layered
+architecture separates concerns clearly. Applications handle user interactions.
+The rag pipeline processes the core functionality and the data layer provides storage. This can handle
+thousands of concurrent users while maintaining high availability and performance. Well, that's a highle
+overview. We haven't spoken about a lot of advanced topics like multimodal rack, graph rag, hybrid search techniques,
+federated rack, reranking techniques, query expansion, context compression. To
+learn more about AI and other uh related technologies, check out our AI learning path on CodeCloud. Well, thank you so
+much for watching. Do subscribe to our channel for more videos like this. Until next time, goodbye.
+
+==================================================
+KEY POINTS:
+1. Transcript
+
+
+Introduction to RAG Tutorial
+Everyone's talking about RAG
+2. If you feel left out, this is the only video you need to watch to catch up
+3. In this
+video, we'll learn Rag in a super simplified manner with visualizations that will make it easy for anyone to
+understand
+4. No background knowledge in AI or AI models or coding or programming required
+5. We'll start with the simplest
+explanation of rag there is

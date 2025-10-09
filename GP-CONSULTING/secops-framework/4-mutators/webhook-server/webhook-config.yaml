@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: secops-system
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: secops-webhook
+  namespace: secops-system
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secops-mutating-webhook
+  namespace: secops-system
+  labels:
+    app: secops-webhook
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: secops-webhook
+  template:
+    metadata:
+      labels:
+        app: secops-webhook
+    spec:
+      serviceAccountName: secops-webhook
+      containers:
+      - name: webhook
+        image: securebank/mutating-webhook:latest
+        ports:
+        - containerPort: 8443
+          name: webhook
+        volumeMounts:
+        - name: tls-certs
+          mountPath: /certs
+          readOnly: true
+        env:
+        - name: TLS_CERT_FILE
+          value: /certs/tls.crt
+        - name: TLS_KEY_FILE
+          value: /certs/tls.key
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      volumes:
+      - name: tls-certs
+        secret:
+          secretName: secops-webhook-tls
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: secops-mutating-webhook
+  namespace: secops-system
+spec:
+  selector:
+    app: secops-webhook
+  ports:
+  - port: 443
+    targetPort: 8443
+    name: webhook
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: secops-mutating-webhook
+webhooks:
+- name: mutate.securebank.com
+  clientConfig:
+    service:
+      name: secops-mutating-webhook
+      namespace: secops-system
+      path: /mutate
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURQekNDQWllZ0F3SUJBZ0lVSEhDaEZWc2N6OHpyVWRmd1RWZDJNL1hkQWo4d0RRWUpLb1pJaHZjTkFRRUwKQlFBd0x6RXRNQ3NHQTFVRUF3d2tjMlZqYjNCekxXMTFkR0YwYVc1bkxYZGxZbWh2YjJzdWMyVmpiM0J6TFhONQpjM1JsYlM1emRtTXdIaGNOTWpVd056QXhNVEl3TURBd1doY05ORGN3TXpFeE1USXdNREF3V2pBdk1TMHdLd1lEClZRUUREQ1J6WldOdmNITXRiWFYwWVhScGJtY3RkMlZpYUc5dmF5NXpaV052Y0hNdGMzbHpkR1Z0TG5OMll6Q0MKQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFOdWI4ck0wK3BvdytOMGw4OG5DUzNZdApzZStTVVBFdFBQUWdEdTBQWXFzaEJQNlFyMWVFbkZqL3lWRDY4MGFNZEhFWWdEWU5pSXllR1BuTWppRFFBWi9rCnBxN3ZNRDAxbEZoOG9Ec1VOUGRMcVArNHVPVlF5SnVQTWU5dGhqRWptOVJCYnR1QUtacGE1Ky9wT1h0SnRBVmEKNHNxQnhnSWhZL2xKaUl6TVd4Nk5WOCtVb0FrZDJyRXphKzZVZVhoWTVHRUVLSkQ5M2hXbmpGQmdObnF3VFhoNwpaYWdhck9sYzdzZzNISDJpS2RWNVoyQ2ljQnJtZnZJZDZSc2JML3UycHI1ZWRPV2ltbjJOZTBvWitVWkUyRVE4Cmx3U2ZaTW9YbmpPSkJhNHBzcDZyL3RYbGlrdTNZeU9oUU5SYnlweUJZdWJPOVl0Z0dyb3c4TDFGbVlhN1dFMEMKQXdFQUFhTlRNRkV3SFFZRFZSME9CQllFRkpDVklrUXNRdHB5UFRSbU1icWluL0g1TEg5ak1COEdBMVVkSXdRWQpNQmFBRkpDVklrUXNRdHB5UFRSbU1icWluL0g1TEg5ak1BOEdBMVVkRXdFQi93UUZNQU1CQWY4d0RRWUpLb1pJCmh2Y05BUUVMQlFBRGdnRUJBREdDQVc1Y0oxQ1VNcGdMSTJvREhCcHJ6Z01rTHl6ZGRRSjdOWEF1cTBwVVBqSTAKU0xydE9RcjJpUFhRVEVKNzRoVE1KeUhGU0RjQ05UY2ExZTUvcEtXZGZOQnROeTdKdEU4NXRKL0YxT0N4YjRFKwpKYWpNb3JCQXZMUThkZlBERzBqN3ZwSkFCWkE1WXBxY3h1OWJ1Q2gzS3lsYXZ0UTVwc1BSZkN0VWdRN01kK0ZGCjVEbWZCdGk3WVJZZ1FhUXZCOTdNVHAwSFFxZ1FQNlNRNjVJZDRLMnhYWkVwKzJNMktmVnlwNEpYZFdZU2tlUWcKWXFZcnR4UGJDRFZaVEdGeDRLOGc2L3JUZ2FQQkVJRTNad3VjTjJ1dXhBL3IwQXFhN3NIWG9GV1oxT21tTzBNeAp3aUZkTjhCSUpQc3YyR1BhS1dvQUdLVGN3WTJmTHl3dEhDQT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  rules:
+  - operations: ["CREATE", "UPDATE"]
+    apiGroups: [""]
+    apiVersions: ["v1"]
+    resources: ["pods"]
+  - operations: ["CREATE", "UPDATE"]
+    apiGroups: ["apps"]
+    apiVersions: ["v1"]
+    resources: ["deployments", "statefulsets", "daemonsets"]
+  namespaceSelector:
+    matchLabels:
+      secops-mutation: "enabled"
+  admissionReviewVersions: ["v1", "v1beta1"]
+  sideEffects: None
+  timeoutSeconds: 10
+  failurePolicy: Ignore  # Don't block deployments if webhook is down

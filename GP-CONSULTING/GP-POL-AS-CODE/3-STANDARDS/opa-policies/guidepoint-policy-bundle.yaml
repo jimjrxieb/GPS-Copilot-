@@ -1,0 +1,169 @@
+# ===================================================================
+# ConstraintTemplate: GuidePointPodPolicy (DENY — hard requirements)
+# ===================================================================
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: guidepointpodpolicy
+spec:
+  crd:
+    spec:
+      names:
+        kind: GuidePointPodPolicy
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package guidepoint.security
+
+        # -----------------------
+        # helpers (null-safe ops)
+        # -----------------------
+        has(obj, key) { obj[key] != null }
+        is_true(x) { x == true }
+
+        # 1) Non-root containers mandatory
+        violation[{"msg": msg}] {
+          c := input.review.object.spec.containers[_]
+          not has(c, "securityContext")
+          msg := sprintf("Non-root required: container %q missing securityContext.runAsNonRoot", [c.name])
+        }
+        violation[{"msg": msg}] {
+          c := input.review.object.spec.containers[_]
+          has(c, "securityContext")
+          not is_true(c.securityContext.runAsNonRoot)
+          msg := sprintf("Non-root required: container %q must set securityContext.runAsNonRoot=true", [c.name])
+        }
+
+        # 2) No privileged containers
+        violation[{"msg": msg}] {
+          c := input.review.object.spec.containers[_]
+          has(c, "securityContext")
+          is_true(c.securityContext.privileged)
+          msg := sprintf("Privileged prohibited: container %q is privileged", [c.name])
+        }
+
+        # 3) Resource limits required (cpu + memory)
+        violation[{"msg": msg}] {
+          c := input.review.object.spec.containers[_]
+          not has(c, "resources")
+          msg := sprintf("Resource limits required: container %q missing resources.limits", [c.name])
+        }
+        violation[{"msg": msg}] {
+          c := input.review.object.spec.containers[_]
+          has(c, "resources")
+          not has(c.resources, "limits")
+          msg := sprintf("Resource limits required: container %q missing resources.limits", [c.name])
+        }
+        violation[{"msg": msg}] {
+          c := input.review.object.spec.containers[_]
+          has(c, "resources"); has(c.resources, "limits")
+          not has(c.resources.limits, "cpu")
+          msg := sprintf("CPU limit required: container %q missing resources.limits.cpu", [c.name])
+        }
+        violation[{"msg": msg}] {
+          c := input.review.object.spec.containers[_]
+          has(c, "resources"); has(c.resources, "limits")
+          not has(c.resources.limits, "memory")
+          msg := sprintf("Memory limit required: container %q missing resources.limits.memory", [c.name])
+        }
+
+        # 4) No privilege escalation
+        violation[{"msg": msg}] {
+          c := input.review.object.spec.containers[_]
+          has(c, "securityContext")
+          not (has(c.securityContext, "allowPrivilegeEscalation") and c.securityContext.allowPrivilegeEscalation == false)
+          msg := sprintf("Privilege escalation prohibited: container %q must set allowPrivilegeEscalation=false", [c.name])
+        }
+
+        # 5) Dangerous capabilities banned (SYS_ADMIN / NET_ADMIN)
+        violation[{"msg": msg}] {
+          c := input.review.object.spec.containers[_]
+          has(c, "securityContext"); has(c.securityContext, "capabilities"); has(c.securityContext.capabilities, "add")
+          some i
+          cap := c.securityContext.capabilities.add[i]
+          cap == "SYS_ADMIN" or cap == "NET_ADMIN"
+          msg := sprintf("Dangerous capability prohibited: container %q adds %q", [c.name, cap])
+        }
+
+        # 6) No hostNetwork
+        violation[{"msg": msg}] {
+          is_true(input.review.object.spec.hostNetwork)
+          msg := "Host network is prohibited"
+        }
+
+        # 7) No hostPID
+        violation[{"msg": msg}] {
+          is_true(input.review.object.spec.hostPID)
+          msg := "Host PID namespace is prohibited"
+        }
+
+        # 8) No hostIPC
+        violation[{"msg": msg}] {
+          is_true(input.review.object.spec.hostIPC)
+          msg := "Host IPC namespace is prohibited"
+        }
+
+        # 9) No hostPath volumes
+        violation[{"msg": msg}] {
+          v := input.review.object.spec.volumes[_]
+          has(v, "hostPath")
+          msg := sprintf("hostPath volume %q is prohibited", [v.name])
+        }
+---
+# ===================================================================
+# Constraint: enforce GuidePointPodPolicy as DENY (cluster-wide, with exceptions)
+# ===================================================================
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: GuidePointPodPolicy
+metadata:
+  name: guidepoint-pod-policy-deny
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    excludedNamespaces:
+      - kube-system
+      - gatekeeper-system
+---
+# ===================================================================
+# ConstraintTemplate: GuidePointBestPractices (WARN — best practice)
+# Only contains readOnlyRootFilesystem recommendation.
+# ===================================================================
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: guidepointbestpractices
+spec:
+  crd:
+    spec:
+      names:
+        kind: GuidePointBestPractices
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package guidepoint.bestpractices
+
+        has(obj, key) { obj[key] != null }
+
+        # Read-only root filesystem recommended
+        violation[{"msg": msg}] {
+          c := input.review.object.spec.containers[_]
+          not (has(c, "securityContext") and c.securityContext.readOnlyRootFilesystem == true)
+          msg := sprintf("Best practice: container %q should set readOnlyRootFilesystem=true", [c.name])
+        }
+---
+# ===================================================================
+# Constraint: apply best practices as WARN (non-blocking)
+# ===================================================================
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: GuidePointBestPractices
+metadata:
+  name: guidepoint-bestpractices-warn
+spec:
+  enforcementAction: warn
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]

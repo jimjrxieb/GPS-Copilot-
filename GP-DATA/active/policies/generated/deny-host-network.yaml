@@ -1,0 +1,23 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  annotations:
+    compliance: CIS-5.2.4
+    description: Prevent use of host network
+    generated-by: jade-policy-generator
+  name: k8sdenyhostnetwork
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sDenyHostNetwork
+      validation:
+        openAPIV3Schema:
+          type: object
+  targets:
+  - rego: "package k8sdenyhostnetwork\n\nviolation[{\"msg\": msg}] {\n    input.review.object.spec.hostNetwork\
+      \ == true\n    msg := \"Pod cannot use hostNetwork\"\n}\n\nviolation[{\"msg\"\
+      : msg}] {\n    input.review.object.spec.hostPID == true\n    msg := \"Pod cannot\
+      \ use hostPID\"\n}\n\nviolation[{\"msg\": msg}] {\n    input.review.object.spec.hostIPC\
+      \ == true\n    msg := \"Pod cannot use hostIPC\"\n}"
+    target: admission.k8s.gatekeeper.sh

@@ -1,0 +1,46 @@
+apiVersion: k8sdenyroot.constraints.gatekeeper.sh/v1beta1
+kind: K8sDenyRoot
+metadata:
+  name: deny-root-containers-policy
+  annotations:
+    description: "Enforces non-root container policy across specified namespaces"
+spec:
+  enforcementAction: deny  # Options: deny, dryrun, warn
+  match:
+    kinds:
+    - apiGroups: ["", "apps", "batch"]
+      kinds:
+      - Pod
+      - Deployment
+      - StatefulSet
+      - DaemonSet
+      - Job
+      - CronJob
+      - ReplicaSet
+    namespaces:
+    - default
+    - production
+    - staging
+    - development
+    excludedNamespaces:
+    - kube-system
+    - kube-public
+    - kube-node-lease
+    - gatekeeper-system
+    - cert-manager
+    labelSelector:
+      matchExpressions:
+      - key: security-policy
+        operator: NotIn
+        values: ["exempt"]
+  parameters:
+    message: "Security Policy Violation: Containers must run as non-root user for defense-in-depth security."
+    exemptImages:
+    # System components that may require root
+    - "gcr.io/google-containers/*"
+    - "k8s.gcr.io/*"
+    - "registry.k8s.io/*"
+    # Specific exemptions (use sparingly)
+    - "docker.io/istio/pilot:*"
+    - "docker.io/library/nginx:*-alpine"  # Example: specific nginx alpine versions
+    allowedUsers: [1000, 1001, 2000]  # Allowed non-root UIDs

@@ -1,0 +1,11 @@
+work_order_id: "WO-TEST-20250917"
+client: "TestCorp"
+business_context: "Security assessment for startup preparing for Series A funding"
+target_systems:
+  - "/home/jimmie/linkops-industries/Portfolio"
+priority: "P2"
+compliance_requirements:
+  - "SOC2"
+  - "OWASP"
+autonomy_level: "standard"
+timeline: "2 weeks"

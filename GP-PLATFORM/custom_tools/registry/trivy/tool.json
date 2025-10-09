@@ -1,0 +1,23 @@
+{
+  "name": "trivy",
+  "version": "0.55.0",
+  "type": "docker",
+  "image": "aquasec/trivy:0.55.0",
+  "capabilities": ["scan.vuln", "scan.secrets", "scan.misconfig"],
+  "entrypoints": {
+    "fs": ["trivy", "fs", "--format", "json", "--quiet", "."],
+    "image": ["trivy", "image", "--format", "json"],
+    "config": ["trivy", "config", "--format", "json", "."]
+  },
+  "outputs": {
+    "format": "json",
+    "path_template": "outputs/trivy/{run_id}/raw.json"
+  },
+  "normalizer": "adapters/normalize.py",
+  "schema_version": "1.0",
+  "description": "Comprehensive vulnerability scanner for containers and filesystems",
+  "tags": ["security", "vulnerability", "container", "iac"],
+  "env_allowlist": ["TRIVY_CACHE_DIR", "TRIVY_DB_REPOSITORY"],
+  "working_dir": "/work",
+  "timeout_seconds": 300
+}

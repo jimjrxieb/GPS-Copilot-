@@ -1,0 +1,222 @@
+[
+  {
+    "status": "completed",
+    "target": "/home/jimmie/linkops-industries/James-OS/ms-008-desktop-ui",
+    "total_vulnerabilities": 1,
+    "critical": 0,
+    "high": 1,
+    "raw_results": {
+      "SchemaVersion": 2,
+      "CreatedAt": "2025-09-17T11:11:41.199727902-04:00",
+      "ArtifactName": "/home/jimmie/linkops-industries/James-OS/ms-008-desktop-ui",
+      "ArtifactType": "filesystem",
+      "Results": [
+        {
+          "Target": "package-lock.json",
+          "Class": "lang-pkgs",
+          "Type": "npm",
+          "Vulnerabilities": [
+            {
+              "VulnerabilityID": "CVE-2025-58754",
+              "PkgID": "axios@1.11.0",
+              "PkgName": "axios",
+              "PkgIdentifier": {
+                "PURL": "pkg:npm/axios@1.11.0",
+                "UID": "1f8d3e538c0120d6"
+              },
+              "InstalledVersion": "1.11.0",
+              "FixedVersion": "1.12.0",
+              "Status": "fixed",
+              "SeveritySource": "ghsa",
+              "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-58754",
+              "DataSource": {
+                "ID": "ghsa",
+                "Name": "GitHub Security Advisory npm",
+                "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+              },
+              "Title": "axios: Axios DoS via lack of data size check",
+              "Description": "Axios is a promise based HTTP client for the browser and Node.js. When Axios prior to version 1.11.0 runs on Node.js and is given a URL with the `data:` scheme, it does not perform HTTP. Instead, its Node http adapter decodes the entire payload into memory (`Buffer`/`Blob`) and returns a synthetic 200 response. This path ignores `maxContentLength` / `maxBodyLength` (which only protect HTTP responses), so an attacker can supply a very large `data:` URI and cause the process to allocate unbounded memory and crash (DoS), even if the caller requested `responseType: 'stream'`. Version 1.11.0 contains a patch for the issue.",
+              "Severity": "HIGH",
+              "CweIDs": [
+                "CWE-770"
+              ],
+              "VendorSeverity": {
+                "ghsa": 3,
+                "redhat": 2
+              },
+              "CVSS": {
+                "ghsa": {
+                  "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                  "V3Score": 7.5
+                },
+                "redhat": {
+                  "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+                  "V3Score": 5.3
+                }
+              },
+              "References": [
+                "https://access.redhat.com/security/cve/CVE-2025-58754",
+                "https://github.com/axios/axios",
+                "https://github.com/axios/axios/commit/945435fc51467303768202250debb8d4ae892593",
+                "https://github.com/axios/axios/pull/7011",
+                "https://github.com/axios/axios/releases/tag/v1.12.0",
+                "https://github.com/axios/axios/security/advisories/GHSA-4hjh-wcwx-xvwj",
+                "https://nvd.nist.gov/vuln/detail/CVE-2025-58754",
+                "https://www.cve.org/CVERecord?id=CVE-2025-58754"
+              ],
+              "PublishedDate": "2025-09-12T02:15:46.873Z",
+              "LastModifiedDate": "2025-09-15T15:22:38.297Z"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "status": "completed",
+    "target": "/home/jimmie/linkops-industries/James-OS/ms-agents",
+    "total_vulnerabilities": 0,
+    "critical": 0,
+    "high": 0,
+    "raw_results": {
+      "SchemaVersion": 2,
+      "CreatedAt": "2025-09-17T11:11:41.457643248-04:00",
+      "ArtifactName": "/home/jimmie/linkops-industries/James-OS/ms-agents",
+      "ArtifactType": "filesystem",
+      "Results": [
+        {
+          "Target": "mcp/__pycache__/evidence_writer.cpython-311.pyc",
+          "Class": "secret",
+          "Secrets": [
+            {
+              "RuleID": "github-pat",
+              "Category": "GitHub",
+              "Severity": "CRITICAL",
+              "Title": "GitHub Personal Access Token",
+              "StartLine": 209,
+              "EndLine": 209,
+              "Code": {
+                "Lines": null
+              },
+              "Match": "Binary file \"mcp/__pycache__/evidence_writer.cpython-311.pyc\" matches a rule \"GitHub Personal Access Token\"",
+              "Offset": 3597
+            }
+          ]
+        },
+        {
+          "Target": "mcp/evidence_writer.py",
+          "Class": "secret",
+          "Secrets": [
+            {
+              "RuleID": "aws-access-key-id",
+              "Category": "AWS",
+              "Severity": "CRITICAL",
+              "Title": "AWS Access Key ID",
+              "StartLine": 254,
+              "EndLine": 254,
+              "Code": {
+                "Lines": [
+                  {
+                    "Number": 252,
+                    "Content": "    # Write some logs",
+                    "IsCause": false,
+                    "Annotation": "",
+                    "Truncated": false,
+                    "Highlighted": "    # Write some logs",
+                    "FirstCause": false,
+                    "LastCause": false
+                  },
+                  {
+                    "Number": 253,
+                    "Content": "    session.append_log('stdout', {'message': 'Starting test', 'level': 'info'})",
+                    "IsCause": false,
+                    "Annotation": "",
+                    "Truncated": false,
+                    "Highlighted": "    session.append_log('stdout', {'message': 'Starting test', 'level': 'info'})",
+                    "FirstCause": false,
+                    "LastCause": false
+                  },
+                  {
+                    "Number": 254,
+                    "Content": "ge': 'Processing with API key ********************', 'level': 'debug'}",
+                    "IsCause": true,
+                    "Annotation": "",
+                    "Truncated": false,
+                    "Highlighted": "ge': 'Processing with API key ********************', 'level': 'debug'}",
+                    "FirstCause": true,
+                    "LastCause": true
+                  },
+                  {
+                    "Number": 255,
+                    "Content": "    session.append_log('stderr', {'message': 'Warning: test mode', 'level': 'warn'})",
+                    "IsCause": false,
+                    "Annotation": "",
+                    "Truncated": false,
+                    "Highlighted": "    session.append_log('stderr', {'message': 'Warning: test mode', 'level': 'warn'})",
+                    "FirstCause": false,
+                    "LastCause": false
+                  }
+                ]
+              },
+              "Match": "ge': 'Processing with API key ********************', 'level': 'debug'}",
+              "Offset": 9298
+            },
+            {
+              "RuleID": "github-pat",
+              "Category": "GitHub",
+              "Severity": "CRITICAL",
+              "Title": "GitHub Personal Access Token",
+              "StartLine": 259,
+              "EndLine": 259,
+              "Code": {
+                "Lines": [
+                  {
+                    "Number": 257,
+                    "Content": "    # Write artifacts",
+                    "IsCause": false,
+                    "Annotation": "",
+                    "Truncated": false,
+                    "Highlighted": "    # Write artifacts",
+                    "FirstCause": false,
+                    "LastCause": false
+                  },
+                  {
+                    "Number": 258,
+                    "Content": "    session.write_artifact('test-report.json', json.dumps({'test': 'data', 'status': 'pass'}))",
+                    "IsCause": false,
+                    "Annotation": "",
+                    "Truncated": false,
+                    "Highlighted": "    session.write_artifact('test-report.json', json.dumps({'test': 'data', 'status': 'pass'}))",
+                    "FirstCause": false,
+                    "LastCause": false
+                  },
+                  {
+                    "Number": 259,
+                    "Content": "txt', 'Test output with token ****************************************5678')",
+                    "IsCause": true,
+                    "Annotation": "",
+                    "Truncated": false,
+                    "Highlighted": "txt', 'Test output with token ****************************************5678')",
+                    "FirstCause": true,
+                    "LastCause": true
+                  },
+                  {
+                    "Number": 260,
+                    "Content": "",
+                    "IsCause": false,
+                    "Annotation": "",
+                    "Truncated": false,
+                    "FirstCause": false,
+                    "LastCause": false
+                  }
+                ]
+              },
+              "Match": "txt', 'Test output with token ****************************************5678')",
+              "Offset": 9613
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

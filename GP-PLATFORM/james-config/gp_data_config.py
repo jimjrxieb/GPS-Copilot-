@@ -59,6 +59,24 @@ class GPDataConfig:
         fixes_dir.mkdir(parents=True, exist_ok=True)
         return fixes_dir
 
+    def get_opa_scans_directory(self) -> Path:
+        """Get OPA policy scan results directory"""
+        opa_dir = self.base_path / "active" / "scans" / "opa"
+        opa_dir.mkdir(parents=True, exist_ok=True)
+        return opa_dir
+
+    def get_opa_fixes_directory(self) -> Path:
+        """Get OPA fix results directory"""
+        opa_fixes_dir = self.base_path / "active" / "fixes" / "opa"
+        opa_fixes_dir.mkdir(parents=True, exist_ok=True)
+        return opa_fixes_dir
+
+    def get_opa_reports_directory(self) -> Path:
+        """Get OPA reports directory"""
+        opa_reports_dir = self.base_path / "active" / "reports" / "opa"
+        opa_reports_dir.mkdir(parents=True, exist_ok=True)
+        return opa_reports_dir
+
     def get_workflows_directory(self) -> Path:
         """Get workflow tracking directory"""
         workflows_dir = self.base_path / "active" / "workflows"

@@ -1,0 +1,130 @@
+{
+  "scan_id": "checkov-terraform-insecure-20250917",
+  "target": "terraform/insecure.tf",
+  "scan_type": "infrastructure",
+  "timestamp": "2025-09-17T10:32:20Z",
+  "framework": "terraform",
+  "summary": {
+    "total_violations": 13,
+    "critical": 7,
+    "high": 4,
+    "medium": 2,
+    "passed": 0,
+    "skipped": 0
+  },
+  "critical_violations": [
+    {
+      "check_id": "CKV_AWS_21",
+      "check_name": "S3 bucket has versioning enabled",
+      "resource": "aws_s3_bucket.test_bucket",
+      "file_path": "insecure.tf",
+      "line_number": 2,
+      "severity": "CRITICAL",
+      "description": "S3 bucket does not have versioning enabled",
+      "remediation": "Add versioning configuration block"
+    },
+    {
+      "check_id": "CKV_AWS_141",
+      "check_name": "S3 bucket has encryption enabled",
+      "resource": "aws_s3_bucket.test_bucket",
+      "file_path": "insecure.tf",
+      "line_number": 2,
+      "severity": "CRITICAL",
+      "description": "S3 bucket server-side encryption is not configured",
+      "remediation": "Add aws_s3_bucket_server_side_encryption_configuration resource"
+    },
+    {
+      "check_id": "CKV_AWS_55",
+      "check_name": "S3 bucket has 'Block public access' enabled",
+      "resource": "aws_s3_bucket.test_bucket",
+      "file_path": "insecure.tf",
+      "line_number": 2,
+      "severity": "CRITICAL",
+      "description": "S3 bucket public access is not blocked",
+      "remediation": "Add aws_s3_bucket_public_access_block resource"
+    },
+    {
+      "check_id": "CKV_AWS_23",
+      "check_name": "Security group ingress rule is too permissive",
+      "resource": "aws_security_group.insecure_sg",
+      "file_path": "insecure.tf",
+      "line_number": 14,
+      "severity": "CRITICAL",
+      "description": "Security group allows ingress from 0.0.0.0/0 on all ports",
+      "remediation": "Restrict CIDR blocks to specific IP ranges"
+    },
+    {
+      "check_id": "CKV_AWS_16",
+      "check_name": "RDS instance is encrypted",
+      "resource": "aws_db_instance.insecure_db",
+      "file_path": "insecure.tf",
+      "line_number": 26,
+      "severity": "CRITICAL",
+      "description": "RDS instance does not have encryption enabled",
+      "remediation": "Set storage_encrypted = true"
+    },
+    {
+      "check_id": "CKV_AWS_17",
+      "check_name": "RDS instance is not publicly accessible",
+      "resource": "aws_db_instance.insecure_db",
+      "file_path": "insecure.tf",
+      "line_number": 41,
+      "severity": "CRITICAL",
+      "description": "RDS instance is publicly accessible",
+      "remediation": "Set publicly_accessible = false"
+    },
+    {
+      "check_id": "CKV_AWS_62",
+      "check_name": "IAM policy attached to users, groups or roles should not have statements with 'Effect: Allow' and 'Action: *' and 'Resource: *'",
+      "resource": "aws_iam_role_policy.overly_permissive",
+      "file_path": "insecure.tf",
+      "line_number": 63,
+      "severity": "CRITICAL",
+      "description": "IAM policy allows all actions on all resources",
+      "remediation": "Implement least privilege principle with specific actions and resources"
+    }
+  ],
+  "high_violations": [
+    {
+      "check_id": "CKV_AWS_3",
+      "check_name": "RDS instance has backup retention period greater than 0",
+      "resource": "aws_db_instance.insecure_db",
+      "severity": "HIGH",
+      "description": "RDS backup retention not configured"
+    },
+    {
+      "check_id": "CKV_AWS_118",
+      "check_name": "RDS instance has enhanced monitoring enabled",
+      "resource": "aws_db_instance.insecure_db",
+      "severity": "HIGH",
+      "description": "Enhanced monitoring not enabled for RDS"
+    }
+  ],
+  "compliance_mapping": {
+    "cis_aws": {
+      "total_controls": 15,
+      "passed": 0,
+      "failed": 13,
+      "compliance_percentage": 0
+    },
+    "nist_800_53": {
+      "total_controls": 8,
+      "passed": 0,
+      "failed": 8,
+      "compliance_percentage": 0
+    },
+    "pci_dss": {
+      "total_controls": 6,
+      "passed": 0,
+      "failed": 6,
+      "compliance_percentage": 0
+    }
+  },
+  "risk_assessment": {
+    "overall_score": 1.2,
+    "data_exposure": "HIGH",
+    "unauthorized_access": "CRITICAL",
+    "compliance_risk": "HIGH",
+    "business_impact": "Data breach, regulatory fines, reputation damage"
+  }
+}

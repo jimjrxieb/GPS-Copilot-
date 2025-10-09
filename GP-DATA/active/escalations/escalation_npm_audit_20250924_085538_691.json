@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "scan_file": "npm_audit_20250924_085538_691.json",
+    "tool": "npm_audit",
+    "target": "GP-Projects/Portfolio",
+    "escalation_time": "2025-09-30T08:48:24.360736",
+    "severity": "requires_attention"
+  },
+  "summary": {
+    "total_issues": 2,
+    "auto_fixed": 0,
+    "needs_manual_review": 2,
+    "severity_breakdown": {
+      "critical": 0,
+      "high": 0,
+      "medium": 2,
+      "low": 0
+    }
+  },
+  "unfixable_issues": [
+    {
+      "file": null,
+      "issue_id": null,
+      "resource": null,
+      "reason_not_fixed": "No automated fixer available",
+      "severity": "medium",
+      "manual_fix_suggestions": [
+        "Based on security knowledge: # Gatekeeper vs Scanners - Comprehensive Understanding\n\n## The Key Distinction\n\n**Scanners (Bandit, Trivy, Checkov, SonarQube, Snyk):**\n- Run AFTER code/configs are written\n- Find problems in existing",
+        "Review npm_audit documentation for remediation steps"
+      ]
+    }
+  ],
+  "jade_insights": [
+    {
+      "finding_id": null,
+      "finding_desc": null,
+      "rag_context": [
+        "# Gatekeeper vs Scanners - Comprehensive Understanding\n\n## The Key Distinction\n\n**Scanners (Bandit, Trivy, Checkov, SonarQube, Snyk):**\n- Run AFTER code/configs are written\n- Find problems in existing",
+        "## The CRDs Gatekeeper Adds\n\n**ConstraintTemplate**: Defines reusable policy templates\n```yaml\napiVersion: templates.gatekeeper.sh/v1\nkind: ConstraintTemplate\nmetadata:\n  name: k8spspprivileged\nspec:\n",
+        "## The Workflow Difference\n\n**Traditional Scanning (Checkov/Trivy):**\n```\nWrite manifest \u2192 Scan with tool \u2192 See violations \u2192 Fix manually \u2192 Re-scan\n```\n\n**OPA/Gatekeeper:**\n```\nWrite manifest \u2192 kubect"
+      ]
+    },
+    {
+      "finding_id": null,
+      "finding_desc": null,
+      "rag_context": [
+        "# Gatekeeper vs Scanners - Comprehensive Understanding\n\n## The Key Distinction\n\n**Scanners (Bandit, Trivy, Checkov, SonarQube, Snyk):**\n- Run AFTER code/configs are written\n- Find problems in existing",
+        "## The CRDs Gatekeeper Adds\n\n**ConstraintTemplate**: Defines reusable policy templates\n```yaml\napiVersion: templates.gatekeeper.sh/v1\nkind: ConstraintTemplate\nmetadata:\n  name: k8spspprivileged\nspec:\n",
+        "## The Workflow Difference\n\n**Traditional Scanning (Checkov/Trivy):**\n```\nWrite manifest \u2192 Scan with tool \u2192 See violations \u2192 Fix manually \u2192 Re-scan\n```\n\n**OPA/Gatekeeper:**\n```\nWrite manifest \u2192 kubect"
+      ]
+    }
+  ],
+  "recommended_actions": [
+    "Review detailed escalation report for specific fix instructions"
+  ]
+}

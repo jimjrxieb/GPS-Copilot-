@@ -14,14 +14,24 @@ from pathlib import Path
 # Add parent directory to path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from engines.ai_security_engine import ai_security_engine
-from engines.rag_engine import rag_engine
+from core.ai_security_engine import ai_security_engine
+from core.rag_engine import rag_engine
+
+# Import approval routes
+from api.approval_routes import router as approval_router
+# Import secrets routes
+from api.secrets_routes import router as secrets_router
 
 app = FastAPI(
     title="GP-JADE AI Security API",
     description="AI-Powered Security Consulting and Analysis",
     version="2.0.0"
 )
+
+# Include approval queue routes
+app.include_router(approval_router)
+# Include secrets management routes
+app.include_router(secrets_router)
 
 # CORS configuration
 app.add_middleware(

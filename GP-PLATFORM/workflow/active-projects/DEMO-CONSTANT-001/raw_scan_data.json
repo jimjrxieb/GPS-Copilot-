@@ -1,0 +1,41 @@
+[
+  {
+    "tool": "checkov",
+    "vulnerabilities": [
+      {
+        "check_id": "CKV_AWS_126",
+        "check_name": "Enable detailed monitoring for EC2 instances",
+        "severity": "medium",
+        "description": "EC2 instances should have detailed monitoring enabled"
+      },
+      {
+        "check_id": "CKV_AWS_79",
+        "check_name": "Ensure Instance Metadata Service Version 2 is enforced",
+        "severity": "high",
+        "description": "IMDSv2 should be enforced for EC2 instances"
+      },
+      {
+        "check_id": "CKV_K8S_23",
+        "check_name": "Minimize admission of containers with allowPrivilegeEscalation",
+        "severity": "high",
+        "description": "Containers should not allow privilege escalation"
+      },
+      {
+        "check_id": "CKV_K8S_28",
+        "check_name": "Minimize admission of containers with privileged flag",
+        "severity": "high",
+        "description": "Containers should not run in privileged mode"
+      },
+      {
+        "check_id": "CKV_K8S_20",
+        "check_name": "Containers should not run as root user",
+        "severity": "medium",
+        "description": "Containers should run as non-root user"
+      }
+    ],
+    "total_vulnerabilities": 166,
+    "risk_score": 10.0,
+    "critical_issues": 4,
+    "high_issues": 6
+  }
+]

@@ -7,6 +7,7 @@ __pycache__/
 env/
 venv/
 .venv
+ai-env/
 *.egg-info/
 dist/
 build/
@@ -17,12 +18,16 @@ GP-DATA/ai-models/
 *.pth
 *.bin
 *.safetensors
+*.gguf
 
 # Hugging Face cache
 .cache/huggingface/
 
-# Keep vector database (embeddings are small enough)
-# GP-DATA/vector-db/ <- NOT ignored, we want to commit this
+# Vector databases (too large, regenerate on new machines)
+GP-RAG/vector-store/
+GP-RAG/jade_vector_db/
+**/vector-db/
+*.chroma
 
 # Logs
 *.log
@@ -80,4 +85,4 @@ GP-TOOLS/binaries/gitleaks
 # Nested git repositories (keep as separate projects)
 GP-PROJECTS/DVWA/
 GP-PROJECTS/LinkOps-MLOps/
-GP-PROJECTS/Terraform_CICD_Setup/
+GP-PROJECTS/Terraform_CICD_Setup/*.pyc

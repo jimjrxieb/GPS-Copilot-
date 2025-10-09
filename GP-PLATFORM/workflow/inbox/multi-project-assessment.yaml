@@ -1,0 +1,38 @@
+work_order_id: "WO-MULTI-20250917"
+client: "Internal Infrastructure Team"
+business_context: "Security assessment of multiple infrastructure projects for quarterly compliance review"
+projects:
+  - name: "Portfolio Application"
+    path: "/home/jimmie/linkops-industries/Portfolio"
+    type: "kubernetes"
+    technologies:
+      - "Kubernetes"
+      - "Docker"
+      - "Node.js"
+    compliance_requirements:
+      - "OWASP"
+      - "CIS Kubernetes Benchmark"
+  - name: "Terraform CICD Infrastructure"
+    path: "/home/jimmie/linkops-industries/Terraform_CICD_Setup"
+    type: "infrastructure"
+    technologies:
+      - "Terraform"
+      - "AWS"
+      - "EKS"
+      - "Prometheus"
+    compliance_requirements:
+      - "CIS AWS Foundations"
+      - "AWS Well-Architected"
+      - "Infrastructure as Code Best Practices"
+priority: "P1"
+compliance_requirements:
+  - "SOC2"
+  - "CIS"
+  - "AWS Security Best Practices"
+autonomy_level: "supervised"
+timeline: "1 week"
+deliverables:
+  - "Executive summary with risk assessment"
+  - "Technical findings report per project"
+  - "Remediation roadmap with priorities"
+  - "Manager dashboard status update"

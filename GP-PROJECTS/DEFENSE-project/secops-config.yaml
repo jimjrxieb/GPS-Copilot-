@@ -1,0 +1,54 @@
+# SecOps Configuration - DEFENSE Project
+project:
+  name: "TacticalNet"
+  industry: "defense"
+  compliance_frameworks:
+    - "FedRAMP-Moderate"
+    - "NIST-800-53"
+    - "CMMC-Level-3"
+    - "ITAR"
+
+scanning:
+  enabled_scanners:
+    - tfsec
+    - checkov
+    - bandit
+    - trivy
+    - gitleaks  # Critical for ITAR
+    - opa
+
+  scan_paths:
+    terraform: "./infrastructure/terraform"
+    ansible: "./ansible"
+    backend: "./backend"
+
+  severity_thresholds:
+    fail_on_critical: true
+    fail_on_high: true
+    fail_on_medium: true
+    fail_on_low: true      # Zero-tolerance for defense
+
+policies:
+  opa_policies:
+    - "cloud-security-patterns/vpc-isolation"
+    - "cloud-security-patterns/zero-trust-sg"
+    - "cloud-security-patterns/incident-evidence"
+    - "compliance-frameworks/fedramp"
+
+  enforcement_mode: "strict"
+
+  air_gapped: true           # No internet access
+  use_local_llm: true        # No cloud AI for classified
+
+reporting:
+  formats:
+    - markdown
+    - json
+
+  # No PDF (no external dependencies in air-gapped)
+  # No email/Slack in air-gapped
+  local_path: "/secure/reports"
+
+aws:
+  cloud: "govcloud"          # AWS GovCloud
+  region: "us-gov-west-1"

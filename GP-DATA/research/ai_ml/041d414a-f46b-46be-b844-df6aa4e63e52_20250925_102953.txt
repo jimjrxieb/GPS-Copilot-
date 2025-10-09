@@ -1,0 +1,16 @@
+Title: FastAPI Overview
+Category: AI/ML
+Source: FastAPI Documentation
+Created: 2025-09-25T10:29:53.029887
+ID: 041d414a-f46b-46be-b844-df6aa4e63e52
+==================================================
+
+FastAPI is a modern Python web framework for building APIs with automatic OpenAPI documentation and async support.
+
+==================================================
+TOPICS LEARNED:
+1. Python
+2. Building
+3. Fastapi
+4. Framework
+5. Modern

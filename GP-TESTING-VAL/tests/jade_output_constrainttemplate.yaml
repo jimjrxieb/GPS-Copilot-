@@ -1,0 +1,107 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8sdenyroot
+  annotations:
+    description: "Denies containers from running as root user (UID 0)"
+    documentation: "https://kubernetes.io/docs/concepts/security/pod-security-standards/"
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sDenyRoot
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            message:
+              type: string
+              description: "Custom violation message"
+            exemptImages:
+              type: array
+              description: "List of container images exempt from this policy"
+              items:
+                type: string
+            allowedUsers:
+              type: array
+              description: "List of allowed non-root UIDs"
+              items:
+                type: integer
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sdenyroot
+
+        import future.keywords.contains
+        import future.keywords.if
+        import future.keywords.in
+
+        # Main violation rule for containers
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          is_running_as_root(container, input.review.object.spec)
+          not is_exempt(container.image)
+          msg := sprintf("Container '%s' is not allowed to run as root (UID 0). Please set securityContext.runAsNonRoot: true or specify a non-root runAsUser.", [container.name])
+        }
+
+        # Check init containers
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.initContainers[_]
+          is_running_as_root(container, input.review.object.spec)
+          not is_exempt(container.image)
+          msg := sprintf("Init container '%s' is not allowed to run as root (UID 0).", [container.name])
+        }
+
+        # Check ephemeral containers
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.ephemeralContainers[_]
+          is_running_as_root(container, input.review.object.spec)
+          not is_exempt(container.image)
+          msg := sprintf("Ephemeral container '%s' is not allowed to run as root.", [container.name])
+        }
+
+        # Helper: Check if container runs as root
+        is_running_as_root(container, pod_spec) {
+          # Explicitly set to run as root at container level
+          container.securityContext.runAsUser == 0
+        }
+
+        is_running_as_root(container, pod_spec) {
+          # Explicitly set to allow root at container level
+          container.securityContext.runAsNonRoot == false
+        }
+
+        is_running_as_root(container, pod_spec) {
+          # Pod level sets root and container doesn't override
+          pod_spec.securityContext.runAsUser == 0
+          not container.securityContext.runAsUser
+          not container.securityContext.runAsNonRoot
+        }
+
+        is_running_as_root(container, pod_spec) {
+          # Neither pod nor container specify non-root
+          not container.securityContext.runAsUser
+          not container.securityContext.runAsNonRoot
+          not pod_spec.securityContext.runAsUser
+          not pod_spec.securityContext.runAsNonRoot
+        }
+
+        # Helper: Check if image is exempt
+        is_exempt(image) {
+          exempt_images := object.get(input.parameters, "exemptImages", [])
+          exempt := exempt_images[_]
+          match_image(image, exempt)
+        }
+
+        # Helper: Match image with wildcards
+        match_image(image, pattern) {
+          # Exact match
+          image == pattern
+        }
+
+        match_image(image, pattern) {
+          # Wildcard match
+          contains(pattern, "*")
+          regex := replace(replace(pattern, ".", "\\."), "*", ".*")
+          regex_match(regex, image)
+        }

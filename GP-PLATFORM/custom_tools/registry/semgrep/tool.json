@@ -1,0 +1,25 @@
+{
+  "name": "semgrep",
+  "version": "1.83.0",
+  "type": "docker",
+  "image": "semgrep/semgrep:1.83.0",
+  "capabilities": ["scan.sast", "scan.secrets", "scan.supply-chain"],
+  "entrypoints": {
+    "auto": ["semgrep", "--config=auto", "--json", "--quiet", "."],
+    "p/security-audit": ["semgrep", "--config=p/security-audit", "--json", "--quiet", "."],
+    "p/owasp-top-ten": ["semgrep", "--config=p/owasp-top-ten", "--json", "--quiet", "."],
+    "p/secrets": ["semgrep", "--config=p/secrets", "--json", "--quiet", "."],
+    "custom": ["semgrep", "--config", "{config_path}", "--json", "--quiet", "."]
+  },
+  "outputs": {
+    "format": "json",
+    "path_template": "outputs/semgrep/{run_id}/raw.json"
+  },
+  "normalizer": "adapters/normalize.py",
+  "schema_version": "1.0",
+  "description": "Static analysis security testing (SAST) tool for finding bugs and security issues",
+  "tags": ["security", "sast", "code-analysis", "owasp", "secrets"],
+  "env_allowlist": ["SEMGREP_APP_TOKEN", "SEMGREP_TIMEOUT", "SEMGREP_RULES"],
+  "working_dir": "/src",
+  "timeout_seconds": 900
+}

@@ -1,6 +1,18 @@
-# 🤖 GP-copilot - James-OS Conversational Security Intelligence Platform
+# 🤖 GP-copilot - Jade Conversational Security Intelligence Platform
 
 **Enterprise-grade AI-powered security consulting with professional business intelligence and client context awareness**
+
+---
+
+## 📚 **⚠️ START HERE: Critical Documentation**
+
+### 🎯 [VISION.md](VISION.md) - **READ THIS FIRST**
+Complete architecture, roadmap, and philosophy. Explains what we're building, why, and how.
+
+### ⚡ [.claude/architecture-rules.md](.claude/architecture-rules.md)
+Quick reference for developers. Read before every coding session to avoid code drift.
+
+---
 
 ## 🎯 Manager Priority Achievement: ✅ CONVERSATIONAL INTELLIGENCE OPERATIONAL
 
@@ -215,4 +227,3 @@ Your subagents now benefit from unified business intelligence:
 
 **Status: ✅ Manager Priority Achieved | Conversational Intelligence Operational | Enterprise Ready**
 
-*James-OS Conversational Security Intelligence Platform - "AI that answers questions about projects and clients more than fixing errors"*

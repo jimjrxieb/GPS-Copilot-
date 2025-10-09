@@ -1,0 +1,66 @@
+{
+  "project": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/DVWA",
+  "timestamp": "2025-09-28T12:13:43.984861",
+  "scanners": {
+    "bandit": {
+      "scanner": "bandit",
+      "scan_file": "/home/jimmie/linkops-industries/GP-copilot/GP-DATA/active/scans/bandit_latest.json",
+      "timestamp": "2025-09-28T12:05:54.332736",
+      "total_issues": 2,
+      "recommendations": [
+        {
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/DVWA/tests/test_url.py",
+          "line": 32,
+          "issue_id": "B113",
+          "severity": "medium",
+          "issue": "Call to requests without timeout",
+          "risk": "Can cause denial of service through hanging requests",
+          "fix": "\nAdd timeout parameter to all requests:\n\n# Bad:\nresponse = requests.get(url)\n\n# Good:\nresponse = requests.get(url, timeout=30)\n\n# Better (with retry logic):\nfrom requests.adapters import HTTPAdapter\nfrom requests.packages.urllib3.util.retry import Retry\n\nsession = requests.Session()\nretry = Retry(total=3, backoff_factor=0.3)\nadapter = HTTPAdapter(max_retries=retry)\nsession.mount('http://', adapter)\nsession.mount('https://', adapter)\nresponse = session.get(url, timeout=30)\n",
+          "references": [
+            "https://bandit.readthedocs.io/en/latest/plugins/b113_request_without_timeout.html"
+          ]
+        },
+        {
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/DVWA/tests/test_url.py",
+          "line": 90,
+          "issue_id": "B101",
+          "severity": "low",
+          "issue": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+          "risk": "Assert statements are removed in optimized code, breaking validation",
+          "fix": "\nReplace assert with proper exception handling:\n\n# Bad:\nassert user_input, \"Invalid input\"\n\n# Good:\nif not user_input:\n    raise ValueError(\"Invalid input\")\n",
+          "references": [
+            "https://bandit.readthedocs.io/en/latest/plugins/b101_assert_used.html"
+          ]
+        }
+      ]
+    },
+    "semgrep": {
+      "scanner": "semgrep",
+      "scan_file": "/home/jimmie/linkops-industries/GP-copilot/GP-DATA/active/scans/semgrep_latest.json",
+      "timestamp": "2025-09-28T12:05:59.436803",
+      "total_issues": 0,
+      "recommendations": []
+    },
+    "trivy": {
+      "scanner": "trivy",
+      "scan_file": "/home/jimmie/linkops-industries/GP-copilot/GP-DATA/active/scans/trivy_20250928_120611_564.json",
+      "timestamp": "2025-09-28T12:06:11.564403",
+      "total_issues": 0,
+      "recommendations": []
+    },
+    "gitleaks": {
+      "scanner": "gitleaks",
+      "scan_file": "/home/jimmie/linkops-industries/GP-copilot/GP-DATA/active/scans/gitleaks_latest.json",
+      "timestamp": "2025-09-28T12:06:04.582145",
+      "total_issues": 0,
+      "recommendations": []
+    }
+  },
+  "summary": {
+    "total_issues": 2,
+    "critical": 0,
+    "high": 0,
+    "medium": 1,
+    "low": 1
+  }
+}
