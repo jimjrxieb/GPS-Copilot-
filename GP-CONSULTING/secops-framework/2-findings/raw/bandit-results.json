@@ -1,11 +1,6 @@
 {
-  "errors": [
-    {
-      "filename": "./../../backend/",
-      "reason": "No such file or directory"
-    }
-  ],
-  "generated_at": "2025-10-09T03:14:52Z",
+  "errors": [],
+  "generated_at": "2025-10-09T15:23:37Z",
   "metrics": {
     "_totals": {
       "CONFIDENCE.HIGH": 0,

@@ -1,0 +1,287 @@
+# ============================================================================
+# SecOps Framework - Scanner Configuration
+# ============================================================================
+# Last Updated: 2025-10-09
+# Purpose: Document all security scanners with CI/CD/Runtime stage mappings
+#
+# Philosophy: Shift-left security
+#   - CI: Find issues early (cheap to fix)
+#   - CD: Validate infrastructure before production
+#   - Runtime: Monitor live systems 24/7
+# ============================================================================
+
+scanners:
+  # ═══════════════════════════════════════════════════════════
+  # CI STAGE - Run BEFORE code reaches production
+  # ═══════════════════════════════════════════════════════════
+
+  bandit:
+    stage: CI
+    category: SAST
+    language: Python
+    when: [git_commit, git_push, pull_request]
+    speed: ~5 seconds
+    focus: "Hardcoded secrets, SQL injection, weak crypto"
+    fail_build_on: [HIGH]
+    command: "bandit -r backend/ -f json -o bandit-results.json"
+    script: "ci/scan-code-sast.sh"
+
+  semgrep:
+    stage: CI
+    category: SAST
+    language: [Python, JavaScript, TypeScript, Go, Java]
+    when: [git_push, pull_request]
+    speed: ~10 seconds
+    focus: "Code patterns, OWASP Top 10, business logic bugs"
+    fail_build_on: [ERROR]
+    command: "semgrep --config auto backend/ frontend/ --json"
+    script: "ci/scan-code-sast.sh"
+
+  gitleaks:
+    stage: CI
+    category: Secret_Scanning
+    language: All
+    when: [git_commit, git_push, pre-receive-hook]
+    speed: ~3 seconds
+    focus: "AWS keys, API tokens, passwords, private keys in commits"
+    fail_build_on: [ANY]
+    command: "gitleaks detect --source . --report-format json"
+    script: "ci/scan-secrets.sh"
+
+  npm_audit:
+    stage: CI
+    category: SCA
+    language: JavaScript/Node.js
+    when: [package_json_change, pull_request]
+    speed: ~5 seconds
+    focus: "Vulnerable npm packages, CVEs in dependencies"
+    fail_build_on: [HIGH, CRITICAL]
+    command: "npm audit --json"
+    script: "ci/scan-dependencies.sh"
+
+  pip_audit:
+    stage: CI
+    category: SCA
+    language: Python
+    when: [requirements_txt_change, pull_request]
+    speed: ~5 seconds
+    focus: "Vulnerable Python packages, CVEs"
+    fail_build_on: [HIGH, CRITICAL]
+    command: "pip-audit -r requirements.txt --format json"
+    script: "ci/scan-dependencies.sh"
+
+  trivy:
+    stage: CI
+    category: Container_Security
+    language: Docker
+    when: [dockerfile_change, image_build]
+    speed: ~15 seconds
+    focus: "Vulnerable OS packages, CVEs in base images"
+    fail_build_on: [CRITICAL]
+    command: "trivy image securebank/backend:latest --format json"
+    script: "ci/scan-containers.sh"
+
+  # ═══════════════════════════════════════════════════════════
+  # CD STAGE - Run DURING/AFTER infrastructure deployment
+  # ═══════════════════════════════════════════════════════════
+
+  tfsec:
+    stage: CD
+    category: IaC_Security
+    language: Terraform
+    when: [terraform_plan, terraform_apply]
+    speed: ~10 seconds
+    focus: "AWS misconfigurations (S3, RDS, VPC, IAM)"
+    fail_build_on: [HIGH, CRITICAL]
+    command: "tfsec infrastructure/terraform/ --format json"
+    script: "cd/scan-iac.sh"
+
+  checkov:
+    stage: CD
+    category: IaC_Security
+    language: [Terraform, CloudFormation, Kubernetes]
+    when: [terraform_plan, kubectl_apply]
+    speed: ~15 seconds
+    focus: "Multi-cloud policy violations, CIS benchmarks"
+    fail_build_on: [CRITICAL]
+    command: "checkov -d infrastructure/terraform/ --framework terraform"
+    script: "cd/scan-iac.sh"
+
+  opa_conftest:
+    stage: CD
+    category: Policy_as_Code
+    language: [Terraform, Kubernetes]
+    when: [terraform_plan, kubectl_apply]
+    speed: ~5 seconds
+    focus: "Custom policies (CIS, PCI-DSS, company standards)"
+    fail_build_on: [FAIL]
+    command: "conftest test infrastructure/terraform/ -p policies/opa/"
+    script: "cd/scan-iac.sh"
+
+  opa_gatekeeper:
+    stage: CD
+    category: Admission_Control
+    language: Kubernetes
+    when: [kubectl_apply]
+    speed: ~100ms per resource
+    focus: "Real-time policy enforcement (blocks violations)"
+    fail_build_on: [DENY]
+    command: "kubectl apply -f manifest.yaml"
+    script: "cd/scan-kubernetes.sh"
+    notes: "Requires Gatekeeper controller installed in cluster"
+
+  kubescape:
+    stage: CD
+    category: Kubernetes_Security
+    language: Kubernetes
+    when: [post_deployment, scheduled]
+    speed: ~30 seconds
+    focus: "CIS Kubernetes Benchmark, NSA hardening, MITRE ATT&CK"
+    fail_build_on: [CRITICAL]
+    command: "kubescape scan framework cis infrastructure/k8s/"
+    script: "cd/scan-kubernetes.sh"
+
+  aws_config:
+    stage: CD
+    category: Cloud_Posture_Management
+    platform: AWS
+    when: [post_deployment, continuous]
+    speed: real-time
+    focus: "AWS resource compliance (S3, RDS, VPC, IAM)"
+    fail_build_on: [NON_COMPLIANT]
+    command: "aws configservice describe-compliance-by-config-rule"
+    script: "cd/scan-aws-compliance.sh"
+
+  # ═══════════════════════════════════════════════════════════
+  # RUNTIME STAGE - Continuous monitoring (24/7)
+  # ═══════════════════════════════════════════════════════════
+
+  prometheus:
+    stage: RUNTIME
+    category: Metrics
+    platform: Kubernetes
+    when: [continuous]
+    speed: real-time (15s scrape)
+    focus: "CPU, memory, network, request rates, error rates"
+    alert_on: [high_cpu, high_memory, pod_restart_loop]
+    command: "# Deployed as service"
+    script: "runtime/query-prometheus.sh"
+    deployment: "helm install prometheus prometheus-community/kube-prometheus-stack"
+
+  grafana:
+    stage: RUNTIME
+    category: Visualization
+    platform: Prometheus
+    when: [continuous]
+    speed: real-time
+    focus: "Dashboards, alerts, visualization"
+    alert_on: [dashboard_thresholds]
+    command: "# Deployed as service"
+    script: "runtime/check-grafana-alerts.sh"
+    deployment: "helm install grafana grafana/grafana"
+
+  aws_guardduty:
+    stage: RUNTIME
+    category: Threat_Detection
+    platform: AWS
+    when: [continuous]
+    speed: real-time
+    focus: "Compromised instances, malicious IPs, crypto mining"
+    alert_on: [suspicious_activity]
+    command: "aws guardduty list-findings --detector-id $DETECTOR_ID"
+    script: "runtime/query-guardduty.sh"
+
+  aws_security_hub:
+    stage: RUNTIME
+    category: Cloud_SIEM
+    platform: AWS
+    when: [continuous]
+    speed: real-time
+    focus: "Aggregates GuardDuty, Config, Inspector, Macie"
+    alert_on: [aggregated_findings]
+    command: "aws securityhub get-findings"
+    script: "runtime/query-security-hub.sh"
+
+  cloudwatch_logs:
+    stage: RUNTIME
+    category: Logging
+    platform: AWS
+    when: [continuous]
+    speed: real-time
+    focus: "Application logs, VPC Flow Logs, CloudTrail"
+    alert_on: [error_rate_spike]
+    command: "aws logs filter-log-events --log-group-name /aws/lambda/payment"
+    script: "runtime/query-cloudwatch.sh"
+
+  cloudtrail:
+    stage: RUNTIME
+    category: Audit_Logging
+    platform: AWS
+    when: [continuous]
+    speed: real-time
+    focus: "Who did what, when - API audit logs"
+    alert_on: [suspicious_api_calls]
+    command: "aws cloudtrail lookup-events"
+    script: "runtime/query-cloudtrail.sh"
+
+# ============================================================================
+# Learning Path
+# ============================================================================
+
+learning_path:
+  week_1_ci:
+    focus: "Code-level security (CI)"
+    tools: [bandit, gitleaks, semgrep]
+    why: "Run on laptop, no cloud needed"
+    time: "1 week to master"
+
+  week_2_ci:
+    focus: "Dependencies and containers (CI)"
+    tools: [npm_audit, pip_audit, trivy]
+    why: "Understand supply chain security"
+    time: "1 week to master"
+
+  week_3_cd:
+    focus: "Infrastructure security (CD)"
+    tools: [tfsec, checkov, opa_conftest]
+    why: "Learn Terraform and K8s security"
+    time: "2 weeks to master"
+
+  week_5_cd:
+    focus: "Kubernetes hardening (CD)"
+    tools: [kubescape, opa_gatekeeper]
+    why: "CIS Benchmarks and admission control"
+    time: "1 week to master"
+
+  week_6_runtime:
+    focus: "Cloud monitoring (Runtime)"
+    tools: [prometheus, grafana, guardduty]
+    why: "Threat detection and metrics"
+    time: "3 weeks to master"
+
+# ============================================================================
+# Integration Points
+# ============================================================================
+
+integrations:
+  github_actions:
+    ci_triggers:
+      - on: [push, pull_request]
+        runs: [bandit, semgrep, gitleaks, npm_audit, trivy]
+
+    cd_triggers:
+      - on: [terraform_plan]
+        runs: [tfsec, checkov, opa_conftest]
+      - on: [kubectl_apply]
+        runs: [kubescape, opa_gatekeeper]
+
+  aws_integration:
+    cd_services:
+      - AWS Config (compliance validation)
+      - AWS Secrets Manager (credential storage)
+
+    runtime_services:
+      - CloudWatch (logs and metrics)
+      - GuardDuty (threat detection)
+      - Security Hub (aggregated findings)
+      - CloudTrail (audit logs)
