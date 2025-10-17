@@ -220,7 +220,8 @@
       "Bash(PYTHONPATH=/home/jimmie/linkops-industries/GP-copilot/GP-Backend/james-config:$PYTHONPATH python:*)",
       "Bash(bin/gitleaks version:*)",
       "Bash(bin/tfsec:*)",
-      "Bash(bin/kubescape version:*)"
+      "Bash(bin/kubescape version:*)",
+      "Bash(FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch:*)"
     ],
     "deny": [],
     "ask": []
