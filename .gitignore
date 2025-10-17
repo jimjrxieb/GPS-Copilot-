@@ -88,3 +88,9 @@ GP-PROJECTS/LinkOps-MLOps/
 GP-PROJECTS/Terraform_CICD_Setup/*.pyc
 *.terraform*
 terraform-provider-*
+# Large binaries
+bin/kubescape
+bin/terraform-provider-*
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform-provider-*
