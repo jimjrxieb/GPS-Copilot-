@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "2.0",
+  "accountId": "123456789012",
+  "region": "us-east-1",
+  "partition": "aws",
+  "id": "test-finding-20251013-001",
+  "arn": "arn:aws:guardduty:us-east-1:123456789012:detector/abc123/finding/test-finding-20251013-001",
+  "type": "UnauthorizedAccess:EC2/SSHBruteForce",
+  "resource": {
+    "resourceType": "Instance",
+    "instanceDetails": {
+      "instanceId": "i-0example12345678",
+      "instanceType": "t3.medium",
+      "launchTime": "2025-10-01T12:00:00.000Z",
+      "imageId": "ami-0abcdef1234567890",
+      "tags": [
+        {
+          "key": "Name",
+          "value": "test-server"
+        },
+        {
+          "key": "Environment",
+          "value": "production"
+        }
+      ]
+    }
+  },
+  "service": {
+    "serviceName": "guardduty",
+    "detectorId": "abc123def456",
+    "action": {
+      "actionType": "NETWORK_CONNECTION",
+      "networkConnectionAction": {
+        "blocked": false,
+        "connectionDirection": "INBOUND",
+        "localPortDetails": {
+          "port": 22,
+          "portName": "SSH"
+        },
+        "protocol": "TCP",
+        "remoteIpDetails": {
+          "ipAddressV4": "198.51.100.123",
+          "organization": {
+            "asn": "16509",
+            "asnOrg": "AMAZON-02",
+            "isp": "Amazon.com",
+            "org": "Amazon.com"
+          },
+          "country": {
+            "countryName": "Unknown"
+          },
+          "city": {},
+          "geoLocation": {}
+        }
+      }
+    },
+    "archived": false,
+    "count": 152,
+    "eventFirstSeen": "2025-10-13T08:00:00.000Z",
+    "eventLastSeen": "2025-10-13T14:30:00.000Z",
+    "resourceRole": "TARGET",
+    "additionalInfo": {
+      "threatName": "Scanner",
+      "threatListName": "GeneratedFindingThreatListName"
+    }
+  },
+  "severity": 8.0,
+  "title": "i-0example12345678 is performing SSH brute force attacks against 10.0.1.123.",
+  "description": "10.0.1.123 is performing SSH brute force attacks against i-0example12345678. Brute force attacks are used to gain unauthorized access to your instance by guessing the SSH password.",
+  "createdAt": "2025-10-13T14:35:00.000Z",
+  "updatedAt": "2025-10-13T14:35:00.000Z"
+}

@@ -1,0 +1,25 @@
+{
+  "framework": "ISO 27001:2022",
+  "scan_date": "2025-10-10T12:30:38.656409",
+  "summary": {
+    "total_controls_in_standard": 114,
+    "controls_checked": 0,
+    "controls_passing": 0,
+    "controls_failing": 0,
+    "compliance_score": 0.0,
+    "coverage_percentage": 0.0
+  },
+  "findings_summary": {
+    "total_findings": 0,
+    "findings_with_compliance_mapping": 0,
+    "mapping_coverage": 0.0
+  },
+  "failing_controls": [],
+  "remediation_summary": {
+    "total_effort_hours": 0,
+    "critical_priority_controls": 0,
+    "high_priority_controls": 0,
+    "medium_priority_controls": 0,
+    "low_priority_controls": 0
+  }
+}

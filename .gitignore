@@ -86,3 +86,5 @@ GP-TOOLS/binaries/gitleaks
 GP-PROJECTS/DVWA/
 GP-PROJECTS/LinkOps-MLOps/
 GP-PROJECTS/Terraform_CICD_Setup/*.pyc
+*.terraform*
+terraform-provider-*

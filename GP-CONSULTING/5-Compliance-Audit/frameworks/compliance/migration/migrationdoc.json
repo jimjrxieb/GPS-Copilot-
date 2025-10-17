@@ -1,0 +1,88 @@
+{
+  "task": "FINANCE Project Cloud Migration Assessment",
+  "location": "FINANCE-project/docs/MIGRATION_PLAN.md",
+  "content": {
+    "application_inventory": {
+      "frontend": "Flask web app (Python 3.11)",
+      "backend_api": "REST API with JWT auth",
+      "database": "PostgreSQL 14",
+      "storage": "Local filesystem (uploads/)",
+      "secrets": "Hardcoded in config.py",
+      "external_apis": ["Plaid API", "Stripe API"]
+    },
+    
+    "cloud_architecture_target": {
+      "compute": {
+        "current": "Bare metal / local",
+        "target": "AWS ECS Fargate (containerized)",
+        "reasoning": "Serverless container, no EC2 management"
+      },
+      "database": {
+        "current": "Local PostgreSQL",
+        "target": "AWS RDS PostgreSQL (Multi-AZ)",
+        "reasoning": "Managed, automated backups, encryption at rest"
+      },
+      "storage": {
+        "current": "Local filesystem",
+        "target": "AWS S3 (private bucket)",
+        "reasoning": "Durable, encrypted, versioned"
+      },
+      "secrets": {
+        "current": "config.py (plaintext)",
+        "target": "AWS Secrets Manager",
+        "reasoning": "Encrypted, rotated, audited"
+      },
+      "networking": {
+        "current": "Public internet",
+        "target": "VPC with private subnets",
+        "reasoning": "Network isolation, no public database access"
+      },
+      "monitoring": {
+        "current": "None",
+        "target": "CloudWatch + GuardDuty",
+        "reasoning": "Security monitoring, alerting"
+      }
+    },
+    
+    "migration_phases": [
+      {
+        "phase": "1. Infrastructure Provisioning",
+        "duration": "2 days",
+        "tasks": [
+          "Write Terraform for VPC, subnets, security groups",
+          "Provision RDS PostgreSQL (encrypted)",
+          "Create S3 bucket (private, encrypted)",
+          "Deploy Secrets Manager for API keys"
+        ]
+      },
+      {
+        "phase": "2. Security Hardening",
+        "duration": "1 day",
+        "tasks": [
+          "Scan infrastructure with GP-Consulting",
+          "Fix findings (use auto-fixers)",
+          "Re-scan and validate (0 violations)"
+        ]
+      },
+      {
+        "phase": "3. Application Migration",
+        "duration": "2 days",
+        "tasks": [
+          "Containerize Flask app (Dockerfile)",
+          "Update app to use Secrets Manager",
+          "Migrate database schema and data",
+          "Deploy to ECS Fargate"
+        ]
+      },
+      {
+        "phase": "4. Validation & Documentation",
+        "duration": "1 day",
+        "tasks": [
+          "End-to-end testing",
+          "Generate compliance report",
+          "Document architecture and runbooks"
+        ]
+      }
+    ]
+  }
+}

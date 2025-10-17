@@ -1,0 +1,42 @@
+{
+  "findings": [],
+  "summary": {
+    "total": 0,
+    "files_scanned": 0,
+    "severity_breakdown": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "package_managers_found": [],
+    "vulnerability_sources": {},
+    "scan_coverage": {
+      "package_files": {
+        "npm": 558,
+        "pip": 22
+      },
+      "dockerfile_count": 22
+    }
+  },
+  "target": "GP-PROJECTS/LinkOps-MLOps",
+  "tool": "trivy",
+  "timestamp": "2025-10-04T22:25:19.578222",
+  "scan_id": "trivy_20251004_222519_578",
+  "scan_context": {
+    "package_files": {
+      "npm": 558,
+      "pip": 22
+    },
+    "dockerfile_count": 22,
+    "total_files": 29740
+  },
+  "metadata": {
+    "trivy_db_version": 2,
+    "scan_type": "filesystem",
+    "scan_performance": {
+      "results_processed": 0,
+      "total_vulnerabilities": 0
+    }
+  }
+}

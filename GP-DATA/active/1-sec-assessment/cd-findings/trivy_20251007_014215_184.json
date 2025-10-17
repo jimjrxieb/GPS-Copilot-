@@ -1,0 +1,24 @@
+{
+  "findings": [],
+  "summary": {
+    "total": 0,
+    "scan_coverage": {
+      "package_files": {
+        "maven": 1
+      },
+      "dockerfile_count": 1,
+      "total_files": 211
+    }
+  },
+  "target": "GP-PROJECTS/CLOUD-project",
+  "tool": "trivy",
+  "timestamp": "2025-10-07T01:42:15.184498",
+  "scan_id": "trivy_20251007_014215_184",
+  "scan_context": {
+    "package_files": {
+      "maven": 1
+    },
+    "dockerfile_count": 1,
+    "total_files": 211
+  }
+}

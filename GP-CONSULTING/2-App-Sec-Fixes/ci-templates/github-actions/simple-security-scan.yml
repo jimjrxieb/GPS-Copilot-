@@ -1,0 +1,48 @@
+name: Security Scan (Simple)
+
+# Lightweight security scanning for quick feedback
+# Perfect for small projects or fast CI pipelines
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  security-scan:
+    name: Quick Security Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install scanners
+        run: |
+          pip install bandit semgrep
+          wget -q https://github.com/gitleaks/gitleaks/releases/download/v8.18.0/gitleaks_8.18.0_linux_x64.tar.gz
+          tar -xzf gitleaks_8.18.0_linux_x64.tar.gz && sudo mv gitleaks /usr/local/bin/
+
+      - name: Run Bandit
+        run: bandit -r . -ll  # Only LOW and above
+
+      - name: Run Gitleaks
+        run: gitleaks detect --source . --no-git
+
+      - name: Run Semgrep
+        run: semgrep --config auto --error
+
+      - name: npm audit (if Node.js project)
+        if: hashFiles('**/package.json') != ''
+        run: npm audit --audit-level=high
+
+      - name: pip-audit (if Python project)
+        if: hashFiles('**/requirements.txt') != ''
+        run: |
+          pip install pip-audit
+          pip-audit

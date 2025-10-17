@@ -1,0 +1,81 @@
+{
+  "findings": [],
+  "summary": {
+    "total": 0,
+    "severity_breakdown": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "category_breakdown": {},
+    "hunter_breakdown": {},
+    "scan_mode": "cidr",
+    "services_discovered": 0,
+    "nodes_discovered": 0
+  },
+  "target": "GP-Projects/Portfolio",
+  "tool": "kube-hunter",
+  "timestamp": "2025-09-24T08:49:42.617668",
+  "scan_id": "kube_hunter_20250924_084942_617",
+  "kubernetes_context": {
+    "total_manifest_files": 31,
+    "total_k8s_resources": 70,
+    "resource_types": {
+      "Namespace": 4,
+      "NetworkPolicy": 11,
+      "ResourceQuota": 1,
+      "LimitRange": 1,
+      "ServiceAccount": 6,
+      "Secret": 2,
+      "ConfigMap": 4,
+      "PersistentVolumeClaim": 5,
+      "Service": 13,
+      "Deployment": 12,
+      "Ingress": 5,
+      "Job": 1,
+      "Pod": 1,
+      "Role": 2,
+      "RoleBinding": 2
+    },
+    "manifest_files": [
+      "rendered-manifests.yaml",
+      "k8s/expose-services.yaml",
+      "k8s/quick-fix-ui.yaml",
+      "k8s/job-ingest.yaml",
+      "k8s/quick-fix-api.yaml",
+      "k8s/ingress.yaml",
+      "k8s/base/service-api.yaml",
+      "k8s/base/service-ui.yaml",
+      "k8s/base/pvc-chroma.yaml",
+      "k8s/base/secret-example.yaml",
+      "k8s/base/configmap.yaml",
+      "k8s/base/deployment-api.yaml",
+      "k8s/base/ingress.yaml",
+      "k8s/base/deployment-ui.yaml",
+      "k8s/base/namespace.yaml",
+      "k8s/cloudflared/deployment.yaml",
+      "k8s/portfolio/netpol-allow-from-cloudflared.yaml",
+      "k8s/portfolio/chromadb-deployment.yaml",
+      "k8s/portfolio/ollama-deployment.yaml",
+      "k8s/network-policies/network-policy-1.yaml",
+      "k8s/network-policies/network-policy-2.yaml",
+      "tests/security/secure-deployment.yaml",
+      "tests/security/vulnerable-deployment.yaml",
+      "kubernetes-security/pod-security-standards.yaml",
+      "kubernetes-security/rbac-hardening.yaml",
+      "k8s-security-fixes/default-deny-networkpolicy.yaml",
+      "k8s-security-fixes/role-binding-default.yaml",
+      "k8s-security-fixes/service-account-default.yaml",
+      "k8s-security-fixes/pod-security-standards-default.yaml",
+      "k8s-security-fixes/app-role-default.yaml",
+      "k8s-security-fixes/allow-dns-networkpolicy.yaml"
+    ]
+  },
+  "services": [],
+  "nodes": [],
+  "metadata": {
+    "scan_mode": "cidr",
+    "scan_type": "penetration_test"
+  }
+}

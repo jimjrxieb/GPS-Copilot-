@@ -1,0 +1,388 @@
+{
+  "findings": [
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "db/job-category/data_scientist/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "db/job-category/data_scientist/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "db/job-category/devops_engineer/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "db/job-category/devops_engineer/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "db/job-category/kubernetes_specialist/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "db/job-category/kubernetes_specialist/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "db/job-category/platform_engineer/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "db/job-category/platform_engineer/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "htc/qa-generator/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "htc/qa-generator/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "htc/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "htc/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    }
+  ],
+  "summary": {
+    "total": 12,
+    "files_scanned": 6,
+    "severity_breakdown": {
+      "critical": 6,
+      "high": 0,
+      "medium": 6,
+      "low": 0
+    },
+    "package_managers_found": [
+      "pip"
+    ],
+    "vulnerability_sources": {
+      "db/job-category/data_scientist/requirements.txt": 2,
+      "db/job-category/devops_engineer/requirements.txt": 2,
+      "db/job-category/kubernetes_specialist/requirements.txt": 2,
+      "db/job-category/platform_engineer/requirements.txt": 2,
+      "htc/qa-generator/requirements.txt": 2,
+      "htc/requirements.txt": 2
+    },
+    "scan_coverage": {
+      "package_files": {
+        "npm": 558,
+        "pip": 22
+      },
+      "dockerfile_count": 22
+    }
+  },
+  "target": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/LinkOps-MLOps",
+  "tool": "trivy",
+  "timestamp": "2025-09-30T08:57:19.272827",
+  "scan_id": "trivy_20250930_085719_272",
+  "scan_context": {
+    "package_files": {
+      "npm": 558,
+      "pip": 22
+    },
+    "dockerfile_count": 22,
+    "total_files": 29733
+  },
+  "metadata": {
+    "trivy_db_version": 2,
+    "scan_type": "filesystem",
+    "scan_performance": {
+      "results_processed": 6,
+      "total_vulnerabilities": 12
+    }
+  }
+}

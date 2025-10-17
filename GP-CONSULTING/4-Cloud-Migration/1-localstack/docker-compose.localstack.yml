@@ -1,0 +1,129 @@
+# ============================================================================
+# REUSABLE LOCALSTACK SETUP
+# Test AWS services locally without AWS costs
+# ============================================================================
+# USAGE:
+#   docker-compose -f docker-compose.localstack.yml up -d
+#
+# SERVICES:
+#   - S3, Secrets Manager, RDS, KMS, IAM, CloudWatch, ECR, EKS
+#
+# ENDPOINT:
+#   http://localhost:4566
+#
+# AWS CLI:
+#   Use awslocal instead of aws
+#   pip install awscli-local
+# ============================================================================
+
+version: '3.8'
+
+services:
+  localstack:
+    image: localstack/localstack:3.0.2
+    container_name: localstack-aws
+    hostname: localstack
+    ports:
+      - "4566:4566"          # LocalStack gateway
+      - "4510-4559:4510-4559"  # External services (optional)
+    environment:
+      # Core configuration
+      - SERVICES=s3,secretsmanager,rds,kms,iam,cloudwatch,ecr,eks,ec2,lambda,dynamodb,sqs,sns
+      - DEBUG=1
+      - DATA_DIR=/var/lib/localstack/data
+      - PERSISTENCE=1        # Persist data between restarts
+
+      # Docker integration
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - LAMBDA_EXECUTOR=docker-reuse
+
+      # Disable telemetry
+      - DISABLE_EVENTS=1
+
+      # Performance
+      - SKIP_INFRA_DOWNLOADS=1
+      - SKIP_SSL_CERT_DOWNLOAD=1
+
+      # CORS (for frontend access)
+      - DISABLE_CUSTOM_CORS_S3=1
+      - DISABLE_CUSTOM_CORS_APIGATEWAY=1
+
+      # Region
+      - DEFAULT_REGION=us-east-1
+
+    security_opt:
+      - no-new-privileges:true
+
+    volumes:
+      # Persist LocalStack data
+      - localstack_data:/var/lib/localstack
+
+      # Docker socket (required for Lambda, ECS, etc.)
+      # ⚠️ SECURITY: Only use in development, never production
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+      # Optional: Mount init scripts
+      # - ./init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh
+
+    networks:
+      - localstack-net
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+networks:
+  localstack-net:
+    driver: bridge
+    name: localstack-network
+
+volumes:
+  localstack_data:
+    driver: local
+    name: localstack_data
+
+# ============================================================================
+# USAGE EXAMPLES
+# ============================================================================
+#
+# 1. Start LocalStack:
+#    docker-compose -f docker-compose.localstack.yml up -d
+#
+# 2. Install awslocal:
+#    pip install awscli-local
+#
+# 3. Test S3:
+#    awslocal s3 mb s3://test-bucket
+#    awslocal s3 ls
+#
+# 4. Test Secrets Manager:
+#    awslocal secretsmanager create-secret \
+#      --name test-secret \
+#      --secret-string "mysecret123"
+#
+# 5. Test RDS:
+#    awslocal rds create-db-instance \
+#      --db-instance-identifier test-db \
+#      --engine postgres \
+#      --master-username admin \
+#      --master-user-password password123
+#
+# 6. Test KMS:
+#    awslocal kms create-key \
+#      --description "Test encryption key"
+#
+# 7. Check health:
+#    curl http://localhost:4566/_localstack/health
+#
+# 8. Stop LocalStack:
+#    docker-compose -f docker-compose.localstack.yml down
+#
+# 9. Clean up (remove data):
+#    docker-compose -f docker-compose.localstack.yml down -v
+#
+# ============================================================================

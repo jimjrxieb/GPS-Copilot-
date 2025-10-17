@@ -1,0 +1,17 @@
+{
+  "scanner_name": "checkov",
+  "start_time": "2025-10-15T12:47:32.884981",
+  "end_time": "2025-10-15T12:47:38.806658",
+  "duration_seconds": 5.92,
+  "exit_code": 1,
+  "total_issues": 13,
+  "severity_breakdown": {
+    "CRITICAL": 0,
+    "HIGH": 0,
+    "MEDIUM": 13,
+    "LOW": 0,
+    "INFO": 0
+  },
+  "retry_count": 0,
+  "status": "success"
+}

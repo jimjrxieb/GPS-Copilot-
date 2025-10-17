@@ -1,0 +1,412 @@
+name: OPA Security Gate (Phase 3 Hardening)
+
+# Trigger on pull requests and pushes to main
+on:
+  pull_request:
+    branches: [main, master, develop]
+    paths:
+      - '**.tf'              # Terraform files
+      - '**.yaml'            # Kubernetes manifests
+      - '**.yml'             # Kubernetes/Docker Compose
+      - '**.json'            # Config files
+      - 'Dockerfile*'        # Dockerfiles
+      - '.github/workflows/**'  # CI/CD changes
+  push:
+    branches: [main, master, develop]
+
+# Cancel in-progress runs when new commit pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Job 1: OPA Policy Testing
+  opa-policy-tests:
+    name: OPA Policy Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OPA
+        run: |
+          OPA_VERSION=v0.60.0
+          curl -L -o opa "https://github.com/open-policy-agent/opa/releases/download/${OPA_VERSION}/opa_linux_amd64_static"
+          chmod +x opa
+          sudo mv opa /usr/local/bin/
+          opa version
+
+      - name: Run OPA policy tests
+        run: |
+          echo "Running OPA policy unit tests..."
+
+          # Test Terraform security policies
+          if [ -d "GP-CONSULTING/3-Hardening/policies/opa" ]; then
+            cd GP-CONSULTING/3-Hardening/policies/opa
+
+            # Run OPA tests (looks for *_test.rego files)
+            opa test . --verbose
+
+            cd -
+          fi
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opa-test-results
+          path: |
+            **/test-results.json
+            **/coverage.json
+
+  # Job 2: Terraform Security Validation
+  terraform-opa-validation:
+    name: Terraform + OPA Validation
+    runs-on: ubuntu-latest
+    if: |
+      contains(github.event.pull_request.changed_files, '.tf') ||
+      contains(github.event.head_commit.message, 'terraform')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0
+
+      - name: Setup Conftest (OPA for IaC)
+        run: |
+          CONFTEST_VERSION=0.49.0
+          wget "https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz"
+          tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz
+          sudo mv conftest /usr/local/bin/
+          conftest --version
+
+      - name: Find Terraform directories
+        id: find_terraform
+        run: |
+          # Find all directories with .tf files
+          TF_DIRS=$(find . -name "*.tf" -type f -exec dirname {} \; | sort -u | tr '\n' ' ')
+          echo "terraform_dirs=$TF_DIRS" >> $GITHUB_OUTPUT
+          echo "Found Terraform directories: $TF_DIRS"
+
+      - name: Terraform Init & Plan
+        run: |
+          for dir in ${{ steps.find_terraform.outputs.terraform_dirs }}; do
+            echo "Processing $dir..."
+            cd "$dir"
+
+            # Initialize Terraform
+            terraform init -backend=false
+
+            # Generate plan in JSON format for OPA
+            terraform plan -out=tfplan.binary
+            terraform show -json tfplan.binary > tfplan.json
+
+            cd -
+          done
+
+      - name: Validate Terraform with OPA policies
+        run: |
+          POLICY_DIR="GP-CONSULTING/3-Hardening/policies/opa"
+          VIOLATIONS=0
+
+          for dir in ${{ steps.find_terraform.outputs.terraform_dirs }}; do
+            echo "Validating $dir with OPA policies..."
+
+            PLAN_FILE="$dir/tfplan.json"
+            if [ ! -f "$PLAN_FILE" ]; then
+              echo "⚠️  No plan file found for $dir"
+              continue
+            fi
+
+            # Run Conftest with OPA policies
+            conftest test "$PLAN_FILE" \
+              --policy "$POLICY_DIR" \
+              --namespace terraform.security \
+              --output json > "$dir/opa-results.json" || VIOLATIONS=$((VIOLATIONS + 1))
+
+            # Show results
+            echo "Results for $dir:"
+            cat "$dir/opa-results.json" | jq -r '.[] | .failures[]? | "❌ \(.msg)"' || true
+            cat "$dir/opa-results.json" | jq -r '.[] | .warnings[]? | "⚠️  \(.msg)"' || true
+            cat "$dir/opa-results.json" | jq -r '.[] | .successes[]? | "✅ \(.msg)"' || true
+          done
+
+          if [ $VIOLATIONS -gt 0 ]; then
+            echo "❌ OPA validation failed with $VIOLATIONS violation(s)"
+            exit 1
+          else
+            echo "✅ All Terraform configurations passed OPA validation"
+          fi
+
+      - name: Upload OPA results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-opa-results
+          path: '**/opa-results.json'
+
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            // Find all OPA result files
+            const results = [];
+            const findResults = (dir) => {
+              const files = fs.readdirSync(dir);
+              files.forEach(file => {
+                const fullPath = path.join(dir, file);
+                if (fs.statSync(fullPath).isDirectory()) {
+                  findResults(fullPath);
+                } else if (file === 'opa-results.json') {
+                  const content = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+                  results.push({ path: fullPath, content });
+                }
+              });
+            };
+
+            try {
+              findResults('.');
+            } catch (e) {
+              console.log('No OPA results found');
+              return;
+            }
+
+            // Format comment
+            let comment = '## OPA Security Gate Results\n\n';
+
+            results.forEach(result => {
+              const failures = result.content[0]?.failures || [];
+              const warnings = result.content[0]?.warnings || [];
+              const successes = result.content[0]?.successes || [];
+
+              comment += `### ${result.path}\n\n`;
+
+              if (failures.length > 0) {
+                comment += `❌ **Failures (${failures.length}):**\n`;
+                failures.forEach(f => comment += `- ${f.msg}\n`);
+                comment += '\n';
+              }
+
+              if (warnings.length > 0) {
+                comment += `⚠️ **Warnings (${warnings.length}):**\n`;
+                warnings.forEach(w => comment += `- ${w.msg}\n`);
+                comment += '\n';
+              }
+
+              if (successes.length > 0) {
+                comment += `✅ **Passed (${successes.length} checks)**\n\n`;
+              }
+            });
+
+            // Post comment
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: comment
+            });
+
+  # Job 3: Kubernetes Manifest Validation
+  kubernetes-opa-validation:
+    name: Kubernetes + OPA Validation
+    runs-on: ubuntu-latest
+    if: |
+      contains(github.event.pull_request.changed_files, '.yaml') ||
+      contains(github.event.pull_request.changed_files, '.yml')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Conftest
+        run: |
+          CONFTEST_VERSION=0.49.0
+          wget "https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz"
+          tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz
+          sudo mv conftest /usr/local/bin/
+          conftest --version
+
+      - name: Find Kubernetes manifests
+        id: find_k8s
+        run: |
+          # Find YAML files that look like K8s manifests (have 'apiVersion')
+          K8S_FILES=$(grep -rl "apiVersion:" . --include="*.yaml" --include="*.yml" \
+            --exclude-dir=node_modules \
+            --exclude-dir=.git \
+            --exclude-dir=vendor || echo "")
+
+          echo "k8s_files=$K8S_FILES" >> $GITHUB_OUTPUT
+
+          if [ -n "$K8S_FILES" ]; then
+            echo "Found Kubernetes manifests:"
+            echo "$K8S_FILES"
+          else
+            echo "No Kubernetes manifests found"
+          fi
+
+      - name: Validate Kubernetes manifests with OPA
+        if: steps.find_k8s.outputs.k8s_files != ''
+        run: |
+          POLICY_DIR="GP-CONSULTING/3-Hardening/policies/opa"
+          VIOLATIONS=0
+
+          for file in ${{ steps.find_k8s.outputs.k8s_files }}; do
+            echo "Validating $file..."
+
+            # Run Conftest with OPA policies
+            conftest test "$file" \
+              --policy "$POLICY_DIR" \
+              --namespace kubernetes.security \
+              --output json > "${file}.opa-results.json" || VIOLATIONS=$((VIOLATIONS + 1))
+
+            # Show results
+            echo "Results for $file:"
+            cat "${file}.opa-results.json" | jq -r '.[] | .failures[]? | "❌ \(.msg)"' || true
+            cat "${file}.opa-results.json" | jq -r '.[] | .warnings[]? | "⚠️  \(.msg)"' || true
+          done
+
+          if [ $VIOLATIONS -gt 0 ]; then
+            echo "❌ OPA validation failed with $VIOLATIONS violation(s)"
+            exit 1
+          else
+            echo "✅ All Kubernetes manifests passed OPA validation"
+          fi
+
+      - name: Upload Kubernetes OPA results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kubernetes-opa-results
+          path: '**/*.opa-results.json'
+
+  # Job 4: Docker Security Validation
+  docker-opa-validation:
+    name: Dockerfile + OPA Validation
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.changed_files, 'Dockerfile')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Conftest
+        run: |
+          CONFTEST_VERSION=0.49.0
+          wget "https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz"
+          tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz
+          sudo mv conftest /usr/local/bin/
+          conftest --version
+
+      - name: Find Dockerfiles
+        id: find_dockerfiles
+        run: |
+          DOCKERFILES=$(find . -name "Dockerfile*" -type f | tr '\n' ' ')
+          echo "dockerfiles=$DOCKERFILES" >> $GITHUB_OUTPUT
+          echo "Found Dockerfiles: $DOCKERFILES"
+
+      - name: Validate Dockerfiles with OPA
+        run: |
+          POLICY_DIR="GP-CONSULTING/3-Hardening/policies/opa"
+          VIOLATIONS=0
+
+          for file in ${{ steps.find_dockerfiles.outputs.dockerfiles }}; do
+            echo "Validating $file..."
+
+            # Run Conftest with OPA policies
+            conftest test "$file" \
+              --policy "$POLICY_DIR" \
+              --namespace docker.security \
+              --output json > "${file}.opa-results.json" || VIOLATIONS=$((VIOLATIONS + 1))
+
+            # Show results
+            echo "Results for $file:"
+            cat "${file}.opa-results.json" | jq -r '.[] | .failures[]? | "❌ \(.msg)"' || true
+            cat "${file}.opa-results.json" | jq -r '.[] | .warnings[]? | "⚠️  \(.msg)"' || true
+          done
+
+          if [ $VIOLATIONS -gt 0 ]; then
+            echo "❌ OPA validation failed with $VIOLATIONS violation(s)"
+            exit 1
+          else
+            echo "✅ All Dockerfiles passed OPA validation"
+          fi
+
+      - name: Upload Dockerfile OPA results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dockerfile-opa-results
+          path: '**/Dockerfile*.opa-results.json'
+
+  # Job 5: Security Summary & Gate
+  security-gate-summary:
+    name: Security Gate Summary
+    runs-on: ubuntu-latest
+    needs: [opa-policy-tests, terraform-opa-validation, kubernetes-opa-validation, docker-opa-validation]
+    if: always()
+    steps:
+      - name: Check job results
+        run: |
+          echo "OPA Policy Tests: ${{ needs.opa-policy-tests.result }}"
+          echo "Terraform Validation: ${{ needs.terraform-opa-validation.result }}"
+          echo "Kubernetes Validation: ${{ needs.kubernetes-opa-validation.result }}"
+          echo "Docker Validation: ${{ needs.docker-opa-validation.result }}"
+
+          # Fail if any critical job failed
+          if [[ "${{ needs.opa-policy-tests.result }}" == "failure" ]]; then
+            echo "❌ OPA policy tests failed"
+            exit 1
+          fi
+
+          if [[ "${{ needs.terraform-opa-validation.result }}" == "failure" ]]; then
+            echo "❌ Terraform OPA validation failed"
+            exit 1
+          fi
+
+          if [[ "${{ needs.kubernetes-opa-validation.result }}" == "failure" ]]; then
+            echo "❌ Kubernetes OPA validation failed"
+            exit 1
+          fi
+
+          if [[ "${{ needs.docker-opa-validation.result }}" == "failure" ]]; then
+            echo "❌ Docker OPA validation failed"
+            exit 1
+          fi
+
+          echo "✅ All OPA security gates passed!"
+
+      - name: Post summary to PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const summary = `## 🔒 OPA Security Gate Summary
+
+            | Check | Status |
+            |-------|--------|
+            | OPA Policy Tests | ${{ needs.opa-policy-tests.result == 'success' && '✅ Passed' || '❌ Failed' }} |
+            | Terraform Validation | ${{ needs.terraform-opa-validation.result == 'success' && '✅ Passed' || needs.terraform-opa-validation.result == 'skipped' && '⏭️ Skipped' || '❌ Failed' }} |
+            | Kubernetes Validation | ${{ needs.kubernetes-opa-validation.result == 'success' && '✅ Passed' || needs.kubernetes-opa-validation.result == 'skipped' && '⏭️ Skipped' || '❌ Failed' }} |
+            | Docker Validation | ${{ needs.docker-opa-validation.result == 'success' && '✅ Passed' || needs.docker-opa-validation.result == 'skipped' && '⏭️ Skipped' || '❌ Failed' }} |
+
+            **Phase 3 Hardening - OPA Security Gate**
+
+            This PR has been validated against:
+            - Infrastructure as Code security policies (Terraform)
+            - Kubernetes security policies (Pod Security, RBAC, Network)
+            - Container security policies (Dockerfile best practices)
+
+            ℹ️ View detailed results in the Actions tab.
+            `;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: summary
+            });

@@ -1,0 +1,54 @@
+# ============================================================================
+# OPA GATEKEEPER CONSTRAINTS - SecureBank
+# ============================================================================
+# Constraint instances that enforce policies on SecureBank namespace
+# Enforcement Action: deny (blocks violations)
+# ============================================================================
+
+---
+# Constraint: Require Non-Root Containers
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequireNonRoot
+metadata:
+  name: require-non-root
+  namespace: gatekeeper-system
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment", "StatefulSet", "DaemonSet"]
+    namespaces:
+      - securebank
+
+---
+# Constraint: Block Privileged Containers
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sBlockPrivileged
+metadata:
+  name: block-privileged-containers
+  namespace: gatekeeper-system
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment"]
+    namespaces:
+      - securebank
+
+---
+# Constraint: Block CVV/PIN in ConfigMaps/Secrets
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sBlockCVVPIN
+metadata:
+  name: block-cvv-pin-in-configmaps
+  namespace: gatekeeper-system
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["ConfigMap", "Secret"]
+    namespaces:
+      - securebank

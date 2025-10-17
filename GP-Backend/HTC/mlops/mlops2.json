@@ -1,0 +1,347 @@
+{
+  "product_name": "Kube PAC Copilot",
+  "version": "1.0",
+  "owner": "LinkOps Industries / Jimmie Coleman",
+  "status": "Draft",
+  "last_updated": "2025-10-16",
+  "source_project": "GP-RAG",
+  "objective": "Transform GP-RAG (RAG + Knowledge Graph) into a production-ready Kubernetes Policy-as-Code (PAC) copilot that recommends, generates, tests, troubleshoots, and maintains OPA/Gatekeeper (or Kyverno) policies with CI/CD integration and drift monitoring.",
+  "problem_statement": "Kubernetes environments change rapidly; policy libraries lag and developers face friction. Security teams need a system that learns from manifests and scan results, predicts needed policies, drafts safe Rego+tests, proposes minimal patches, and continuously validates policy health with low false positives and tight CI latency.",
+  "personas": {
+    "security_engineer": {
+      "goals": "Raise posture, reduce drift, keep FP low, map to CIS/NSA/MITRE.",
+      "pain_points": "Duplicated or brittle rules, unclear failures, webhook timeouts."
+    },
+    "devops_engineer": {
+      "goals": "Actionable PR comments, minimal YAML churn, fast green builds.",
+      "pain_points": "Noisy gates, policy regressions, slow feedback loops."
+    },
+    "mlops_engineer": {
+      "goals": "Versioned models/policies, retraining triggers, drift insights.",
+      "pain_points": "Untracked model/prompt changes, opaque failures."
+    }
+  },
+  "goals": {
+    "primary": [
+      "Ingest cluster/repo resources and predict applicable policies.",
+      "Generate or adapt Rego constraints and conftest tests using grounded RAG.",
+      "Run deterministic unit and bundle tests; gate merges via CI with SARIF.",
+      "Autofix: propose minimal manifest or policy patches with rationale.",
+      "Continuously detect drift in resource mix, policy coverage, and violations."
+    ],
+    "secondary": [
+      "Provide explainability mapped to CIS K8s Benchmarks and MITRE ATT&CK.",
+      "Support offline/local LLM operation and air-gapped use.",
+      "Expose API for IDE/PR bots and dashboards.",
+      "Track models/prompts/artifacts via MLflow; monitor drift with Evidently."
+    ]
+  },
+  "non_goals": [
+    "Directly enforcing policies at runtime (admission) in v1; audit-only first.",
+    "Auto-merging policy changes without human approval.",
+    "Replacing Gatekeeper/Kyverno runtimes."
+  },
+  "success_criteria": {
+    "policy_recommendation_hit_at_5": ">= 0.85 on held-out repos",
+    "rego_test_pass_rate": ">= 0.95 for generated/edited policies",
+    "false_positive_rate": "<= 0.05 over curated safe fixtures",
+    "ci_job_latency_seconds_p95": "<= 60",
+    "time_to_first_fix_minutes": "<= 10 for typical PR",
+    "drift_alert_precision": ">= 0.80 over replayed snapshots"
+  },
+  "key_features": {
+    "data_ingestion": "Parse Kubernetes YAML from repos and optional cluster snapshots; normalize to JSON with typed features.",
+    "policy_retrieval_and_rank": "Hybrid BM25 + vector retrieval over curated policy corpus; LTR/heuristic ranker for top-N applicability.",
+    "policy_generation": "RAG-grounded LLM drafts or adapts Rego + conftest tests; strict templates and schema checks.",
+    "test_and_gate": "Run `opa test` + `conftest` against positive/negative fixtures and sampled repo bundles; emit SARIF and PR comments.",
+    "autofix_engine": "Recommend minimal manifest patch or policy refinement; choose via classifier; include diffs and trade-offs.",
+    "troubleshooter": "Failure classifier, counterexample synthesis with `opa eval`, Rego anti-pattern linter, latency risk estimator.",
+    "drift_monitoring": "Nightly snapshot; track resource distribution, policy coverage, violation trends; Prometheus metrics + Grafana.",
+    "explainability": "Link results to CIS/NSA/MITRE; natural-language rationales with citations to policy exemplars.",
+    "operations": "MLflow model/prompt registry, Evidently drift reports, DVC datasets, Dockerized services with health endpoints."
+  },
+  "architecture": {
+    "frontend": "Optional Streamlit/Vue dashboard for posture, drift, and PR status.",
+    "backend": {
+      "api": "FastAPI microservice: /analyze, /propose, /autofix, /troubleshoot, /drift, /health",
+      "orchestration": "LangGraph state machine connecting feature extraction → retrieve → rank → draft → test → (accept|troubleshoot)",
+      "storage": {
+        "metadata": "PostgreSQL",
+        "artifacts": "MinIO or local FS",
+        "vector_index": "Chroma/FAISS",
+        "metrics": "Prometheus"
+      }
+    },
+    "mlops": {
+      "registry": "MLflow (models: policy_ranker, fix_classifier, latency_regressor, prompt versions)",
+      "drift": "Evidently on features (resource mix) and violations",
+      "datasets": "DVC for fixtures, bundles, failure logs"
+    },
+    "deployment": {
+      "local": "Docker Compose for dev",
+      "kubernetes": "Helm chart (optional) for multi-service deploy"
+    }
+  },
+  "source_to_target_mapping": {
+    "from_GP-RAG": [
+      {"path": "GP-RAG/core/jade_engine.py", "reuse_as": "kube-pac-copilot/src/core/rag_engine.py"},
+      {"path": "GP-RAG/jade_rag_langgraph.py", "reuse_as": "kube-pac-copilot/src/graph/pipeline.py"},
+      {"path": "GP-RAG/unprocessed/", "reuse_as": "kube-pac-copilot/data/intake/unprocessed/"},
+      {"path": "GP-RAG/processed/", "reuse_as": "kube-pac-copilot/data/intake/processed/"},
+      {"path": "GP-RAG/core/dynamic_learner.py", "reuse_as": "kube-pac-copilot/src/ingest/watcher.py"}
+    ],
+    "new_components": [
+      "kube-pac-copilot/policies/",
+      "kube-pac-copilot/src/policy_gen/",
+      "kube-pac-copilot/src/troubleshoot/",
+      "kube-pac-copilot/src/features/",
+      "kube-pac-copilot/src/ci/",
+      "kube-pac-copilot/src/api/",
+      "kube-pac-copilot/pipelines/",
+      "kube-pac-copilot/grafana/",
+      "kube-pac-copilot/mlflow/"
+    ]
+  },
+  "repository_layout": {
+    "root": "kube-pac-copilot/",
+    "tree": [
+      "kube-pac-copilot/README.md",
+      "kube-pac-copilot/docker-compose.yml",
+      "kube-pac-copilot/.github/workflows/policy_scan.yml",
+      "kube-pac-copilot/.github/workflows/nightly_drift.yml",
+      "kube-pac-copilot/policies/gatekeeper/templates/",
+      "kube-pac-copilot/policies/gatekeeper/constraints/",
+      "kube-pac-copilot/policies/conftest/policy_packs/",
+      "kube-pac-copilot/policies/index.jsonl",
+      "kube-pac-copilot/data/fixtures/positive/",
+      "kube-pac-copilot/data/fixtures/negative/",
+      "kube-pac-copilot/data/failures/failure_log.jsonl",
+      "kube-pac-copilot/data/intake/unprocessed/",
+      "kube-pac-copilot/data/intake/processed/",
+      "kube-pac-copilot/src/features/extract.py",
+      "kube-pac-copilot/src/retrieve/index.py",
+      "kube-pac-copilot/src/rank/model.py",
+      "kube-pac-copilot/src/policy_gen/drafter.py",
+      "kube-pac-copilot/src/policy_gen/test_runner.py",
+      "kube-pac-copilot/src/policy_gen/schemas.py",
+      "kube-pac-copilot/src/troubleshoot/rego_linter.py",
+      "kube-pac-copilot/src/troubleshoot/counterexample.py",
+      "kube-pac-copilot/src/troubleshoot/fix_recommender.py",
+      "kube-pac-copilot/src/troubleshoot/classifiers.py",
+      "kube-pac-copilot/src/ci/report_sarif.py",
+      "kube-pac-copilot/src/ci/pr_comment.py",
+      "kube-pac-copilot/src/graph/pipeline.py",
+      "kube-pac-copilot/src/api/app.py",
+      "kube-pac-copilot/grafana/dashboards/policy_health.json",
+      "kube-pac-copilot/mlflow/README.md"
+    ]
+  },
+  "apis": [
+    {
+      "method": "POST",
+      "path": "/analyze",
+      "request": {"repo_path": "string", "bundle_glob": "string", "kinds": ["Deployment","Pod","Role","NetworkPolicy"]},
+      "response": {"summary": "string", "violations": [], "recommendations": [], "sarif_path": "string"}
+    },
+    {
+      "method": "POST",
+      "path": "/propose",
+      "request": {"resource_json": {}, "top_n": 5},
+      "response": {"candidates": [{"policy_id": "string", "score": 0.0, "rego_code": "string", "tests": []}]}
+    },
+    {
+      "method": "POST",
+      "path": "/autofix",
+      "request": {"violation": {}, "strategy": "auto|manifest|policy"},
+      "response": {"manifest_diff": "string", "policy_diff": "string", "rationale": "string"}
+    },
+    {
+      "method": "POST",
+      "path": "/troubleshoot",
+      "request": {"policy_id": "string", "rego_code": "string", "inputs": [{}], "logs": "string"},
+      "response": {"failure_type": "parse|logic|perf|real", "culprit_lines": [0], "counterexample": {}, "suggested_patch": "string"}
+    },
+    {
+      "method": "GET",
+      "path": "/drift",
+      "request": {},
+      "response": {"coverage_rate": 0.0, "violation_trend": [], "resource_mix": {}, "alerts": []}
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "request": {},
+      "response": {"status": "ok", "version": "string"}
+    }
+  ],
+  "data_contracts": {
+    "feature_vector": {
+      "resource_kind": "string",
+      "namespace": "string",
+      "features": {
+        "securityContext.privileged": "bool",
+        "securityContext.allowPrivilegeEscalation": "bool",
+        "image.tag": "string",
+        "volume.hostPath": "bool",
+        "rbac.wildcard_verbs": "bool",
+        "netpol_present": "bool"
+      }
+    },
+    "policy_index_row": {
+      "id": "string",
+      "kind": ["Pod", "Deployment", "Role"],
+      "tags": ["cis:1.1.0", "mitre:TXXXX"],
+      "features": ["securityContext.privileged=true"],
+      "example_inputs": ["string"],
+      "reliability": "high|medium|low"
+    },
+    "draft_output": {
+      "rego_package": "string",
+      "rego_code": "string",
+      "tests": [
+        {"name": "string", "type": "deny|allow", "input_fixture": "json"}
+      ]
+    },
+    "failure_event": {
+      "ts": "RFC3339",
+      "policy_id": "string",
+      "failure_type": "parse|logic|perf|real",
+      "culprit_lines": [0],
+      "counterexample": {},
+      "suggested_patch": "string",
+      "accepted": "bool"
+    }
+  },
+  "models": {
+    "policy_ranker": {
+      "type": "LogisticRegression or GradientBoosting (start simple)",
+      "inputs": "feature_vector.features",
+      "target": "applicable_policy (multi-label)",
+      "metrics": ["hit@5", "precision@k", "inference_ms"],
+      "registry_name": "policy_ranker",
+      "constraints": "Deterministic, seed-fixed"
+    },
+    "fix_strategy_classifier": {
+      "type": "Binary classifier",
+      "inputs": ["severity", "developer_revert_history", "FP_score", "policy_reliability"],
+      "target": "manifest_patch_vs_policy_change",
+      "registry_name": "fix_classifier"
+    },
+    "latency_regressor": {
+      "type": "Linear or small tree model",
+      "inputs": ["rego_ast_size", "comprehension_depth", "array_scan_ops"],
+      "target": "estimated_ms (webhook)",
+      "registry_name": "latency_regressor"
+    },
+    "prompted_policy_drafter": {
+      "type": "LLM + RAG (Qwen2.5 or local equivalent)",
+      "grounding": "Policies/index.jsonl + exemplar Rego + tests",
+      "guardrails": "Schema validation + unit tests + FP budget"
+    }
+  },
+  "training_and_eval": {
+    "datasets": {
+      "fixtures_positive": "kube-pac-copilot/data/fixtures/positive/",
+      "fixtures_negative": "kube-pac-copilot/data/fixtures/negative/",
+      "failure_logs": "kube-pac-copilot/data/failures/failure_log.jsonl",
+      "policy_index": "kube-pac-copilot/policies/index.jsonl"
+    },
+    "evaluation": [
+      "Policy recommendation hit@k on held-out bundles",
+      "Rego unit test pass rate",
+      "FP rate against safe corpus",
+      "CI latency p50/p95",
+      "Drift alert precision/recall via replay"
+    ],
+    "mlflow_tracking": {
+      "experiment_names": ["ranker_experiments", "fix_classifier_experiments", "latency_regression", "prompt_tuning"],
+      "artifacts": ["models", "confusion_matrices", "drift_reports"]
+    }
+  },
+  "ci_cd": {
+    "workflows": [
+      {
+        "file": ".github/workflows/policy_scan.yml",
+        "steps": [
+          "Checkout",
+          "Install opa/conftest",
+          "Run feature extraction",
+          "Retrieve+rank policies",
+          "Draft (if enabled) and run tests",
+          "Generate SARIF",
+          "Post PR comment"
+        ],
+        "budgets": {"time_seconds_p95": 60, "fp_rate_max": 0.05}
+      },
+      {
+        "file": ".github/workflows/nightly_drift.yml",
+        "steps": [
+          "Snapshot manifests",
+          "Compute coverage, violations, resource mix",
+          "Push Prometheus metrics",
+          "Upload Evidently drift report"
+        ]
+      }
+    ],
+    "outputs": {
+      "sarif_path": "kube-pac-copilot/out/report.sarif",
+      "pr_comment_md": "kube-pac-copilot/out/comment.md"
+    }
+  },
+  "observability": {
+    "prometheus_metrics": [
+      "policy_coverage_rate",
+      "violation_false_positive_rate",
+      "opa_test_pass_rate",
+      "ci_job_latency_seconds",
+      "webhook_latency_ms_estimate_p95"
+    ],
+    "grafana_dashboards": ["grafana/dashboards/policy_health.json"]
+  },
+  "security_controls": {
+    "sandboxed_testing": "Container-isolated `opa test` and `conftest` execution",
+    "no_auto_merge": "Human approval required for patches",
+    "prompt_grounding_only": "LLM restricted to retrieved exemplars; no free-text policy invention",
+    "audit_logging": "Hash and timestamp all drafts, diffs, and test logs",
+    "secret_hygiene": "Scan containers and repo with Trivy/Gitleaks in CI"
+  },
+  "roadmap": {
+    "phase_1_mvp_weeks_1_2": [
+      "Add policies/ corpus + index.jsonl (10–20 high-value constraints)",
+      "Feature extractor + retrieval + heuristic ranker",
+      "Conftest runner + SARIF + PR comment",
+      "Baseline Grafana dashboard and Prometheus metrics"
+    ],
+    "phase_2_weeks_3_4": [
+      "RAG-grounded policy drafter + test loop",
+      "Troubleshooter: linter, counterexample, fix recommender",
+      "Fix strategy classifier v0",
+      "MLflow integration for models/prompts"
+    ],
+    "phase_3_weeks_5_6": [
+      "Nightly drift job + Evidently reports",
+      "Latency regressor + webhook risk warnings",
+      "RBAC/NetPol specific rules and fixtures",
+      "Docs: playbooks, runbooks, and API spec"
+    ],
+    "phase_4_plus": [
+      "Kyverno parity mode",
+      "RBAC least-privilege recommender",
+      "Graph reasoning for reachability",
+      "IDE plugin (VSCode) and Chat UX"
+    ]
+  },
+  "acceptance_criteria": [
+    "End-to-end PR scan posts SARIF + actionable comment with at least one minimal diff.",
+    "Generated/edited Rego and tests pass locally and in CI; FP ≤ 5% on safe fixtures.",
+    "Drift dashboard shows coverage and violation trends over 7-day window.",
+    "MLflow registers at least ranker v1 and prompt v1 with metrics.",
+    "All services run via `docker-compose up` with green /health."
+  ],
+  "dependencies": {
+    "languages": ["Python >=3.10"],
+    "libraries": ["FastAPI", "LangGraph", "opa", "conftest", "mlflow", "evidently", "chromadb or faiss", "pydantic", "uvicorn"],
+    "ops": ["Docker", "Prometheus", "Grafana", "GitHub Actions or GitLab CI"],
+    "optional": ["Streamlit or Vue", "Kubectl", "Helm"]
+  }
+}

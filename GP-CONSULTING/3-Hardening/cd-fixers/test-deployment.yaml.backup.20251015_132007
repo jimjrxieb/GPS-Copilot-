@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+  namespace: securebank
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: test-container
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        securityContext:
+          runAsUser: 0  # Running as root - will be fixed
+          privileged: true  # Privileged mode - will be fixed

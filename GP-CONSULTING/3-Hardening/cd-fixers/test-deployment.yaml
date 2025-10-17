@@ -1,0 +1,61 @@
+# ============================================================================
+# KUBERNETES DEPLOYMENT - HARDENED (PHASE 3)
+# ============================================================================
+# Security fixes applied: 2025-10-15 13:20:07
+#
+# Hardening applied:
+# - Containers run as non-root (runAsUser: 10000)
+# - Privileged mode disabled
+# - Dangerous capabilities removed
+# - Resource limits added
+# - ReadOnlyRootFilesystem enabled
+# - Privilege escalation blocked
+#
+# Compliance:
+# - CIS Kubernetes 5.2.x: Container security
+# - PCI-DSS 2.2: Configuration standards
+# - NIST 800-190: Container security
+# ============================================================================
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+  namespace: securebank
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      containers:
+      - name: test-container
+        # ✅ ADDED: Secure security context (Phase 3)
+        # ✅ ADDED: Resource limits (Phase 3)
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 10000
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        securityContext:
+          runAsUser: 10000  # ✅ FIXED: Non-root user (Phase 3)
+          # runAsUser: 0  # Running as root - will be fixed - REMOVED: Running as root
+          privileged: false  # ✅ FIXED: Disabled privileged mode (Phase 3)
+          # privileged: true  # Privileged mode - will be fixed - REMOVED: Privileged container

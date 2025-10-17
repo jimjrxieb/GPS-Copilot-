@@ -1,0 +1,36 @@
+{
+  "findings": [],
+  "summary": {
+    "total": 0,
+    "files_scanned": 0,
+    "severity_breakdown": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "package_managers_found": [],
+    "vulnerability_sources": {},
+    "scan_coverage": {
+      "package_files": {},
+      "dockerfile_count": 0
+    }
+  },
+  "target": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/INTERVIEW-DEMO",
+  "tool": "trivy",
+  "timestamp": "2025-09-29T07:55:46.741729",
+  "scan_id": "trivy_20250929_075546_741",
+  "scan_context": {
+    "package_files": {},
+    "dockerfile_count": 0,
+    "total_files": 11
+  },
+  "metadata": {
+    "trivy_db_version": 2,
+    "scan_type": "filesystem",
+    "scan_performance": {
+      "results_processed": 0,
+      "total_vulnerabilities": 0
+    }
+  }
+}

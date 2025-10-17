@@ -1,0 +1,2773 @@
+{
+  "findings": [
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/db/job-category/data_scientist/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/db/job-category/data_scientist/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/db/job-category/devops_engineer/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/db/job-category/devops_engineer/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/db/job-category/kubernetes_specialist/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/db/job-category/kubernetes_specialist/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/db/job-category/platform_engineer/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/db/job-category/platform_engineer/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/htc/qa-generator/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/htc/qa-generator/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/htc/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/htc/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33663",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "python-jose: algorithm confusion with OpenSSH ECDSA keys and other key formats",
+      "description": "python-jose through 3.3.0 has algorithm confusion with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/links-pipeline/data-intake/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-327"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33663",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/346",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-232.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33663",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33663",
+        "https://www.vicarius.io/vsociety/posts/algorithm-confusion-in-python-jose-cve-2024-33663"
+      ],
+      "published_date": "2024-04-26T00:15:09.01Z",
+      "last_modified": "2025-09-02T18:37:53.477Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-33664",
+      "package_name": "python-jose",
+      "package_version": "3.3.0",
+      "fixed_version": "3.4.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "python-jose: allows attackers to cause a denial of service",
+      "description": "python-jose through 3.3.0 allows attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+      "source_file": "GP-PROJECTS/LinkOps-MLOps/links-pipeline/data-intake/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-33664",
+        "https://github.com/mpdavis/python-jose",
+        "https://github.com/mpdavis/python-jose/issues/344",
+        "https://github.com/mpdavis/python-jose/pull/345",
+        "https://github.com/mpdavis/python-jose/releases/tag/3.4.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/python-jose/PYSEC-2024-233.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-33664",
+        "https://www.cve.org/CVERecord?id=CVE-2024-33664",
+        "https://www.vicarius.io/vsociety/posts/jwt-bomb-in-python-jose-cve-2024-33664"
+      ],
+      "published_date": "2024-04-26T00:15:09.06Z",
+      "last_modified": "2025-09-02T18:36:30.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-24762",
+      "package_name": "python-multipart",
+      "package_version": "0.0.6",
+      "fixed_version": "0.0.7",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "`python-multipart` is a streaming multipart parser for Python. When us ...",
+      "description": "`python-multipart` is a streaming multipart parser for Python. When using form data, `python-multipart` uses a Regular Expression to parse the HTTP `Content-Type` header, including options. An attacker could send a custom-made `Content-Type` option that is very difficult for the RegEx to process, consuming CPU resources and stalling indefinitely (minutes or more) while holding the main event loop. This means that process can't handle any more requests, leading to regular expression denial of service. This vulnerability has been patched in version 0.0.7.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/CLEANUP_ARCHIVE/legacy/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-400",
+        "CWE-1333"
+      ],
+      "references": [
+        "https://github.com/Kludex/python-multipart",
+        "https://github.com/Kludex/python-multipart/commit/20f0ef6b4e4caf7d69a667c54dff57fe467109a4",
+        "https://github.com/Kludex/python-multipart/security/advisories/GHSA-2jv5-9r88-3w3p",
+        "https://github.com/andrew-d/python-multipart/blob/d3d16dae4b061c34fe9d3c9081d9800c49fc1f7a/multipart/multipart.py#L72-L74",
+        "https://github.com/encode/starlette/commit/13e5c26a27f4903924624736abd6131b2da80cc5",
+        "https://github.com/encode/starlette/security/advisories/GHSA-93gm-qmq6-w238",
+        "https://github.com/github/advisory-database/pull/4829",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/fastapi/PYSEC-2024-38.yaml",
+        "https://github.com/tiangolo/fastapi/commit/9d34ad0ee8a0dfbbcce06f76c2d5d851085024fc",
+        "https://github.com/tiangolo/fastapi/releases/tag/0.109.1",
+        "https://github.com/tiangolo/fastapi/security/advisories/GHSA-qf9m-vfgh-m389",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-24762"
+      ],
+      "published_date": "2024-02-05T15:15:09.26Z",
+      "last_modified": "2025-05-05T14:14:26.363Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-53981",
+      "package_name": "python-multipart",
+      "package_version": "0.0.6",
+      "fixed_version": "0.0.18",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "python-multipart: python-multipart has a DoS via deformation `multipart/form-data` boundary",
+      "description": "python-multipart is a streaming multipart parser for Python. When parsing form data, python-multipart skips line breaks (CR \\r or LF \\n) in front of the first boundary and any tailing bytes after the last boundary. This happens one byte at a time and emits a log event each time, which may cause excessive logging for certain inputs. An attacker could abuse this by sending a malicious request with lots of data before the first or after the last boundary, causing high CPU load and stalling the processing thread for a significant amount of time. In case of ASGI application, this could stall the event loop and prevent other requests from being processed, resulting in a denial of service (DoS). This vulnerability is fixed in 0.0.18.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/CLEANUP_ARCHIVE/legacy/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-770"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-53981",
+        "https://github.com/Kludex/python-multipart",
+        "https://github.com/Kludex/python-multipart/commit/c4fe4d3cebc08c660e57dd709af1ffa7059b3177",
+        "https://github.com/Kludex/python-multipart/security/advisories/GHSA-59g5-xgcq-4qw3",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-53981",
+        "https://www.cve.org/CVERecord?id=CVE-2024-53981"
+      ],
+      "published_date": "2024-12-02T16:15:14.457Z",
+      "last_modified": "2024-12-02T16:15:14.457Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-32434",
+      "package_name": "torch",
+      "package_version": "2.1.2",
+      "fixed_version": "2.6.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "PyTorch is a Python package that provides tensor computation with stro ...",
+      "description": "PyTorch is a Python package that provides tensor computation with strong GPU acceleration and deep neural networks built on a tape-based autograd system. In version 2.5.1 and prior, a Remote Command Execution (RCE) vulnerability exists in PyTorch when loading a model using torch.load with weights_only=True. This issue has been patched in version 2.6.0.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/CLEANUP_ARCHIVE/legacy/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 9.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/pypa/advisory-database/tree/main/vulns/torch/PYSEC-2025-41.yaml",
+        "https://github.com/pytorch/pytorch",
+        "https://github.com/pytorch/pytorch/commit/8d4b8a920a2172523deb95bf20e8e52d50649c04",
+        "https://github.com/pytorch/pytorch/security/advisories/GHSA-53q9-r3pm-6pq6",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-32434"
+      ],
+      "published_date": "2025-04-18T16:15:23.183Z",
+      "last_modified": "2025-05-28T13:14:20.75Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-31580",
+      "package_name": "torch",
+      "package_version": "2.1.2",
+      "fixed_version": "2.2.0",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "PyTorch before v2.2.0 was discovered to contain a heap buffer overflow ...",
+      "description": "PyTorch before v2.2.0 was discovered to contain a heap buffer overflow vulnerability in the component /runtime/vararg_functions.cpp. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted input.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/CLEANUP_ARCHIVE/legacy/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-122"
+      ],
+      "references": [
+        "https://gist.github.com/1047524396/038c78f2f007345e6f497698ace2aa3d",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/torch/PYSEC-2024-252.yaml",
+        "https://github.com/pytorch/pytorch",
+        "https://github.com/pytorch/pytorch/commit/b5c3a17c2c207ebefcb85043f0cf94be9b2fef81",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-31580",
+        "https://security.snyk.io/vuln/SNYK-PYTHON-TORCH-6649934"
+      ],
+      "published_date": "2024-04-17T19:15:07.783Z",
+      "last_modified": "2025-06-10T17:38:16.883Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-31583",
+      "package_name": "torch",
+      "package_version": "2.1.2",
+      "fixed_version": "2.2.0",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "Pytorch before version v2.2.0 was discovered to contain a use-after-fr ...",
+      "description": "Pytorch before version v2.2.0 was discovered to contain a use-after-free vulnerability in torch/csrc/jit/mobile/interpreter.cpp.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/CLEANUP_ARCHIVE/legacy/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-416"
+      ],
+      "references": [
+        "https://gist.github.com/1047524396/43e19a41f2b36503a4a228c32cdbc176",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/torch/PYSEC-2024-251.yaml",
+        "https://github.com/pytorch/pytorch",
+        "https://github.com/pytorch/pytorch/blob/v2.1.2/torch/csrc/jit/mobile/interpreter.cpp#L132",
+        "https://github.com/pytorch/pytorch/commit/9c7071b0e324f9fb68ab881283d6b8d388a4bcd2",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-31583",
+        "https://security.snyk.io/vuln/SNYK-PYTHON-TORCH-6619806"
+      ],
+      "published_date": "2024-04-17T19:15:07.95Z",
+      "last_modified": "2025-06-10T01:33:43.18Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-3730",
+      "package_name": "torch",
+      "package_version": "2.1.2",
+      "fixed_version": "2.8.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "A vulnerability, which was classified as problematic, was found in PyT ...",
+      "description": "A vulnerability, which was classified as problematic, was found in PyTorch 2.6.0. Affected is the function torch.nn.functional.ctc_loss of the file aten/src/ATen/native/LossCTC.cpp. The manipulation leads to denial of service. An attack has to be approached locally. The exploit has been disclosed to the public and may be used. The real existence of this vulnerability is still doubted at the moment. The name of the patch is 46fc5d8e360127361211cb237d5f9eef0223e567. It is recommended to apply a patch to fix this issue. The security policy of the project warns to use unknown models which might establish malicious effects.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/CLEANUP_ARCHIVE/legacy/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 5.5,
+      "cwe_ids": [
+        "CWE-404"
+      ],
+      "references": [
+        "https://github.com/pytorch/pytorch",
+        "https://github.com/pytorch/pytorch/commit/01f226bfb8f2c343f5c614a6bbf685d91160f3af",
+        "https://github.com/pytorch/pytorch/issues/150835",
+        "https://github.com/pytorch/pytorch/issues/150835#issue-2979082232",
+        "https://github.com/pytorch/pytorch/pull/150981",
+        "https://github.com/timocafe/tewart-pytorch/commit/46fc5d8e360127361211cb237d5f9eef0223e567",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-3730",
+        "https://vuldb.com/?ctiid.305076",
+        "https://vuldb.com/?id.305076",
+        "https://vuldb.com/?submit.553645"
+      ],
+      "published_date": "2025-04-16T21:15:48.7Z",
+      "last_modified": "2025-05-28T17:35:54.08Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-2953",
+      "package_name": "torch",
+      "package_version": "2.1.2",
+      "fixed_version": "2.7.1-rc1",
+      "severity": "LOW",
+      "normalized_severity": "low",
+      "title": "torch: PyTorch torch.mkldnn_max_pool2d denial of service",
+      "description": "A vulnerability, which was classified as problematic, has been found in PyTorch 2.6.0+cu124. Affected by this issue is the function torch.mkldnn_max_pool2d. The manipulation leads to denial of service. An attack has to be approached locally. The exploit has been disclosed to the public and may be used. The real existence of this vulnerability is still doubted at the moment. The security policy of the project warns to use unknown models which might establish malicious effects.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/CLEANUP_ARCHIVE/legacy/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 5.5,
+      "cwe_ids": [
+        "CWE-404"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-2953",
+        "https://github.com/pytorch/pytorch",
+        "https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models",
+        "https://github.com/pytorch/pytorch/issues/149274",
+        "https://github.com/pytorch/pytorch/issues/149274#issue-2923122269",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-2953",
+        "https://vuldb.com/?ctiid.302006",
+        "https://vuldb.com/?id.302006",
+        "https://vuldb.com/?submit.521279",
+        "https://www.cve.org/CVERecord?id=CVE-2025-2953"
+      ],
+      "published_date": "2025-03-30T16:15:14.38Z",
+      "last_modified": "2025-04-22T12:15:16.043Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-39689",
+      "package_name": "certifi",
+      "package_version": "2023.11.17",
+      "fixed_version": "2024.7.4",
+      "severity": "LOW",
+      "normalized_severity": "low",
+      "title": "python-certifi: Remove root certificates from `GLOBALTRUST` from the root store",
+      "description": "Certifi is a curated collection of Root Certificates for validating the trustworthiness of SSL certificates while verifying the identity of TLS hosts. Certifi starting in 2021.5.30 and prior to 2024.7.4 recognized root certificates from `GLOBALTRUST`. Certifi 2024.7.04 removes root certificates from `GLOBALTRUST` from the root store. These are in the process of being removed from Mozilla's trust store. `GLOBALTRUST`'s root certificates are being removed pursuant to an investigation which identified \"long-running and unresolved compliance issues.\"",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-345"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-39689",
+        "https://github.com/certifi/python-certifi",
+        "https://github.com/certifi/python-certifi/commit/bd8153872e9c6fc98f4023df9c2deaffea2fa463",
+        "https://github.com/certifi/python-certifi/security/advisories/GHSA-248v-346w-9cwc",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/certifi/PYSEC-2024-230.yaml",
+        "https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/XpknYMPO8dI",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-39689",
+        "https://security.netapp.com/advisory/ntap-20241206-0001",
+        "https://security.netapp.com/advisory/ntap-20241206-0001/",
+        "https://www.cve.org/CVERecord?id=CVE-2024-39689"
+      ],
+      "published_date": "2024-07-05T19:15:10.247Z",
+      "last_modified": "2025-02-15T00:15:13.183Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-50782",
+      "package_name": "cryptography",
+      "package_version": "41.0.8",
+      "fixed_version": "42.0.0",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "python-cryptography: Bleichenbacher timing oracle attack against RSA decryption - incomplete fix for CVE-2020-25659",
+      "description": "A flaw was found in the python-cryptography package. This issue may allow a remote attacker to decrypt captured messages in TLS servers that use RSA key exchanges, which may lead to exposure of confidential or sensitive data.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-208",
+        "CWE-203"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2023-50782",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2254432",
+        "https://github.com/openssl/openssl/pull/13817",
+        "https://github.com/pyca/cryptography",
+        "https://github.com/pyca/cryptography/issues/9785",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-50782",
+        "https://people.redhat.com/~hkario/marvin/",
+        "https://ubuntu.com/security/notices/USN-6663-1",
+        "https://ubuntu.com/security/notices/USN-6673-1",
+        "https://ubuntu.com/security/notices/USN-6673-2",
+        "https://www.couchbase.com/alerts/",
+        "https://www.cve.org/CVERecord?id=CVE-2023-50782"
+      ],
+      "published_date": "2024-02-05T21:15:11.183Z",
+      "last_modified": "2024-11-21T08:37:18.337Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-26130",
+      "package_name": "cryptography",
+      "package_version": "41.0.8",
+      "fixed_version": "42.0.4",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "python-cryptography: NULL pointer dereference with pkcs12.serialize_key_and_certificates when called with a non-matching certificate and private key and an hmac_hash override",
+      "description": "cryptography is a package designed to expose cryptographic primitives and recipes to Python developers. Starting in version 38.0.0 and prior to version 42.0.4, if `pkcs12.serialize_key_and_certificates` is called with both a certificate whose public key did not match the provided private key and an `encryption_algorithm` with `hmac_hash` set (via `PrivateFormat.PKCS12.encryption_builder().hmac_hash(...)`, then a NULL pointer dereference would occur, crashing the Python process. This has been resolved in version 42.0.4, the first version in which a `ValueError` is properly raised.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-476"
+      ],
+      "references": [
+        "https://access.redhat.com/errata/RHSA-2025:15608",
+        "https://access.redhat.com/security/cve/CVE-2024-26130",
+        "https://bugzilla.redhat.com/2269617",
+        "https://errata.almalinux.org/9/ALSA-2025-15608.html",
+        "https://github.com/pyca/cryptography",
+        "https://github.com/pyca/cryptography/commit/97d231672763cdb5959a3b191e692a362f1b9e55",
+        "https://github.com/pyca/cryptography/pull/10423",
+        "https://github.com/pyca/cryptography/security/advisories/GHSA-6vqw-3v5j-54x4",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/cryptography/PYSEC-2024-225.yaml",
+        "https://linux.oracle.com/cve/CVE-2024-26130.html",
+        "https://linux.oracle.com/errata/ELSA-2025-20364.html",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-26130",
+        "https://ubuntu.com/security/notices/USN-6673-1",
+        "https://ubuntu.com/security/notices/USN-6673-3",
+        "https://www.cve.org/CVERecord?id=CVE-2024-26130"
+      ],
+      "published_date": "2024-02-21T17:15:09.863Z",
+      "last_modified": "2025-02-05T22:09:20.427Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-0727",
+      "package_name": "cryptography",
+      "package_version": "41.0.8",
+      "fixed_version": "42.0.2",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "openssl: denial of service via null dereference",
+      "description": "Issue summary: Processing a maliciously formatted PKCS12 file may lead OpenSSL\nto crash leading to a potential Denial of Service attack\n\nImpact summary: Applications loading files in the PKCS12 format from untrusted\nsources might terminate abruptly.\n\nA file in PKCS12 format can contain certificates and keys and may come from an\nuntrusted source. The PKCS12 specification allows certain fields to be NULL, but\nOpenSSL does not correctly check for this case. This can lead to a NULL pointer\ndereference that results in OpenSSL crashing. If an application processes PKCS12\nfiles from an untrusted source using the OpenSSL APIs then that application will\nbe vulnerable to this issue.\n\nOpenSSL APIs that are vulnerable to this are: PKCS12_parse(),\nPKCS12_unpack_p7data(), PKCS12_unpack_p7encdata(), PKCS12_unpack_authsafes()\nand PKCS12_newpass().\n\nWe have also fixed a similar issue in SMIME_write_PKCS7(). However since this\nfunction is related to writing data we do not consider it security significant.\n\nThe FIPS modules in 3.2, 3.1 and 3.0 are not affected by this issue.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 5.5,
+      "cwe_ids": [
+        "CWE-476"
+      ],
+      "references": [
+        "http://www.openwall.com/lists/oss-security/2024/03/11/1",
+        "https://access.redhat.com/errata/RHSA-2024:9088",
+        "https://access.redhat.com/security/cve/CVE-2024-0727",
+        "https://bugzilla.redhat.com/2257571",
+        "https://bugzilla.redhat.com/2258502",
+        "https://bugzilla.redhat.com/2259944",
+        "https://bugzilla.redhat.com/2284243",
+        "https://errata.almalinux.org/9/ALSA-2024-9088.html",
+        "https://github.com/alexcrichton/openssl-src-rs/commit/add20f73b6b42be7451af2e1044d4e0e778992b2",
+        "https://github.com/github/advisory-database/pull/3472",
+        "https://github.com/openssl/openssl/commit/09df4395b5071217b76dc7d3d2e630eb8c5a79c2",
+        "https://github.com/openssl/openssl/commit/775acfdbd0c6af9ac855f34969cdab0c0c90844a",
+        "https://github.com/openssl/openssl/commit/d135eeab8a5dbf72b3da5240bab9ddb7678dbd2c",
+        "https://github.com/openssl/openssl/pull/23362",
+        "https://github.com/pyca/cryptography/commit/3519591d255d4506fbcd0d04037d45271903c64d",
+        "https://github.openssl.org/openssl/extended-releases/commit/03b3941d60c4bce58fab69a0c22377ab439bc0e8",
+        "https://github.openssl.org/openssl/extended-releases/commit/aebaa5883e31122b404e450732dc833dc9dee539",
+        "https://linux.oracle.com/cve/CVE-2024-0727.html",
+        "https://linux.oracle.com/errata/ELSA-2024-9088.html",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-0727",
+        "https://security.netapp.com/advisory/ntap-20240208-0006",
+        "https://security.netapp.com/advisory/ntap-20240208-0006/",
+        "https://ubuntu.com/security/notices/USN-6622-1",
+        "https://ubuntu.com/security/notices/USN-6632-1",
+        "https://ubuntu.com/security/notices/USN-6709-1",
+        "https://ubuntu.com/security/notices/USN-7018-1",
+        "https://www.cve.org/CVERecord?id=CVE-2024-0727",
+        "https://www.openssl.org/news/secadv/20240125.txt"
+      ],
+      "published_date": "2024-01-26T09:15:07.637Z",
+      "last_modified": "2025-05-29T16:15:31.96Z"
+    },
+    {
+      "vulnerability_id": "GHSA-h4gh-qq45-vh27",
+      "package_name": "cryptography",
+      "package_version": "41.0.8",
+      "fixed_version": "43.0.1",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "pyca/cryptography has a vulnerable OpenSSL included in cryptography wheels",
+      "description": "pyca/cryptography's wheels include a statically linked copy of OpenSSL. The versions of OpenSSL included in cryptography 37.0.0-43.0.0 are vulnerable to a security issue. More details about the vulnerability itself can be found in https://openssl-library.org/news/secadv/20240903.txt.\n\nIf you are building cryptography source (\"sdist\") then you are responsible for upgrading your copy of OpenSSL. Only users installing from wheels built by the cryptography project (i.e., those distributed on PyPI) need to update their cryptography versions.\n",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [],
+      "references": [
+        "https://github.com/pyca/cryptography",
+        "https://github.com/pyca/cryptography/security/advisories/GHSA-h4gh-qq45-vh27",
+        "https://openssl-library.org/news/secadv/20240903.txt"
+      ],
+      "published_date": "2024-09-03T21:59:48Z",
+      "last_modified": "2024-09-03T21:59:48Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-56201",
+      "package_name": "jinja2",
+      "package_version": "3.1.4",
+      "fixed_version": "3.1.5",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "jinja2: Jinja has a sandbox breakout through malicious filenames",
+      "description": "Jinja is an extensible templating engine. In versions on the 3.x branch prior to 3.1.5, a bug in the Jinja compiler allows an attacker that controls both the content and filename of a template to execute arbitrary Python code, regardless of if Jinja's sandbox is used. To exploit the vulnerability, an attacker needs to control both the filename and the contents of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of applications which execute untrusted templates where the template author can also choose the template filename. This vulnerability is fixed in 3.1.5.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-150"
+      ],
+      "references": [
+        "https://access.redhat.com/errata/RHSA-2025:0308",
+        "https://access.redhat.com/security/cve/CVE-2024-56201",
+        "https://errata.almalinux.org/9/ALSA-2025-0308.html",
+        "https://github.com/pallets/jinja",
+        "https://github.com/pallets/jinja/commit/767b23617628419ae3709ccfb02f9602ae9fe51f",
+        "https://github.com/pallets/jinja/issues/1792",
+        "https://github.com/pallets/jinja/releases/tag/3.1.5",
+        "https://github.com/pallets/jinja/security/advisories/GHSA-gmj6-6f8f-6699",
+        "https://linux.oracle.com/cve/CVE-2024-56201.html",
+        "https://linux.oracle.com/errata/ELSA-2025-0308.html",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-56201",
+        "https://ubuntu.com/security/notices/USN-7244-1",
+        "https://ubuntu.com/security/notices/USN-7343-1",
+        "https://www.cve.org/CVERecord?id=CVE-2024-56201"
+      ],
+      "published_date": "2024-12-23T16:15:07.41Z",
+      "last_modified": "2025-09-22T17:45:28.71Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-56326",
+      "package_name": "jinja2",
+      "package_version": "3.1.4",
+      "fixed_version": "3.1.5",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "jinja2: Jinja has a sandbox breakout through indirect reference to format method",
+      "description": "Jinja is an extensible templating engine. Prior to 3.1.5, An oversight in how the Jinja sandboxed environment detects calls to str.format allows an attacker that controls the content of a template to execute arbitrary Python code. To exploit the vulnerability, an attacker needs to control the content of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of applications which execute untrusted templates. Jinja's sandbox does catch calls to str.format and ensures they don't escape the sandbox. However, it's possible to store a reference to a malicious string's format method, then pass that to a filter that calls it. No such filters are built-in to Jinja, but could be present through custom filters in an application. After the fix, such indirect calls are also handled by the sandbox. This vulnerability is fixed in 3.1.5.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-693",
+        "CWE-1336"
+      ],
+      "references": [
+        "https://access.redhat.com/errata/RHSA-2025:0711",
+        "https://access.redhat.com/security/cve/CVE-2024-56326",
+        "https://bugzilla.redhat.com/2333856",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2333856",
+        "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-56326",
+        "https://errata.almalinux.org/8/ALSA-2025-0711.html",
+        "https://errata.rockylinux.org/RLSA-2025:0711",
+        "https://github.com/pallets/jinja",
+        "https://github.com/pallets/jinja/commit/48b0687e05a5466a91cd5812d604fa37ad0943b4",
+        "https://github.com/pallets/jinja/releases/tag/3.1.5",
+        "https://github.com/pallets/jinja/security/advisories/GHSA-q2x7-8rv6-6q7h",
+        "https://linux.oracle.com/cve/CVE-2024-56326.html",
+        "https://linux.oracle.com/errata/ELSA-2025-1250.html",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-56326",
+        "https://ubuntu.com/security/notices/USN-7244-1",
+        "https://ubuntu.com/security/notices/USN-7343-1",
+        "https://www.cve.org/CVERecord?id=CVE-2024-56326"
+      ],
+      "published_date": "2024-12-23T16:15:07.59Z",
+      "last_modified": "2025-09-22T17:41:19.177Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-27516",
+      "package_name": "jinja2",
+      "package_version": "3.1.4",
+      "fixed_version": "3.1.6",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "jinja2: Jinja sandbox breakout through attr filter selecting format method",
+      "description": "Jinja is an extensible templating engine. Prior to 3.1.6, an oversight in how the Jinja sandboxed environment interacts with the |attr filter allows an attacker that controls the content of a template to execute arbitrary Python code. To exploit the vulnerability, an attacker needs to control the content of a template. Whether that is the case depends on the type of application using Jinja. This vulnerability impacts users of applications which execute untrusted templates. Jinja's sandbox does catch calls to str.format and ensures they don't escape the sandbox. However, it's possible to use the |attr filter to get a reference to a string's plain format method, bypassing the sandbox. After the fix, the |attr filter no longer bypasses the environment's attribute lookup. This vulnerability is fixed in 3.1.6.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-1336"
+      ],
+      "references": [
+        "https://access.redhat.com/errata/RHSA-2025:7476",
+        "https://access.redhat.com/security/cve/CVE-2025-27516",
+        "https://bugzilla.redhat.com/2350190",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2350190",
+        "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-27516",
+        "https://errata.almalinux.org/10/ALSA-2025-7476.html",
+        "https://errata.rockylinux.org/RLSA-2025:3388",
+        "https://github.com/pallets/jinja",
+        "https://github.com/pallets/jinja/commit/90457bbf33b8662926ae65cdde4c4c32e756e403",
+        "https://github.com/pallets/jinja/security/advisories/GHSA-cpwx-vrp4-4pq7",
+        "https://linux.oracle.com/cve/CVE-2025-27516.html",
+        "https://linux.oracle.com/errata/ELSA-2025-7476.html",
+        "https://lists.debian.org/debian-lts-announce/2025/04/msg00045.html",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-27516",
+        "https://ubuntu.com/security/notices/USN-7343-1",
+        "https://www.cve.org/CVERecord?id=CVE-2025-27516"
+      ],
+      "published_date": "2025-03-05T21:15:20.073Z",
+      "last_modified": "2025-09-22T18:49:36.437Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-2965",
+      "package_name": "langchain",
+      "package_version": "0.0.350",
+      "fixed_version": "0.2.5",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "langchain-community: Langchain-community SitemapParser DoS Vulnerability",
+      "description": "A Denial-of-Service (DoS) vulnerability exists in the `SitemapLoader` class of the `langchain-ai/langchain` repository, affecting all versions. The `parse_sitemap` method, responsible for parsing sitemaps and extracting URLs, lacks a mechanism to prevent infinite recursion when a sitemap URL refers to the current sitemap itself. This oversight allows for the possibility of an infinite loop, leading to a crash by exceeding the maximum recursion depth in Python. This vulnerability can be exploited to occupy server socket/port resources and crash the Python process, impacting the availability of services relying on this functionality.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 4.7,
+      "cwe_ids": [
+        "CWE-674"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-2965",
+        "https://github.com/langchain-ai/langchain",
+        "https://github.com/langchain-ai/langchain/commit/73c42306745b0831aa6fe7fe4eeb70d2c2d87a82",
+        "https://github.com/langchain-ai/langchain/commit/9a877c7adbd06f90a2518152f65b562bd90487cc",
+        "https://github.com/langchain-ai/langchain/pull/22903",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/langchain/PYSEC-2024-118.yaml",
+        "https://huntr.com/bounties/90b0776d-9fa6-4841-aac4-09fde5918cae",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-2965",
+        "https://www.cve.org/CVERecord?id=CVE-2024-2965"
+      ],
+      "published_date": "2024-06-06T19:15:55.897Z",
+      "last_modified": "2024-11-21T09:10:56.847Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-3571",
+      "package_name": "langchain",
+      "package_version": "0.0.350",
+      "fixed_version": "0.0.353",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "langchain vulnerable to path traversal",
+      "description": "langchain-ai/langchain is vulnerable to path traversal due to improper limitation of a pathname to a restricted directory ('Path Traversal') in its LocalFileStore functionality. An attacker can leverage this vulnerability to read or write files anywhere on the filesystem, potentially leading to information disclosure or remote code execution. The issue lies in the handling of file paths in the mset and mget methods, where user-supplied input is not adequately sanitized, allowing directory traversal sequences to reach unintended directories.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-22"
+      ],
+      "references": [
+        "https://github.com/langchain-ai/langchain",
+        "https://github.com/langchain-ai/langchain/commit/aad3d8bd47d7f5598156ff2bdcc8f736f24a7412",
+        "https://huntr.com/bounties/2df3acdc-ee4f-4257-bbf8-a7de3870a9d8",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-3571"
+      ],
+      "published_date": "2024-04-16T00:15:12.203Z",
+      "last_modified": "2025-07-29T19:19:25.003Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-0243",
+      "package_name": "langchain",
+      "package_version": "0.0.350",
+      "fixed_version": "0.1.0",
+      "severity": "LOW",
+      "normalized_severity": "low",
+      "title": "langchain Server-Side Request Forgery vulnerability",
+      "description": "With the following crawler configuration:\n\n```python\nfrom bs4 import BeautifulSoup as Soup\n\nurl = \"https://example.com\"\nloader = RecursiveUrlLoader(\n    url=url, max_depth=2, extractor=lambda x: Soup(x, \"html.parser\").text\n)\ndocs = loader.load()\n```\n\nAn attacker in control of the contents of `https://example.com` could place a malicious HTML file in there with links like \"https://example.completely.different/my_file.html\" and the crawler would proceed to download that file as well even though `prevent_outside=True`.\n\nhttps://github.com/langchain-ai/langchain/blob/bf0b3cc0b5ade1fb95a5b1b6fa260e99064c2e22/libs/community/langchain_community/document_loaders/recursive_url_loader.py#L51-L51\n\nResolved in https://github.com/langchain-ai/langchain/pull/15559",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.1,
+      "cwe_ids": [
+        "CWE-918"
+      ],
+      "references": [
+        "https://github.com/langchain-ai/langchain",
+        "https://github.com/langchain-ai/langchain/blob/bf0b3cc0b5ade1fb95a5b1b6fa260e99064c2e22/libs/community/langchain_community/document_loaders/recursive_url_loader.py#L51-L51",
+        "https://github.com/langchain-ai/langchain/commit/bf0b3cc0b5ade1fb95a5b1b6fa260e99064c2e22",
+        "https://github.com/langchain-ai/langchain/pull/15559",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/langchain-exa/PYSEC-2024-235.yaml",
+        "https://huntr.com/bounties/370904e7-10ac-40a4-a8d4-e2d16e1ca861",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-0243"
+      ],
+      "published_date": "2024-02-26T16:27:49.67Z",
+      "last_modified": "2025-02-25T22:56:19.323Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-8309",
+      "package_name": "langchain",
+      "package_version": "0.0.350",
+      "fixed_version": "0.2.0",
+      "severity": "LOW",
+      "normalized_severity": "low",
+      "title": "langchain: SQL Injection in langchain-ai/langchain",
+      "description": "A vulnerability in the GraphCypherQAChain class of langchain-ai/langchain version 0.2.5 allows for SQL injection through prompt injection. This vulnerability can lead to unauthorized data manipulation, data exfiltration, denial of service (DoS) by deleting all data, breaches in multi-tenant security environments, and data integrity issues. Attackers can create, update, or delete nodes and relationships without proper authorization, extract sensitive data, disrupt services, access data across different tenants, and compromise the integrity of the database.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 9.8,
+      "cwe_ids": [
+        "CWE-89",
+        "CWE-74"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-8309",
+        "https://api.python.langchain.com/en/latest/chains/langchain.chains.graph_qa.cypher.GraphCypherQAChain.html",
+        "https://github.com/langchain-ai/langchain",
+        "https://github.com/langchain-ai/langchain/commit/64c317eba05fbac0c6a6fc5aa192bc0d7130972e",
+        "https://github.com/langchain-ai/langchain/commit/c2a3021bb0c5f54649d380b42a0684ca5778c255",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/langchain/PYSEC-2024-115.yaml",
+        "https://huntr.com/bounties/8f4ad910-7fdc-4089-8f0a-b5df5f32e7c5",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-8309",
+        "https://www.cve.org/CVERecord?id=CVE-2024-8309"
+      ],
+      "published_date": "2024-10-29T13:15:10.95Z",
+      "last_modified": "2024-11-01T19:19:20.327Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-6018",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.2",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "Remote Code Execution due to Full Controled File Write in mlflow",
+      "description": "An attacker can overwrite any file on the server hosting MLflow without any authentication.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 9.8,
+      "cwe_ids": [
+        "CWE-78"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/55c72d02380e8db8118595a4fdae7879cb7ac5bd",
+        "https://huntr.com/bounties/7cf918b5-43f4-48c0-a371-4d963ce69b30",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-6018"
+      ],
+      "published_date": "2023-11-16T16:15:34.88Z",
+      "last_modified": "2024-11-21T08:42:59.413Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-6831",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.2",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "Path traversal in MLflow",
+      "description": "Path Traversal: '\\..\\filename' in GitHub repository mlflow/mlflow prior to 2.9.2.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.1,
+      "cwe_ids": [
+        "CWE-29",
+        "CWE-22"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/1da75dfcecd4d169e34809ade55748384e8af6c1",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2023-253.yaml",
+        "https://huntr.com/bounties/0acdd745-0167-4912-9d5c-02035fe5b314",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-6831"
+      ],
+      "published_date": "2023-12-15T01:15:08.14Z",
+      "last_modified": "2024-11-21T08:44:38.267Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-6974",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.2",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "MLflow Server-Side Request Forgery (SSRF)",
+      "description": "A malicious user could use this issue to access internal HTTP(s) servers and in the worst case (ie: aws instance) it could be abuse to get a remote code execution on the victim machine.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 9.8,
+      "cwe_ids": [
+        "CWE-918"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/8174250f83352a04c2d42079f414759060458555",
+        "https://huntr.com/bounties/438b0524-da0e-4d08-976a-6f270c688393",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-6974"
+      ],
+      "published_date": "2023-12-20T06:15:45.16Z",
+      "last_modified": "2024-11-21T08:44:57.34Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-6975",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.2",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "MLFlow Path Traversal Vulnerability",
+      "description": "A malicious user could use this issue to get command execution on the vulnerable machine and get access to data & models information.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 9.8,
+      "cwe_ids": [
+        "CWE-29"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/b9ab9ed77e1deda9697fe472fb1079fd428149ee",
+        "https://huntr.com/bounties/029a3824-cee3-4cf1-b260-7138aa539b85",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-6975"
+      ],
+      "published_date": "2023-12-20T06:15:45.553Z",
+      "last_modified": "2024-11-21T08:44:57.463Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-0520",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "Remote code execution in mlflow",
+      "description": "A vulnerability in mlflow/mlflow version 8.2.1 allows for remote code execution due to improper neutralization of special elements used in an OS command ('Command Injection') within the `mlflow.data.http_dataset_source.py` module. Specifically, when loading a dataset from a source URL with an HTTP scheme, the filename extracted from the `Content-Disposition` header or the URL path is used to generate the final file path without proper sanitization. This flaw enables an attacker to control the file path fully by utilizing path traversal or absolute path techniques, such as '../../tmp/poc.txt' or '/tmp/poc.txt', leading to arbitrary file write. Exploiting this vulnerability could allow a malicious user to execute commands on the vulnerable machine, potentially gaining access to data and model information. The issue is fixed in version 2.9.0.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-23",
+        "CWE-22"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/400c226953b4568f4361bc0a0c223511652c2b9d",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2024-239.yaml",
+        "https://huntr.com/bounties/93e470d7-b6f0-409b-af63-49d3e2a26dbc",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-0520"
+      ],
+      "published_date": "2024-06-06T19:15:51.187Z",
+      "last_modified": "2024-11-21T08:46:46.93Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-27132",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.10.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "Cross-site Scripting in MLFlow",
+      "description": "Insufficient sanitization in MLflow leads to XSS when running an untrusted recipe.\n\nThis issue leads to a client-side RCE when running an untrusted recipe in Jupyter Notebook.\n\nThe vulnerability stems from lack of sanitization over template variables.\n\n",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 9.6,
+      "cwe_ids": [
+        "CWE-79"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/pull/10873",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2024-240.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-27132",
+        "https://research.jfrog.com/vulnerabilities/mlflow-untrusted-recipe-xss-jfsa-2024-000631930",
+        "https://research.jfrog.com/vulnerabilities/mlflow-untrusted-recipe-xss-jfsa-2024-000631930/"
+      ],
+      "published_date": "2024-02-23T22:15:55.077Z",
+      "last_modified": "2025-01-22T14:15:26.13Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-27133",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.10.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "MLFlow Cross-site Scripting vulnerability leads to client-side Remote Code Execution",
+      "description": "Insufficient sanitization in MLflow leads to XSS when running a recipe that uses an untrusted dataset. This issue leads to a client-side RCE when running the recipe in Jupyter Notebook. The vulnerability stems from lack of sanitization over dataset table fields.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 9.6,
+      "cwe_ids": [
+        "CWE-79"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/c43823750bffa5b6abcc086683b15a068513b67b",
+        "https://github.com/mlflow/mlflow/commit/cfa71879a884cc3520e23ccab998c9aa78fdf2b1",
+        "https://github.com/mlflow/mlflow/pull/10893",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2024-241.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-27133",
+        "https://research.jfrog.com/vulnerabilities/mlflow-untrusted-dataset-xss-jfsa-2024-000631932",
+        "https://research.jfrog.com/vulnerabilities/mlflow-untrusted-dataset-xss-jfsa-2024-000631932/"
+      ],
+      "published_date": "2024-02-23T22:15:55.287Z",
+      "last_modified": "2025-01-22T13:46:56.667Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-3573",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.10.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "mlflow vulnerable to Path Traversal",
+      "description": "mlflow/mlflow is vulnerable to Local File Inclusion (LFI) due to improper parsing of URIs, allowing attackers to bypass checks and read arbitrary files on the system. The issue arises from the 'is_local_uri' function's failure to properly handle URIs with empty or 'file' schemes, leading to the misclassification of URIs as non-local. Attackers can exploit this by crafting malicious model versions with specially crafted 'source' parameters, enabling the reading of sensitive files within at least two directory levels from the server's root.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 9.3,
+      "cwe_ids": [
+        "CWE-29",
+        "CWE-22"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/438a450714a3ca06285eeea34bdc6cf79d7f6cbc",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2024-243.yaml",
+        "https://huntr.com/bounties/8ea058a7-4ef8-4baf-9198-bc0147fc543c",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-3573"
+      ],
+      "published_date": "2024-04-16T00:15:12.57Z",
+      "last_modified": "2025-02-03T15:50:28.267Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-43472",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.0",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "Information exposure in MLflow",
+      "description": "An issue in MLFlow versions 2.8.1 and before allows a remote attacker to obtain sensitive information via a crafted request to REST API.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://mlflow.org/news/2023/12/06/2.9.0-release/index.html",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-43472",
+        "https://www.contrastsecurity.com/security-influencers/discovering-mlflow-framework-zero-day-vulnerability-machine-language-model-security-contrast-security"
+      ],
+      "published_date": "2023-12-05T07:15:07.667Z",
+      "last_modified": "2024-11-21T08:24:07.247Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-6709",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.2",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "Jinja2 template injection in mlflow",
+      "description": "Improper Neutralization of Special Elements Used in a Template Engine in GitHub repository mlflow/mlflow prior to 2.9.2.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-1336"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/432b8ccf27fd3a76df4ba79bb1bec62118a85625",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2023-281.yaml",
+        "https://huntr.com/bounties/9e4cc07b-6fff-421b-89bd-9445ef61d34d",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-6709"
+      ],
+      "published_date": "2023-12-12T04:15:07.083Z",
+      "last_modified": "2024-11-21T08:44:24.41Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-6753",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.2",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "Path traversal in MLflow",
+      "description": "Path Traversal in GitHub repository mlflow/mlflow prior to 2.9.2.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-22"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/1c6309f884798fbf56017a3cc808016869ee8de4",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2023-309.yaml",
+        "https://huntr.com/bounties/b397b83a-527a-47e7-b912-a12a17a6cfb4",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-6753"
+      ],
+      "published_date": "2023-12-13T00:15:07.33Z",
+      "last_modified": "2024-11-21T08:44:29.233Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-6909",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.2",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLflow Path Traversal Vulnerability",
+      "description": "Path Traversal: '\\..\\filename' in GitHub repository mlflow/mlflow prior to 2.9.2.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-29"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/1da75dfcecd4d169e34809ade55748384e8af6c1",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2023-252.yaml",
+        "https://huntr.com/bounties/11209efb-0f84-482f-add0-587ea6b7e850",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-6909"
+      ],
+      "published_date": "2023-12-18T04:15:52.367Z",
+      "last_modified": "2024-11-21T08:44:48.957Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-6940",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.2",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "mlflow Command Injection vulnerability",
+      "description": "with only one user interaction(download a malicious config), attackers can gain full command execution on the victim system.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-77"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/5139b1087d686fa52e2b087e09da66aff86297b1",
+        "https://github.com/mlflow/mlflow/commit/a98a341a7222f894b7735db575ad9311ecaba4e3",
+        "https://github.com/mlflow/mlflow/commits/v2.9.2",
+        "https://github.com/mlflow/mlflow/pull/10676",
+        "https://huntr.com/bounties/c6f59480-ce47-4f78-a3dc-4bd8ca15029c",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-6940"
+      ],
+      "published_date": "2023-12-19T02:15:45.05Z",
+      "last_modified": "2024-11-21T08:44:52.89Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-6976",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.2",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLflow Path Traversal Vulnerability",
+      "description": "This vulnerability is capable of writing arbitrary files into arbitrary locations on the remote filesystem in the context of the server process.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-434"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/5044878da0c1851ccfdd5c0a867157ed9a502fbc",
+        "https://huntr.com/bounties/2408a52b-f05b-4cac-9765-4f74bac3f20f",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-6976"
+      ],
+      "published_date": "2023-12-20T06:15:45.73Z",
+      "last_modified": "2024-11-21T08:44:57.587Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-6977",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.2",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLflow Local File Disclosure Vulnerability",
+      "description": "This vulnerability enables malicious users to read sensitive files on the server.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-29"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/4bd7f27c810ba7487d53ed5ef1038fca0f8dc28c",
+        "https://huntr.com/bounties/fe53bf71-3687-4711-90df-c26172880aaf",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-6977"
+      ],
+      "published_date": "2023-12-20T06:15:45.907Z",
+      "last_modified": "2024-11-21T08:44:57.717Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-1483",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.12.1",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "mlflow Path Traversal vulnerability",
+      "description": "A path traversal vulnerability exists in mlflow/mlflow version 2.9.2, allowing attackers to access arbitrary files on the server. By crafting a series of HTTP POST requests with specially crafted 'artifact_location' and 'source' parameters, using a local URI with '#' instead of '?', an attacker can traverse the server's directory structure. The issue occurs due to insufficient validation of user-supplied input in the server's handlers.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-22"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://huntr.com/bounties/52a3855d-93ff-4460-ac24-9c7e4334198d",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-1483"
+      ],
+      "published_date": "2024-04-16T00:15:08.353Z",
+      "last_modified": "2025-02-03T15:02:46.71Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-1558",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.12.1",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "mlflow vulnerable to Path Traversal",
+      "description": "A path traversal vulnerability exists in the `_create_model_version()` function within `server/handlers.py` of the mlflow/mlflow repository, due to improper validation of the `source` parameter. Attackers can exploit this vulnerability by crafting a `source` parameter that bypasses the `_validate_non_local_source_contains_relative_paths(source)` function's checks, allowing for arbitrary file read access on the server. The issue arises from the handling of unquoted URL characters and the subsequent misuse of the original `source` value for model version creation, leading to the exposure of sensitive files when interacting with the `/model-versions/get-artifact` handler.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-22"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://huntr.com/bounties/7f4dbcc5-b6b3-43dd-b310-e2d0556a8081",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-1558"
+      ],
+      "published_date": "2024-04-16T00:15:08.533Z",
+      "last_modified": "2025-02-03T15:14:41.203Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-1560",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "mlflow vulnerable to Path Traversal",
+      "description": "A path traversal vulnerability exists in the mlflow/mlflow repository, specifically within the artifact deletion functionality. Attackers can bypass path validation by exploiting the double decoding process in the `_delete_artifact_mlflow_artifacts` handler and `local_file_uri_to_path` function, allowing for the deletion of arbitrary directories on the server's filesystem. This vulnerability is due to an extra unquote operation in the `delete_artifacts` function of `local_artifact_repo.py`, which fails to properly sanitize user-supplied paths. The issue is present up to version 2.9.2, despite attempts to fix a similar issue in CVE-2023-6831.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.1,
+      "cwe_ids": [
+        "CWE-22"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://huntr.com/bounties/4a34259c-3c8f-4872-b178-f27fbc876b98",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-1560"
+      ],
+      "published_date": "2024-04-16T00:15:08.713Z",
+      "last_modified": "2025-02-03T15:18:54.417Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-1593",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "mlflow vulnerable to Path Traversal",
+      "description": "A path traversal vulnerability exists in the mlflow/mlflow repository due to improper handling of URL parameters. By smuggling path traversal sequences using the ';' character in URLs, attackers can manipulate the 'params' portion of the URL to gain unauthorized access to files or directories. This vulnerability allows for arbitrary data smuggling into the 'params' part of the URL, enabling attacks similar to those described in previous reports but utilizing the ';' character for parameter smuggling. Successful exploitation could lead to unauthorized information disclosure or server compromise.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-22"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://huntr.com/bounties/dbdc6bd6-d09a-46f2-9d9c-5138a14b6e31",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-1593"
+      ],
+      "published_date": "2024-04-16T00:15:09.247Z",
+      "last_modified": "2025-02-03T15:41:20.283Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-1594",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "mlflow vulnerable to Path Traversal",
+      "description": "A path traversal vulnerability exists in the mlflow/mlflow repository, specifically within the handling of the `artifact_location` parameter when creating an experiment. Attackers can exploit this vulnerability by using a fragment component `#` in the artifact location URI to read arbitrary files on the server in the context of the server's process. This issue is similar to CVE-2023-6909 but utilizes a different component of the URI to achieve the same effect. ",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-22"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/blob/b929a3e727dc48a1eb19b7e954b7897ac09ad3ec/mlflow/utils/uri.py#L246",
+        "https://huntr.com/bounties/424b6f6b-e778-4a2b-b860-39730d396f3e",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-1594"
+      ],
+      "published_date": "2024-04-16T00:15:09.417Z",
+      "last_modified": "2025-02-03T15:41:00.377Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-27134",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.16.0",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLflow's excessive directory permissions allow local privilege escalation",
+      "description": "Excessive directory permissions in MLflow leads to local privilege escalation when using spark_udf. This behavior can be exploited by a local attacker to gain elevated permissions by using a ToCToU attack. The issue is only relevant when the spark_udf() MLflow API is called.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7,
+      "cwe_ids": [
+        "CWE-276",
+        "CWE-367"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/0b1d995d66a678153e01ed3040f3f4dfc16a0d6b",
+        "https://github.com/mlflow/mlflow/pull/10874",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-27134"
+      ],
+      "published_date": "2024-11-25T14:15:06.867Z",
+      "last_modified": "2025-02-03T15:05:50.187Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-2928",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.11.3",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "Local File Inclusion in mlflow",
+      "description": "A Local File Inclusion (LFI) vulnerability was identified in mlflow/mlflow, specifically in version 2.9.2, which was fixed in version 2.11.3. This vulnerability arises from the application's failure to properly validate URI fragments for directory traversal sequences such as '../'. An attacker can exploit this flaw by manipulating the fragment part of the URI to read arbitrary files on the local file system, including sensitive files like '/etc/passwd'. The vulnerability is a bypass to a previous patch that only addressed similar manipulation within the URI's query string, highlighting the need for comprehensive validation of all parts of a URI to prevent LFI attacks.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-29",
+        "CWE-22"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/96f0b573a73d8eedd6735a2ce26e08859527be07",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2024-242.yaml",
+        "https://huntr.com/bounties/19bf02d7-6393-4a95-b9d0-d6d4d2d8c298",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-2928"
+      ],
+      "published_date": "2024-06-06T19:15:55.68Z",
+      "last_modified": "2024-11-21T09:10:51.707Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-37052",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLFlow unsafe deserialization",
+      "description": "Deserialization of untrusted data can occur in versions of the MLflow platform running version 1.1.0 or newer, enabling a maliciously uploaded scikit-learn model to run arbitrary code on an end user\u2019s system when interacted with.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://hiddenlayer.com/sai-security-advisory/mlflow-june2024",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37052"
+      ],
+      "published_date": "2024-06-04T12:15:10.413Z",
+      "last_modified": "2025-02-03T14:35:02.407Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-37053",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLFlow unsafe deserialization",
+      "description": "Deserialization of untrusted data can occur in versions of the MLflow platform running version 1.1.0 or newer, enabling a maliciously uploaded scikit-learn model to run arbitrary code on an end user\u2019s system when interacted with.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://hiddenlayer.com/sai-security-advisory/mlflow-june2024",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37053"
+      ],
+      "published_date": "2024-06-04T12:15:10.957Z",
+      "last_modified": "2025-02-03T14:35:07.88Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-37054",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLFlow unsafe deserialization",
+      "description": "Deserialization of untrusted data can occur in versions of the MLflow platform running version 0.9.0 or newer, enabling a maliciously uploaded PyFunc model to run arbitrary code on an end user\u2019s system when interacted with.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://hiddenlayer.com/sai-security-advisory/mlflow-june2024",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37054"
+      ],
+      "published_date": "2024-06-04T12:15:11.19Z",
+      "last_modified": "2025-02-03T14:40:37.527Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-37055",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLFlow unsafe deserialization",
+      "description": "Deserialization of untrusted data can occur in versions of the MLflow platform running version 1.24.0 or newer, enabling a maliciously uploaded pmdarima model to run arbitrary code on an end user\u2019s system when interacted with.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://hiddenlayer.com/sai-security-advisory/mlflow-june2024",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37055"
+      ],
+      "published_date": "2024-06-04T12:15:11.397Z",
+      "last_modified": "2025-02-03T14:44:39.397Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-37056",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLFlow unsafe deserialization",
+      "description": "Deserialization of untrusted data can occur in versions of the MLflow platform running version 1.23.0 or newer, enabling a maliciously uploaded LightGBM scikit-learn model to run arbitrary code on an end user\u2019s system when interacted with.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://hiddenlayer.com/sai-security-advisory/mlflow-june2024",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37056"
+      ],
+      "published_date": "2024-06-04T12:15:11.593Z",
+      "last_modified": "2025-02-03T14:45:07.183Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-37057",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLFlow unsafe deserialization",
+      "description": "Deserialization of untrusted data can occur in versions of the MLflow platform running version 2.0.0rc0 or newer, enabling a maliciously uploaded Tensorflow model to run arbitrary code on an end user\u2019s system when interacted with.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://hiddenlayer.com/sai-security-advisory/mlflow-june2024",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37057"
+      ],
+      "published_date": "2024-06-04T12:15:11.8Z",
+      "last_modified": "2025-02-03T14:45:23.6Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-37058",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLFlow unsafe deserialization",
+      "description": "Deserialization of untrusted data can occur in versions of the MLflow platform running version 2.5.0 or newer, enabling a maliciously uploaded Langchain AgentExecutor model to run arbitrary code on an end user\u2019s system when interacted with.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://hiddenlayer.com/sai-security-advisory/mlflow-june2024",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37058"
+      ],
+      "published_date": "2024-06-04T12:15:12.023Z",
+      "last_modified": "2025-02-03T14:46:16.247Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-37059",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLFlow unsafe deserialization",
+      "description": "Deserialization of untrusted data can occur in versions of the MLflow platform running version 0.5.0 or newer, enabling a maliciously uploaded PyTorch model to run arbitrary code on an end user\u2019s system when interacted with.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://hiddenlayer.com/sai-security-advisory/mlflow-june2024",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37059"
+      ],
+      "published_date": "2024-06-04T12:15:12.227Z",
+      "last_modified": "2025-02-03T14:46:23.25Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-37060",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLFlow unsafe deserialization",
+      "description": "Deserialization of untrusted data can occur in versions of the MLflow platform running version 1.27.0 or newer, enabling a maliciously crafted Recipe to execute arbitrary code on an end user\u2019s system when run.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://hiddenlayer.com/sai-security-advisory/mlflow-june2024",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37060"
+      ],
+      "published_date": "2024-06-04T12:15:12.463Z",
+      "last_modified": "2025-02-03T14:46:31.613Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-37061",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLFlow improper input validation",
+      "description": "Remote Code Execution can occur in versions of the MLflow platform running version 1.11.0 or newer, enabling a maliciously crafted MLproject to execute arbitrary code on an end user\u2019s system when run.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-94"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://hiddenlayer.com/sai-security-advisory/mlflow-june2024",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37061"
+      ],
+      "published_date": "2024-06-04T12:15:12.703Z",
+      "last_modified": "2025-02-03T14:48:37.123Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-8859",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.17.0rc0",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "MLflow has a Local File Read/Path Traversal in dbfs",
+      "description": "A path traversal vulnerability exists in mlflow/mlflow version 2.15.1. When users configure and use the dbfs service, concatenating the URL directly into the file protocol results in an arbitrary file read vulnerability. This issue occurs because only the path part of the URL is checked, while parts such as query and parameters are not handled. The vulnerability is triggered if the user has configured the dbfs service, and during usage, the service is mounted to a local directory.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-29"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/7791b8cdd595f21b5f179c7b17e4b5eb5cbbe654",
+        "https://huntr.com/bounties/2259b88b-a0c6-4c7c-b434-6aacf6056dcb",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-8859"
+      ],
+      "published_date": "2025-03-20T10:15:44.463Z",
+      "last_modified": "2025-08-05T16:15:20.24Z"
+    },
+    {
+      "vulnerability_id": "CVE-2023-6568",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.9.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "Cross-site Scripting (XSS) in MLflow",
+      "description": "A reflected Cross-Site Scripting (XSS) vulnerability exists in the mlflow/mlflow repository, specifically within the handling of the Content-Type header in POST requests. An attacker can inject malicious JavaScript code into the Content-Type header, which is then improperly reflected back to the user without adequate sanitization or escaping, leading to arbitrary JavaScript execution in the context of the victim's browser. The vulnerability is present in the mlflow/server/auth/__init__.py file, where the user-supplied Content-Type header is directly injected into a Python formatted string and returned to the user, facilitating the XSS attack.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 6.1,
+      "cwe_ids": [
+        "CWE-79"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/28ff3f94994941e038f2172c6484b65dc4db6ca1",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2023-260.yaml",
+        "https://huntr.com/bounties/816bdaaa-8153-4732-951e-b0d92fddf709",
+        "https://nvd.nist.gov/vuln/detail/CVE-2023-6568"
+      ],
+      "published_date": "2023-12-07T05:15:09.347Z",
+      "last_modified": "2024-11-21T08:44:07.173Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-3099",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.11.3",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "Undefined Behavior in mlflow",
+      "description": "A vulnerability in mlflow/mlflow version 2.11.1 allows attackers to create multiple models with the same name by exploiting URL encoding. This flaw can lead to Denial of Service (DoS) as an authenticated user might not be able to use the intended model, as it will open a different model each time. Additionally, an attacker can exploit this vulnerability to perform data model poisoning by creating a model with the same name, potentially causing an authenticated user to become a victim by using the poisoned model. The issue stems from inadequate validation of model names, allowing for the creation of models with URL-encoded names that are treated as distinct from their URL-decoded counterparts.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 5.4,
+      "cwe_ids": [
+        "CWE-475"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://huntr.com/bounties/8d96374a-ce8d-480e-9cb0-0a7e5165c24a",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-3099"
+      ],
+      "published_date": "2024-06-06T19:15:59.393Z",
+      "last_modified": "2024-11-21T09:28:53.953Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-4263",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.10.1",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "MLflow allows low privilege users to delete any artifact",
+      "description": "A broken access control vulnerability exists in mlflow/mlflow versions before 2.10.1, where low privilege users with only EDIT permissions on an experiment can delete any artifacts. This issue arises due to the lack of proper validation for DELETE requests by users with EDIT permissions, allowing them to perform unauthorized deletions of artifacts. The vulnerability specifically affects the handling of artifact deletions within the application, as demonstrated by the ability of a low privilege user to delete a directory inside an artifact using a DELETE request, despite the official documentation stating that users with EDIT permission can only read and update artifacts, not delete them.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 5.4,
+      "cwe_ids": [
+        "CWE-284"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/b43e0e3de5b500554e13dc032ba2083b2d6c94b8",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2024-51.yaml",
+        "https://huntr.com/bounties/bfa116d3-2af8-4c4a-ac34-ccde7491ae11",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-4263"
+      ],
+      "published_date": "2024-05-16T09:15:16.037Z",
+      "last_modified": "2025-02-03T15:55:20.03Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-6838",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "MLflow Uncontrolled Resource Consumption vulnerability",
+      "description": "In mlflow/mlflow version v2.13.2, a vulnerability exists that allows the creation or renaming of an experiment with a large number of integers in its name due to the lack of a limit on the experiment name. This can cause the MLflow UI panel to become unresponsive, leading to a potential denial of service. Additionally, there is no character limit in the `artifact_location` parameter while creating the experiment.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 5.3,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://huntr.com/bounties/8ad52cb2-2cda-4eb0-aec9-586060ee43e0",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-6838"
+      ],
+      "published_date": "2025-03-20T10:15:33.62Z",
+      "last_modified": "2025-04-01T20:33:56.51Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-0453",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "MLflow Uncontrolled Resource Consumption vulnerability",
+      "description": "In mlflow/mlflow version 2.17.2, the `/graphql` endpoint is vulnerable to a denial of service attack. An attacker can create large batches of queries that repeatedly request all runs from a given experiment. This can tie up all the workers allocated by MLFlow, rendering the application unable to respond to other requests. This vulnerability is due to uncontrolled resource consumption.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://huntr.com/bounties/788327ec-714a-4d5c-83aa-8df04dd7612b",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-0453"
+      ],
+      "published_date": "2025-03-20T10:15:53.017Z",
+      "last_modified": "2025-04-02T16:10:48.93Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-52967",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "3.1.0, 2.22.2",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "MLFlow SSRF via gateway_proxy_handler",
+      "description": "gateway_proxy_handler in MLflow before 3.1.0 lacks gateway_path validation.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-918"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/issues/15944",
+        "https://github.com/mlflow/mlflow/pull/15970",
+        "https://github.com/mlflow/mlflow/releases/tag/v2.22.2",
+        "https://github.com/mlflow/mlflow/releases/tag/v3.1.0",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2025-52.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-52967"
+      ],
+      "published_date": "2025-06-23T15:15:29.163Z",
+      "last_modified": "2025-06-23T20:16:21.633Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-1474",
+      "package_name": "mlflow",
+      "package_version": "2.8.1",
+      "fixed_version": "2.19.0",
+      "severity": "LOW",
+      "normalized_severity": "low",
+      "title": "MLflow has Weak Password Requirements",
+      "description": "In mlflow/mlflow version 2.18, an admin is able to create a new user account without setting a password. This vulnerability could lead to security risks, as accounts without passwords may be susceptible to unauthorized access. Additionally, this issue violates best practices for secure user account management. The issue is fixed in version 2.19.0.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 5.5,
+      "cwe_ids": [
+        "CWE-521"
+      ],
+      "references": [
+        "https://github.com/mlflow/mlflow",
+        "https://github.com/mlflow/mlflow/commit/149c9e18aa219bc47e86b432e130e467a36f4a17",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/mlflow/PYSEC-2025-17.yaml",
+        "https://huntr.com/bounties/e79f7774-10fe-46b2-b522-e73b748e3b2d",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-1474"
+      ],
+      "published_date": "2025-03-20T10:15:54.037Z",
+      "last_modified": "2025-03-27T15:36:42.54Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-27454",
+      "package_name": "orjson",
+      "package_version": "3.9.10",
+      "fixed_version": "3.9.15",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "orjson.loads in orjson before 3.9.15 does not limit recursion for deep ...",
+      "description": "orjson.loads in orjson before 3.9.15 does not limit recursion for deeply nested JSON documents.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-674"
+      ],
+      "references": [
+        "https://github.com/ijl/orjson",
+        "https://github.com/ijl/orjson/blob/master/CHANGELOG.md#3915",
+        "https://github.com/ijl/orjson/commit/b0e4d2c06ce06c6e63981bf0276e4b7c74e5845e",
+        "https://github.com/ijl/orjson/issues/458",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/orjson/PYSEC-2024-40.yaml",
+        "https://monicz.dev/CVE-2024-27454",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-27454"
+      ],
+      "published_date": "2024-02-26T16:28:00.53Z",
+      "last_modified": "2025-09-18T16:23:58.163Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-55197",
+      "package_name": "pypdf",
+      "package_version": "3.17.1",
+      "fixed_version": "6.0.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "pypdf: PyPDF RAM Exhaustion Vulnerability",
+      "description": "pypdf is a free and open-source pure-python PDF library. Prior to version 6.0.0, an attacker can craft a PDF which leads to the RAM being exhausted. This requires just reading the file if a series of FlateDecode filters is used on a malicious cross-reference stream. Other content streams are affected on explicit access. This issue has been fixed in 6.0.0. If an update is not possible, a workaround involves including the fixed code from pypdf.filters.decompress into the existing filters file.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-400",
+        "CWE-770"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-55197",
+        "https://github.com/py-pdf/pypdf",
+        "https://github.com/py-pdf/pypdf/blob/0dd57738bbdcdb63f0fb43d8a6b3d222b6946595/pypdf/filters.py#L72-L143",
+        "https://github.com/py-pdf/pypdf/issues/3429",
+        "https://github.com/py-pdf/pypdf/pull/3430",
+        "https://github.com/py-pdf/pypdf/releases/tag/6.0.0",
+        "https://github.com/py-pdf/pypdf/security/advisories/GHSA-7hfw-26vp-jp8m",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-55197",
+        "https://www.cve.org/CVERecord?id=CVE-2025-55197"
+      ],
+      "published_date": "2025-08-13T23:15:27.66Z",
+      "last_modified": "2025-08-15T20:05:20.427Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-35195",
+      "package_name": "requests",
+      "package_version": "2.31.0",
+      "fixed_version": "2.32.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "requests: subsequent requests to the same host ignore cert verification",
+      "description": "Requests is a HTTP library. Prior to 2.32.0, when making requests through a Requests `Session`, if the first request is made with `verify=False` to disable cert verification, all subsequent requests to the same host will continue to ignore cert verification regardless of changes to the value of `verify`. This behavior will continue for the lifecycle of the connection in the connection pool. This vulnerability is fixed in 2.32.0.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-670"
+      ],
+      "references": [
+        "https://access.redhat.com/errata/RHSA-2025:0012",
+        "https://access.redhat.com/security/cve/CVE-2024-35195",
+        "https://bugzilla.redhat.com/2282114",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2282114",
+        "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-35195",
+        "https://errata.almalinux.org/8/ALSA-2025-0012.html",
+        "https://errata.rockylinux.org/RLSA-2025:0012",
+        "https://github.com/psf/requests",
+        "https://github.com/psf/requests/commit/a58d7f2ffb4d00b46dca2d70a3932a0b37e22fac",
+        "https://github.com/psf/requests/pull/6655",
+        "https://github.com/psf/requests/security/advisories/GHSA-9wx4-h78v-vm56",
+        "https://linux.oracle.com/cve/CVE-2024-35195.html",
+        "https://linux.oracle.com/errata/ELSA-2025-7049.html",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/IYLSNK5TL46Q6XPRVMHVWS63MVJQOK4Q",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/IYLSNK5TL46Q6XPRVMHVWS63MVJQOK4Q/",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/N7WP6EYDSUOCOJYHDK5NX43PYZ4SNHGZ",
+        "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/N7WP6EYDSUOCOJYHDK5NX43PYZ4SNHGZ/",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-35195",
+        "https://www.cve.org/CVERecord?id=CVE-2024-35195"
+      ],
+      "published_date": "2024-05-20T21:15:09.99Z",
+      "last_modified": "2024-11-21T09:19:54.51Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-47081",
+      "package_name": "requests",
+      "package_version": "2.31.0",
+      "fixed_version": "2.32.4",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "requests: Requests vulnerable to .netrc credentials leak via malicious URLs",
+      "description": "Requests is a HTTP library. Due to a URL parsing issue, Requests releases prior to 2.32.4 may leak .netrc credentials to third parties for specific maliciously-crafted URLs. Users should upgrade to version 2.32.4 to receive a fix. For older versions of Requests, use of the .netrc file can be disabled with `trust_env=False` on one's Requests Session.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-522"
+      ],
+      "references": [
+        "http://seclists.org/fulldisclosure/2025/Jun/2",
+        "http://www.openwall.com/lists/oss-security/2025/06/03/11",
+        "http://www.openwall.com/lists/oss-security/2025/06/03/9",
+        "http://www.openwall.com/lists/oss-security/2025/06/04/1",
+        "http://www.openwall.com/lists/oss-security/2025/06/04/6",
+        "https://access.redhat.com/errata/RHSA-2025:14750",
+        "https://access.redhat.com/security/cve/CVE-2024-47081",
+        "https://bugzilla.redhat.com/2371272",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2371272",
+        "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-47081",
+        "https://errata.almalinux.org/8/ALSA-2025-14750.html",
+        "https://errata.rockylinux.org/RLSA-2025:13234",
+        "https://github.com/psf/requests",
+        "https://github.com/psf/requests/commit/96ba401c1296ab1dda74a2365ef36d88f7d144ef",
+        "https://github.com/psf/requests/pull/6965",
+        "https://github.com/psf/requests/security/advisories/GHSA-9hjg-9r4m-mvj7",
+        "https://linux.oracle.com/cve/CVE-2024-47081.html",
+        "https://linux.oracle.com/errata/ELSA-2025-14999.html",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-47081",
+        "https://requests.readthedocs.io/en/latest/api/#requests.Session.trust_env",
+        "https://seclists.org/fulldisclosure/2025/Jun/2",
+        "https://ubuntu.com/security/notices/USN-7568-1",
+        "https://ubuntu.com/security/notices/USN-7762-1",
+        "https://www.cve.org/CVERecord?id=CVE-2024-47081",
+        "https://www.openwall.com/lists/oss-security/2025/06/03/9"
+      ],
+      "published_date": "2025-06-09T18:15:24.983Z",
+      "last_modified": "2025-06-12T16:06:47.857Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-5206",
+      "package_name": "scikit-learn",
+      "package_version": "1.3.2",
+      "fixed_version": "1.5.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "scikit-learn: Possible sensitive data leak",
+      "description": "A sensitive data leakage vulnerability was identified in scikit-learn's TfidfVectorizer, specifically in versions up to and including 1.4.1.post1, which was fixed in version 1.5.0. The vulnerability arises from the unexpected storage of all tokens present in the training data within the `stop_words_` attribute, rather than only storing the subset of tokens required for the TF-IDF technique to function. This behavior leads to the potential leakage of sensitive information, as the `stop_words_` attribute could contain tokens that were meant to be discarded and not stored, such as passwords or keys. The impact of this vulnerability varies based on the nature of the data being processed by the vectorizer.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 4.7,
+      "cwe_ids": [
+        "CWE-921",
+        "CWE-922"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-5206",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/scikit-learn/PYSEC-2024-110.yaml",
+        "https://github.com/scikit-learn/scikit-learn",
+        "https://github.com/scikit-learn/scikit-learn/commit/70ca21f106b603b611da73012c9ade7cd8e438b8",
+        "https://huntr.com/bounties/14bc0917-a85b-4106-a170-d09d5191517c",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-5206",
+        "https://www.cve.org/CVERecord?id=CVE-2024-5206"
+      ],
+      "published_date": "2024-06-06T19:16:06.363Z",
+      "last_modified": "2024-11-21T09:47:11.143Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-32434",
+      "package_name": "torch",
+      "package_version": "2.1.1",
+      "fixed_version": "2.6.0",
+      "severity": "CRITICAL",
+      "normalized_severity": "critical",
+      "title": "PyTorch is a Python package that provides tensor computation with stro ...",
+      "description": "PyTorch is a Python package that provides tensor computation with strong GPU acceleration and deep neural networks built on a tape-based autograd system. In version 2.5.1 and prior, a Remote Command Execution (RCE) vulnerability exists in PyTorch when loading a model using torch.load with weights_only=True. This issue has been patched in version 2.6.0.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 9.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/pypa/advisory-database/tree/main/vulns/torch/PYSEC-2025-41.yaml",
+        "https://github.com/pytorch/pytorch",
+        "https://github.com/pytorch/pytorch/commit/8d4b8a920a2172523deb95bf20e8e52d50649c04",
+        "https://github.com/pytorch/pytorch/security/advisories/GHSA-53q9-r3pm-6pq6",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-32434"
+      ],
+      "published_date": "2025-04-18T16:15:23.183Z",
+      "last_modified": "2025-05-28T13:14:20.75Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-31580",
+      "package_name": "torch",
+      "package_version": "2.1.1",
+      "fixed_version": "2.2.0",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "PyTorch before v2.2.0 was discovered to contain a heap buffer overflow ...",
+      "description": "PyTorch before v2.2.0 was discovered to contain a heap buffer overflow vulnerability in the component /runtime/vararg_functions.cpp. This vulnerability allows attackers to cause a Denial of Service (DoS) via a crafted input.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-122"
+      ],
+      "references": [
+        "https://gist.github.com/1047524396/038c78f2f007345e6f497698ace2aa3d",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/torch/PYSEC-2024-252.yaml",
+        "https://github.com/pytorch/pytorch",
+        "https://github.com/pytorch/pytorch/commit/b5c3a17c2c207ebefcb85043f0cf94be9b2fef81",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-31580",
+        "https://security.snyk.io/vuln/SNYK-PYTHON-TORCH-6649934"
+      ],
+      "published_date": "2024-04-17T19:15:07.783Z",
+      "last_modified": "2025-06-10T17:38:16.883Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-31583",
+      "package_name": "torch",
+      "package_version": "2.1.1",
+      "fixed_version": "2.2.0",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "Pytorch before version v2.2.0 was discovered to contain a use-after-fr ...",
+      "description": "Pytorch before version v2.2.0 was discovered to contain a use-after-free vulnerability in torch/csrc/jit/mobile/interpreter.cpp.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-416"
+      ],
+      "references": [
+        "https://gist.github.com/1047524396/43e19a41f2b36503a4a228c32cdbc176",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/torch/PYSEC-2024-251.yaml",
+        "https://github.com/pytorch/pytorch",
+        "https://github.com/pytorch/pytorch/blob/v2.1.2/torch/csrc/jit/mobile/interpreter.cpp#L132",
+        "https://github.com/pytorch/pytorch/commit/9c7071b0e324f9fb68ab881283d6b8d388a4bcd2",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-31583",
+        "https://security.snyk.io/vuln/SNYK-PYTHON-TORCH-6619806"
+      ],
+      "published_date": "2024-04-17T19:15:07.95Z",
+      "last_modified": "2025-06-10T01:33:43.18Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-3730",
+      "package_name": "torch",
+      "package_version": "2.1.1",
+      "fixed_version": "2.8.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "A vulnerability, which was classified as problematic, was found in PyT ...",
+      "description": "A vulnerability, which was classified as problematic, was found in PyTorch 2.6.0. Affected is the function torch.nn.functional.ctc_loss of the file aten/src/ATen/native/LossCTC.cpp. The manipulation leads to denial of service. An attack has to be approached locally. The exploit has been disclosed to the public and may be used. The real existence of this vulnerability is still doubted at the moment. The name of the patch is 46fc5d8e360127361211cb237d5f9eef0223e567. It is recommended to apply a patch to fix this issue. The security policy of the project warns to use unknown models which might establish malicious effects.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 5.5,
+      "cwe_ids": [
+        "CWE-404"
+      ],
+      "references": [
+        "https://github.com/pytorch/pytorch",
+        "https://github.com/pytorch/pytorch/commit/01f226bfb8f2c343f5c614a6bbf685d91160f3af",
+        "https://github.com/pytorch/pytorch/issues/150835",
+        "https://github.com/pytorch/pytorch/issues/150835#issue-2979082232",
+        "https://github.com/pytorch/pytorch/pull/150981",
+        "https://github.com/timocafe/tewart-pytorch/commit/46fc5d8e360127361211cb237d5f9eef0223e567",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-3730",
+        "https://vuldb.com/?ctiid.305076",
+        "https://vuldb.com/?id.305076",
+        "https://vuldb.com/?submit.553645"
+      ],
+      "published_date": "2025-04-16T21:15:48.7Z",
+      "last_modified": "2025-05-28T17:35:54.08Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-2953",
+      "package_name": "torch",
+      "package_version": "2.1.1",
+      "fixed_version": "2.7.1-rc1",
+      "severity": "LOW",
+      "normalized_severity": "low",
+      "title": "torch: PyTorch torch.mkldnn_max_pool2d denial of service",
+      "description": "A vulnerability, which was classified as problematic, has been found in PyTorch 2.6.0+cu124. Affected by this issue is the function torch.mkldnn_max_pool2d. The manipulation leads to denial of service. An attack has to be approached locally. The exploit has been disclosed to the public and may be used. The real existence of this vulnerability is still doubted at the moment. The security policy of the project warns to use unknown models which might establish malicious effects.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 5.5,
+      "cwe_ids": [
+        "CWE-404"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-2953",
+        "https://github.com/pytorch/pytorch",
+        "https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models",
+        "https://github.com/pytorch/pytorch/issues/149274",
+        "https://github.com/pytorch/pytorch/issues/149274#issue-2923122269",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-2953",
+        "https://vuldb.com/?ctiid.302006",
+        "https://vuldb.com/?id.302006",
+        "https://vuldb.com/?submit.521279",
+        "https://www.cve.org/CVERecord?id=CVE-2025-2953"
+      ],
+      "published_date": "2025-03-30T16:15:14.38Z",
+      "last_modified": "2025-04-22T12:15:16.043Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-11392",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.48.0",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "transformers: Hugging Face Transformers MobileViTV2 Deserialization of Untrusted Data Remote Code Execution Vulnerability",
+      "description": "Hugging Face Transformers MobileViTV2 Deserialization of Untrusted Data Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of Hugging Face Transformers. User interaction is required to exploit this vulnerability in that the target must visit a malicious page or open a malicious file.\n\nThe specific flaw exists within the handling of configuration files. The issue results from the lack of proper validation of user-supplied data, which can result in deserialization of untrusted data. An attacker can leverage this vulnerability to execute code in the context of the current user. Was ZDI-CAN-24322.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-11392",
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/issues/34840",
+        "https://github.com/huggingface/transformers/pull/35296",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/transformers/PYSEC-2024-227.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-11392",
+        "https://www.cve.org/CVERecord?id=CVE-2024-11392",
+        "https://www.zerodayinitiative.com/advisories/ZDI-24-1513",
+        "https://www.zerodayinitiative.com/advisories/ZDI-24-1513/"
+      ],
+      "published_date": "2024-11-22T22:15:06.97Z",
+      "last_modified": "2025-02-10T22:18:55.153Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-11393",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.48.0",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "transformers: Hugging Face Transformers MaskFormer Model Deserialization of Untrusted Data Remote Code Execution Vulnerability",
+      "description": "Hugging Face Transformers MaskFormer Model Deserialization of Untrusted Data Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of Hugging Face Transformers. User interaction is required to exploit this vulnerability in that the target must visit a malicious page or open a malicious file.\n\nThe specific flaw exists within the parsing of model files. The issue results from the lack of proper validation of user-supplied data, which can result in deserialization of untrusted data. An attacker can leverage this vulnerability to execute code in the context of the current user. Was ZDI-CAN-25191.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-11393",
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/issues/34840",
+        "https://github.com/huggingface/transformers/pull/35296",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/transformers/PYSEC-2024-228.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-11393",
+        "https://www.cve.org/CVERecord?id=CVE-2024-11393",
+        "https://www.zerodayinitiative.com/advisories/ZDI-24-1514",
+        "https://www.zerodayinitiative.com/advisories/ZDI-24-1514/"
+      ],
+      "published_date": "2024-11-22T22:15:07.1Z",
+      "last_modified": "2025-02-10T22:18:52.253Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-11394",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.48.0",
+      "severity": "HIGH",
+      "normalized_severity": "high",
+      "title": "transformers: Hugging Face Transformers Trax Model Deserialization of Untrusted Data Remote Code Execution Vulnerability",
+      "description": "Hugging Face Transformers Trax Model Deserialization of Untrusted Data Remote Code Execution Vulnerability. This vulnerability allows remote attackers to execute arbitrary code on affected installations of Hugging Face Transformers. User interaction is required to exploit this vulnerability in that the target must visit a malicious page or open a malicious file.\n\nThe specific flaw exists within the handling of model files. The issue results from the lack of proper validation of user-supplied data, which can result in deserialization of untrusted data. An attacker can leverage this vulnerability to execute code in the context of the current user. Was ZDI-CAN-25012.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 8.8,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2024-11394",
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/issues/34840",
+        "https://github.com/huggingface/transformers/pull/35296",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/transformers/PYSEC-2024-229.yaml",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-11394",
+        "https://www.cve.org/CVERecord?id=CVE-2024-11394",
+        "https://www.zerodayinitiative.com/advisories/ZDI-24-1515",
+        "https://www.zerodayinitiative.com/advisories/ZDI-24-1515/"
+      ],
+      "published_date": "2024-11-22T22:15:07.223Z",
+      "last_modified": "2025-02-10T22:16:16.163Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-12720",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.48.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "Transformers Regular Expression Denial of Service (ReDoS) vulnerability",
+      "description": "A Regular Expression Denial of Service (ReDoS) vulnerability was identified in the huggingface/transformers library, specifically in the file tokenization_nougat_fast.py. The vulnerability occurs in the post_process_single() function, where a regular expression processes specially crafted input. The issue stems from the regex exhibiting exponential time complexity under certain conditions, leading to excessive backtracking. This can result in significantly high CPU usage and potential application downtime, effectively creating a Denial of Service (DoS) scenario. The affected version is v4.46.3 (latest).",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-1333"
+      ],
+      "references": [
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/commit/deac971c469bcbb182c2e52da0b82fb3bf54cccf",
+        "https://huntr.com/bounties/4bed1214-7835-4252-a853-22bbad891f98",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-12720"
+      ],
+      "published_date": "2025-03-20T10:15:29.507Z",
+      "last_modified": "2025-08-01T21:11:26.963Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-1194",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.50.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "Transformers Regular Expression Denial of Service (ReDoS) vulnerability",
+      "description": "A Regular Expression Denial of Service (ReDoS) vulnerability was identified in the huggingface/transformers library, specifically in the file `tokenization_gpt_neox_japanese.py` of the GPT-NeoX-Japanese model. The vulnerability occurs in the SubWordJapaneseTokenizer class, where regular expressions process specially crafted inputs. The issue stems from a regex exhibiting exponential complexity under certain conditions, leading to excessive backtracking. This can result in high CPU usage and potential application downtime, effectively creating a Denial of Service (DoS) scenario. The affected version is v4.48.1 (latest).",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 6.5,
+      "cwe_ids": [
+        "CWE-1333"
+      ],
+      "references": [
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/commit/92c5ca9dd70de3ade2af2eb835c96215cc50e815",
+        "https://huntr.com/bounties/86f58dcd-683f-4adc-a735-849f51e9abb2",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-1194"
+      ],
+      "published_date": "2025-04-29T12:15:31.717Z",
+      "last_modified": "2025-08-01T21:56:15.79Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-2099",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.50.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "transformers: Regular Expression Denial of Service (ReDoS) in huggingface/transformers",
+      "description": "A vulnerability in the `preprocess_string()` function of the `transformers.testing_utils` module in huggingface/transformers version v4.48.3 allows for a Regular Expression Denial of Service (ReDoS) attack. The regular expression used to process code blocks in docstrings contains nested quantifiers, leading to exponential backtracking when processing input with a large number of newline characters. An attacker can exploit this by providing a specially crafted payload, causing high CPU usage and potential application downtime, effectively resulting in a Denial of Service (DoS) scenario.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 7.5,
+      "cwe_ids": [
+        "CWE-1333"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-2099",
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/commit/8cb522b4190bd556ce51be04942720650b1a3e57",
+        "https://github.com/huggingface/transformers/pull/36648",
+        "https://github.com/pypa/advisory-database/tree/main/vulns/transformers/PYSEC-2025-40.yaml",
+        "https://huntr.com/bounties/97b780f3-ffca-424f-ad5d-0e1c57a5bde4",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-2099",
+        "https://www.cve.org/CVERecord?id=CVE-2025-2099"
+      ],
+      "published_date": "2025-05-19T12:15:19.64Z",
+      "last_modified": "2025-05-21T17:43:15.08Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-3263",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.51.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "transformers: Regular Expression Denial of Service (ReDoS) in huggingface/transformers",
+      "description": "A Regular Expression Denial of Service (ReDoS) vulnerability was discovered in the Hugging Face Transformers library, specifically in the `get_configuration_file()` function within the `transformers.configuration_utils` module. The affected version is 4.49.0, and the issue is resolved in version 4.51.0. The vulnerability arises from the use of a regular expression pattern `config\\.(.*)\\.json` that can be exploited to cause excessive CPU consumption through crafted input strings, leading to catastrophic backtracking. This can result in model serving disruption, resource exhaustion, and increased latency in applications using the library.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-1333"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-3263",
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/commit/0720e206c6ba28887e4d60ef60a6a089f6c1cc76",
+        "https://github.com/huggingface/transformers/commit/126abe3461762e5fc180e7e614391d1b4ab051ca",
+        "https://huntr.com/bounties/c7a69150-54f8-4e81-8094-791e7a2a0f29",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-3263",
+        "https://www.cve.org/CVERecord?id=CVE-2025-3263"
+      ],
+      "published_date": "2025-07-07T10:15:27.35Z",
+      "last_modified": "2025-08-07T01:03:17.99Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-3264",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.51.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "transformers: Regular Expression Denial of Service (ReDoS) in huggingface/transformers",
+      "description": "A Regular Expression Denial of Service (ReDoS) vulnerability was discovered in the Hugging Face Transformers library, specifically in the `get_imports()` function within `dynamic_module_utils.py`. This vulnerability affects versions 4.49.0 and is fixed in version 4.51.0. The issue arises from a regular expression pattern `\\s*try\\s*:.*?except.*?:` used to filter out try/except blocks from Python code, which can be exploited to cause excessive CPU consumption through crafted input strings due to catastrophic backtracking. This vulnerability can lead to remote code loading disruption, resource exhaustion in model serving, supply chain attack vectors, and development pipeline disruption.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-1333"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-3264",
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/commit/0720e206c6ba28887e4d60ef60a6a089f6c1cc76",
+        "https://github.com/huggingface/transformers/commit/126abe3461762e5fc180e7e614391d1b4ab051ca",
+        "https://huntr.com/bounties/3c6f7822-9992-476d-8cf0-b0b1623427df",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-3264",
+        "https://www.cve.org/CVERecord?id=CVE-2025-3264"
+      ],
+      "published_date": "2025-07-07T10:15:27.5Z",
+      "last_modified": "2025-08-07T01:02:30.7Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-3933",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.52.1",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "transformers: Regular Expression Denial of Service (ReDoS) in huggingface/transformers",
+      "description": "A Regular Expression Denial of Service (ReDoS) vulnerability was discovered in the Hugging Face Transformers library, specifically within the DonutProcessor class's `token2json()` method. This vulnerability affects versions 4.50.3 and earlier, and is fixed in version 4.52.1. The issue arises from the regex pattern `<s_(.*?)>` which can be exploited to cause excessive CPU consumption through crafted input strings due to catastrophic backtracking. This vulnerability can lead to service disruption, resource exhaustion, and potential API service vulnerabilities, impacting document processing tasks using the Donut model.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 5.3,
+      "cwe_ids": [
+        "CWE-1333"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-3933",
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/commit/ebbe9b12dd75b69f92100d684c47f923ee262a93",
+        "https://github.com/huggingface/transformers/pull/37788",
+        "https://huntr.com/bounties/25282953-5827-4384-bb6f-5790d275721b",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-3933",
+        "https://www.cve.org/CVERecord?id=CVE-2025-3933"
+      ],
+      "published_date": "2025-07-11T10:15:22.293Z",
+      "last_modified": "2025-08-07T01:01:46.78Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-5197",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.53.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "transformers: Transformers ReDoS Vulnerability",
+      "description": "A Regular Expression Denial of Service (ReDoS) vulnerability exists in the Hugging Face Transformers library, specifically in the `convert_tf_weight_name_to_pt_weight_name()` function. This function, responsible for converting TensorFlow weight names to PyTorch format, uses a regex pattern `/[^/]*___([^/]*)/` that can be exploited to cause excessive CPU consumption through crafted input strings due to catastrophic backtracking. The vulnerability affects versions up to 4.51.3 and is fixed in version 4.53.0. This issue can lead to service disruption, resource exhaustion, and potential API service vulnerabilities, impacting model conversion processes between TensorFlow and PyTorch formats.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-1333"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-5197",
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/commit/701caef704e356dc2f9331cc3fd5df0eccb4720a",
+        "https://github.com/huggingface/transformers/commit/944b56000be5e9b61af8301aa340838770ad8a0b",
+        "https://huntr.com/bounties/3f8b3fd0-166b-46e7-b60f-60dd9d2678bf",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-5197",
+        "https://www.cve.org/CVERecord?id=CVE-2025-5197"
+      ],
+      "published_date": "2025-08-06T12:15:26.837Z",
+      "last_modified": "2025-08-06T20:23:37.6Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-6051",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.53.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "transformers: Regular Expression Denial of Service (ReDoS) in huggingface/transformers",
+      "description": "A Regular Expression Denial of Service (ReDoS) vulnerability was discovered in the Hugging Face Transformers library, specifically within the `normalize_numbers()` method of the `EnglishNormalizer` class. This vulnerability affects versions up to 4.52.4 and is fixed in version 4.53.0. The issue arises from the method's handling of numeric strings, which can be exploited using crafted input strings containing long sequences of digits, leading to excessive CPU consumption. This vulnerability impacts text-to-speech and number normalization tasks, potentially causing service disruption, resource exhaustion, and API vulnerabilities.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-1333"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-6051",
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/commit/54a02160eb030da9be18231c77791f2eb3a52216",
+        "https://github.com/huggingface/transformers/commit/ba8eaba9865618253f997784aa565b96206426f0",
+        "https://github.com/huggingface/transformers/pull/38844",
+        "https://huntr.com/bounties/af929523-7b59-418a-bf55-301830b2ac9d",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-6051",
+        "https://www.cve.org/CVERecord?id=CVE-2025-6051"
+      ],
+      "published_date": "2025-09-14T17:15:34.21Z",
+      "last_modified": "2025-09-15T15:21:42.937Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-6638",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.53.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "transformers: Regular Expression Denial of Service (ReDoS) in huggingface/transformers",
+      "description": "A Regular Expression Denial of Service (ReDoS) vulnerability was discovered in the Hugging Face Transformers library, specifically affecting the MarianTokenizer's `remove_language_code()` method. This vulnerability is present in version 4.52.4 and has been fixed in version 4.53.0. The issue arises from inefficient regex processing, which can be exploited by crafted input strings containing malformed language code patterns, leading to excessive CPU consumption and potential denial of service.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-1333"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-6638",
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/commit/47c34fba5c303576560cb29767efb452ff12b8be",
+        "https://github.com/huggingface/transformers/commit/d37f7517972f67e3f2194c000ed0f87f064e5099",
+        "https://huntr.com/bounties/6a6c933f-9ce8-4ded-8b3b-2c1444c61f36",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-6638",
+        "https://www.cve.org/CVERecord?id=CVE-2025-6638"
+      ],
+      "published_date": "2025-09-12T11:15:31.77Z",
+      "last_modified": "2025-09-15T15:21:42.937Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-6921",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.53.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "Hugging Face Transformers vulnerable to Regular Expression Denial of Service (ReDoS) in the AdamWeightDecay optimizer",
+      "description": "The huggingface/transformers library, versions prior to 4.53.0, is vulnerable to Regular Expression Denial of Service (ReDoS) in the AdamWeightDecay optimizer. The vulnerability arises from the _do_use_weight_decay method, which processes user-controlled regular expressions in the include_in_weight_decay and exclude_from_weight_decay lists. Malicious regular expressions can cause catastrophic backtracking during the re.search call, leading to 100% CPU utilization and a denial of service. This issue can be exploited by attackers who can control the patterns in these lists, potentially causing the machine learning task to hang and rendering services unresponsive.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "references": [
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/commit/47c34fba5c303576560cb29767efb452ff12b8be",
+        "https://github.com/huggingface/transformers/commit/d37f7517972f67e3f2194c000ed0f87f064e5099",
+        "https://huntr.com/bounties/287d15a7-6e7c-45d2-8c05-11e305776f1f",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-6921"
+      ],
+      "published_date": "2025-09-23T14:15:41.387Z",
+      "last_modified": "2025-09-23T14:15:41.387Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-3568",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.38.0",
+      "severity": "LOW",
+      "normalized_severity": "low",
+      "title": "Transformers Deserialization of Untrusted Data vulnerability",
+      "description": "The huggingface/transformers library is vulnerable to arbitrary code execution through deserialization of untrusted data within the `load_repo_checkpoint()` function of the `TFPreTrainedModel()` class. Attackers can execute arbitrary code and commands by crafting a malicious serialized payload, exploiting the use of `pickle.load()` on data from potentially untrusted sources. This vulnerability allows for remote code execution (RCE) by deceiving victims into loading a seemingly harmless checkpoint during a normal training process, thereby enabling attackers to execute arbitrary code on the targeted machine.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-502"
+      ],
+      "references": [
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/commit/693667b8ac8138b83f8adb6522ddaf42fa07c125",
+        "https://huntr.com/bounties/b3c36992-5264-4d7f-9906-a996efafba8f",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-3568"
+      ],
+      "published_date": "2024-04-10T17:15:58.16Z",
+      "last_modified": "2024-11-21T09:29:53.77Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-3777",
+      "package_name": "transformers",
+      "package_version": "4.36.2",
+      "fixed_version": "4.52.1",
+      "severity": "LOW",
+      "normalized_severity": "low",
+      "title": "transformers: Improper Input Validation in huggingface/transformers",
+      "description": "Hugging Face Transformers versions up to 4.49.0 are affected by an improper input validation vulnerability in the `image_utils.py` file. The vulnerability arises from insecure URL validation using the `startswith()` method, which can be bypassed through URL username injection. This allows attackers to craft URLs that appear to be from YouTube but resolve to malicious domains, potentially leading to phishing attacks, malware distribution, or data exfiltration. The issue is fixed in version 4.52.1.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-20"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-3777",
+        "https://github.com/huggingface/transformers",
+        "https://github.com/huggingface/transformers/blame/a7d2bbaaa8aac64f7c1ee8c1421cfe84b38359a4/src/transformers/image_utils.py",
+        "https://github.com/huggingface/transformers/commit/4dda5f71b35fb70cf602187eef84bb17a50b9082",
+        "https://huntr.com/bounties/ccba0730-9248-4853-b7ff-5c20e6364f09",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-3777",
+        "https://www.cve.org/CVERecord?id=CVE-2025-3777"
+      ],
+      "published_date": "2025-07-07T10:15:28.297Z",
+      "last_modified": "2025-08-07T00:54:16.957Z"
+    },
+    {
+      "vulnerability_id": "CVE-2024-37891",
+      "package_name": "urllib3",
+      "package_version": "2.1.0",
+      "fixed_version": "1.26.19, 2.2.2",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "urllib3: proxy-authorization request header is not stripped during cross-origin redirects",
+      "description": " urllib3 is a user-friendly HTTP client library for Python. When using urllib3's proxy support with `ProxyManager`, the `Proxy-Authorization` header is only sent to the configured proxy, as expected. However, when sending HTTP requests *without* using urllib3's proxy support, it's possible to accidentally configure the `Proxy-Authorization` header even though it won't have any effect as the request is not using a forwarding proxy or a tunneling proxy. In those cases, urllib3 doesn't treat the `Proxy-Authorization` HTTP header as one carrying authentication material and thus doesn't strip the header on cross-origin redirects. Because this is a highly unlikely scenario, we believe the severity of this vulnerability is low for almost all users. Out of an abundance of caution urllib3 will automatically strip the `Proxy-Authorization` header during cross-origin redirects to avoid the small chance that users are doing this on accident. Users should use urllib3's proxy support or disable automatic redirects to achieve safe processing of the `Proxy-Authorization` header, but we still decided to strip the header by default in order to further protect users who aren't using the correct approach. We believe the number of usages affected by this advisory is low. It requires all of the following to be true to be exploited: 1. Setting the `Proxy-Authorization` header without using urllib3's built-in proxy support. 2. Not disabling HTTP redirects. 3. Either not using an HTTPS origin server or for the proxy or target origin to redirect to a malicious origin. Users are advised to update to either version 1.26.19 or version 2.2.2. Users unable to upgrade may use the `Proxy-Authorization` header with urllib3's `ProxyManager`, disable HTTP redirects using `redirects=False` when sending requests, or not user the `Proxy-Authorization` header as mitigations.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 0,
+      "cwe_ids": [
+        "CWE-669"
+      ],
+      "references": [
+        "https://access.redhat.com/errata/RHSA-2024:8843",
+        "https://access.redhat.com/security/cve/CVE-2024-37891",
+        "https://bugzilla.redhat.com/2292788",
+        "https://bugzilla.redhat.com/show_bug.cgi?id=2292788",
+        "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-37891",
+        "https://errata.almalinux.org/8/ALSA-2024-8843.html",
+        "https://errata.rockylinux.org/RLSA-2024:5309",
+        "https://github.com/urllib3/urllib3",
+        "https://github.com/urllib3/urllib3/commit/40b6d1605814dd1db0a46e202d6e56f2e4c9a468",
+        "https://github.com/urllib3/urllib3/commit/accff72ecc2f6cf5a76d9570198a93ac7c90270e",
+        "https://github.com/urllib3/urllib3/security/advisories/GHSA-34jh-p97f-mpxf",
+        "https://linux.oracle.com/cve/CVE-2024-37891.html",
+        "https://linux.oracle.com/errata/ELSA-2024-9458.html",
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-37891",
+        "https://security.netapp.com/advisory/ntap-20240822-0003/",
+        "https://ubuntu.com/security/notices/USN-7084-1",
+        "https://ubuntu.com/security/notices/USN-7084-2",
+        "https://www.cve.org/CVERecord?id=CVE-2024-37891",
+        "https://www.vicarius.io/vsociety/posts/proxy-authorization-header-handling-vulnerability-in-urllib3-cve-2024-37891"
+      ],
+      "published_date": "2024-06-17T20:15:13.45Z",
+      "last_modified": "2024-11-21T09:24:28.953Z"
+    },
+    {
+      "vulnerability_id": "CVE-2025-50181",
+      "package_name": "urllib3",
+      "package_version": "2.1.0",
+      "fixed_version": "2.5.0",
+      "severity": "MEDIUM",
+      "normalized_severity": "medium",
+      "title": "urllib3: urllib3 redirects are not disabled when retries are disabled on PoolManager instantiation",
+      "description": "urllib3 is a user-friendly HTTP client library for Python. Prior to 2.5.0, it is possible to disable redirects for all requests by instantiating a PoolManager and specifying retries in a way that disable redirects. By default, requests and botocore users are not affected. An application attempting to mitigate SSRF or open redirect vulnerabilities by disabling redirects at the PoolManager level will remain vulnerable. This issue has been patched in version 2.5.0.",
+      "source_file": "GP-PROJECTS/SOAR-copilot/requirements.txt",
+      "source_type": "pip",
+      "cvss_score": 6.1,
+      "cwe_ids": [
+        "CWE-601"
+      ],
+      "references": [
+        "https://access.redhat.com/security/cve/CVE-2025-50181",
+        "https://github.com/urllib3/urllib3",
+        "https://github.com/urllib3/urllib3/commit/f05b1329126d5be6de501f9d1e3e36738bc08857",
+        "https://github.com/urllib3/urllib3/security/advisories/GHSA-pq67-6m6q-mj2v",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-50181",
+        "https://ubuntu.com/security/notices/USN-7599-1",
+        "https://ubuntu.com/security/notices/USN-7599-2",
+        "https://www.cve.org/CVERecord?id=CVE-2025-50181"
+      ],
+      "published_date": "2025-06-19T01:15:24.453Z",
+      "last_modified": "2025-09-18T13:51:10.24Z"
+    }
+  ],
+  "summary": {
+    "total": 100,
+    "files_scanned": 15,
+    "severity_breakdown": {
+      "critical": 17,
+      "high": 37,
+      "medium": 38,
+      "low": 8
+    },
+    "package_managers_found": [
+      "pip"
+    ],
+    "vulnerability_sources": {
+      "GP-PROJECTS/LinkOps-MLOps/db/job-category/data_scientist/requirements.txt": 2,
+      "GP-PROJECTS/LinkOps-MLOps/db/job-category/devops_engineer/requirements.txt": 2,
+      "GP-PROJECTS/LinkOps-MLOps/db/job-category/kubernetes_specialist/requirements.txt": 2,
+      "GP-PROJECTS/LinkOps-MLOps/db/job-category/platform_engineer/requirements.txt": 2,
+      "GP-PROJECTS/LinkOps-MLOps/htc/qa-generator/requirements.txt": 2,
+      "GP-PROJECTS/LinkOps-MLOps/htc/requirements.txt": 2,
+      "GP-PROJECTS/LinkOps-MLOps/links-pipeline/data-intake/requirements.txt": 2,
+      "GP-PROJECTS/SOAR-copilot/CLEANUP_ARCHIVE/legacy/requirements.txt": 7,
+      "GP-PROJECTS/SOAR-copilot/requirements.txt": 79
+    },
+    "scan_coverage": {
+      "package_files": {
+        "npm": 1535,
+        "pip": 33
+      },
+      "dockerfile_count": 37
+    }
+  },
+  "target": "/home/jimmie/linkops-industries/GP-copilot",
+  "tool": "trivy",
+  "timestamp": "2025-09-24T15:17:14.461185",
+  "scan_id": "trivy_20250924_151714_461",
+  "scan_context": {
+    "package_files": {
+      "npm": 1535,
+      "pip": 33
+    },
+    "dockerfile_count": 37,
+    "total_files": 83440
+  },
+  "metadata": {
+    "trivy_db_version": 2,
+    "scan_type": "filesystem",
+    "scan_performance": {
+      "results_processed": 15,
+      "total_vulnerabilities": 100
+    }
+  }
+}

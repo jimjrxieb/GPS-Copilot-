@@ -1,0 +1,130 @@
+{
+  "SecureBankLeastPrivilege": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "SecretManagerRead",
+        "Effect": "Allow",
+        "Action": [
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret"
+        ],
+        "Resource": [
+          "arn:aws:secretsmanager:*:*:secret:securebank/*"
+        ],
+        "Condition": {
+          "StringEquals": {
+            "aws:RequestedRegion": "us-east-1"
+          }
+        }
+      },
+      {
+        "Sid": "S3PaymentReceiptsRead",
+        "Effect": "Allow",
+        "Action": [
+          "s3:GetObject",
+          "s3:ListBucket"
+        ],
+        "Resource": [
+          "arn:aws:s3:::securebank-payment-receipts-*",
+          "arn:aws:s3:::securebank-payment-receipts-*/*"
+        ]
+      },
+      {
+        "Sid": "CloudWatchLogsWrite",
+        "Effect": "Allow",
+        "Action": [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Resource": [
+          "arn:aws:logs:*:*:log-group:/aws/securebank/*"
+        ]
+      },
+      {
+        "Sid": "KMSDecrypt",
+        "Effect": "Allow",
+        "Action": [
+          "kms:Decrypt",
+          "kms:DescribeKey"
+        ],
+        "Resource": [
+          "arn:aws:kms:*:*:key/*"
+        ],
+        "Condition": {
+          "StringEquals": {
+            "kms:ViaService": [
+              "s3.us-east-1.amazonaws.com",
+              "secretsmanager.us-east-1.amazonaws.com"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "SecureBankEKSNodePolicy": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "EKSNodeGroupPermissions",
+        "Effect": "Allow",
+        "Action": [
+          "ec2:DescribeInstances",
+          "ec2:DescribeRouteTables",
+          "ec2:DescribeSecurityGroups",
+          "ec2:DescribeSubnets",
+          "ec2:DescribeVolumes",
+          "ec2:DescribeVolumesModifications",
+          "ec2:DescribeVpcs",
+          "eks:DescribeCluster"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Sid": "ECRImagePull",
+        "Effect": "Allow",
+        "Action": [
+          "ecr:GetAuthorizationToken",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage"
+        ],
+        "Resource": "*"
+      }
+    ]
+  },
+  "SecureBankDenyDangerousActions": {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "DenyPublicS3Access",
+        "Effect": "Deny",
+        "Action": [
+          "s3:PutBucketPublicAccessBlock",
+          "s3:DeleteBucketPublicAccessBlock"
+        ],
+        "Resource": "arn:aws:s3:::securebank-*"
+      },
+      {
+        "Sid": "DenyUnencryptedS3Upload",
+        "Effect": "Deny",
+        "Action": "s3:PutObject",
+        "Resource": "arn:aws:s3:::securebank-*/*",
+        "Condition": {
+          "StringNotEquals": {
+            "s3:x-amz-server-side-encryption": "aws:kms"
+          }
+        }
+      },
+      {
+        "Sid": "DenySecretDeletion",
+        "Effect": "Deny",
+        "Action": [
+          "secretsmanager:DeleteSecret"
+        ],
+        "Resource": "arn:aws:secretsmanager:*:*:secret:securebank/*"
+      }
+    ]
+  }
+}

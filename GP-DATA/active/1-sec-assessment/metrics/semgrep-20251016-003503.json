@@ -1,0 +1,17 @@
+{
+  "scanner_name": "semgrep",
+  "start_time": "2025-10-16T00:33:09.488998",
+  "end_time": "2025-10-16T00:35:03.873074",
+  "duration_seconds": 114.38,
+  "exit_code": 0,
+  "total_issues": 420,
+  "severity_breakdown": {
+    "CRITICAL": 0,
+    "HIGH": 58,
+    "MEDIUM": 332,
+    "LOW": 30,
+    "INFO": 0
+  },
+  "retry_count": 0,
+  "status": "success"
+}

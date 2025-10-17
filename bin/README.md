@@ -51,7 +51,7 @@ bin/
 ### 🔐 Secrets Detection
 
 **gitleaks** (v8.18.0)
-- **Type**: Symlink → `../GP-TOOLS/binaries/gitleaks`
+- **Type**: Binary (6.8MB executable)
 - **Purpose**: Detect hardcoded secrets, API keys, passwords in code/git history
 - **Usage**: `gitleaks detect --source /path/to/repo`
 - **Detects**: AWS keys, GitHub tokens, private keys, passwords, JWTs
@@ -71,7 +71,7 @@ bin/
 - **Fixer**: `GP-CONSULTING/fixers/checkov_fixer.py`
 
 **tfsec** (v1.28.1)
-- **Type**: Symlink → `../GP-TOOLS/binaries/tfsec`
+- **Type**: Binary (38MB executable)
 - **Purpose**: Static analysis for Terraform code
 - **Usage**: `tfsec /path/to/terraform`
 - **Detects**: AWS/Azure/GCP misconfigurations, insecure defaults
@@ -83,7 +83,7 @@ bin/
 ### ☸️ Kubernetes Security
 
 **kubescape** (v3.0.3)
-- **Type**: Symlink → `../GP-TOOLS/binaries/kubescape`
+- **Type**: Binary (164MB executable)
 - **Purpose**: Kubernetes security posture management (KSPM)
 - **Usage**: `kubescape scan framework nsa /path/to/manifests`
 - **Detects**: NSA/CISA Kubernetes hardening guide violations, RBAC issues
@@ -335,8 +335,7 @@ done
 # Check symlink target
 ls -la bin/gitleaks
 
-# Fix if broken
-ln -sf ../GP-TOOLS/binaries/gitleaks bin/gitleaks
+# Binaries are now directly in bin/ (no symlinks needed)
 ```
 
 ### Permission Denied
@@ -364,7 +363,7 @@ echo 'export PATH="/home/jimmie/linkops-industries/GP-copilot/bin:$PATH"' >> ~/.
 
 ## Related Files & Directories
 
-- **GP-TOOLS/binaries/** - Source location for some binary tools (gitleaks, tfsec, kubescape)
+- **bin/download-binaries.sh** - Script to download/update security tool binaries
 - **GP-CONSULTING/scanners/** - Python wrapper scripts for all scanners
 - **GP-CONSULTING/fixers/** - Automated fix generators
 - **GP-CONSULTING/config/** - Scanner configuration files

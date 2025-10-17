@@ -1,0 +1,95 @@
+.
+├── README.md
+├── auto_sync.py
+├── core
+│   ├── dynamic_learner.py
+│   └── jade_engine.py
+├── dynamic_learner.py
+├── graph_ingest_knowledge.py
+├── ingest_jade_knowledge.py
+├── ingest_scan_results.py
+├── jade.py
+├── jade_api.py
+├── jade_rag_langgraph.py
+├── migrate_vector_db_knowledge.py
+├── processed
+│   ├── acme-corp-security-requirements.md
+│   ├── client-docs
+│   │   └── acme-corp-security-requirements.md
+│   ├── james-os-knowledge
+│   │   ├── SECURITY_REVIEW_JAMES_GUI.md
+│   │   ├── UNIFIED_BRAIN_ARCHITECTURE.md
+│   │   ├── agent-design-patterns.md
+│   │   ├── architectural-principles.md
+│   │   ├── james_os_security_intelligence.md
+│   │   ├── security_report.json
+│   │   └── testing-standards-20250920.md
+│   ├── metadata
+│   │   ├── chunks_20250928_011107.json
+│   │   ├── chunks_20250928_011137.json
+│   │   ├── chunks_20250928_011208.json
+│   │   ├── chunks_20250928_011224.json
+│   │   ├── chunks_20250928_011549.json
+│   │   └── chunks_20250928_012133.json
+│   ├── processing_report_20250928_021700.json
+│   ├── security-docs
+│   │   ├── advanced_kubernetes_opa_security.md
+│   │   ├── bandit_security_guide.md
+│   │   ├── ccsp_iac_kubernetes_architecture.md
+│   │   ├── checkov_infrastructure_guide.md
+│   │   ├── comprehensive_iac_terraform_opa_guide.md
+│   │   ├── example_security_guide.md
+│   │   ├── expanded_security_iac_corpus.md
+│   │   ├── kubernetes_opa_admission_control_primer.md
+│   │   ├── kubernetes_security_comprehensive.md
+│   │   ├── semgrep_gitleaks_security_guide.md
+│   │   ├── terraform_opa_integration_tutorial.md
+│   │   ├── terraform_security_guide.md
+│   │   ├── trivy_comprehensive_guide.md
+│   │   └── troubleshooting_iac_terraform_opa.md
+│   ├── semgrep_gitleaks_security_guide.md
+│   ├── test-rag-drop.md
+│   ├── trivy_comprehensive_guide.md
+│   ├── vector_counter.json
+│   ├── vector_viz_2d_20250928_011110.html
+│   ├── vector_viz_2d_20250928_011140.html
+│   ├── vector_viz_2d_20250928_011210.html
+│   ├── vector_viz_2d_20250928_011227.html
+│   ├── vector_viz_2d_20250928_011552.html
+│   └── vector_viz_2d_20250928_012136.html
+├── rag-Tree.txt
+├── simple_learn.py
+├── test_auto_sync.py
+├── test_jade_ai.py
+├── test_jade_comprehensive.py
+└── unprocessed
+    ├── cluadecodefix
+    │   └── KUBERNETES-DEPLOYMENT-GUIDE.md
+    ├── intake
+    │   ├── clients
+    │   │   └── README.md
+    │   ├── meetings
+    │   │   └── README.md
+    │   └── people
+    │       └── README.md
+    ├── jade-knowledge
+    │   ├── cks-training1.jsonl
+    │   ├── cloud1.jsonl
+    │   ├── cloud2.jsonl
+    │   ├── cloud3.jsonl
+    │   ├── cloud4.jsonl
+    │   ├── opa1.jsonl
+    │   └── security_report.json
+    ├── projects-docs
+    ├── session-docs
+    └── windows-sync
+        ├── JAMES-TDv1.txt
+        ├── JAMES-TRAINING-DATA.txt
+        ├── K8s-TD.txt
+        ├── james_devsecops_20.jsonl
+        ├── james_final_100.jsonl
+        ├── james_k8s_common_errors_80.jsonl
+        ├── k8s.txt
+        └── sync_to_gp_copilot.bat
+
+17 directories, 76 files

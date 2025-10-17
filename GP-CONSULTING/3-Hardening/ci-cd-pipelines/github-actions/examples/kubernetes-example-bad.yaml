@@ -1,0 +1,77 @@
+# BAD EXAMPLE - Will FAIL OPA Security Gate
+# This file demonstrates common Kubernetes security violations
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insecure-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: insecure-app
+  template:
+    metadata:
+      labels:
+        app: insecure-app
+    spec:
+      # ❌ VIOLATION: No security context at pod level
+      containers:
+      - name: app
+        image: myapp:latest  # ❌ Using 'latest' tag (not immutable)
+
+        # ❌ VIOLATION: No resource limits
+        # Missing:
+        # resources:
+        #   requests:
+        #     memory: "128Mi"
+        #     cpu: "100m"
+        #   limits:
+        #     memory: "256Mi"
+        #     cpu: "200m"
+
+        # ❌ VIOLATION: No security context
+        # Missing:
+        # securityContext:
+        #   allowPrivilegeEscalation: false
+        #   readOnlyRootFilesystem: true
+
+        ports:
+        - containerPort: 8080
+
+        env:
+        - name: DB_PASSWORD
+          value: "admin123"  # ❌ Hardcoded secret in manifest
+
+        # ❌ VIOLATION: Running as root (no runAsNonRoot)
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: insecure-service
+spec:
+  type: NodePort  # ❌ Exposing service via NodePort (use LoadBalancer or Ingress)
+  ports:
+  - port: 80
+    targetPort: 8080
+    nodePort: 30080  # ❌ Using specific NodePort
+  selector:
+    app: insecure-app
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: privileged-pod
+spec:
+  containers:
+  - name: app
+    image: busybox
+    command: ["sh", "-c", "sleep 3600"]
+    securityContext:
+      privileged: true  # ❌ Running in privileged mode
+      capabilities:
+        add:
+        - SYS_ADMIN  # ❌ Adding dangerous capabilities
+        - NET_ADMIN

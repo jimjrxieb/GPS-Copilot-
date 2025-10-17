@@ -1,0 +1,261 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'GuardDuty Incident Response - Automated threat response and forensics'
+
+Parameters:
+  DryRunMode:
+    Type: String
+    Default: 'false'
+    AllowedValues:
+      - 'true'
+      - 'false'
+    Description: 'Enable dry-run mode (no actual changes)'
+
+  MinimumSeverity:
+    Type: Number
+    Default: 4.0
+    Description: 'Minimum severity to trigger incident response (4.0 = HIGH and above)'
+
+  NotificationEmail:
+    Type: String
+    Description: 'Email address for incident notifications'
+    Default: 'security-team@example.com'
+
+Resources:
+  # S3 Bucket for Forensics Evidence
+  ForensicsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'forensics-evidence-${AWS::Region}-${AWS::AccountId}'
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: DeleteOldEvidence
+            Status: Enabled
+            ExpirationInDays: 90
+            NoncurrentVersionExpirationInDays: 30
+      Tags:
+        - Key: Purpose
+          Value: ForensicsEvidence
+        - Key: ManagedBy
+          Value: CloudFormation
+
+  # SNS Topic for Notifications
+  IncidentNotificationTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: security-incidents
+      DisplayName: 'Security Incidents'
+      Subscription:
+        - Endpoint: !Ref NotificationEmail
+          Protocol: email
+
+  # IAM Role for Lambda
+  IncidentResponseLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: GuardDutyIncidentResponseRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
+      Policies:
+        - PolicyName: IncidentResponsePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              # EC2 Permissions - For instance isolation
+              - Sid: EC2IsolationPermissions
+                Effect: Allow
+                Action:
+                  - 'ec2:DescribeInstances'
+                  - 'ec2:DescribeSecurityGroups'
+                  - 'ec2:DescribeInstanceAttribute'
+                  - 'ec2:CreateSecurityGroup'
+                  - 'ec2:AuthorizeSecurityGroupIngress'
+                  - 'ec2:AuthorizeSecurityGroupEgress'
+                  - 'ec2:RevokeSecurityGroupIngress'
+                  - 'ec2:RevokeSecurityGroupEgress'
+                  - 'ec2:ModifyInstanceAttribute'
+                  - 'ec2:CreateTags'
+                  - 'ec2:CreateSnapshot'
+                  - 'ec2:DescribeSnapshots'
+                  - 'ec2:DescribeVolumes'
+                Resource: '*'
+
+              # IAM Permissions - For credential lockdown
+              - Sid: IAMLockdownPermissions
+                Effect: Allow
+                Action:
+                  - 'iam:GetUser'
+                  - 'iam:ListAccessKeys'
+                  - 'iam:UpdateAccessKey'
+                  - 'iam:PutUserPolicy'
+                  - 'iam:DeleteUserPolicy'
+                  - 'iam:ListUserPolicies'
+                  - 'iam:TagUser'
+                  - 'iam:ListUserTags'
+                Resource: '*'
+
+              # S3 Permissions - For forensics storage
+              - Sid: S3ForensicsPermissions
+                Effect: Allow
+                Action:
+                  - 's3:PutObject'
+                  - 's3:PutObjectAcl'
+                  - 's3:GetObject'
+                  - 's3:ListBucket'
+                  - 's3:CreateBucket'
+                  - 's3:PutBucketEncryption'
+                  - 's3:PutBucketVersioning'
+                  - 's3:PutPublicAccessBlock'
+                Resource:
+                  - !GetAtt ForensicsBucket.Arn
+                  - !Sub '${ForensicsBucket.Arn}/*'
+
+              # SSM Permissions - For log collection
+              - Sid: SSMLogCollectionPermissions
+                Effect: Allow
+                Action:
+                  - 'ssm:DescribeInstanceInformation'
+                  - 'ssm:SendCommand'
+                  - 'ssm:GetCommandInvocation'
+                  - 'ssm:ListCommands'
+                Resource: '*'
+
+              # CloudWatch Logs Permissions
+              - Sid: CloudWatchLogsPermissions
+                Effect: Allow
+                Action:
+                  - 'logs:DescribeLogGroups'
+                  - 'logs:DescribeLogStreams'
+                  - 'logs:GetLogEvents'
+                  - 'logs:FilterLogEvents'
+                Resource: '*'
+
+              # CloudTrail Permissions - For API audit
+              - Sid: CloudTrailPermissions
+                Effect: Allow
+                Action:
+                  - 'cloudtrail:LookupEvents'
+                  - 'cloudtrail:GetEventSelectors'
+                Resource: '*'
+
+              # GuardDuty Permissions
+              - Sid: GuardDutyPermissions
+                Effect: Allow
+                Action:
+                  - 'guardduty:GetFindings'
+                  - 'guardduty:ListDetectors'
+                  - 'guardduty:GetDetector'
+                Resource: '*'
+
+              # SNS Permissions - For notifications
+              - Sid: SNSNotificationPermissions
+                Effect: Allow
+                Action:
+                  - 'sns:Publish'
+                Resource: !Ref IncidentNotificationTopic
+
+  # Lambda Function
+  IncidentResponseFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: guardduty-incident-response
+      Runtime: python3.11
+      Handler: lambda_handler.lambda_handler
+      Role: !GetAtt IncidentResponseLambdaRole.Arn
+      Timeout: 300
+      MemorySize: 512
+      Environment:
+        Variables:
+          DRY_RUN: !Ref DryRunMode
+          SNS_TOPIC_ARN: !Ref IncidentNotificationTopic
+          FORENSICS_BUCKET: !Ref ForensicsBucket
+      Code:
+        ZipFile: |
+          # Placeholder - replace with actual deployment package
+          def lambda_handler(event, context):
+              return {'statusCode': 200, 'body': 'Placeholder - deploy actual code'}
+      Description: 'Automated incident response for GuardDuty findings'
+      Tags:
+        - Key: Purpose
+          Value: SecurityAutomation
+        - Key: ManagedBy
+          Value: CloudFormation
+
+  # CloudWatch Event Rule - Trigger on GuardDuty findings
+  GuardDutyEventRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: guardduty-incident-response
+      Description: 'Trigger incident response for HIGH and CRITICAL GuardDuty findings'
+      State: ENABLED
+      EventPattern:
+        source:
+          - aws.guardduty
+        detail-type:
+          - GuardDuty Finding
+        detail:
+          severity:
+            - numeric:
+                - '>='
+                - !Ref MinimumSeverity
+      Targets:
+        - Arn: !GetAtt IncidentResponseFunction.Arn
+          Id: IncidentResponseLambda
+
+  # Lambda Permission for CloudWatch Events
+  IncidentResponseInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref IncidentResponseFunction
+      Action: 'lambda:InvokeFunction'
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt GuardDutyEventRule.Arn
+
+  # CloudWatch Log Group for Lambda
+  IncidentResponseLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${IncidentResponseFunction}'
+      RetentionInDays: 30
+
+Outputs:
+  LambdaFunctionArn:
+    Description: 'ARN of the incident response Lambda function'
+    Value: !GetAtt IncidentResponseFunction.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-LambdaArn'
+
+  ForensicsBucketName:
+    Description: 'Name of the forensics evidence S3 bucket'
+    Value: !Ref ForensicsBucket
+    Export:
+      Name: !Sub '${AWS::StackName}-ForensicsBucket'
+
+  SNSTopicArn:
+    Description: 'ARN of the incident notification SNS topic'
+    Value: !Ref IncidentNotificationTopic
+    Export:
+      Name: !Sub '${AWS::StackName}-SNSTopic'
+
+  EventRuleName:
+    Description: 'Name of the CloudWatch Event Rule'
+    Value: !Ref GuardDutyEventRule
+    Export:
+      Name: !Sub '${AWS::StackName}-EventRule'

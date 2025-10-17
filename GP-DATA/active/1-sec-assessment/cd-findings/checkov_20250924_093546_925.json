@@ -1,0 +1,16 @@
+{
+  "findings": [],
+  "summary": {
+    "total": 0,
+    "frameworks_scanned": [
+      "github_actions",
+      "helm",
+      "kubernetes",
+      "docker"
+    ]
+  },
+  "target": "GP-Projects/Portfolio",
+  "tool": "checkov",
+  "timestamp": "2025-09-24T09:35:46.925354",
+  "scan_id": "checkov_20250924_093546_925"
+}

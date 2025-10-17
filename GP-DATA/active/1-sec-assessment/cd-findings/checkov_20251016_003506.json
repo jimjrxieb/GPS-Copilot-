@@ -1,0 +1,1202 @@
+{
+  "findings": [
+    {
+      "id": "checkov_1",
+      "scanner": "checkov",
+      "check_id": "CKV_AWS_260",
+      "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80",
+      "title": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/security-groups.tf",
+      "line": 32,
+      "end_line": 40,
+      "resource": "aws_security_group_rule.alb_ingress_http",
+      "resource_type": "aws_security_group_rule",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-security-groups-do-not-allow-ingress-from-00000-to-port-80",
+      "compliance_frameworks": [],
+      "category": "Network Security",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV_AWS_260",
+        "bc_check_id": "BC_AWS_NETWORKING_67",
+        "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80",
+        "check_result": {
+          "result": "FAILED",
+          "evaluated_keys": [
+            "from_port",
+            "to_port",
+            "cidr_blocks",
+            "ipv6_cidr_blocks"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/security-groups.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "file_line_range": [
+          32,
+          40
+        ],
+        "resource": "aws_security_group_rule.alb_ingress_http",
+        "evaluations": null,
+        "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupUnrestrictedIngress80",
+        "fixed_definition": null,
+        "entity_tags": null,
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-security-groups-do-not-allow-ingress-from-00000-to-port-80",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf"
+      }
+    },
+    {
+      "id": "checkov_2",
+      "scanner": "checkov",
+      "check_id": "CKV_AWS_130",
+      "check_name": "Ensure VPC subnets do not assign public IP by default",
+      "title": "Ensure VPC subnets do not assign public IP by default",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/vpc.tf",
+      "line": 22,
+      "end_line": 33,
+      "resource": "aws_subnet.public_1",
+      "resource_type": "aws_subnet",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-vpc-subnets-do-not-assign-public-ip-by-default",
+      "compliance_frameworks": [],
+      "category": "Exposure & Access",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV_AWS_130",
+        "bc_check_id": "BC_AWS_NETWORKING_53",
+        "check_name": "Ensure VPC subnets do not assign public IP by default",
+        "check_result": {
+          "result": "FAILED",
+          "evaluated_keys": [
+            "map_public_ip_on_launch"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/vpc.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "file_line_range": [
+          22,
+          33
+        ],
+        "resource": "aws_subnet.public_1",
+        "evaluations": null,
+        "check_class": "checkov.terraform.checks.resource.aws.SubnetPublicIP",
+        "fixed_definition": null,
+        "entity_tags": {
+          "Environment": "production",
+          "Name": "securebank-public-1",
+          "Type": "public"
+        },
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-vpc-subnets-do-not-assign-public-ip-by-default",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "breadcrumbs": {
+          "availability_zone": [
+            {
+              "type": "variable",
+              "name": "aws_region",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ],
+          "tags.Environment": [
+            {
+              "type": "variable",
+              "name": "environment",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ],
+          "tags.Name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkov_3",
+      "scanner": "checkov",
+      "check_id": "CKV_AWS_130",
+      "check_name": "Ensure VPC subnets do not assign public IP by default",
+      "title": "Ensure VPC subnets do not assign public IP by default",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/vpc.tf",
+      "line": 35,
+      "end_line": 46,
+      "resource": "aws_subnet.public_2",
+      "resource_type": "aws_subnet",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-vpc-subnets-do-not-assign-public-ip-by-default",
+      "compliance_frameworks": [],
+      "category": "Exposure & Access",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV_AWS_130",
+        "bc_check_id": "BC_AWS_NETWORKING_53",
+        "check_name": "Ensure VPC subnets do not assign public IP by default",
+        "check_result": {
+          "result": "FAILED",
+          "evaluated_keys": [
+            "map_public_ip_on_launch"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/vpc.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "file_line_range": [
+          35,
+          46
+        ],
+        "resource": "aws_subnet.public_2",
+        "evaluations": null,
+        "check_class": "checkov.terraform.checks.resource.aws.SubnetPublicIP",
+        "fixed_definition": null,
+        "entity_tags": {
+          "Environment": "production",
+          "Name": "securebank-public-2",
+          "Type": "public"
+        },
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-vpc-subnets-do-not-assign-public-ip-by-default",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "breadcrumbs": {
+          "availability_zone": [
+            {
+              "type": "variable",
+              "name": "aws_region",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ],
+          "tags.Environment": [
+            {
+              "type": "variable",
+              "name": "environment",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ],
+          "tags.Name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkov_4",
+      "scanner": "checkov",
+      "check_id": "CKV_AWS_290",
+      "check_name": "Ensure IAM policies does not allow write access without constraints",
+      "title": "Ensure IAM policies does not allow write access without constraints",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/vpc.tf",
+      "line": 125,
+      "end_line": 145,
+      "resource": "aws_iam_role_policy.vpc_flow_logs",
+      "resource_type": "aws_iam_role_policy",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-290",
+      "compliance_frameworks": [],
+      "category": "Access Control",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV_AWS_290",
+        "bc_check_id": "BC_AWS_IAM_85",
+        "check_name": "Ensure IAM policies does not allow write access without constraints",
+        "check_result": {
+          "result": "FAILED",
+          "evaluated_keys": [
+            "policy/Statement/[0]/Action"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/vpc.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "file_line_range": [
+          125,
+          145
+        ],
+        "resource": "aws_iam_role_policy.vpc_flow_logs",
+        "evaluations": null,
+        "check_class": "checkov.terraform.checks.resource.aws.IAMWriteAccess",
+        "fixed_definition": null,
+        "entity_tags": null,
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-290",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "breadcrumbs": {
+          "name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkov_5",
+      "scanner": "checkov",
+      "check_id": "CKV_AWS_355",
+      "check_name": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+      "title": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/vpc.tf",
+      "line": 125,
+      "end_line": 145,
+      "resource": "aws_iam_role_policy.vpc_flow_logs",
+      "resource_type": "aws_iam_role_policy",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-355",
+      "compliance_frameworks": [],
+      "category": "Access Control",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV_AWS_355",
+        "bc_check_id": "BC_AWS_IAM_88",
+        "check_name": "Ensure no IAM policies documents allow \"*\" as a statement's resource for restrictable actions",
+        "check_result": {
+          "result": "FAILED",
+          "evaluated_keys": [
+            "policy/Statement/[0]/Action"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/vpc.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "file_line_range": [
+          125,
+          145
+        ],
+        "resource": "aws_iam_role_policy.vpc_flow_logs",
+        "evaluations": null,
+        "check_class": "checkov.terraform.checks.resource.aws.IAMStarResourcePolicyDocument",
+        "fixed_definition": null,
+        "entity_tags": null,
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-355",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/vpc.tf",
+        "breadcrumbs": {
+          "name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkov_6",
+      "scanner": "checkov",
+      "check_id": "CKV2_AWS_5",
+      "check_name": "Ensure that Security Groups are attached to another resource",
+      "title": "Ensure that Security Groups are attached to another resource",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/security-groups.tf",
+      "line": 9,
+      "end_line": 19,
+      "resource": "aws_security_group.alb",
+      "resource_type": "aws_security_group",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-security-groups-are-attached-to-ec2-instances-or-elastic-network-interfaces-enis",
+      "compliance_frameworks": [],
+      "category": "Network Security",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV2_AWS_5",
+        "bc_check_id": "BC_AWS_NETWORKING_51",
+        "check_name": "Ensure that Security Groups are attached to another resource",
+        "check_result": {
+          "result": "FAILED",
+          "entity": {
+            "aws_security_group": {
+              "alb": {
+                "__end_line__": 19,
+                "__start_line__": 9,
+                "description": [
+                  "Allow HTTPS from internet to ALB only"
+                ],
+                "name": [
+                  "securebank-alb"
+                ],
+                "tags": [
+                  {
+                    "Description": "Public ALB - HTTPS only",
+                    "Name": "securebank-alb",
+                    "PCI_DSS": "1.2.1"
+                  }
+                ],
+                "vpc_id": [
+                  "aws_vpc.main.id"
+                ],
+                "__address__": "aws_security_group.alb"
+              }
+            }
+          },
+          "evaluated_keys": [
+            "resource_type",
+            "networking"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/security-groups.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "file_line_range": [
+          9,
+          19
+        ],
+        "resource": "aws_security_group.alb",
+        "evaluations": null,
+        "check_class": "checkov.common.graph.checks_infra.base_check",
+        "fixed_definition": null,
+        "entity_tags": {
+          "Description": "Public ALB - HTTPS only",
+          "Name": "securebank-alb",
+          "PCI_DSS": "1.2.1"
+        },
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-security-groups-are-attached-to-ec2-instances-or-elastic-network-interfaces-enis",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "breadcrumbs": {
+          "name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ],
+          "tags.Name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkov_7",
+      "scanner": "checkov",
+      "check_id": "CKV2_AWS_5",
+      "check_name": "Ensure that Security Groups are attached to another resource",
+      "title": "Ensure that Security Groups are attached to another resource",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/security-groups.tf",
+      "line": 54,
+      "end_line": 64,
+      "resource": "aws_security_group.backend",
+      "resource_type": "aws_security_group",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-security-groups-are-attached-to-ec2-instances-or-elastic-network-interfaces-enis",
+      "compliance_frameworks": [],
+      "category": "Network Security",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV2_AWS_5",
+        "bc_check_id": "BC_AWS_NETWORKING_51",
+        "check_name": "Ensure that Security Groups are attached to another resource",
+        "check_result": {
+          "result": "FAILED",
+          "entity": {
+            "aws_security_group": {
+              "backend": {
+                "__end_line__": 64,
+                "__start_line__": 54,
+                "description": [
+                  "Backend app - only from ALB"
+                ],
+                "name": [
+                  "securebank-backend"
+                ],
+                "tags": [
+                  {
+                    "Description": "Backend - ALB to DB only",
+                    "Name": "securebank-backend",
+                    "PCI_DSS": "1.2.1"
+                  }
+                ],
+                "vpc_id": [
+                  "aws_vpc.main.id"
+                ],
+                "__address__": "aws_security_group.backend"
+              }
+            }
+          },
+          "evaluated_keys": [
+            "resource_type",
+            "networking"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/security-groups.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "file_line_range": [
+          54,
+          64
+        ],
+        "resource": "aws_security_group.backend",
+        "evaluations": null,
+        "check_class": "checkov.common.graph.checks_infra.base_check",
+        "fixed_definition": null,
+        "entity_tags": {
+          "Description": "Backend - ALB to DB only",
+          "Name": "securebank-backend",
+          "PCI_DSS": "1.2.1"
+        },
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-security-groups-are-attached-to-ec2-instances-or-elastic-network-interfaces-enis",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "breadcrumbs": {
+          "name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ],
+          "tags.Name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkov_8",
+      "scanner": "checkov",
+      "check_id": "CKV2_AWS_5",
+      "check_name": "Ensure that Security Groups are attached to another resource",
+      "title": "Ensure that Security Groups are attached to another resource",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/security-groups.tf",
+      "line": 136,
+      "end_line": 145,
+      "resource": "aws_security_group.redis",
+      "resource_type": "aws_security_group",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-security-groups-are-attached-to-ec2-instances-or-elastic-network-interfaces-enis",
+      "compliance_frameworks": [],
+      "category": "Network Security",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV2_AWS_5",
+        "bc_check_id": "BC_AWS_NETWORKING_51",
+        "check_name": "Ensure that Security Groups are attached to another resource",
+        "check_result": {
+          "result": "FAILED",
+          "entity": {
+            "aws_security_group": {
+              "redis": {
+                "__end_line__": 145,
+                "__start_line__": 136,
+                "description": [
+                  "Redis - only from backend"
+                ],
+                "name": [
+                  "securebank-redis"
+                ],
+                "tags": [
+                  {
+                    "Description": "Redis cache",
+                    "Name": "securebank-redis"
+                  }
+                ],
+                "vpc_id": [
+                  "aws_vpc.main.id"
+                ],
+                "__address__": "aws_security_group.redis"
+              }
+            }
+          },
+          "evaluated_keys": [
+            "resource_type",
+            "networking"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/security-groups.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "file_line_range": [
+          136,
+          145
+        ],
+        "resource": "aws_security_group.redis",
+        "evaluations": null,
+        "check_class": "checkov.common.graph.checks_infra.base_check",
+        "fixed_definition": null,
+        "entity_tags": {
+          "Description": "Redis cache",
+          "Name": "securebank-redis"
+        },
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-security-groups-are-attached-to-ec2-instances-or-elastic-network-interfaces-enis",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "breadcrumbs": {
+          "name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ],
+          "tags.Name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkov_9",
+      "scanner": "checkov",
+      "check_id": "CKV2_AWS_5",
+      "check_name": "Ensure that Security Groups are attached to another resource",
+      "title": "Ensure that Security Groups are attached to another resource",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/security-groups.tf",
+      "line": 192,
+      "end_line": 201,
+      "resource": "aws_security_group.eks_nodes",
+      "resource_type": "aws_security_group",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-security-groups-are-attached-to-ec2-instances-or-elastic-network-interfaces-enis",
+      "compliance_frameworks": [],
+      "category": "Network Security",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV2_AWS_5",
+        "bc_check_id": "BC_AWS_NETWORKING_51",
+        "check_name": "Ensure that Security Groups are attached to another resource",
+        "check_result": {
+          "result": "FAILED",
+          "entity": {
+            "aws_security_group": {
+              "eks_nodes": {
+                "__end_line__": 201,
+                "__start_line__": 192,
+                "description": [
+                  "EKS worker nodes"
+                ],
+                "name": [
+                  "securebank-eks-nodes"
+                ],
+                "tags": [
+                  {
+                    "Name": "securebank-eks-nodes",
+                    "kubernetes.io/cluster/${var.project_name}": "owned"
+                  }
+                ],
+                "vpc_id": [
+                  "aws_vpc.main.id"
+                ],
+                "__address__": "aws_security_group.eks_nodes"
+              }
+            }
+          },
+          "evaluated_keys": [
+            "resource_type",
+            "networking"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/security-groups.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "file_line_range": [
+          192,
+          201
+        ],
+        "resource": "aws_security_group.eks_nodes",
+        "evaluations": null,
+        "check_class": "checkov.common.graph.checks_infra.base_check",
+        "fixed_definition": null,
+        "entity_tags": {
+          "Name": "securebank-eks-nodes",
+          "kubernetes.io/cluster/${var.project_name}": "owned"
+        },
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-security-groups-are-attached-to-ec2-instances-or-elastic-network-interfaces-enis",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/security-groups.tf",
+        "breadcrumbs": {
+          "name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ],
+          "tags.Name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkov_10",
+      "scanner": "checkov",
+      "check_id": "CKV2_AWS_57",
+      "check_name": "Ensure Secrets Manager secrets should have automatic rotation enabled",
+      "title": "Ensure Secrets Manager secrets should have automatic rotation enabled",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/secrets-manager.tf",
+      "line": 9,
+      "end_line": 29,
+      "resource": "aws_secretsmanager_secret.db_password",
+      "resource_type": "aws_secretsmanager_secret",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-2-57",
+      "compliance_frameworks": [],
+      "category": "Security Configuration",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV2_AWS_57",
+        "bc_check_id": "BC_AWS_GENERAL_192",
+        "check_name": "Ensure Secrets Manager secrets should have automatic rotation enabled",
+        "check_result": {
+          "result": "FAILED",
+          "entity": {
+            "aws_secretsmanager_secret": {
+              "db_password": {
+                "__end_line__": 29,
+                "__start_line__": 9,
+                "description": [
+                  "Database password for SecureBank"
+                ],
+                "kms_key_id": [
+                  "True"
+                ],
+                "name": [
+                  "securebank/db/password"
+                ],
+                "recovery_window_in_days": [
+                  7
+                ],
+                "tags": [
+                  {
+                    "Compliance": "PCI-DSS",
+                    "Environment": "production",
+                    "Name": "Database Password"
+                  }
+                ],
+                "__address__": "aws_secretsmanager_secret.db_password"
+              }
+            }
+          },
+          "evaluated_keys": [
+            "resource_type"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/secrets-manager.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/secrets-manager.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/secrets-manager.tf",
+        "file_line_range": [
+          9,
+          29
+        ],
+        "resource": "aws_secretsmanager_secret.db_password",
+        "evaluations": null,
+        "check_class": "checkov.common.graph.checks_infra.base_check",
+        "fixed_definition": null,
+        "entity_tags": {
+          "Compliance": "PCI-DSS",
+          "Environment": "production",
+          "Name": "Database Password"
+        },
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-2-57",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/secrets-manager.tf",
+        "breadcrumbs": {
+          "tags.Environment": [
+            {
+              "type": "variable",
+              "name": "environment",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ],
+          "name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkov_11",
+      "scanner": "checkov",
+      "check_id": "CKV2_AWS_57",
+      "check_name": "Ensure Secrets Manager secrets should have automatic rotation enabled",
+      "title": "Ensure Secrets Manager secrets should have automatic rotation enabled",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/secrets-manager.tf",
+      "line": 46,
+      "end_line": 65,
+      "resource": "aws_secretsmanager_secret.jwt_secret",
+      "resource_type": "aws_secretsmanager_secret",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-2-57",
+      "compliance_frameworks": [],
+      "category": "Security Configuration",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV2_AWS_57",
+        "bc_check_id": "BC_AWS_GENERAL_192",
+        "check_name": "Ensure Secrets Manager secrets should have automatic rotation enabled",
+        "check_result": {
+          "result": "FAILED",
+          "entity": {
+            "aws_secretsmanager_secret": {
+              "jwt_secret": {
+                "__end_line__": 65,
+                "__start_line__": 46,
+                "kms_key_id": [
+                  "True"
+                ],
+                "name": [
+                  "securebank/jwt/secret"
+                ],
+                "recovery_window_in_days": [
+                  7
+                ],
+                "tags": [
+                  {
+                    "Compliance": "PCI-DSS",
+                    "Environment": "production",
+                    "Name": "JWT Secret"
+                  }
+                ],
+                "__address__": "aws_secretsmanager_secret.jwt_secret"
+              }
+            }
+          },
+          "evaluated_keys": [
+            "resource_type"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/secrets-manager.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/secrets-manager.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/secrets-manager.tf",
+        "file_line_range": [
+          46,
+          65
+        ],
+        "resource": "aws_secretsmanager_secret.jwt_secret",
+        "evaluations": null,
+        "check_class": "checkov.common.graph.checks_infra.base_check",
+        "fixed_definition": null,
+        "entity_tags": {
+          "Compliance": "PCI-DSS",
+          "Environment": "production",
+          "Name": "JWT Secret"
+        },
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-2-57",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/secrets-manager.tf",
+        "breadcrumbs": {
+          "tags.Environment": [
+            {
+              "type": "variable",
+              "name": "environment",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ],
+          "name": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkov_12",
+      "scanner": "checkov",
+      "check_id": "CKV_AWS_144",
+      "check_name": "Ensure that S3 bucket has cross-region replication enabled",
+      "title": "Ensure that S3 bucket has cross-region replication enabled",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/s3.tf",
+      "line": 11,
+      "end_line": 23,
+      "resource": "aws_s3_bucket.payment_receipts",
+      "resource_type": "aws_s3_bucket",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-s3-bucket-has-cross-region-replication-enabled",
+      "compliance_frameworks": [],
+      "category": "Security Configuration",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV_AWS_144",
+        "bc_check_id": "BC_AWS_GENERAL_72",
+        "check_name": "Ensure that S3 bucket has cross-region replication enabled",
+        "check_result": {
+          "result": "FAILED",
+          "entity": {
+            "aws_s3_bucket": {
+              "payment_receipts": {
+                "__end_line__": 23,
+                "__start_line__": 11,
+                "bucket": [
+                  "securebank-payment-receipts"
+                ],
+                "force_destroy": [
+                  true
+                ],
+                "tags": [
+                  {
+                    "Contains": "Payment Data",
+                    "Name": "Payment Receipts",
+                    "Public": true
+                  }
+                ],
+                "__address__": "aws_s3_bucket.payment_receipts"
+              }
+            }
+          },
+          "evaluated_keys": [
+            "replication_configuration/rules/*/status",
+            "resource_type",
+            "rule/*/status"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/s3.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf",
+        "file_line_range": [
+          11,
+          23
+        ],
+        "resource": "aws_s3_bucket.payment_receipts",
+        "evaluations": null,
+        "check_class": "checkov.common.graph.checks_infra.base_check",
+        "fixed_definition": null,
+        "entity_tags": {
+          "Contains": "Payment Data",
+          "Name": "Payment Receipts",
+          "Public": true
+        },
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-s3-bucket-has-cross-region-replication-enabled",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf",
+        "breadcrumbs": {
+          "bucket": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            },
+            {
+              "type": "resource",
+              "name": "aws_s3_bucket.payment_receipts",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkov_13",
+      "scanner": "checkov",
+      "check_id": "CKV_AWS_144",
+      "check_name": "Ensure that S3 bucket has cross-region replication enabled",
+      "title": "Ensure that S3 bucket has cross-region replication enabled",
+      "severity": "MEDIUM",
+      "file": "/infrastructure/terraform/s3.tf",
+      "line": 134,
+      "end_line": 143,
+      "resource": "aws_s3_bucket.audit_logs",
+      "resource_type": "aws_s3_bucket",
+      "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-s3-bucket-has-cross-region-replication-enabled",
+      "compliance_frameworks": [],
+      "category": "Security Configuration",
+      "scan_timestamp": "20251016_003511",
+      "_original": {
+        "check_id": "CKV_AWS_144",
+        "bc_check_id": "BC_AWS_GENERAL_72",
+        "check_name": "Ensure that S3 bucket has cross-region replication enabled",
+        "check_result": {
+          "result": "FAILED",
+          "entity": {
+            "aws_s3_bucket": {
+              "audit_logs": {
+                "__end_line__": 143,
+                "__start_line__": 134,
+                "bucket": [
+                  "securebank-audit-logs"
+                ],
+                "force_destroy": [
+                  true
+                ],
+                "tags": [
+                  {
+                    "Contains": "PCI Audit Logs",
+                    "Name": "Audit Logs"
+                  }
+                ],
+                "__address__": "aws_s3_bucket.audit_logs"
+              }
+            }
+          },
+          "evaluated_keys": [
+            "replication_configuration/rules/*/status",
+            "resource_type",
+            "rule/*/status"
+          ]
+        },
+        "code_block": null,
+        "file_path": "/infrastructure/terraform/s3.tf",
+        "file_abs_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf",
+        "repo_file_path": "/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf",
+        "file_line_range": [
+          134,
+          143
+        ],
+        "resource": "aws_s3_bucket.audit_logs",
+        "evaluations": null,
+        "check_class": "checkov.common.graph.checks_infra.base_check",
+        "fixed_definition": null,
+        "entity_tags": {
+          "Contains": "PCI Audit Logs",
+          "Name": "Audit Logs"
+        },
+        "caller_file_path": null,
+        "caller_file_line_range": null,
+        "resource_address": null,
+        "severity": null,
+        "bc_category": null,
+        "benchmarks": null,
+        "description": null,
+        "short_description": null,
+        "vulnerability_details": null,
+        "connected_node": null,
+        "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-s3-bucket-has-cross-region-replication-enabled",
+        "details": [],
+        "check_len": null,
+        "definition_context_file_path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf",
+        "breadcrumbs": {
+          "bucket": [
+            {
+              "type": "variable",
+              "name": "project_name",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/variables.tf",
+              "module_connection": false
+            },
+            {
+              "type": "resource",
+              "name": "aws_s3_bucket.audit_logs",
+              "path": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/terraform/s3.tf",
+              "module_connection": false
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "scanner": "checkov",
+    "scan_timestamp": "2025-10-16T00:35:11.957640",
+    "target": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project",
+    "framework": "terraform",
+    "issue_count": 13,
+    "severity_breakdown": {
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 13,
+      "LOW": 0,
+      "INFO": 0
+    },
+    "checkov_summary": {
+      "total_checks": 243,
+      "passed": 230,
+      "failed": 13,
+      "skipped": 0,
+      "resource_count": 83,
+      "pass_rate": 94.7,
+      "compliance_frameworks": {},
+      "check_categories": {
+        "Network Security": 5,
+        "Exposure & Access": 2,
+        "Access Control": 2,
+        "Security Configuration": 4
+      }
+    }
+  }
+}

@@ -1,0 +1,695 @@
+{
+  "framework": "SOC2 Trust Service Criteria",
+  "scan_date": "2025-10-10T12:37:01.935651",
+  "summary": {
+    "total_criteria_in_standard": 64,
+    "criteria_checked": 4,
+    "criteria_passing": 0,
+    "criteria_failing": 4,
+    "compliance_score": 0.0,
+    "coverage_percentage": 6.2
+  },
+  "trust_service_categories": {
+    "Security": 28
+  },
+  "findings_summary": {
+    "total_findings": 100,
+    "findings_with_compliance_mapping": 28,
+    "mapping_coverage": 28.0
+  },
+  "failing_criteria": [
+    {
+      "criterion": "CC6.1",
+      "criteria_names": [
+        "CC6.1 - Logical and Physical Access Controls",
+        "CC6.6 - Logical Access - Authentication",
+        "CC7.2 - System Monitoring - Security Events"
+      ],
+      "trust_service_category": "Security",
+      "control_objective": "The entity restricts logical access to system resources through authorization and authentication mechanisms",
+      "status": "FAIL",
+      "finding_count": 25,
+      "findings": [
+        {
+          "scanner": "semgrep",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/server.js",
+          "line": 13,
+          "issue": "Express Check Csurf Middleware Usage",
+          "severity": "LOW",
+          "cwe": [
+            "CWE-352"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/.env.example",
+          "line": 34,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/README.md",
+          "line": 112,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/README.md",
+          "line": 132,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/README.md",
+          "line": 329,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/services/aws.service.js",
+          "line": 27,
+          "issue": "AWS detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/cli/jade_chat.py",
+          "line": 365,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/cli/jade_chat.py",
+          "line": 586,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/core/rag_graph_engine.py",
+          "line": 518,
+          "issue": "Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",
+          "severity": "MEDIUM",
+          "cwe": [
+            "CWE-502"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/core/scan_graph_integrator.py",
+          "line": 144,
+          "issue": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-327"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/core/scan_graph_integrator.py",
+          "line": 176,
+          "issue": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-327"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/core/scan_graph_integrator.py",
+          "line": 214,
+          "issue": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-327"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/core/scan_graph_integrator.py",
+          "line": 246,
+          "issue": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-327"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/core/scan_graph_integrator.py",
+          "line": 272,
+          "issue": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-327"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-DATA/active/scans/scan_manifest.py",
+          "line": 145,
+          "issue": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-327"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-PLATFORM/core/james_orchestrator.py",
+          "line": 60,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-PLATFORM/core/james_orchestrator.py",
+          "line": 121,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-PLATFORM/model_client/james_mlops_client.py",
+          "line": 125,
+          "issue": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-327"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-PLATFORM/workflow/work_order_processor.py",
+          "line": 223,
+          "issue": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-327"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-PROJECTS/kubernetes-goat/infrastructure/info-app/app.py",
+          "line": 11,
+          "issue": "A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",
+          "severity": "HIGH",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-RAG/graph_ingest_knowledge.py",
+          "line": 56,
+          "issue": "Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",
+          "severity": "MEDIUM",
+          "cwe": [
+            "CWE-502"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-RAG/ingest_scan_results.py",
+          "line": 64,
+          "issue": "Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",
+          "severity": "MEDIUM",
+          "cwe": [
+            "CWE-502"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-RAG/jade_api.py",
+          "line": 331,
+          "issue": "A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",
+          "severity": "HIGH",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-TESTING-VAL/jade_chat_tests.py",
+          "line": 29,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-TESTING-VAL/jade_knowledge_tests.py",
+          "line": 29,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        }
+      ],
+      "total_effort_hours": 160,
+      "highest_priority": "CRITICAL",
+      "audit_evidence": [
+        "CSRF token implementation in all state-changing operations",
+        "SameSite cookie attribute configuration",
+        "Framework CSRF protection enabled",
+        "Session management security documentation"
+      ],
+      "remediation_guidance": "Implement CSRF tokens, configure SameSite=Strict on cookies"
+    },
+    {
+      "criterion": "CC7.2",
+      "criteria_names": [
+        "CC7.2 - System Monitoring - Security Events"
+      ],
+      "trust_service_category": "Security",
+      "control_objective": "The entity monitors network traffic",
+      "status": "FAIL",
+      "finding_count": 15,
+      "findings": [
+        {
+          "scanner": "semgrep",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/server.js",
+          "line": 13,
+          "issue": "Express Check Csurf Middleware Usage",
+          "severity": "LOW",
+          "cwe": [
+            "CWE-352"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/cli/jade_chat.py",
+          "line": 365,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/cli/jade_chat.py",
+          "line": 586,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/core/rag_graph_engine.py",
+          "line": 518,
+          "issue": "Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",
+          "severity": "MEDIUM",
+          "cwe": [
+            "CWE-502"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-PLATFORM/core/james_orchestrator.py",
+          "line": 60,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-PLATFORM/core/james_orchestrator.py",
+          "line": 121,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-PROJECTS/kubernetes-goat/infrastructure/info-app/app.py",
+          "line": 11,
+          "issue": "A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",
+          "severity": "HIGH",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-RAG/graph_ingest_knowledge.py",
+          "line": 56,
+          "issue": "Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",
+          "severity": "MEDIUM",
+          "cwe": [
+            "CWE-502"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-RAG/ingest_scan_results.py",
+          "line": 64,
+          "issue": "Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",
+          "severity": "MEDIUM",
+          "cwe": [
+            "CWE-502"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-RAG/jade_api.py",
+          "line": 331,
+          "issue": "A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",
+          "severity": "HIGH",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-TESTING-VAL/jade_chat_tests.py",
+          "line": 29,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-TESTING-VAL/jade_knowledge_tests.py",
+          "line": 29,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "checkov",
+          "file": "/cloudwatch.tf",
+          "line": 8,
+          "issue": "Ensure CloudWatch log groups retains logs for at least 1 year",
+          "severity": "MEDIUM",
+          "cwe": []
+        },
+        {
+          "scanner": "checkov",
+          "file": "/vpc.tf",
+          "line": 19,
+          "issue": "Ensure VPC subnets do not assign public IP by default",
+          "severity": "MEDIUM",
+          "cwe": []
+        },
+        {
+          "scanner": "checkov",
+          "file": "/vpc.tf",
+          "line": 30,
+          "issue": "Ensure VPC subnets do not assign public IP by default",
+          "severity": "MEDIUM",
+          "cwe": []
+        }
+      ],
+      "total_effort_hours": 97,
+      "highest_priority": "CRITICAL",
+      "audit_evidence": [
+        "CSRF token implementation in all state-changing operations",
+        "SameSite cookie attribute configuration",
+        "Framework CSRF protection enabled",
+        "Session management security documentation"
+      ],
+      "remediation_guidance": "Implement CSRF tokens, configure SameSite=Strict on cookies"
+    },
+    {
+      "criterion": "CC6.6",
+      "criteria_names": [
+        "CC6.1 - Logical and Physical Access Controls",
+        "CC6.6 - Logical Access - Authentication",
+        "CC7.2 - System Monitoring - Security Events"
+      ],
+      "trust_service_category": "Security",
+      "control_objective": "The entity restricts logical access to system resources through authorization and authentication mechanisms",
+      "status": "FAIL",
+      "finding_count": 13,
+      "findings": [
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/.env.example",
+          "line": 34,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/README.md",
+          "line": 112,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/README.md",
+          "line": 132,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/README.md",
+          "line": 329,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/services/aws.service.js",
+          "line": 27,
+          "issue": "AWS detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/cli/jade_chat.py",
+          "line": 365,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-AI/cli/jade_chat.py",
+          "line": 586,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-PLATFORM/core/james_orchestrator.py",
+          "line": 60,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-PLATFORM/core/james_orchestrator.py",
+          "line": 121,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-PROJECTS/kubernetes-goat/infrastructure/info-app/app.py",
+          "line": 11,
+          "issue": "A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",
+          "severity": "HIGH",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-RAG/jade_api.py",
+          "line": 331,
+          "issue": "A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",
+          "severity": "HIGH",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-TESTING-VAL/jade_chat_tests.py",
+          "line": 29,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        },
+        {
+          "scanner": "bandit",
+          "file": "../GP-TESTING-VAL/jade_knowledge_tests.py",
+          "line": 29,
+          "issue": "subprocess call with shell=True identified, security issue.",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-78"
+          ]
+        }
+      ],
+      "total_effort_hours": 84,
+      "highest_priority": "CRITICAL",
+      "audit_evidence": [
+        "Secrets management solution implementation (AWS Secrets Manager, Vault)",
+        "Gitleaks scan results showing no hardcoded credentials",
+        "Secret rotation policies and logs",
+        "Access control matrix for secret access",
+        "Code review logs checking for hardcoded secrets"
+      ],
+      "remediation_guidance": "Migrate all secrets to vault, implement rotation, remove hardcoded credentials"
+    },
+    {
+      "criterion": "CC6.7",
+      "criteria_names": [
+        "CC6.1 - Logical and Physical Access Controls",
+        "CC6.6 - Logical Access - Authentication",
+        "CC6.7 - Logical Access - Authorization"
+      ],
+      "trust_service_category": "Security",
+      "control_objective": "The entity requires unique identification and strong authentication for system access",
+      "status": "FAIL",
+      "finding_count": 5,
+      "findings": [
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/.env.example",
+          "line": 34,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/README.md",
+          "line": 112,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/README.md",
+          "line": 132,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/README.md",
+          "line": 329,
+          "issue": "Generic API Key detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        },
+        {
+          "scanner": "gitleaks",
+          "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/backend/services/aws.service.js",
+          "line": 27,
+          "issue": "AWS detected",
+          "severity": "CRITICAL",
+          "cwe": [
+            "CWE-798"
+          ]
+        }
+      ],
+      "total_effort_hours": 20,
+      "highest_priority": "CRITICAL",
+      "audit_evidence": [
+        "Secrets management solution implementation (AWS Secrets Manager, Vault)",
+        "Gitleaks scan results showing no hardcoded credentials",
+        "Secret rotation policies and logs",
+        "Access control matrix for secret access",
+        "Code review logs checking for hardcoded secrets"
+      ],
+      "remediation_guidance": "Migrate all secrets to vault, implement rotation, remove hardcoded credentials"
+    }
+  ],
+  "remediation_summary": {
+    "total_effort_hours": 361,
+    "critical_priority_criteria": 4,
+    "high_priority_criteria": 0,
+    "medium_priority_criteria": 0,
+    "low_priority_criteria": 0
+  }
+}

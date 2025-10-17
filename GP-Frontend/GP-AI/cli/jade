@@ -1,0 +1,18 @@
+#!/bin/bash
+# Jade CLI - Simple wrapper for Jade chat interface
+# Usage: ./jade
+
+# Get GP-copilot root directory
+GP_COPILOT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../" && pwd)"
+cd "$GP_COPILOT_ROOT"
+
+# Activate virtual environment if it exists
+if [ -f "ai-env/bin/activate" ]; then
+    source ai-env/bin/activate
+fi
+
+# Set PYTHONPATH to include necessary directories
+export PYTHONPATH="$GP_COPILOT_ROOT:$GP_COPILOT_ROOT/GP-Backend/james-config:$PYTHONPATH"
+
+# Run Jade chat
+python GP-Frontend/GP-AI/cli/jade_chat.py "$@"

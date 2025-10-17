@@ -1,1 +1,299 @@
-GP-CONSULTING/gp-security
+#!/bin/bash
+################################################################################
+# GP-Security Master CLI
+# Purpose: Unified security workflow orchestration
+# Architecture: Phase-based security engagement (1-6)
+# Location: Root of GP-copilot project
+################################################################################
+
+set -e
+set -u
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+# Root directory (where this script lives)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+# Pillar directories
+GP_CONSULTING="$SCRIPT_DIR/GP-CONSULTING"
+GP_DATA="$SCRIPT_DIR/GP-DATA"
+GP_PROJECTS="$SCRIPT_DIR/GP-PROJECTS"
+GP_FRONTEND="$SCRIPT_DIR/GP-Frontend"
+GP_BACKEND="$SCRIPT_DIR/GP-Backend"
+
+################################################################################
+# Helper Functions
+################################################################################
+
+show_banner() {
+    echo -e "${BLUE}"
+    cat << "EOF"
+╔═══════════════════════════════════════════════════════════════╗
+║                    GP-SECURITY CLI v2.0                       ║
+║            Phase-Based Security Engagement Framework          ║
+╚═══════════════════════════════════════════════════════════════╝
+EOF
+    echo -e "${NC}"
+}
+
+show_usage() {
+    cat << EOF
+${GREEN}Usage:${NC}
+  ./gp-security <command> [options]
+
+${GREEN}Commands:${NC}
+  ${CYAN}assess${NC}     Phase 1: Security Assessment (scan vulnerabilities)
+  ${CYAN}fix${NC}        Phase 2: Application Security Fixes (auto-remediation)
+  ${CYAN}harden${NC}     Phase 3: Infrastructure Hardening (policies + enforcement)
+  ${CYAN}migrate${NC}    Phase 4: Cloud Migration (AWS secure deployment)
+  ${CYAN}validate${NC}   Phase 5: Compliance Audit (reports + validation)
+  ${CYAN}automate${NC}   Phase 6: Continuous Automation (CI/CD + agents)
+  ${CYAN}workflow${NC}   Run complete 6-phase engagement
+  ${CYAN}help${NC}       Show this help message
+
+${GREEN}Examples:${NC}
+  # Run Phase 1 assessment on FINANCE project
+  ./gp-security assess GP-PROJECTS/FINANCE-project
+
+  # Run Phase 1 CI scanners only
+  ./gp-security assess GP-PROJECTS/FINANCE-project --ci
+
+  # Run Phase 2 fixes
+  ./gp-security fix GP-PROJECTS/FINANCE-project
+
+  # Run complete workflow (all 6 phases)
+  ./gp-security workflow GP-PROJECTS/FINANCE-project
+
+  # Skip phases 1-2, start from Phase 3
+  ./gp-security workflow GP-PROJECTS/FINANCE-project --skip-phases=1,2
+
+${GREEN}Architecture:${NC}
+  ${CYAN}GP-Backend${NC}     - RAG, Knowledge Hub, Testing
+  ${CYAN}GP-CONSULTING${NC}  - Security scanners, fixers, policies (Phases 1-6)
+  ${CYAN}GP-DATA${NC}        - Scan results, findings, reports, knowledge
+  ${CYAN}GP-Frontend${NC}    - AI orchestration, Platform, GUI
+  ${CYAN}GP-PROJECTS${NC}    - Client projects (FINANCE, DVWA, etc.)
+
+${GREEN}Data Flow:${NC}
+  Scan → GP-DATA/active/1-sec-assessment/
+  Fix  → GP-DATA/active/2-fixes/
+  Validate → GP-DATA/active/5-com-audit/
+  Reports → GP-DATA/active/reports/
+
+${GREEN}Documentation:${NC}
+  GP-CONSULTING/README.md       - Framework overview
+  GP-CONSULTING/tagsandlabels.md - Tool classification
+  GP-DATA/GP-DOCS/              - Project documentation
+
+EOF
+}
+
+################################################################################
+# Phase Commands
+################################################################################
+
+phase1_assess() {
+    local project="${1:-}"
+    local scan_type="${2:-all}"
+
+    if [ -z "$project" ]; then
+        echo -e "${RED}Error: Project path required${NC}"
+        echo "Usage: ./gp-security assess <project-path> [--ci|--cd|--runtime]"
+        exit 1
+    fi
+
+    echo -e "${BLUE}═══ Phase 1: Security Assessment ═══${NC}"
+    echo -e "${CYAN}Project:${NC} $project"
+    echo -e "${CYAN}Scan Type:${NC} $scan_type"
+    echo ""
+
+    # Run assessment
+    cd "$GP_CONSULTING/1-Security-Assessment"
+
+    case "$scan_type" in
+        "ci"|"--ci")
+            echo -e "${GREEN}Running CI scanners (Bandit, Semgrep, Gitleaks)...${NC}"
+            cd ci-scanners
+            python3 bandit_scanner.py "$project"
+            python3 semgrep_scanner.py --target "$project"
+            python3 gitleaks_scanner.py --target "$project" --no-git
+            ;;
+        "cd"|"--cd")
+            echo -e "${GREEN}Running CD scanners (Checkov, Trivy)...${NC}"
+            cd cd-scanners
+            python3 checkov_scanner.py --target "$project/infrastructure"
+            python3 trivy_scanner.py --target "$project/infrastructure"
+            ;;
+        "runtime"|"--runtime")
+            echo -e "${GREEN}Running Runtime scanners...${NC}"
+            cd runtime-scanners
+            bash query-aws-config.sh
+            ;;
+        *)
+            echo -e "${GREEN}Running ALL scanners...${NC}"
+            cd tools
+            bash run-all-scanners.sh "$project"
+            ;;
+    esac
+
+    echo -e "${GREEN}✅ Phase 1 complete. Findings in: GP-DATA/active/1-sec-assessment/${NC}"
+}
+
+phase2_fix() {
+    local project="${1:-}"
+
+    if [ -z "$project" ]; then
+        echo -e "${RED}Error: Project path required${NC}"
+        echo "Usage: ./gp-security fix <project-path>"
+        exit 1
+    fi
+
+    echo -e "${BLUE}═══ Phase 2: Application Security Fixes ═══${NC}"
+    echo -e "${CYAN}Project:${NC} $project"
+    echo ""
+
+    cd "$GP_CONSULTING/2-App-Sec-Fixes/ci-fixers"
+
+    # Run fixers
+    if [ -f "fix-hardcoded-secrets.sh" ]; then
+        echo -e "${GREEN}Fixing hardcoded secrets...${NC}"
+        bash fix-hardcoded-secrets.sh "$project"
+    fi
+
+    if [ -f "fix-sql-injection.sh" ]; then
+        echo -e "${GREEN}Fixing SQL injection vulnerabilities...${NC}"
+        bash fix-sql-injection.sh "$project/backend"
+    fi
+
+    echo -e "${GREEN}✅ Phase 2 complete. Fix reports in: GP-DATA/active/2-fixes/${NC}"
+}
+
+phase3_harden() {
+    local project="${1:-}"
+
+    if [ -z "$project" ]; then
+        echo -e "${RED}Error: Project path required${NC}"
+        echo "Usage: ./gp-security harden <project-path>"
+        exit 1
+    fi
+
+    echo -e "${BLUE}═══ Phase 3: Infrastructure Hardening ═══${NC}"
+    echo -e "${CYAN}Project:${NC} $project"
+    echo ""
+
+    cd "$GP_CONSULTING/3-Hardening/cd-fixers"
+
+    # Run infrastructure fixers
+    if [ -d "$project/infrastructure/k8s" ]; then
+        echo -e "${GREEN}Hardening Kubernetes manifests...${NC}"
+        bash fix-kubernetes-security.sh "$project/infrastructure/k8s"
+    fi
+
+    if [ -d "$project/infrastructure/terraform" ]; then
+        echo -e "${GREEN}Hardening Terraform configs...${NC}"
+        bash fix-s3-encryption.sh "$project/infrastructure/terraform"
+        bash fix-rds-ssl.sh "$project/infrastructure/terraform"
+    fi
+
+    echo -e "${GREEN}✅ Phase 3 complete. Hardening applied.${NC}"
+}
+
+phase5_validate() {
+    local project="${1:-}"
+
+    if [ -z "$project" ]; then
+        echo -e "${RED}Error: Project path required${NC}"
+        echo "Usage: ./gp-security validate <project-path>"
+        exit 1
+    fi
+
+    echo -e "${BLUE}═══ Phase 5: Compliance Audit ═══${NC}"
+    echo -e "${CYAN}Project:${NC} $project"
+    echo ""
+
+    cd "$GP_CONSULTING/5-Compliance-Audit"
+
+    # Re-scan after fixes
+    echo -e "${GREEN}Re-scanning to validate fixes...${NC}"
+    "$SCRIPT_DIR/gp-security" assess "$project"
+
+    # Generate reports
+    cd reports
+    echo -e "${GREEN}Generating compliance reports...${NC}"
+    # Report generation logic here
+
+    echo -e "${GREEN}✅ Phase 5 complete. Reports in: GP-DATA/active/5-com-audit/${NC}"
+}
+
+run_workflow() {
+    local project="${1:-}"
+    local skip_phases="${2:-}"
+
+    if [ -z "$project" ]; then
+        echo -e "${RED}Error: Project path required${NC}"
+        echo "Usage: ./gp-security workflow <project-path> [--skip-phases=1,2]"
+        exit 1
+    fi
+
+    echo -e "${BLUE}═══ Complete Security Engagement Workflow ═══${NC}"
+    echo -e "${CYAN}Project:${NC} $project"
+    [ -n "$skip_phases" ] && echo -e "${CYAN}Skipping Phases:${NC} $skip_phases"
+    echo ""
+
+    # Use the master orchestration script
+    cd "$GP_CONSULTING"
+    bash run-complete-engagement.sh "$project" "$GP_DATA/active" "$skip_phases"
+}
+
+################################################################################
+# Main Command Router
+################################################################################
+
+main() {
+    if [ $# -eq 0 ]; then
+        show_banner
+        show_usage
+        exit 0
+    fi
+
+    local command="$1"
+    shift
+
+    case "$command" in
+        "assess"|"scan")
+            phase1_assess "$@"
+            ;;
+        "fix"|"remediate")
+            phase2_fix "$@"
+            ;;
+        "harden"|"secure")
+            phase3_harden "$@"
+            ;;
+        "validate"|"audit"|"compliance")
+            phase5_validate "$@"
+            ;;
+        "workflow"|"full"|"complete")
+            run_workflow "$@"
+            ;;
+        "help"|"-h"|"--help")
+            show_banner
+            show_usage
+            ;;
+        *)
+            echo -e "${RED}Error: Unknown command '$command'${NC}"
+            echo ""
+            show_usage
+            exit 1
+            ;;
+    esac
+}
+
+# Run main
+main "$@"

@@ -1,1 +1,0 @@
-run-all-ci-cd-runtime.sh

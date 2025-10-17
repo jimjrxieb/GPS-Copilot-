@@ -1,0 +1,2002 @@
+.
+├── ClaudeCodeClaude
+│   ├── 10072025-0830.md
+│   ├── 10072025-0850
+│   ├── 10072025-0950.md
+│   ├── 10072025-1100.md
+│   ├── 10072025-1554.md
+│   └── 10152025-1000.md
+├── GP-Backend
+│   ├── GP-KNOWLEDGE-HUB
+│   │   ├── DEPRECATED.md
+│   │   ├── README.md
+│   │   ├── api
+│   │   │   ├── jade_central_config.py
+│   │   │   └── knowledge_api.py
+│   │   ├── backups
+│   │   │   └── vector-cleanup-20250929_091332
+│   │   │       └── vector-db_backup
+│   │   ├── consolidation_report_20250929_090845.md
+│   │   ├── consolidation_report_20250929_092724.md
+│   │   ├── ingest
+│   │   │   ├── add-new-knowledge.py
+│   │   │   └── consolidate-knowledge.py
+│   │   ├── knowledge-base
+│   │   │   ├── policies
+│   │   │   │   ├── GP-CONSULTING-AGENTS_policies_COMPLIANCE_MAPPINGS.md
+│   │   │   │   ├── GP-CONSULTING-AGENTS_policies_GUIDEPOINT_ENGAGEMENT_GUIDE.md
+│   │   │   │   ├── GP-CONSULTING-AGENTS_policies_IMPLEMENTATION_SUMMARY.md
+│   │   │   │   ├── GP-CONSULTING-AGENTS_policies_OPA_INTEGRATION_VALIDATION.md
+│   │   │   │   ├── GP-CONSULTING-AGENTS_policies_README.md
+│   │   │   │   ├── GP-CONSULTING-AGENTS_policies_THREAT_MODEL.md
+│   │   │   │   ├── GP-CONSULTING-AGENTS_policies_opa_README.md
+│   │   │   │   ├── gatekeeper_comprehensive_explanation.md
+│   │   │   │   └── policies_index.md
+│   │   │   ├── security
+│   │   │   │   ├── GP-DATA_active_reports_executive_summary_LinkOps-MLOps_20250923_002337.md
+│   │   │   │   ├── GP-DATA_active_reports_executive_summary_Portfolio_20250923_002254.md
+│   │   │   │   ├── GP-DATA_active_reports_executive_summary_Portfolio_20250923_004804.md
+│   │   │   │   ├── GP-DATA_active_reports_executive_summary_Portfolio_20250923_012236.md
+│   │   │   │   ├── GP-DATA_active_reports_portfolio_PORTFOLIO_SECURITY_REMEDIATION_REPORT.md
+│   │   │   │   ├── GP-DATA_active_reports_rag_summary_LinkOps-MLOps_20250923_002337.md
+│   │   │   │   ├── GP-DATA_active_reports_rag_summary_Portfolio_20250923_002254.md
+│   │   │   │   ├── GP-DATA_active_reports_rag_summary_Portfolio_20250923_004804.md
+│   │   │   │   ├── GP-DATA_active_reports_rag_summary_Portfolio_20250923_012236.md
+│   │   │   │   ├── GP-DATA_active_reports_technical_report_LinkOps-MLOps_20250923_002337.md
+│   │   │   │   ├── GP-DATA_active_reports_technical_report_Portfolio_20250923_002254.md
+│   │   │   │   ├── GP-DATA_active_reports_technical_report_Portfolio_20250923_004804.md
+│   │   │   │   ├── GP-DATA_active_reports_technical_report_Portfolio_20250923_012236.md
+│   │   │   │   ├── GP-DATA_knowledge-base_enhanced_security_knowledge.md
+│   │   │   │   ├── GP-DATA_knowledge-base_network_configuration.md
+│   │   │   │   ├── GP-DATA_metadata_audits_codebase_audit_report.md
+│   │   │   │   ├── GP-RAG_processed_james-os-knowledge_SECURITY_REVIEW_JAMES_GUI.md
+│   │   │   │   ├── GP-RAG_processed_james-os-knowledge_UNIFIED_BRAIN_ARCHITECTURE.md
+│   │   │   │   ├── GP-RAG_processed_james-os-knowledge_agent-design-patterns.md
+│   │   │   │   ├── GP-RAG_processed_james-os-knowledge_architectural-principles.md
+│   │   │   │   ├── GP-RAG_processed_james-os-knowledge_james_os_security_intelligence.md
+│   │   │   │   ├── GP-RAG_processed_james-os-knowledge_testing-standards-20250920.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_advanced_kubernetes_opa_security.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_bandit_security_guide.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_ccsp_iac_kubernetes_architecture.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_checkov_infrastructure_guide.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_comprehensive_iac_terraform_opa_guide.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_example_security_guide.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_expanded_security_iac_corpus.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_kubernetes_opa_admission_control_primer.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_kubernetes_security_comprehensive.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_terraform_opa_integration_tutorial.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_terraform_security_guide.md
+│   │   │   │   ├── GP-RAG_processed_security-docs_troubleshooting_iac_terraform_opa.md
+│   │   │   │   └── security_index.md
+│   │   │   └── workflows
+│   │   │       ├── GP-CONSULTING-AGENTS_workflows_gatekeeper_complete_flow.md
+│   │   │       ├── GP-CONSULTING-AGENTS_workflows_gatekeeper_workflow.md
+│   │   │       ├── GP-PROJECTS_DVWA_CHANGELOG.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.ar.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.es.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.fa.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.fr.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.id.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.it.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.ko.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.pl.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.pt.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.tr.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.vi.md
+│   │   │       ├── GP-PROJECTS_DVWA_README.zh.md
+│   │   │       ├── GP-PROJECTS_DVWA_SECURITY.md
+│   │   │       ├── GP-PROJECTS_DVWA_tests_README.md
+│   │   │       ├── GP-PROJECTS_DVWA_vulnerabilities_api_README.md
+│   │   │       ├── GP-PROJECTS_INTERVIEW-DEMO_gatekeeper_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_GP-copilot_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_GP-copilot_SECURITY_ASSESSMENT_REPORT.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_GP-copilot_SECURITY_FIXES_IMPLEMENTED.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_CVE-2023-4863-RESPONSE.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_backend_developer_responsibilities_role_duties.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_ccsp_specialist_resources_vulnerability_assessment.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_ccsp_specialist_responsibilities_role_duties.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_cloud_migration_resources_cloud_migration_checklist.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_cloud_migration_responsibilities_role_duties.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_data_scientist_responsibilities_role_duties.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_devops_engineer_responsibilities_role_duties.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_kubernetes_specialist_responsibilities_role_duties.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_mlops_engineer_responsibilities_role_duties.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_platform_engineer_responsibilities_role_duties.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_job-category_sre_engineer_responsibilities_role_duties.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_db_mlops-platform_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_ARCHITECTURE_SUMMARY.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_ARISE-README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_CD-README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_CHECKLIST-CI-CD.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_CHECKLIST-CURSOR-PLATFORM-READINESS.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_CHECKLIST-HELM-ARGO-GITOPS.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_CHECKLIST-K8S-NETWORKING.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_CHECKLIST-SECURITY.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_CI-CD-SETUP.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_COMPLETE-PIPELINE-README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_CONFIGURATION.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_DEPLOYMENT_AUTOMATION.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_DEPLOYMENT_FIXED.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_PLATFORM_COMPLETE.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_SERVICES.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_architecture_DATA_FLOW_DIAGRAM.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_architecture_WHIS_MICROSERVICES_REFACTOR.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_architecture_WHIS_TRAINING_SYSTEM.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_deployment_CI-CD-SETUP.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_deployment_ENVIRONMENT_SETUP.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_deployment_GITHUB_ACTIONS_SETUP.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_deployment_GITHUB_ACTIONS_SUMMARY.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_deployment_GITHUB_SECRETS_SETUP.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_deployment_IGRIS_DEPLOYMENT_READY.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_deployment_README_COMPOSE_MODES.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_deployment_SECURE_DEPLOYMENT_GUIDE.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_deployment_shadow-agents.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_development_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_sec-cve_CVE-2023-4863-RESPONSE.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_sec-cve_CVE-2025-6556-RESPONSE.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_sec-cve_SECURITY-ACTIONS.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_sec-cve_SECURITY-FIXES-JULY-2025.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_sec-cve_SECURITY-SUMMARY-JULY-2025.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_services_auditguard_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_services_igris_logic_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_services_james_logic_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_services_katie_logic_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_services_whis_webscraper_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_docs_setup_docker_registry.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_frontend_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_models_autonomy-ranker_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_models_autonomy-ranker_v1_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_models_feedback-improver_v1_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_models_links-forging_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_models_links-smithing_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_models_qa-paraphraser_v1_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_models_rag-embedder_v1_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_models_task-evaluator_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_qa-generator_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_qa-generator_responsibilities_role_duties.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_htc_responsibilities_role_duties.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_infra_argocd_DEPLOYMENT_SUMMARY.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_infra_argocd_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_infra_helm_HELM_REFACTOR_SUMMARY.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_infra_helm_linkops_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_james-rag_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_links-pipeline_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_links-pipeline_data-intake_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_links-pipeline_links-evaluator_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_links-pipeline_links-forging_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_links-pipeline_links-preprocess_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_links-pipeline_links-ranker_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_links-pipeline_links-smithing_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_scripts_audit_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_scripts_devops_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_tools_README.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_tools_agents_AGENT_SUMMARY.md
+│   │   │       ├── GP-PROJECTS_LinkOps-MLOps_tools_agents_README.md
+│   │   │       ├── GP-PROJECTS_Terraform_CICD_Setup_GP-copilot_JAMES_JSON_INTEGRATION_COMPLETE.md
+│   │   │       ├── GP-PROJECTS_Terraform_CICD_Setup_GP-copilot_README.md
+│   │   │       ├── GP-PROJECTS_Terraform_CICD_Setup_GP-copilot_STEP_BY_STEP_EXECUTION_LOG.md
+│   │   │       ├── GP-PROJECTS_Terraform_CICD_Setup_README.md
+│   │   │       ├── GP-PROJECTS_Terraform_CICD_Setup_guidepoint_remediation_report_20250919_212122.md
+│   │   │       ├── GP-PROJECTS_Terraform_CICD_Setup_guidepoint_remediation_report_20250919_214448.md
+│   │   │       ├── GP-PROJECTS_Terraform_CICD_Setup_james_enhanced_remediation_report.md
+│   │   │       ├── GP-PROJECTS_Terraform_CICD_Setup_james_intelligent_report_20250920_155517.md
+│   │   │       ├── GP-PROJECTS_Terraform_CICD_Setup_james_security_report_20250920_153118.md
+│   │   │       └── workflows_index.md
+│   │   ├── knowledge_mapping.json
+│   │   ├── sync
+│   │   │   └── cleanup-scattered-vectors.py
+│   │   └── vector_cleanup_report_20250929_091337.md
+│   └── GP-RAG
+│       ├── README.md
+│       ├── auto_sync.py
+│       ├── core
+│       │   ├── dynamic_learner.py
+│       │   └── jade_engine.py
+│       ├── dynamic_learner.py
+│       ├── graph_ingest_knowledge.py
+│       ├── ingest_jade_knowledge.py
+│       ├── ingest_scan_results.py
+│       ├── jade.py
+│       ├── jade_api.py
+│       ├── jade_rag_langgraph.py
+│       ├── migrate_vector_db_knowledge.py
+│       ├── mlops
+│       │   ├── mlops.md
+│       │   └── mlops2.json
+│       ├── processed
+│       │   ├── acme-corp-security-requirements.md
+│       │   ├── client-docs
+│       │   │   └── acme-corp-security-requirements.md
+│       │   ├── james-os-knowledge
+│       │   │   ├── SECURITY_REVIEW_JAMES_GUI.md
+│       │   │   ├── UNIFIED_BRAIN_ARCHITECTURE.md
+│       │   │   ├── agent-design-patterns.md
+│       │   │   ├── architectural-principles.md
+│       │   │   ├── james_os_security_intelligence.md
+│       │   │   ├── security_report.json
+│       │   │   └── testing-standards-20250920.md
+│       │   ├── metadata
+│       │   │   ├── chunks_20250928_011107.json
+│       │   │   ├── chunks_20250928_011137.json
+│       │   │   ├── chunks_20250928_011208.json
+│       │   │   ├── chunks_20250928_011224.json
+│       │   │   ├── chunks_20250928_011549.json
+│       │   │   └── chunks_20250928_012133.json
+│       │   ├── processing_report_20250928_021700.json
+│       │   ├── security-docs
+│       │   │   ├── advanced_kubernetes_opa_security.md
+│       │   │   ├── bandit_security_guide.md
+│       │   │   ├── ccsp_iac_kubernetes_architecture.md
+│       │   │   ├── checkov_infrastructure_guide.md
+│       │   │   ├── comprehensive_iac_terraform_opa_guide.md
+│       │   │   ├── example_security_guide.md
+│       │   │   ├── expanded_security_iac_corpus.md
+│       │   │   ├── kubernetes_opa_admission_control_primer.md
+│       │   │   ├── kubernetes_security_comprehensive.md
+│       │   │   ├── semgrep_gitleaks_security_guide.md
+│       │   │   ├── terraform_opa_integration_tutorial.md
+│       │   │   ├── terraform_security_guide.md
+│       │   │   ├── trivy_comprehensive_guide.md
+│       │   │   └── troubleshooting_iac_terraform_opa.md
+│       │   ├── semgrep_gitleaks_security_guide.md
+│       │   ├── test-rag-drop.md
+│       │   ├── trivy_comprehensive_guide.md
+│       │   ├── vector_counter.json
+│       │   ├── vector_viz_2d_20250928_011110.html
+│       │   ├── vector_viz_2d_20250928_011140.html
+│       │   ├── vector_viz_2d_20250928_011210.html
+│       │   ├── vector_viz_2d_20250928_011227.html
+│       │   ├── vector_viz_2d_20250928_011552.html
+│       │   └── vector_viz_2d_20250928_012136.html
+│       ├── rag-Tree.txt
+│       ├── simple_learn.py
+│       ├── test_auto_sync.py
+│       ├── test_jade_ai.py
+│       ├── test_jade_comprehensive.py
+│       └── unprocessed
+│           ├── cluadecodefix
+│           │   └── KUBERNETES-DEPLOYMENT-GUIDE.md
+│           ├── intake
+│           │   ├── clients
+│           │   ├── meetings
+│           │   └── people
+│           ├── jade-knowledge
+│           │   ├── cks-training1.jsonl
+│           │   ├── cloud1.jsonl
+│           │   ├── cloud2.jsonl
+│           │   ├── cloud3.jsonl
+│           │   ├── cloud4.jsonl
+│           │   ├── opa1.jsonl
+│           │   └── security_report.json
+│           ├── projects-docs
+│           ├── session-docs
+│           └── windows-sync
+│               ├── JAMES-TDv1.txt
+│               ├── JAMES-TRAINING-DATA.txt
+│               ├── K8s-TD.txt
+│               ├── james_devsecops_20.jsonl
+│               ├── james_final_100.jsonl
+│               ├── james_k8s_common_errors_80.jsonl
+│               ├── k8s.txt
+│               └── sync_to_gp_copilot.bat
+├── GP-CONSULTING
+│   ├── 1-Security-Assessment
+│   │   ├── README.md
+│   │   ├── cd-scanners
+│   │   │   ├── checkov_scanner.py
+│   │   │   ├── opa-policies
+│   │   │   │   ├── iam-security.rego
+│   │   │   │   ├── s3-security.rego
+│   │   │   │   └── vpc-security.rego
+│   │   │   ├── scan-iac.sh
+│   │   │   ├── scan-kubernetes.sh
+│   │   │   ├── scan-opa-conftest.sh
+│   │   │   └── trivy_scanner.py
+│   │   ├── ci-scanners
+│   │   │   ├── BANDIT-COMPLETION-REPORT.md
+│   │   │   ├── BANDIT-README.md
+│   │   │   ├── README.md
+│   │   │   ├── bandit_scanner.py
+│   │   │   ├── eslint_scanner.py
+│   │   │   ├── gitleaks_scanner.py
+│   │   │   ├── pylint_scanner.py
+│   │   │   └── semgrep_scanner.py
+│   │   ├── runtime-scanners
+│   │   │   ├── cloud_patterns_scanner.py
+│   │   │   ├── ddos_validator.py
+│   │   │   ├── query-aws-config.sh
+│   │   │   ├── query-cloudtrail.sh
+│   │   │   ├── query-cloudwatch.sh
+│   │   │   ├── query-guardduty.sh
+│   │   │   ├── query-prometheus.sh
+│   │   │   └── zero_trust_sg_validator.py
+│   │   └── tools
+│   │       └── run_all_scanners.py
+│   ├── 2-App-Sec-Fixes
+│   │   ├── README.md
+│   │   ├── auto_fix_loop.py
+│   │   ├── ci-fixers
+│   │   │   ├── fix-command-injection.sh
+│   │   │   ├── fix-dependency-vulns.sh
+│   │   │   ├── fix-eslint-issues.sh
+│   │   │   ├── fix-hardcoded-secrets.sh
+│   │   │   ├── fix-insecure-requests.sh
+│   │   │   ├── fix-pylint-issues.sh
+│   │   │   ├── fix-sql-injection.sh
+│   │   │   ├── fix-weak-crypto.sh
+│   │   │   ├── fix-weak-random.sh
+│   │   │   ├── kubernetes_secrets_fixer.py
+│   │   │   └── sql_injection_fixer.py
+│   │   ├── ci-templates
+│   │   │   ├── QUICKSTART.md
+│   │   │   ├── README.md
+│   │   │   ├── azure-devops
+│   │   │   ├── github-actions
+│   │   │   │   ├── dependency-update-bot.yml
+│   │   │   │   ├── security-scan-and-fix.yml
+│   │   │   │   └── simple-security-scan.yml
+│   │   │   ├── gitlab-ci
+│   │   │   ├── jenkins
+│   │   │   │   └── Jenkinsfile
+│   │   │   ├── pre-commit
+│   │   │   └── setup.sh
+│   │   └── remediation
+│   │       ├── remediation_db.py
+│   │       └── security_advisor.py
+│   ├── 3-Hardening
+│   │   ├── DEPLOYMENT-VALIDATION-FEATURE.md
+│   │   ├── README.md
+│   │   ├── analyze-gha-logs.sh
+│   │   ├── best-practices
+│   │   │   ├── README.md
+│   │   │   └── iac-best-practices.md
+│   │   ├── cd-fixers
+│   │   │   ├── fix-cloudwatch-security.sh
+│   │   │   ├── fix-iam-wildcards.sh
+│   │   │   ├── fix-k8s-hardcoded-secrets.sh
+│   │   │   ├── fix-kubernetes-security.sh
+│   │   │   ├── fix-network-security.sh
+│   │   │   ├── fix-s3-encryption.sh
+│   │   │   ├── fix-security-groups.sh
+│   │   │   ├── kubernetes_security_hardening.py
+│   │   │   ├── network-policy.yaml
+│   │   │   ├── test-deployment.yaml
+│   │   │   └── test-deployment.yaml.backup.20251015_132007
+│   │   ├── ci-cd-pipelines
+│   │   │   └── github-actions
+│   │   │       ├── README.md
+│   │   │       ├── examples
+│   │   │       └── opa-security-gate.yml
+│   │   ├── escalation
+│   │   │   └── escalate-incident.sh
+│   │   ├── monitoring-alerting
+│   │   │   └── deployment-health-check.sh
+│   │   ├── mutators
+│   │   │   ├── deploy-gatekeeper.sh
+│   │   │   ├── enable-gatekeeper-enforcement.sh
+│   │   │   ├── gatekeeper-constraints
+│   │   │   │   └── opa-gatekeeper.yaml
+│   │   │   ├── opa-policies
+│   │   │   │   ├── kubernetes-mutator.rego
+│   │   │   │   ├── secrets-mutator.rego
+│   │   │   │   └── terraform-mutator.rego
+│   │   │   └── webhook-server
+│   │   │       ├── Dockerfile
+│   │   │       ├── mutating-webhook.py
+│   │   │       └── webhook-config.yaml
+│   │   ├── policies
+│   │   │   ├── gatekeeper
+│   │   │   │   ├── constraints
+│   │   │   │   └── templates
+│   │   │   ├── opa
+│   │   │   │   ├── cicd-security.rego
+│   │   │   │   ├── compliance-controls.rego
+│   │   │   │   ├── image-security.rego
+│   │   │   │   ├── kubernetes.rego
+│   │   │   │   ├── network-policies.rego
+│   │   │   │   ├── network.rego
+│   │   │   │   ├── pod-security.rego
+│   │   │   │   ├── rbac.rego
+│   │   │   │   ├── secrets-management.rego
+│   │   │   │   ├── security-policy.rego
+│   │   │   │   ├── security.rego
+│   │   │   │   ├── terraform-security.rego
+│   │   │   │   └── terraform-security_test.rego
+│   │   │   └── securebank
+│   │   │       ├── README.md
+│   │   │       ├── aws-policy-as-code
+│   │   │       ├── opa-conftest
+│   │   │       └── opa-gatekeeper
+│   │   ├── rollback-mitigation
+│   │   │   └── auto-rollback.sh
+│   │   └── secrets-management
+│   │       └── vault
+│   │           └── policies
+│   ├── 4-Cloud-Migration
+│   │   ├── 1-localstack
+│   │   │   ├── docker-compose.localstack.yml
+│   │   │   └── setup-localstack.sh
+│   │   ├── 2-aws-cli-scripts
+│   │   │   ├── iam
+│   │   │   │   └── create-role.sh
+│   │   │   ├── kms
+│   │   │   │   └── create-key.sh
+│   │   │   ├── rds
+│   │   │   │   └── create-db.sh
+│   │   │   ├── s3
+│   │   │   │   └── create-bucket.sh
+│   │   │   └── secrets-manager
+│   │   │       ├── create-secret.sh
+│   │   │       └── migrate-from-vault.sh
+│   │   ├── 4-migration-scripts
+│   │   │   ├── database-migration.sh
+│   │   │   └── file-migration.sh
+│   │   ├── 5-best-practices-aws
+│   │   │   ├── README.md
+│   │   │   ├── centralized-egress
+│   │   │   │   └── README.md
+│   │   │   ├── ddos-resilience
+│   │   │   │   ├── README.md
+│   │   │   │   └── validate.py
+│   │   │   ├── incident-evidence
+│   │   │   │   └── README.md
+│   │   │   ├── private-cloud-access
+│   │   │   │   └── README.md
+│   │   │   ├── visibility-monitoring
+│   │   │   │   └── README.md
+│   │   │   ├── vpc-isolation
+│   │   │   │   ├── README.md
+│   │   │   │   ├── compliance-mapping.md
+│   │   │   │   ├── opa-policy.rego
+│   │   │   │   └── terraform-template.tf
+│   │   │   └── zero-trust-sg
+│   │   │       ├── README.md
+│   │   │       └── validate.py
+│   │   ├── README.md
+│   │   ├── aws-fixers
+│   │   ├── docs
+│   │   ├── templates
+│   │   │   ├── centralized-egress
+│   │   │   │   └── README.md
+│   │   │   ├── ddos-resilience
+│   │   │   │   ├── README.md
+│   │   │   │   └── validate.py
+│   │   │   ├── incident-evidence
+│   │   │   │   └── README.md
+│   │   │   ├── private-cloud-access
+│   │   │   │   └── README.md
+│   │   │   ├── visibility-monitoring
+│   │   │   │   └── README.md
+│   │   │   ├── vpc-isolation
+│   │   │   │   ├── README.md
+│   │   │   │   ├── compliance-mapping.md
+│   │   │   │   ├── opa-policy.rego
+│   │   │   │   └── terraform-template.tf
+│   │   │   └── zero-trust-sg
+│   │   │       ├── README.md
+│   │   │       └── validate.py
+│   │   └── terraform-modules
+│   ├── 5-Compliance-Audit
+│   │   ├── COMPLIANCE_FRAMEWORK_README.md
+│   │   ├── IMPLEMENTATION_COMPLETE.md
+│   │   ├── README.md
+│   │   ├── USAGE_EXAMPLES.sh
+│   │   ├── docs
+│   │   ├── evidence
+│   │   ├── frameworks
+│   │   │   ├── compliance
+│   │   │   │   ├── COMPLIANCE_FRAMEWORK_README.md
+│   │   │   │   ├── IMPLEMENTATION_COMPLETE.md
+│   │   │   │   ├── USAGE_EXAMPLES.sh
+│   │   │   │   ├── cloud_patterns_scanner.py
+│   │   │   │   ├── frameworks
+│   │   │   │   ├── mappings
+│   │   │   │   ├── migration
+│   │   │   │   ├── reports
+│   │   │   │   ├── templates
+│   │   │   │   ├── validation
+│   │   │   │   ├── vpc-isolation
+│   │   │   │   └── zero-trust-sg
+│   │   │   ├── hipaa
+│   │   │   │   └── hipaa-security-rule.json
+│   │   │   ├── mappings
+│   │   │   │   └── universal-controls.json
+│   │   │   ├── nist-800-53
+│   │   │   │   └── nist-800-53-rev5.json
+│   │   │   └── pci-dss
+│   │   │       └── pci-dss-v4.json
+│   │   ├── reports
+│   │   │   ├── README-PDF.md
+│   │   │   ├── compliance
+│   │   │   │   ├── iso27001-compliance-report.json
+│   │   │   │   ├── multi-framework-report.json
+│   │   │   │   ├── multi-framework-report.md
+│   │   │   │   └── soc2-compliance-report.json
+│   │   │   ├── executive
+│   │   │   │   ├── EXECUTIVE-SUMMARY.md
+│   │   │   │   └── ROI-ANALYSIS.md
+│   │   │   ├── fix-results
+│   │   │   │   ├── FIX-SUMMARY-20251010.md
+│   │   │   │   ├── README.md
+│   │   │   │   ├── fix-iam-wildcards-20251010-130150.log
+│   │   │   │   ├── fix-kubernetes-security-20251009-231405.json
+│   │   │   │   ├── fix-kubernetes-security-20251009-231405.md
+│   │   │   │   ├── fix-s3-encryption-20251010-130143.log
+│   │   │   │   └── fix-security-groups-20251010-130055.log
+│   │   │   ├── fixing
+│   │   │   │   ├── README.md
+│   │   │   │   ├── cd-fixes
+│   │   │   │   ├── ci-fixes
+│   │   │   │   └── runtime-fixes
+│   │   │   ├── generate-all-reports.sh
+│   │   │   ├── generate-executive-summary.sh
+│   │   │   ├── generate-pci-dss-report.sh
+│   │   │   ├── generate-pdfs-simple.py
+│   │   │   ├── generate-pdfs.sh
+│   │   │   ├── generate-roi-analysis.py
+│   │   │   ├── generate-soc2-report.sh
+│   │   │   ├── generators
+│   │   │   │   └── generate_compliance_report.py
+│   │   │   ├── output
+│   │   │   │   ├── hipaa
+│   │   │   │   ├── nist-800-53
+│   │   │   │   └── pci-dss
+│   │   │   ├── pdfs
+│   │   │   └── validation
+│   │   ├── standards
+│   │   ├── templates
+│   │   │   └── checklists
+│   │   │       └── pre_deployment.md
+│   │   ├── tools
+│   │   │   ├── iso27001_mapper.py
+│   │   │   ├── multi_framework_report.py
+│   │   │   └── soc2_mapper.py
+│   │   └── validators
+│   │       ├── compare-results.py
+│   │       ├── compare-results.sh
+│   │       ├── generate-validation-report.sh
+│   │       ├── validate-all.sh
+│   │       ├── validation-report.md
+│   │       └── violation-metrics.json
+│   ├── 6-Auto-Agents
+│   │   ├── README.md
+│   │   ├── agents
+│   │   │   └── devsecops
+│   │   │       ├── agent_config.yaml
+│   │   │       ├── docs
+│   │   │       └── pipeline_debugger.py
+│   │   ├── cicd-templates
+│   │   │   ├── auto_fix_pipeline.sh
+│   │   │   ├── github-actions
+│   │   │   │   └── workflows
+│   │   │   └── github_actions
+│   │   │       └── workflows
+│   │   ├── cka_agent.py
+│   │   ├── cks_agent.py
+│   │   ├── client_support_agent.py
+│   │   ├── container_agent.py
+│   │   ├── devsecops_agent.py
+│   │   ├── dfir_agent.py
+│   │   ├── docs
+│   │   ├── iac_agent.py
+│   │   ├── incident-response
+│   │   │   ├── DEPLOYMENT_GUIDE.md
+│   │   │   ├── README.md
+│   │   │   ├── READY_TO_DEPLOY.md
+│   │   │   ├── cloudformation-template.yaml
+│   │   │   ├── deploy.sh
+│   │   │   ├── forensics_collector.py
+│   │   │   ├── guardduty_responder.py
+│   │   │   ├── lambda_handler.py
+│   │   │   └── test-finding.json
+│   │   ├── kubernetes_fixer.py
+│   │   ├── kubernetes_troubleshooter.py
+│   │   ├── kubernetes_validator.py
+│   │   ├── monitoring
+│   │   ├── qa_agent.py
+│   │   ├── research_agent.py
+│   │   ├── sast_agent.py
+│   │   ├── secrets_agent.py
+│   │   ├── templates
+│   │   │   └── security_checklists
+│   │   │       └── pre_deployment.md
+│   │   └── workflows
+│   ├── 69-consult-build
+│   │   ├── ADMISSION-CONTROL-FLOW.md
+│   │   ├── ARCHITECTURE.md
+│   │   ├── CODE-DRIFT-ANALYSIS.md
+│   │   ├── COMPLIANCE-MIGRATION-COMPLETE.md
+│   │   ├── DEVSECOPS-MIGRATION-COMPLETE.md
+│   │   ├── FINAL-MIGRATION-COMPLETE.md
+│   │   ├── GP-SECURITY-ENHANCED.md
+│   │   ├── INCIDENT_RESPONSE_COMPLETE.md
+│   │   ├── INSPECTION_COMPLETE.md
+│   │   ├── LINTING-ADDED.md
+│   │   ├── OPA-CICD-PIPELINE-ADDED.md
+│   │   ├── PHASE1-CLEANUP-COMPLETE.md
+│   │   ├── PHASE2-CLEANUP-COMPLETE.md
+│   │   ├── PHASE2-FIXERS-COMPLETE.md
+│   │   ├── PHASE3-CLEANUP-COMPLETE.md
+│   │   ├── PHASE3-RESTRUCTURED.md
+│   │   ├── PHASE4-IMPLEMENTATION-STATUS.md
+│   │   ├── PHASE4-REQUIREMENTS.md
+│   │   ├── POLICIES-CLEANUP-COMPLETE.md
+│   │   ├── POLICIES-VS-MUTATORS.md
+│   │   ├── POLICY-MIGRATION-COMPLETE.md
+│   │   ├── POLICY-MIGRATION-VERIFICATION.md
+│   │   ├── POLICY-REFACTORING-COMPLETE.md
+│   │   ├── POST-MIGRATION-VALIDATION.md
+│   │   ├── REFACTOR_COMPLETE.md
+│   │   ├── REUSABLE-VS-SECUREBANK.md
+│   │   ├── SCANNER-INTEGRATION-COMPLETE.md
+│   │   ├── SCANNER_FIXER_COVERAGE_ANALYSIS.md
+│   │   ├── SCANNER_FIXER_MATRIX.txt
+│   │   ├── SESSION-COMPLETE-2025-10-15.md
+│   │   ├── SESSION-RESUME-2025-10-15.md
+│   │   └── TODAY_SUMMARY_OCT13.md
+│   ├── README.md
+│   ├── gp-security -> GP-CONSULTING/gp-security
+│   ├── run-complete-engagement.sh
+│   ├── shared-library
+│   │   ├── base-classes
+│   │   │   └── base_scanner.py
+│   │   ├── configs
+│   │   │   └── agent_config.yaml
+│   │   └── utils
+│   │       ├── __init__.py
+│   │       ├── base_registry.py
+│   │       ├── fixer_tools.py
+│   │       ├── scanner_tools.py
+│   │       └── validator_tools.py
+│   └── tagsandlabels.md
+├── GP-COPILOT-PRD.json
+├── GP-DATA
+│   ├── 69-data-build
+│   │   ├── AUTO_SYNC_COMPLETE.md
+│   │   ├── CENTRALIZED_ARCHITECTURE.md
+│   │   ├── FINAL_ORGANIZATION_REPORT.md
+│   │   ├── GP_DATA_ARCHITECTURE.md
+│   │   ├── JADE_INTEGRATION_STATUS.md
+│   │   ├── JADE_KNOWLEDGE_GUIDE.md
+│   │   ├── OUTPUT_MAPPING.md
+│   │   ├── README_COMPREHENSIVE.md
+│   │   └── VECTOR_DB_MIGRATION_COMPLETE.md
+│   ├── GP-DOCS
+│   │   ├── CLOUD_PROJECT_OPA_SCAN.md
+│   │   ├── DAY8_COMPLETE_FINAL.md
+│   │   ├── DEMO_SCRIPT.md
+│   │   ├── EXECUTIVE_README.md
+│   │   ├── FINAL_RAG_STATUS.md
+│   │   ├── FOUNDATION_PROGRESS.md
+│   │   ├── JADE_KNOWLEDGE_INGESTION_COMPLETE.md
+│   │   ├── KUBERNETES_GOAT_SCAN_RESULTS.md
+│   │   ├── OPA_INTEGRATION_DEMO.md
+│   │   ├── OPA_JADE_INTEGRATION_COMPLETE.md
+│   │   ├── PRD_INDEX.md
+│   │   ├── QUICK_COMMANDS.txt
+│   │   ├── QUICK_GHA_SETUP.md
+│   │   ├── RAG_GRAPH_IMPLEMENTATION_COMPLETE.md
+│   │   ├── RAG_KNOWLEDGE_STATUS.md
+│   │   ├── RAG_LEARNING_INTEGRATION_GUIDE.md
+│   │   ├── README.md
+│   │   ├── ROADMAP.md
+│   │   ├── SCAN_GRAPH_INTEGRATION_COMPLETE.md
+│   │   ├── SESSION_SUMMARY_GHA_IMPROVEMENTS.md
+│   │   ├── architecture
+│   │   │   ├── ARCHITECTURE_CLARIFICATION.md
+│   │   │   ├── CLEANUP_AND_INTEGRATION_PLAN.md
+│   │   │   ├── CLEANUP_COMPLETE.md
+│   │   │   ├── DASHBOARD_DESIGN.md
+│   │   │   ├── GP-COPILOT_FUNCTIONAL.md
+│   │   │   ├── GUIDEPOINT_STANDARDS_SUMMARY.md
+│   │   │   ├── JADE_KNOWLEDGE_VALIDATED.md
+│   │   │   ├── JADE_OBSERVABILITY_COMPLETE.md
+│   │   │   ├── JADE_TESTING_COMPLETE.md
+│   │   │   ├── MODEL_UPGRADE.md
+│   │   │   ├── OPA_VS_SCANNERS_EXPLAINED.md
+│   │   │   ├── RAG_ARCHITECTURE.md
+│   │   │   └── SYSTEM_ARCHITECTURE_EXPLAINED.md
+│   │   ├── deployment
+│   │   │   ├── DEPLOYMENT-SUCCESS.md
+│   │   │   ├── DEPLOYMENT_READINESS_CHECKLIST.md
+│   │   │   ├── DEPLOYMENT_VERIFICATION_COMPLETE.md
+│   │   │   ├── DIRECTORY-STRUCTURE-FIXED.md
+│   │   │   ├── DOCKER-SETUP-COMPLETE.md
+│   │   │   └── README-DOCKER.md
+│   │   ├── guides
+│   │   │   ├── CLIENT_FACING_OUTPUT_FEATURE.md
+│   │   │   ├── DEPENDENCY_REVIEW_FIX.md
+│   │   │   ├── FIXES_VERIFICATION_CLOUD_PROJECT.md
+│   │   │   ├── GHA_ANALYZER_IMPROVEMENTS.md
+│   │   │   ├── JADE_CHAT_READY.md
+│   │   │   ├── JADE_CHAT_SUMMARY.md
+│   │   │   ├── JADE_GHA_EXPLAINER.md
+│   │   │   ├── JADE_USAGE.md
+│   │   │   ├── PREFLIGHT_CHECKLIST.md
+│   │   │   ├── QUICK_START.md
+│   │   │   └── WEEK2_GHA_INTELLIGENCE.md
+│   │   ├── jadechat-summaries
+│   │   │   ├── HELP_COMMAND_ADDED.md
+│   │   │   └── summary_20251003_105011.md
+│   │   ├── projects
+│   │   └── reports
+│   │       ├── ARCHITECTURAL_CLEANUP_COMPLETE.md
+│   │       ├── CENTRALIZED_KNOWLEDGE_COMPLETE.md
+│   │       ├── CLEANUP_REPORT.md
+│   │       ├── COMPREHENSIVE_JADE_DEMO.md
+│   │       ├── ENDPOINT_VERIFICATION.md
+│   │       ├── FINAL_CENTRALIZATION_COMPLETE.md
+│   │       ├── INTEGRATION_COMPLETE.md
+│   │       ├── OFFLINE_SYSTEM_COMPLETE.md
+│   │       ├── PUSH-TO-GITHUB.md
+│   │       ├── TEST_RESULTS_SUMMARY.md
+│   │       ├── TOOL_PATHS_FIXED.md
+│   │       ├── WORKFLOW_VERIFIED_COMPLETE.md
+│   │       └── workflow.md
+│   ├── README.md
+│   ├── active
+│   │   ├── 1-sec-assessment
+│   │   │   ├── FINANCE_PHASE4_SCAN_SUMMARY.txt
+│   │   │   ├── README.md
+│   │   │   ├── cd-findings
+│   │   │   │   ├── OPA_RAW_RESULTS_20250928_125437.json
+│   │   │   │   ├── OPA_RAW_RESULTS_20250928_125729.json
+│   │   │   │   ├── OPA_RAW_RESULTS_20250928_131338.json
+│   │   │   │   ├── OPA_RAW_RESULTS_20250928_202929.json
+│   │   │   │   ├── checkov_20250924_084032_726.json
+│   │   │   │   ├── checkov_20250924_084042_059.json
+│   │   │   │   ├── checkov_20250924_093546_925.json
+│   │   │   │   ├── checkov_20251015_124732.json
+│   │   │   │   ├── checkov_20251016_003506.json
+│   │   │   │   ├── checkov_latest.json
+│   │   │   │   ├── opa_20250924_085850_962.json
+│   │   │   │   ├── opa_20250924_085908_601.json
+│   │   │   │   ├── opa_20250928_120537_202.json
+│   │   │   │   ├── opa_20250928_122545.json
+│   │   │   │   ├── opa_20250928_122545_339.json
+│   │   │   │   ├── opa_20250928_122631.json
+│   │   │   │   ├── opa_20250928_122631_176.json
+│   │   │   │   ├── opa_20250928_122702.json
+│   │   │   │   ├── opa_20250928_122702_637.json
+│   │   │   │   ├── opa_20250928_122713.json
+│   │   │   │   ├── opa_20250928_122713_609.json
+│   │   │   │   ├── opa_20250928_125350.json
+│   │   │   │   ├── opa_20250928_125350_780.json
+│   │   │   │   ├── opa_20250928_125437.json
+│   │   │   │   ├── opa_20250928_125437_867.json
+│   │   │   │   ├── opa_20250928_125729.json
+│   │   │   │   ├── opa_20250928_125729_866.json
+│   │   │   │   ├── opa_20250928_131338.json
+│   │   │   │   ├── opa_20250928_131338_322.json
+│   │   │   │   ├── opa_20250928_202929.json
+│   │   │   │   ├── opa_20250928_202929_057.json
+│   │   │   │   ├── opa_20250929_115035_387.json
+│   │   │   │   ├── opa_20251003_093751_571.json
+│   │   │   │   ├── opa_20251004_222510_275.json
+│   │   │   │   ├── opa_latest.json
+│   │   │   │   ├── tfsec_20250924_092231_990.json
+│   │   │   │   ├── tfsec_20250925_080556_093.json
+│   │   │   │   ├── tfsec_20250925_081146_358.json
+│   │   │   │   ├── tfsec_20250925_081239_925.json
+│   │   │   │   ├── tfsec_20250925_092230_465.json
+│   │   │   │   ├── tfsec_latest.json
+│   │   │   │   ├── trivy_20250924_092708_801.json
+│   │   │   │   ├── trivy_20250924_094515_560.json
+│   │   │   │   ├── trivy_20250924_151714_461.json
+│   │   │   │   ├── trivy_20250925_080001_269.json
+│   │   │   │   ├── trivy_20250928_120611_564.json
+│   │   │   │   ├── trivy_20250929_075546_741.json
+│   │   │   │   ├── trivy_20250930_084544_956.json
+│   │   │   │   ├── trivy_20250930_085719_272.json
+│   │   │   │   ├── trivy_20250930_085813_797.json
+│   │   │   │   ├── trivy_20251003_130313_691.json
+│   │   │   │   ├── trivy_20251004_222519_578.json
+│   │   │   │   ├── trivy_20251007_014215_184.json
+│   │   │   │   ├── trivy_config_20251015_124738.json
+│   │   │   │   ├── trivy_config_20251016_003511.json
+│   │   │   │   └── trivy_latest.json
+│   │   │   ├── ci-findings
+│   │   │   │   ├── bandit_20250924_093404_019.json
+│   │   │   │   ├── bandit_20250924_094349_482.json
+│   │   │   │   ├── bandit_20250924_151819_404.json
+│   │   │   │   ├── bandit_20250925_080012_341.json
+│   │   │   │   ├── bandit_20250928_120554_332.json
+│   │   │   │   ├── bandit_20250929_075546_020.json
+│   │   │   │   ├── bandit_20250930_084537_324.json
+│   │   │   │   ├── bandit_20250930_085146_739.json
+│   │   │   │   ├── bandit_20250930_085711_680.json
+│   │   │   │   ├── bandit_20251003_130313_726.json
+│   │   │   │   ├── bandit_20251004_222235_772.json
+│   │   │   │   ├── bandit_20251014_152845.json
+│   │   │   │   ├── bandit_latest.json
+│   │   │   │   ├── eslint_20251015_094738.json
+│   │   │   │   ├── gitleaks_20250924_084348_811.json
+│   │   │   │   ├── gitleaks_20250924_084355_926.json
+│   │   │   │   ├── gitleaks_20250924_084408_332.json
+│   │   │   │   ├── gitleaks_20250924_151846_028.json
+│   │   │   │   ├── gitleaks_20250925_080038_518.json
+│   │   │   │   ├── gitleaks_20250928_120604_582.json
+│   │   │   │   ├── gitleaks_20250930_085720_647.json
+│   │   │   │   ├── gitleaks_20251004_222522_741.json
+│   │   │   │   ├── gitleaks_20251015_124732.json
+│   │   │   │   ├── gitleaks_20251016_003503.json
+│   │   │   │   ├── gitleaks_latest.json
+│   │   │   │   ├── pylint_20251015_094750.json
+│   │   │   │   ├── semgrep_20250924_091902_186.json
+│   │   │   │   ├── semgrep_20250925_080232_906.json
+│   │   │   │   ├── semgrep_20250928_120559_436.json
+│   │   │   │   ├── semgrep_20250930_084541_166.json
+│   │   │   │   ├── semgrep_20250930_085714_882.json
+│   │   │   │   ├── semgrep_20251004_222551_916.json
+│   │   │   │   ├── semgrep_20251015_124527.json
+│   │   │   │   ├── semgrep_20251016_003309.json
+│   │   │   │   └── semgrep_latest.json
+│   │   │   ├── logs
+│   │   │   │   ├── bandit-20251014-152845.log
+│   │   │   │   ├── checkov-20251015-124732.log
+│   │   │   │   ├── checkov-20251016-003506.log
+│   │   │   │   ├── gitleaks-20251015-124732.log
+│   │   │   │   ├── gitleaks-20251016-003503.log
+│   │   │   │   ├── semgrep-20251015-124527.log
+│   │   │   │   ├── semgrep-20251016-003309.log
+│   │   │   │   ├── trivy-config-20251015-124738.log
+│   │   │   │   └── trivy-config-20251016-003511.log
+│   │   │   ├── metrics
+│   │   │   │   ├── bandit-20251014-152845.json
+│   │   │   │   ├── checkov-20251015-124738.json
+│   │   │   │   ├── checkov-20251016-003511.json
+│   │   │   │   ├── gitleaks-20251015-124732.json
+│   │   │   │   ├── gitleaks-20251016-003504.json
+│   │   │   │   ├── semgrep-20251015-124732.json
+│   │   │   │   ├── semgrep-20251016-003503.json
+│   │   │   │   ├── trivy-config-20251015-124747.json
+│   │   │   │   └── trivy-config-20251016-003520.json
+│   │   │   ├── reports
+│   │   │   └── runtime-findings
+│   │   │       ├── kube_hunter_20250924_084942_617.json
+│   │   │       ├── kube_hunter_latest.json
+│   │   │       ├── npm_audit_20250924_085538_691.json
+│   │   │       └── npm_audit_latest.json
+│   │   ├── 2-Fixes
+│   │   │   ├── CLOUD-project
+│   │   │   │   ├── fix-guide-20251006.md
+│   │   │   │   └── fix-guide-20251007.md
+│   │   │   ├── bandit_fix_report_20250924_121901.json
+│   │   │   ├── checkov_fix_report_20250924_122523.json
+│   │   │   ├── fixes_20250923_005912.json
+│   │   │   ├── fixes_20250924_011645.json
+│   │   │   ├── opa
+│   │   │   ├── opa_fixes_20250928_122631.json
+│   │   │   └── opa_fixes_20250928_122713.json
+│   │   ├── 3-hardening
+│   │   ├── 4-cloud-migration
+│   │   ├── 5-com-audit
+│   │   │   ├── gatekeeper_audit_2025-10-06_21-00-00.txt
+│   │   │   ├── gatekeeper_audit_2025-10-06_21-00-09.txt
+│   │   │   └── gatekeeper_audit_2025-10-06_21-00-12.txt
+│   │   ├── 6-agents
+│   │   ├── 7-escalations
+│   │   │   └── escalation_npm_audit_20250924_085538_691.json
+│   │   ├── CD_FIXES_COMPLETE_FINANCE.md
+│   │   ├── CD_SCAN_RESULTS_FINANCE.md
+│   │   ├── CI_SCANNER_STATUS_FINANCE.md
+│   │   ├── CRITICAL_NETWORK_FIXES_COMPLETE.md
+│   │   ├── FINANCE_SECURITY_ASSESSMENT_INDEX.md
+│   │   ├── FINANCE_SECURITY_COMPLETE.md
+│   │   ├── FINDINGS-MIGRATION-COMPLETE.md
+│   │   ├── NETWORK_SECURITY_DECISION_FINANCE.md
+│   │   ├── NETWORK_SECURITY_README_FINANCE.md
+│   │   ├── PHASE-ALIGNMENT-COMPLETE.md
+│   │   ├── PHASE3-INFRASTRUCTURE-HARDENING-COMPLETE.md
+│   │   ├── SECRETS_CLEANUP_FINANCE.md
+│   │   ├── SEMGREP_BREAKDOWN_FINANCE.md
+│   │   ├── SEMGREP_FIXES_FINANCE.md
+│   │   ├── activity.db
+│   │   ├── analysis
+│   │   │   ├── k8s_diagnosis_20250924_100720_640.json
+│   │   │   └── k8s_diagnosis_20250924_101306_920.json
+│   │   ├── findings
+│   │   │   ├── README.md
+│   │   │   └── raw
+│   │   │       ├── cd
+│   │   │       ├── ci
+│   │   │       └── runtime
+│   │   ├── policies
+│   │   │   └── generated
+│   │   │       ├── deny-host-network.yaml
+│   │   │       ├── deny-privileged-production-constraint.yaml
+│   │   │       ├── deny-privileged.yaml
+│   │   │       ├── require-labels.yaml
+│   │   │       ├── require-nonroot.yaml
+│   │   │       └── require-resource-limits.yaml
+│   │   ├── reports
+│   │   │   ├── CLOUD-project
+│   │   │   │   ├── analysis-18300191954-20251006-231628.md
+│   │   │   │   ├── analysis-18300191954-20251006-235107.md
+│   │   │   │   ├── analysis-18300191954-20251006-235251.md
+│   │   │   │   ├── analysis-18300191954-20251007-000739.md
+│   │   │   │   ├── analysis-18300191954-20251007-001549.md
+│   │   │   │   ├── analysis-18302062550-20251007-003017.md
+│   │   │   │   ├── analysis-18302062550-20251007-003232.md
+│   │   │   │   ├── analysis-18302256033-20251007-004422.md
+│   │   │   │   ├── analysis-18302300830-20251007-005200.md
+│   │   │   │   └── analysis-18302300830-20251007-005228.md
+│   │   │   ├── executive_summary_LinkOps-MLOps_20250923_002337.md
+│   │   │   ├── executive_summary_Portfolio_20250923_002254.md
+│   │   │   ├── executive_summary_Portfolio_20250923_004804.md
+│   │   │   ├── executive_summary_Portfolio_20250923_012236.md
+│   │   │   ├── opa
+│   │   │   ├── portfolio
+│   │   │   │   └── PORTFOLIO_SECURITY_REMEDIATION_REPORT.md
+│   │   │   ├── rag_summary_LinkOps-MLOps_20250923_002337.md
+│   │   │   ├── rag_summary_Portfolio_20250923_002254.md
+│   │   │   ├── rag_summary_Portfolio_20250923_004804.md
+│   │   │   ├── rag_summary_Portfolio_20250923_012236.md
+│   │   │   ├── security_advice_20250928_121343.json
+│   │   │   ├── security_advice_20250928_121543.json
+│   │   │   ├── technical_report_LinkOps-MLOps_20250923_002337.md
+│   │   │   ├── technical_report_Portfolio_20250923_002254.md
+│   │   │   ├── technical_report_Portfolio_20250923_004804.md
+│   │   │   └── technical_report_Portfolio_20250923_012236.md
+│   │   ├── scans
+│   │   │   ├── CLOUD-project
+│   │   │   │   ├── run-18300191954
+│   │   │   │   ├── run-18302062550
+│   │   │   │   ├── run-18302256033
+│   │   │   │   └── run-18302300830
+│   │   │   ├── OPA_RAW_RESULTS_20250928_125437.json
+│   │   │   ├── OPA_RAW_RESULTS_20250928_125729.json
+│   │   │   ├── OPA_RAW_RESULTS_20250928_131338.json
+│   │   │   ├── OPA_RAW_RESULTS_20250928_202929.json
+│   │   │   ├── OPA_SCAN_REPORT_20250928_125437.md
+│   │   │   ├── OPA_SCAN_REPORT_20250928_125729.md
+│   │   │   ├── OPA_SCAN_REPORT_20250928_131338.md
+│   │   │   ├── OPA_SCAN_REPORT_20250928_202929.md
+│   │   │   ├── SCAN_RESULTS_GUIDE.md
+│   │   │   ├── bandit_20250924_093404_019.json
+│   │   │   ├── bandit_20250924_094349_482.json
+│   │   │   ├── bandit_20250924_151819_404.json
+│   │   │   ├── bandit_20250925_080012_341.json
+│   │   │   ├── bandit_20250928_120554_332.json
+│   │   │   ├── bandit_20250929_075546_020.json
+│   │   │   ├── bandit_20250930_084537_324.json
+│   │   │   ├── bandit_20250930_085146_739.json
+│   │   │   ├── bandit_20250930_085711_680.json
+│   │   │   ├── bandit_20251003_130313_726.json
+│   │   │   ├── bandit_20251004_222235_772.json
+│   │   │   ├── bandit_latest.json
+│   │   │   ├── checkov_20250924_084032_726.json
+│   │   │   ├── checkov_20250924_084042_059.json
+│   │   │   ├── checkov_20250924_093546_925.json
+│   │   │   ├── checkov_latest.json
+│   │   │   ├── gitleaks_20250924_084348_811.json
+│   │   │   ├── gitleaks_20250924_084355_926.json
+│   │   │   ├── gitleaks_20250924_084408_332.json
+│   │   │   ├── gitleaks_20250924_151846_028.json
+│   │   │   ├── gitleaks_20250925_080038_518.json
+│   │   │   ├── gitleaks_20250928_120604_582.json
+│   │   │   ├── gitleaks_20250930_085720_647.json
+│   │   │   ├── gitleaks_20251004_222522_741.json
+│   │   │   ├── gitleaks_latest.json
+│   │   │   ├── k8s_scans_archive
+│   │   │   │   ├── k8s_scan_20250922_235622.json
+│   │   │   │   ├── k8s_scan_20250922_235845.json
+│   │   │   │   ├── k8s_scan_20250923_004600.json
+│   │   │   │   ├── k8s_scan_20250923_005123.json
+│   │   │   │   ├── k8s_scan_20250923_005157.json
+│   │   │   │   ├── k8s_scan_20250923_010227.json
+│   │   │   │   ├── k8s_scan_20250923_010820.json
+│   │   │   │   ├── k8s_scan_20250923_081036.json
+│   │   │   │   ├── k8s_scan_20250923_081354.json
+│   │   │   │   ├── k8s_scan_20250923_082326.json
+│   │   │   │   ├── k8s_scan_20250923_083001.json
+│   │   │   │   ├── k8s_scan_20250923_083118.json
+│   │   │   │   ├── k8s_scan_20250923_085305.json
+│   │   │   │   ├── k8s_scan_20250923_091613.json
+│   │   │   │   ├── k8s_scan_20250923_120747.json
+│   │   │   │   └── k8s_scan_20250923_122641.json
+│   │   │   ├── kube_hunter_20250924_084942_617.json
+│   │   │   ├── kube_hunter_latest.json
+│   │   │   ├── manifests
+│   │   │   │   └── scan_session_20250924_082804_97357ac9.json
+│   │   │   ├── npm_audit_20250924_085538_691.json
+│   │   │   ├── npm_audit_latest.json
+│   │   │   ├── opa
+│   │   │   │   └── kubernetes-goat_opa_20251007_141242.json
+│   │   │   ├── opa_20250924_085850_962.json
+│   │   │   ├── opa_20250924_085908_601.json
+│   │   │   ├── opa_20250928_120537_202.json
+│   │   │   ├── opa_20250928_122545.json
+│   │   │   ├── opa_20250928_122545_339.json
+│   │   │   ├── opa_20250928_122631.json
+│   │   │   ├── opa_20250928_122631_176.json
+│   │   │   ├── opa_20250928_122702.json
+│   │   │   ├── opa_20250928_122702_637.json
+│   │   │   ├── opa_20250928_122713.json
+│   │   │   ├── opa_20250928_122713_609.json
+│   │   │   ├── opa_20250928_125350.json
+│   │   │   ├── opa_20250928_125350_780.json
+│   │   │   ├── opa_20250928_125437.json
+│   │   │   ├── opa_20250928_125437_867.json
+│   │   │   ├── opa_20250928_125729.json
+│   │   │   ├── opa_20250928_125729_866.json
+│   │   │   ├── opa_20250928_131338.json
+│   │   │   ├── opa_20250928_131338_322.json
+│   │   │   ├── opa_20250928_202929.json
+│   │   │   ├── opa_20250928_202929_057.json
+│   │   │   ├── opa_20250929_115035_387.json
+│   │   │   ├── opa_20251003_093751_571.json
+│   │   │   ├── opa_20251004_222510_275.json
+│   │   │   ├── opa_latest.json
+│   │   │   ├── processed
+│   │   │   │   └── bandit
+│   │   │   ├── raw
+│   │   │   │   └── bandit
+│   │   │   ├── scan_20250923_001437.json
+│   │   │   ├── scan_20250923_001511.json
+│   │   │   ├── scan_20250923_002254.json
+│   │   │   ├── scan_20250923_002336.json
+│   │   │   ├── scan_20250923_002337.json
+│   │   │   ├── scan_20250923_004739.json
+│   │   │   ├── scan_20250923_005336.json
+│   │   │   ├── scan_20250923_010409.json
+│   │   │   ├── scan_20250923_233153.json
+│   │   │   ├── scan_20250924_012003.json
+│   │   │   ├── scan_20250924_023305.json
+│   │   │   ├── scan_manifest.py
+│   │   │   ├── semgrep_20250924_091902_186.json
+│   │   │   ├── semgrep_20250925_080232_906.json
+│   │   │   ├── semgrep_20250928_120559_436.json
+│   │   │   ├── semgrep_20250930_084541_166.json
+│   │   │   ├── semgrep_20250930_085714_882.json
+│   │   │   ├── semgrep_20251004_222551_916.json
+│   │   │   ├── semgrep_latest.json
+│   │   │   ├── tfsec_20250924_092231_990.json
+│   │   │   ├── tfsec_20250925_080556_093.json
+│   │   │   ├── tfsec_20250925_081146_358.json
+│   │   │   ├── tfsec_20250925_081239_925.json
+│   │   │   ├── tfsec_20250925_092230_465.json
+│   │   │   ├── tfsec_latest.json
+│   │   │   ├── trivy_20250924_092708_801.json
+│   │   │   ├── trivy_20250924_094515_560.json
+│   │   │   ├── trivy_20250924_151714_461.json
+│   │   │   ├── trivy_20250925_080001_269.json
+│   │   │   ├── trivy_20250928_120611_564.json
+│   │   │   ├── trivy_20250929_075546_741.json
+│   │   │   ├── trivy_20250930_084544_956.json
+│   │   │   ├── trivy_20250930_085719_272.json
+│   │   │   ├── trivy_20250930_085813_797.json
+│   │   │   ├── trivy_20251003_130313_691.json
+│   │   │   ├── trivy_20251004_222519_578.json
+│   │   │   ├── trivy_20251007_014215_184.json
+│   │   │   └── trivy_latest.json
+│   │   ├── test_auto_sync.log
+│   │   ├── test_manifest.yaml
+│   │   └── workflows
+│   │       ├── workflow_20250923_002253_complete.json
+│   │       ├── workflow_20250923_002335_complete.json
+│   │       ├── workflow_20250923_004804_complete.json
+│   │       └── workflow_20250923_012235_complete.json
+│   ├── ai-models
+│   │   └── qwen2.5-7b-instruct
+│   │       └── models--Qwen--Qwen2.5-7B-Instruct
+│   │           ├── blobs
+│   │           ├── refs
+│   │           └── snapshots
+│   ├── audit
+│   │   └── approval_log.db
+│   ├── auto_sync_daemon.py
+│   ├── cache
+│   ├── configs
+│   ├── gp-data-Tree.txt
+│   ├── jade-knowledge
+│   │   ├── chroma
+│   │   │   ├── 07f16ede-45c6-4692-9143-89d710613e24
+│   │   │   │   ├── data_level0.bin
+│   │   │   │   ├── header.bin
+│   │   │   │   ├── length.bin
+│   │   │   │   └── link_lists.bin
+│   │   │   ├── 41b89556-2f85-4d7f-b639-bd792182ab38
+│   │   │   │   ├── data_level0.bin
+│   │   │   │   ├── header.bin
+│   │   │   │   ├── length.bin
+│   │   │   │   └── link_lists.bin
+│   │   │   ├── 8a3bb997-e7a4-406c-8352-36269da090b2
+│   │   │   │   ├── data_level0.bin
+│   │   │   │   ├── header.bin
+│   │   │   │   ├── length.bin
+│   │   │   │   └── link_lists.bin
+│   │   │   ├── a864098f-c50b-457d-a804-e27092eb0223
+│   │   │   │   ├── data_level0.bin
+│   │   │   │   ├── header.bin
+│   │   │   │   ├── length.bin
+│   │   │   │   └── link_lists.bin
+│   │   │   ├── bd08e1ce-e23f-4ae5-8088-1ca34c368e6d
+│   │   │   │   ├── data_level0.bin
+│   │   │   │   ├── header.bin
+│   │   │   │   ├── length.bin
+│   │   │   │   └── link_lists.bin
+│   │   │   ├── ccc340a3-1894-40c8-939e-ab46d3f36424
+│   │   │   │   ├── data_level0.bin
+│   │   │   │   ├── header.bin
+│   │   │   │   ├── length.bin
+│   │   │   │   └── link_lists.bin
+│   │   │   ├── chroma.sqlite3
+│   │   │   ├── dc890bbd-3baf-4964-b8fb-8e5aae14565c
+│   │   │   │   ├── data_level0.bin
+│   │   │   │   ├── header.bin
+│   │   │   │   ├── length.bin
+│   │   │   │   └── link_lists.bin
+│   │   │   └── e7495162-3192-461c-8e47-31c0932d73d9
+│   │   │       ├── data_level0.bin
+│   │   │       ├── header.bin
+│   │   │       ├── index_metadata.pickle
+│   │   │       ├── length.bin
+│   │   │       └── link_lists.bin
+│   │   ├── chroma_backup
+│   │   │   ├── aeb47e84-c286-4186-984b-ab570fcfc631
+│   │   │   │   ├── data_level0.bin
+│   │   │   │   ├── header.bin
+│   │   │   │   ├── length.bin
+│   │   │   │   └── link_lists.bin
+│   │   │   ├── beaa6a64-02b1-4acd-8899-c1f9b98dd48f
+│   │   │   │   ├── data_level0.bin
+│   │   │   │   ├── header.bin
+│   │   │   │   ├── length.bin
+│   │   │   │   └── link_lists.bin
+│   │   │   └── chroma.sqlite3
+│   │   ├── enhanced_security_knowledge.md
+│   │   ├── network_configuration.md
+│   │   ├── security_graph.pkl
+│   │   └── spring-boot-vulnerability-remediation.md
+│   ├── logs
+│   │   ├── fastapi-deepseek.log
+│   │   └── fastapi.log
+│   ├── metadata
+│   │   └── audits
+│   │       ├── audit_summary.json
+│   │       ├── bandit_audit.json
+│   │       ├── codebase_audit_report.md
+│   │       └── trivy_api_audit.json
+│   ├── notes
+│   │   ├── 737ebb7f-3f1c-4dcb-bddc-c93310d17e55_20250925_102032.json
+│   │   └── 737ebb7f-3f1c-4dcb-bddc-c93310d17e55_20250925_102032.txt
+│   ├── research
+│   │   ├── ai_ml
+│   │   │   ├── 041d414a-f46b-46be-b844-df6aa4e63e52_20250925_102953.json
+│   │   │   └── 041d414a-f46b-46be-b844-df6aa4e63e52_20250925_102953.txt
+│   │   └── guidepointpol
+│   │       ├── 27b40c47-2b23-4b90-b292-2fb8da3b8e23_20250925_104518.json
+│   │       ├── 27b40c47-2b23-4b90-b292-2fb8da3b8e23_20250925_104518.txt
+│   │       ├── b5fe915c-469a-418d-8677-ae8bab5f163a_20250925_103353.json
+│   │       └── b5fe915c-469a-418d-8677-ae8bab5f163a_20250925_103353.txt
+│   ├── simple_rag_query.py
+│   ├── simple_sync.py
+│   └── vector-db.archived.20251013
+│       ├── 012961ce-7802-4ac1-a6d2-ed0af4475473
+│       │   ├── data_level0.bin
+│       │   ├── header.bin
+│       │   ├── length.bin
+│       │   └── link_lists.bin
+│       ├── 945fc921-e6da-4204-94c1-0a94ba285c2e
+│       │   ├── data_level0.bin
+│       │   ├── header.bin
+│       │   ├── length.bin
+│       │   └── link_lists.bin
+│       ├── central -> /home/jimmie/linkops-industries/GP-copilot/GP-KNOWLEDGE-HUB/vector-store/central-knowledge-db
+│       └── chroma.sqlite3
+├── GP-Frontend
+│   ├── GP-AI
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── _local_data
+│   │   │   └── README.md
+│   │   ├── agents
+│   │   │   ├── jade_orchestrator.py
+│   │   │   └── troubleshooting_agent.py
+│   │   ├── api
+│   │   │   ├── __init__.py
+│   │   │   ├── approval_routes.py
+│   │   │   ├── main.py
+│   │   │   └── secrets_routes.py
+│   │   ├── awscli.sh
+│   │   ├── baseline_test.sh
+│   │   ├── cli
+│   │   │   ├── CHAT_MODE_README.md
+│   │   │   ├── CLI_AUDIT.md
+│   │   │   ├── JADE_CHAT_FIXES_NEEDED.md
+│   │   │   ├── gha_analyzer.py
+│   │   │   ├── jade-cli.py
+│   │   │   ├── jade_analyze_gha.py
+│   │   │   ├── jade_chat.py
+│   │   │   └── jade_opa.py
+│   │   ├── config
+│   │   │   ├── jade_prompts.py
+│   │   │   └── routing_config.json
+│   │   ├── core
+│   │   │   ├── __init__.py
+│   │   │   ├── ai_security_engine.py
+│   │   │   ├── rag_engine.py
+│   │   │   ├── rag_graph_engine.py
+│   │   │   ├── scan_graph_integrator.py
+│   │   │   └── security_reasoning.py
+│   │   ├── engines
+│   │   │   └── llm_adapter.py
+│   │   ├── integrations
+│   │   │   ├── jade_gatekeeper_integration.py
+│   │   │   ├── scan_integrator.py
+│   │   │   └── tool_registry.py
+│   │   ├── jade-build
+│   │   │   ├── ARCHITECTURE.md
+│   │   │   ├── CLEANUP_SUMMARY.md
+│   │   │   ├── COMPLETE_JADE_MAP.md
+│   │   │   ├── PRD_GP_AI.md
+│   │   │   ├── QUICK_START.md
+│   │   │   └── README_COMPREHENSIVE.md
+│   │   ├── models
+│   │   │   ├── gpu_config.py
+│   │   │   └── model_manager.py
+│   │   └── workflows
+│   │       └── approval_workflow.py
+│   ├── GP-GUI
+│   └── GP-PLATFORM
+│       ├── README.md
+│       ├── README_COMPREHENSIVE.md
+│       ├── api
+│       │   ├── README.md
+│       │   ├── __init__.py
+│       │   ├── agent_gateway.py
+│       │   ├── mcp
+│       │   │   ├── chat_routes.py
+│       │   │   ├── metrics_routes.py
+│       │   │   └── queue_routes.py
+│       │   └── unified
+│       │       └── automation_api.py
+│       ├── config
+│       │   ├── README.md
+│       │   ├── platform-config.yaml
+│       │   └── scanners.json
+│       ├── coordination
+│       │   ├── crew_orchestrator.py
+│       │   └── policy_agent.py
+│       ├── core
+│       │   ├── SECRETS_README.md
+│       │   ├── config.py
+│       │   ├── jade_logger.py
+│       │   ├── james.py
+│       │   ├── james_command_router.py
+│       │   ├── james_orchestrator.py
+│       │   ├── james_ui_integration.py
+│       │   ├── main.py
+│       │   ├── main_working.py
+│       │   └── secrets_manager.py
+│       ├── custom_tools
+│       │   ├── mcp_tool_builder.py
+│       │   └── registry
+│       │       ├── checkov
+│       │       ├── semgrep
+│       │       └── trivy
+│       ├── docs
+│       │   ├── API_WORKFLOW_DIAGRAM.md
+│       │   ├── ARCHITECTURE_UPDATE_COMPLETE.md
+│       │   ├── JAMES_SECURITY_QUICK_REFERENCE.md
+│       │   ├── README.md
+│       │   ├── SCANNER_ARCHITECTURE_DOCUMENTATION.md
+│       │   ├── SECURITY_ARCHITECTURE_GUIDE.md
+│       │   ├── SECURITY_AUTOMATION_WORKFLOW.md
+│       │   └── WORKFLOW_DOCUMENTATION.md
+│       ├── james-config
+│       │   ├── __init__.py
+│       │   ├── agent_metadata.py
+│       │   └── gp_data_config.py
+│       ├── mcp
+│       │   ├── README.md
+│       │   ├── __init__.py
+│       │   ├── agents
+│       │   │   ├── __init__.py
+│       │   │   ├── client_intelligence_agent.py
+│       │   │   ├── consulting_remediation_agent.py
+│       │   │   └── implementation_planning_agent.py
+│       │   ├── config
+│       │   │   └── mcp_config.yaml
+│       │   └── server.py
+│       ├── model_client
+│       │   ├── README.md
+│       │   ├── __init__.py
+│       │   ├── config
+│       │   │   └── model_client_config.yaml
+│       │   └── james_mlops_client.py
+│       ├── scripts
+│       │   ├── gp_status.py
+│       │   ├── import_fix.py
+│       │   └── migrate_secrets.py
+│       └── workflow
+│           ├── MENTOR_DEMONSTRATION_SUMMARY.md
+│           ├── README.md
+│           ├── active-projects
+│           │   ├── DEMO-CONSTANT-001
+│           │   ├── WO-20250917-DEMO001
+│           │   └── WO-20250917-REALISTIC-001
+│           ├── completed-work
+│           │   ├── 2025-09-17-WO-20250917-REALISTIC-001
+│           │   └── 2025-09-17-portfolio-security-transformation
+│           ├── inbox
+│           │   ├── multi-project-assessment.yaml
+│           │   └── test-work-order.yaml
+│           ├── james-workflow.log
+│           ├── templates
+│           │   ├── incident-response-template.md
+│           │   └── security-assessment-template.md
+│           └── work_order_processor.py
+├── GP-PROJECTS
+│   ├── CLOUD-project
+│   │   ├── AUDIT_SUMMARY.md
+│   │   ├── AWS_DEPLOYMENT_COMPLETE.md
+│   │   ├── Dockerfile
+│   │   ├── GH_actionspipeline.txt
+│   │   ├── GP-COPILOT
+│   │   │   ├── README.md
+│   │   │   ├── reports
+│   │   │   │   ├── executive-summary.md
+│   │   │   │   └── latest-analysis.md
+│   │   │   └── scans
+│   │   │       └── latest
+│   │   ├── Jenkinsfile
+│   │   ├── PIPELINE_SUCCESS.md
+│   │   ├── README.md
+│   │   ├── SECURITY_ACHIEVEMENT.md
+│   │   ├── SECURITY_SCANNING.md
+│   │   ├── SKILLS_GAP_ANALYSIS.md
+│   │   ├── deployment-service.yaml
+│   │   ├── jenkinspipeline.txt
+│   │   ├── mvnw
+│   │   ├── mvnw.cmd
+│   │   ├── pom.xml
+│   │   ├── sonar-project.properties
+│   │   ├── src
+│   │   │   ├── main
+│   │   │   │   ├── java
+│   │   │   │   └── resources
+│   │   │   └── test
+│   │   │       └── java
+│   │   └── terraform
+│   │       ├── README.md
+│   │       ├── environments
+│   │       ├── main.tf
+│   │       ├── modules
+│   │       │   ├── alb
+│   │       │   ├── eks
+│   │       │   ├── monitoring
+│   │       │   ├── rds
+│   │       │   └── vpc
+│   │       ├── outputs.tf
+│   │       ├── terraform.tfvars.example
+│   │       └── variables.tf
+│   ├── DEFENSE-project
+│   │   ├── policies -> ../../GP-CONSULTING/GP-POL-AS-CODE
+│   │   ├── secops -> ../../GP-CONSULTING/secops-framework
+│   │   └── secops-config.yaml
+│   ├── DVWA
+│   │   ├── CHANGELOG.md
+│   │   ├── COPYING.txt
+│   │   ├── Dockerfile
+│   │   ├── GP-Copilot
+│   │   │   ├── JADE_SECURITY_REPORT.md
+│   │   │   ├── README.md
+│   │   │   ├── scan_initial.json
+│   │   │   ├── scan_semgrep.json
+│   │   │   ├── scan_trivy.json
+│   │   │   └── scan_verification.json
+│   │   ├── README.ar.md
+│   │   ├── README.es.md
+│   │   ├── README.fa.md
+│   │   ├── README.fr.md
+│   │   ├── README.id.md
+│   │   ├── README.it.md
+│   │   ├── README.ko.md
+│   │   ├── README.md
+│   │   ├── README.pl.md
+│   │   ├── README.pt.md
+│   │   ├── README.tr.md
+│   │   ├── README.vi.md
+│   │   ├── README.zh.md
+│   │   ├── SECURITY.md
+│   │   ├── about.php
+│   │   ├── compose.yml
+│   │   ├── config
+│   │   │   └── config.inc.php.dist
+│   │   ├── database
+│   │   │   ├── create_mssql_db.sql
+│   │   │   ├── create_oracle_db.sql
+│   │   │   ├── create_postgresql_db.sql
+│   │   │   ├── create_sqlite_db.sql
+│   │   │   ├── sqli.db
+│   │   │   └── sqli.db.dist
+│   │   ├── docs
+│   │   │   ├── DVWA_v1.3.pdf
+│   │   │   ├── graphics
+│   │   │   │   └── docker
+│   │   │   └── pdf.html
+│   │   ├── dvwa
+│   │   │   ├── css
+│   │   │   │   ├── help.css
+│   │   │   │   ├── login.css
+│   │   │   │   ├── main.css
+│   │   │   │   └── source.css
+│   │   │   ├── images
+│   │   │   │   ├── dollar.png
+│   │   │   │   ├── lock.png
+│   │   │   │   ├── login_logo.png
+│   │   │   │   ├── logo.png
+│   │   │   │   ├── spanner.png
+│   │   │   │   ├── theme-light-dark.png
+│   │   │   │   └── warning.png
+│   │   │   ├── includes
+│   │   │   │   ├── DBMS
+│   │   │   │   ├── Parsedown.php
+│   │   │   │   └── dvwaPage.inc.php
+│   │   │   └── js
+│   │   │       ├── add_event_listeners.js
+│   │   │       └── dvwaPage.js
+│   │   ├── external
+│   │   │   └── recaptcha
+│   │   │       └── recaptchalib.php
+│   │   ├── favicon.ico
+│   │   ├── hackable
+│   │   │   ├── flags
+│   │   │   │   └── fi.php
+│   │   │   ├── uploads
+│   │   │   │   └── dvwa_email.png
+│   │   │   └── users
+│   │   │       ├── 1337.jpg
+│   │   │       ├── admin.jpg
+│   │   │       ├── gordonb.jpg
+│   │   │       ├── pablo.jpg
+│   │   │       └── smithy.jpg
+│   │   ├── index.php
+│   │   ├── instructions.php
+│   │   ├── login.php
+│   │   ├── logout.php
+│   │   ├── php.ini
+│   │   ├── phpinfo.php
+│   │   ├── robots.txt
+│   │   ├── security.php
+│   │   ├── security.txt
+│   │   ├── setup.php
+│   │   ├── tests
+│   │   │   ├── README.md
+│   │   │   └── test_url.py
+│   │   └── vulnerabilities
+│   │       ├── api
+│   │       │   ├── README.md
+│   │       │   ├── bootstrap.php
+│   │       │   ├── composer.json
+│   │       │   ├── composer.lock
+│   │       │   ├── gen_openapi.php
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   ├── openapi.yml
+│   │       │   ├── public
+│   │       │   ├── source
+│   │       │   └── src
+│   │       ├── authbypass
+│   │       │   ├── authbypass.js
+│   │       │   ├── change_user_details.php
+│   │       │   ├── get_user_data.php
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── brute
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── captcha
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── cryptography
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── csp
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── csrf
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   ├── source
+│   │       │   └── test_credentials.php
+│   │       ├── exec
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── fi
+│   │       │   ├── file1.php
+│   │       │   ├── file2.php
+│   │       │   ├── file3.php
+│   │       │   ├── file4.php
+│   │       │   ├── help
+│   │       │   ├── include.php
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── help.css
+│   │       ├── help.js
+│   │       ├── javascript
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── open_redirect
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── sqli
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   ├── session-input.php
+│   │       │   ├── source
+│   │       │   └── test.php
+│   │       ├── sqli_blind
+│   │       │   ├── cookie-input.php
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── upload
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── view_help.php
+│   │       ├── view_source.php
+│   │       ├── view_source_all.php
+│   │       ├── weak_id
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── xss_d
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       ├── xss_r
+│   │       │   ├── help
+│   │       │   ├── index.php
+│   │       │   └── source
+│   │       └── xss_s
+│   │           ├── help
+│   │           ├── index.php
+│   │           └── source
+│   ├── FINANCE-project
+│   │   ├── -Tree.txt
+│   │   ├── Jenkinsfile
+│   │   ├── PHASE2-REMEDIATION-COMPLETE.md
+│   │   ├── PHASE4_BUILD_COMPLETE.md
+│   │   ├── README.md
+│   │   ├── SCAN-RESULTS-PHASE1.md
+│   │   ├── backend
+│   │   │   ├── Dockerfile
+│   │   │   ├── PRD.md
+│   │   │   ├── README.md
+│   │   │   ├── config
+│   │   │   │   ├── database.js
+│   │   │   │   └── secrets.js
+│   │   │   ├── controllers
+│   │   │   │   ├── auth.controller.js
+│   │   │   │   ├── cards.controller.js
+│   │   │   │   ├── cards.controller.js.backup.20251015_125500
+│   │   │   │   ├── merchant.api.controller.enhanced.js
+│   │   │   │   ├── merchant.api.controller.js
+│   │   │   │   ├── merchant.api.controller.js.backup.20251015_125505
+│   │   │   │   ├── merchant.controller.js
+│   │   │   │   ├── payment.controller.js
+│   │   │   │   └── payment.controller.secure.js
+│   │   │   ├── database
+│   │   │   │   ├── apply-phase4-migration.sh
+│   │   │   │   ├── migrations
+│   │   │   │   └── run_migration.js
+│   │   │   ├── middleware
+│   │   │   │   └── opa.middleware.js
+│   │   │   ├── models
+│   │   │   │   ├── Merchant.js
+│   │   │   │   └── Payment.js
+│   │   │   ├── package-lock.json
+│   │   │   ├── package.json
+│   │   │   ├── routes
+│   │   │   │   ├── admin.routes.js
+│   │   │   │   ├── auth.routes.js
+│   │   │   │   ├── cards.routes.js
+│   │   │   │   ├── fraud.routes.js
+│   │   │   │   ├── merchant.api.routes.js
+│   │   │   │   ├── merchant.routes.js
+│   │   │   │   ├── p2p.routes.js
+│   │   │   │   ├── payment.routes.js
+│   │   │   │   └── payment.routes.secure.js
+│   │   │   ├── server.js
+│   │   │   ├── services
+│   │   │   │   └── aws.service.js
+│   │   │   └── utils
+│   │   │       ├── masking.js
+│   │   │       └── masking.js.backup
+│   │   ├── create_phase4_apis.sh
+│   │   ├── deploy-enhanced.sh
+│   │   ├── docker-compose.yml
+│   │   ├── docs
+│   │   │   ├── 15-MINUTE-PRESENTATION.md
+│   │   │   ├── ACT-1-AUDIT-REPORT.md
+│   │   │   ├── ACT-4-VALIDATION-REPORT.md
+│   │   │   ├── ACT-5-EXECUTIVE-SUMMARY.md
+│   │   │   ├── ACT-5-ROI-ANALYSIS.md
+│   │   │   ├── AUDIT-READINESS-ASSESSMENT.md
+│   │   │   ├── AWS-DEPLOYMENT-GUIDE.md
+│   │   │   ├── CD_SCAN_RESULTS.md
+│   │   │   ├── CI_SCANNER_STATUS_REPORT.md
+│   │   │   ├── CLOUD-PLATFORM-SUMMARY.md
+│   │   │   ├── CODEBASE-AUDIT-REPORT.md
+│   │   │   ├── COMPLETE-PLATFORM-GUIDE.md
+│   │   │   ├── COMPONENT-INVENTORY.md
+│   │   │   ├── CURRENT-WORKING-STATE.md
+│   │   │   ├── DEMO-FIX-PROGRESSION.md
+│   │   │   ├── DEPLOYMENT-STATUS.md
+│   │   │   ├── DEPLOYMENT-SUCCESS-20251010.md
+│   │   │   ├── DEPLOYMENT-SUCCESS-20251015.md
+│   │   │   ├── ENHANCED-BANKING-STATUS.md
+│   │   │   ├── FinancePRD.md
+│   │   │   ├── IMPLEMENTATION-CHECKLIST.md
+│   │   │   ├── KUBERNETES-MIGRATION-COMPLETE.md
+│   │   │   ├── LOCAL-DEPLOYMENT-GUIDE.md
+│   │   │   ├── LOCAL-TESTING.md
+│   │   │   ├── NETWORK_SECURITY_DECISION.md
+│   │   │   ├── OPA-GATEKEEPER-ANALYSIS.md
+│   │   │   ├── OPA-SETUP.md
+│   │   │   ├── PCI-DSS-GAP-ANALYSIS.md
+│   │   │   ├── PHASE-5-6-COMPLETE.md
+│   │   │   ├── PHASE1-DEMO-STATUS.md
+│   │   │   ├── PHASE2-COMPLETE.md
+│   │   │   ├── POLICIES-NOW-EXECUTABLE.md
+│   │   │   ├── PORTFOLIO-READY.md
+│   │   │   ├── PRDjson.json
+│   │   │   ├── QUICK-START-DEMO.md
+│   │   │   ├── QUICK-START-GUIDE.md
+│   │   │   ├── QUICKSTART.md
+│   │   │   ├── README-SECUREBANK.md
+│   │   │   ├── REFACTOR-COMPLETE.md
+│   │   │   ├── SECOPS-PHASE3-COMPLETE.md
+│   │   │   ├── SECOPS-PHASE3-SUMMARY.md
+│   │   │   ├── SECOPS-PHASE4-COMPLETE.md
+│   │   │   ├── SECOPS-VALIDATION-REPORT.md
+│   │   │   ├── SECRETS_CLEANUP_REPORT.md
+│   │   │   ├── SECURE-PAYMENT-IMPLEMENTATION.md
+│   │   │   ├── SECURE-VERSION-COMPLETE.md
+│   │   │   ├── SEMGREP_BREAKDOWN_REPORT.md
+│   │   │   ├── SEMGREP_FIXES_COMPLETE.md
+│   │   │   ├── SESSION-SAVEPOINT-2025-10-09.md
+│   │   │   ├── TROUBLESHOOTING-SESSION.md
+│   │   │   └── VIOLATION-GUIDE.md
+│   │   ├── frontend
+│   │   │   ├── Dockerfile
+│   │   │   ├── PRD.md
+│   │   │   ├── README.md
+│   │   │   ├── package-lock.json
+│   │   │   ├── package.json
+│   │   │   ├── public
+│   │   │   │   ├── favicon.ico
+│   │   │   │   ├── index.html
+│   │   │   │   ├── logo192.png
+│   │   │   │   ├── logo512.png
+│   │   │   │   ├── manifest.json
+│   │   │   │   ├── robots.txt
+│   │   │   │   └── test.html
+│   │   │   ├── src
+│   │   │   │   ├── App.css
+│   │   │   │   ├── App.test.tsx
+│   │   │   │   ├── App.tsx
+│   │   │   │   ├── components
+│   │   │   │   ├── index.css
+│   │   │   │   ├── index.tsx
+│   │   │   │   ├── logo.svg
+│   │   │   │   ├── pages
+│   │   │   │   ├── react-app-env.d.ts
+│   │   │   │   ├── reportWebVitals.ts
+│   │   │   │   ├── services
+│   │   │   │   ├── setupTests.ts
+│   │   │   │   ├── types
+│   │   │   │   └── utils
+│   │   │   └── tsconfig.json
+│   │   ├── infrastructure
+│   │   │   ├── PRD.md
+│   │   │   ├── README.md
+│   │   │   ├── k8s
+│   │   │   │   ├── SECRETS-README.md
+│   │   │   │   ├── deployment-local.yaml
+│   │   │   │   ├── deployment-production.yaml
+│   │   │   │   ├── deployment-vulnerable.yaml
+│   │   │   │   ├── deployment-vulnerable.yaml.backup.20251015_125406
+│   │   │   │   ├── deployment-vulnerable.yaml.backup.20251015_130321
+│   │   │   │   ├── deployment.yaml
+│   │   │   │   ├── monitoring.yaml
+│   │   │   │   ├── namespace.yaml
+│   │   │   │   ├── network-policy.yaml
+│   │   │   │   ├── opa-gatekeeper.yaml
+│   │   │   │   ├── pod-security-policy.yaml
+│   │   │   │   ├── secrets.yaml
+│   │   │   │   └── service.yaml
+│   │   │   ├── nginx
+│   │   │   │   ├── certs
+│   │   │   │   ├── generate-certs.sh
+│   │   │   │   └── nginx.conf
+│   │   │   ├── phase4-aws
+│   │   │   │   ├── PHASE4_BACKEND_COMPLETE.md
+│   │   │   │   ├── QUICKSTART.md
+│   │   │   │   ├── README.md
+│   │   │   │   ├── docs
+│   │   │   │   ├── lambda
+│   │   │   │   ├── scripts
+│   │   │   │   └── terraform
+│   │   │   ├── postgres
+│   │   │   │   ├── Dockerfile
+│   │   │   │   ├── init-enhanced.sql
+│   │   │   │   └── init.sql
+│   │   │   └── terraform
+│   │   │       ├── NETWORK_SECURITY_README.md
+│   │   │       ├── README.md
+│   │   │       ├── backend.tf.disabled
+│   │   │       ├── cloudwatch.tf
+│   │   │       ├── ecr.tf
+│   │   │       ├── eks.tf
+│   │   │       ├── iam-least-privilege.tf
+│   │   │       ├── iam.tf
+│   │   │       ├── iam.tf.INSECURE.bak
+│   │   │       ├── iam.tf.bak
+│   │   │       ├── kms.tf
+│   │   │       ├── outputs.tf
+│   │   │       ├── provider.tf
+│   │   │       ├── rds.tf
+│   │   │       ├── s3.tf
+│   │   │       ├── secrets-manager.tf
+│   │   │       ├── security-groups.tf
+│   │   │       ├── security-groups.tf.INSECURE.bak
+│   │   │       ├── security-groups.tf.backup.20251014-102811
+│   │   │       ├── security-groups.tf.old
+│   │   │       ├── terraform.tfvars.example
+│   │   │       ├── tfplan
+│   │   │       ├── variables.tf
+│   │   │       ├── versions.tf
+│   │   │       └── vpc.tf
+│   │   ├── opa-policies
+│   │   ├── policies -> ../../GP-CONSULTING/GP-POL-AS-CODE
+│   │   ├── scripts
+│   │   │   ├── deploy-securebank.sh
+│   │   │   ├── init-localstack.sh
+│   │   │   ├── start-local.sh
+│   │   │   └── verify-aws-deployment.sh
+│   │   ├── secops-config.yaml
+│   │   ├── setup.sh
+│   │   ├── start-portforwards.sh
+│   │   ├── tmp
+│   │   └── view-secops.sh
+│   └── kubernetes-goat
+│       ├── LICENSE
+│       ├── README.md
+│       ├── access-kubernetes-goat.ps1
+│       ├── access-kubernetes-goat.sh
+│       ├── guide
+│       │   ├── README.md
+│       │   ├── babel.config.js
+│       │   ├── docs
+│       │   │   ├── acknowledgments.md
+│       │   │   ├── architecture.md
+│       │   │   ├── cheatsheet.md
+│       │   │   ├── community.md
+│       │   │   ├── faq.md
+│       │   │   ├── getting-involved
+│       │   │   ├── getting-started.md
+│       │   │   ├── how-to-run
+│       │   │   ├── index.md
+│       │   │   ├── k8s-owasp-top-10.md
+│       │   │   ├── learning-kubernetes
+│       │   │   ├── miscellaneous
+│       │   │   ├── mitre-attack
+│       │   │   ├── resources.md
+│       │   │   ├── scenarios
+│       │   │   ├── security-reports
+│       │   │   ├── showcase.md
+│       │   │   ├── sponsors.md
+│       │   │   ├── teardown.md
+│       │   │   ├── wall-of-love.md
+│       │   │   └── why.md
+│       │   ├── docusaurus.config.js
+│       │   ├── package.json
+│       │   ├── sidebars.js
+│       │   ├── src
+│       │   │   ├── components
+│       │   │   ├── css
+│       │   │   ├── pages
+│       │   │   └── theme
+│       │   ├── static
+│       │   │   ├── img
+│       │   │   ├── kics-report.html
+│       │   │   └── robots.txt
+│       │   ├── tsconfig.json
+│       │   └── yarn.lock
+│       ├── infrastructure
+│       │   ├── batch-check
+│       │   │   ├── Dockerfile
+│       │   │   └── README.md
+│       │   ├── build-code
+│       │   │   ├── Dockerfile
+│       │   │   ├── README.md
+│       │   │   ├── app-arm64.tar.gz
+│       │   │   └── app.tar.gz
+│       │   ├── cache-store
+│       │   │   ├── Dockerfile
+│       │   │   ├── README.md
+│       │   │   ├── data.redis
+│       │   │   └── start-redis.sh
+│       │   ├── goat-home
+│       │   │   ├── Dockerfile
+│       │   │   ├── README.md
+│       │   │   └── home
+│       │   ├── health-check
+│       │   │   ├── Dockerfile
+│       │   │   ├── README.md
+│       │   │   ├── go.mod
+│       │   │   ├── go.sum
+│       │   │   ├── main.go
+│       │   │   └── views
+│       │   ├── helm-tiller
+│       │   │   ├── Dockerfile
+│       │   │   ├── README.md
+│       │   │   └── pwnchart
+│       │   ├── hidden-in-layers
+│       │   │   ├── Dockerfile
+│       │   │   ├── README.md
+│       │   │   └── secret.txt
+│       │   ├── hunger-check
+│       │   │   ├── Dockerfile
+│       │   │   └── README.md
+│       │   ├── info-app
+│       │   │   ├── Dockerfile
+│       │   │   ├── README.md
+│       │   │   └── app.py
+│       │   ├── internal-api
+│       │   │   ├── Dockerfile
+│       │   │   ├── README.md
+│       │   │   └── code
+│       │   ├── metadata-db
+│       │   │   ├── Dockerfile
+│       │   │   ├── README.md
+│       │   │   ├── go.mod
+│       │   │   ├── main.go
+│       │   │   └── metadata
+│       │   ├── poor-registry
+│       │   │   ├── Dockerfile
+│       │   │   ├── README.md
+│       │   │   ├── config.yml
+│       │   │   └── v2.tar.gz
+│       │   ├── system-monitor
+│       │   │   ├── Dockerfile
+│       │   │   └── README.md
+│       │   └── users-repo
+│       │       ├── Dockerfile
+│       │       ├── README.md
+│       │       └── app.py
+│       ├── kubernetes-goat-docs.png
+│       ├── kubernetes-goat-home.png
+│       ├── kubernetes-goat-logo.png
+│       ├── platforms
+│       │   ├── aws-setup
+│       │   │   ├── aws-eks-cdk
+│       │   │   └── aws-kind-ec2-cdk
+│       │   └── kind-setup
+│       │       ├── README.md
+│       │       ├── kind-cluster-setup.yaml
+│       │       ├── setup-kind-cluster-and-goat.ps1
+│       │       ├── setup-kind-cluster-and-goat.sh
+│       │       ├── teardown-cluster.ps1
+│       │       └── teardown-cluster.sh
+│       ├── scenarios
+│       │   ├── batch-check
+│       │   │   └── job.yaml
+│       │   ├── build-code
+│       │   │   └── deployment.yaml
+│       │   ├── cache-store
+│       │   │   └── deployment.yaml
+│       │   ├── docker-bench-security
+│       │   │   └── deployment.yaml
+│       │   ├── health-check
+│       │   │   └── deployment.yaml
+│       │   ├── hidden-in-layers
+│       │   │   └── deployment.yaml
+│       │   ├── hunger-check
+│       │   │   └── deployment.yaml
+│       │   ├── insecure-rbac
+│       │   │   └── setup.yaml
+│       │   ├── internal-proxy
+│       │   │   └── deployment.yaml
+│       │   ├── kube-bench-security
+│       │   │   ├── master-job.yaml
+│       │   │   └── node-job.yaml
+│       │   ├── kubernetes-goat-home
+│       │   │   └── deployment.yaml
+│       │   ├── kyverno-namespace-exec-block
+│       │   │   └── kyverno-block-pod-exec-by-namespace.yaml
+│       │   ├── metadata-db
+│       │   │   ├── Chart.yaml
+│       │   │   ├── templates
+│       │   │   └── values.yaml
+│       │   ├── poor-registry
+│       │   │   └── deployment.yaml
+│       │   └── system-monitor
+│       │       └── deployment.yaml
+│       ├── setup-kubernetes-goat.ps1
+│       ├── setup-kubernetes-goat.sh
+│       ├── teardown-kubernetes-goat.ps1
+│       └── teardown-kubernetes-goat.sh
+├── GP-TESTING-VAL
+│   ├── JAMES_CKS_KNOWLEDGE_UPDATE.md
+│   ├── README.md
+│   ├── README_TESTING.md
+│   ├── demos
+│   │   ├── demo_jade_context.py
+│   │   ├── demonstrate_gatekeeper.py
+│   │   ├── interview-demo-cli.py
+│   │   ├── jade_langgraph_demo.py
+│   │   ├── jade_quick_demo.py
+│   │   ├── jade_unified_launcher.py
+│   │   ├── quick-jade-test.py
+│   │   └── simple-jade-test.py
+│   ├── evidence-test-pod-fixed.yaml
+│   ├── jade_chat_tests.py
+│   ├── jade_knowledge_test_results.json
+│   ├── jade_knowledge_tests.py
+│   ├── quick_jade_test.sh
+│   ├── simple_integration_test.py
+│   ├── test_chat_integration.py
+│   ├── test_guidepoint_rag_consulting.py
+│   ├── test_james_enhanced_analyzer.py
+│   ├── test_policy_as_code.json
+│   ├── test_portfolio_scan.py
+│   ├── test_real_project.py
+│   ├── test_secrets_config.json
+│   ├── test_simple
+│   │   └── main.tf
+│   ├── test_terraform
+│   │   └── main.tf
+│   └── tests
+│       ├── __init__.py
+│       └── test_gp_copilot_phase1.py
+├── GP-TOOLS
+│   ├── README.md
+│   ├── binaries
+│   │   ├── README.md
+│   │   ├── gitleaks
+│   │   ├── kubescape
+│   │   └── tfsec
+│   └── download-binaries.sh
+├── LICENSE
+├── README.md
+├── START_HERE.md
+├── VISION.md
+├── bin
+│   ├── README.md
+│   ├── bandit -> /home/jimmie/.pyenv/shims/bandit
+│   ├── checkov -> /home/jimmie/.local/bin/checkov
+│   ├── conftest
+│   ├── gitleaks -> ../GP-TOOLS/binaries/gitleaks
+│   ├── jade -> /home/jimmie/linkops-industries/GP-copilot/GP-AI/cli/jade-cli.py
+│   ├── jade-stats
+│   ├── kubescape -> ../GP-TOOLS/binaries/kubescape
+│   ├── opa -> /usr/local/bin/opa
+│   ├── semgrep -> /home/jimmie/.local/bin/semgrep
+│   ├── tfsec -> ../GP-TOOLS/binaries/tfsec
+│   └── trivy -> /home/jimmie/bin/trivy
+├── docker-compose.yml
+├── gpcopilot1-Tree.txt
+├── requirements-actual.txt
+├── requirements-docker.txt
+├── requirements.lock
+└── requirements.txt
+
+484 directories, 1516 files

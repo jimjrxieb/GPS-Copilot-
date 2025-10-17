@@ -1,0 +1,330 @@
+{
+  "meta": {
+    "framework": "HIPAA",
+    "version": "Security Rule 2013",
+    "effective_date": "2013-09-23",
+    "description": "Health Insurance Portability and Accountability Act Security Rule - For HEALTHCARE project",
+    "project": "HEALTHCARE",
+    "industry": "Healthcare / Medical Devices",
+    "protected_health_information": true,
+    "last_updated": "2025-10-13"
+  },
+  "project_requirements": {
+    "backup_retention_days": 90,
+    "log_retention_days": 180,
+    "encryption_algorithm": "AES-256-GCM",
+    "mfa_required": true,
+    "audit_trail_required": true,
+    "breach_notification_hours": 72,
+    "data_retention_years": 6,
+    "minimum_necessary_standard": true
+  },
+  "requirements": [
+    {
+      "requirement_id": "164.308(a)(3)(i)",
+      "title": "Workforce Security - Authorization/Supervision",
+      "description": "Implement procedures for the authorization and/or supervision of workforce members who work with ePHI",
+      "category": "Administrative Safeguards",
+      "priority": "P0",
+      "implementation_spec": "Required",
+      "universal_controls": ["UC-002", "UC-006"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_62",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-iam-wildcards.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/iam-least-privilege.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/iam-restrictive.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-iam.sh",
+        "acceptance_criteria": "All users accessing ePHI systems have documented authorization with role-based access controls"
+      },
+      "evidence": {
+        "type": "access_control_matrix",
+        "location": "GP-DATA/active/security/HEALTHCARE/hipaa/164.308(a)(3)(i)-workforce-security.json",
+        "retention_days": 2190
+      }
+    },
+    {
+      "requirement_id": "164.308(a)(4)(ii)(B)",
+      "title": "Information Access Management - Access Authorization",
+      "description": "Implement policies and procedures for granting access to ePHI based on role or function",
+      "category": "Administrative Safeguards",
+      "priority": "P0",
+      "implementation_spec": "Addressable",
+      "universal_controls": ["UC-002", "UC-006"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_111",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-iam-wildcards.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/iam-least-privilege.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/iam-roles.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-iam.sh",
+        "acceptance_criteria": "Zero IAM policies with wildcard permissions for ePHI resources"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/HEALTHCARE/hipaa/164.308(a)(4)(ii)(B)-access-authorization.json",
+        "retention_days": 2190
+      }
+    },
+    {
+      "requirement_id": "164.308(a)(4)(ii)(C)",
+      "title": "Information Access Management - Access Establishment and Modification",
+      "description": "Implement policies for establishing, documenting, reviewing, and modifying access to ePHI",
+      "category": "Administrative Safeguards",
+      "priority": "P0",
+      "implementation_spec": "Addressable",
+      "universal_controls": ["UC-006"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/scan_kubernetes.py",
+        "scan_rule": "K8S_RBAC_ENABLED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-k8s-rbac.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/securebank/opa-gatekeeper/rbac-least-privilege.yaml",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/eks-rbac.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-k8s.sh",
+        "acceptance_criteria": "All service accounts follow least-privilege with documented access reviews"
+      },
+      "evidence": {
+        "type": "access_review_log",
+        "location": "GP-DATA/active/security/HEALTHCARE/hipaa/164.308(a)(4)(ii)(C)-access-modification.json",
+        "retention_days": 2190
+      }
+    },
+    {
+      "requirement_id": "164.308(a)(5)(ii)(B)",
+      "title": "Security Awareness and Training - Protection from Malicious Software",
+      "description": "Implement procedures for guarding against, detecting, and reporting malicious software",
+      "category": "Administrative Safeguards",
+      "priority": "P1",
+      "implementation_spec": "Addressable",
+      "universal_controls": ["UC-007"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/trivy_scanner.py",
+        "scan_rule": "CVE_SCAN",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-container-vulns.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/securebank/opa-gatekeeper/image-scanning-required.yaml",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/ecr-scanning.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-containers.sh",
+        "acceptance_criteria": "100% of container images scanned for malware and vulnerabilities before deployment"
+      },
+      "evidence": {
+        "type": "vulnerability_scan_results",
+        "location": "GP-DATA/active/security/HEALTHCARE/hipaa/164.308(a)(5)(ii)(B)-malware-protection.json",
+        "retention_days": 2190
+      }
+    },
+    {
+      "requirement_id": "164.308(a)(7)(ii)(A)",
+      "title": "Contingency Plan - Data Backup Plan",
+      "description": "Establish and implement procedures to create and maintain retrievable exact copies of ePHI",
+      "category": "Administrative Safeguards",
+      "priority": "P0",
+      "implementation_spec": "Required",
+      "universal_controls": ["UC-008"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-backups.sh",
+        "scan_rule": "RDS_BACKUP_ENABLED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-backup-automation.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/backup-automation.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/rds-backup.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "daily",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-backups.sh",
+        "acceptance_criteria": "All ePHI databases have automated backups with 90-day retention and tested restoration procedures"
+      },
+      "evidence": {
+        "type": "backup_verification",
+        "location": "GP-DATA/active/security/HEALTHCARE/hipaa/164.308(a)(7)(ii)(A)-backup-plan.json",
+        "retention_days": 2190
+      }
+    },
+    {
+      "requirement_id": "164.310(d)(2)(iv)",
+      "title": "Device and Media Controls - Data Backup and Storage",
+      "description": "Create a retrievable, exact copy of ePHI, when needed, before movement of equipment",
+      "category": "Physical Safeguards",
+      "priority": "P1",
+      "implementation_spec": "Addressable",
+      "universal_controls": ["UC-008"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-backups.sh",
+        "scan_rule": "EBS_SNAPSHOT_ENABLED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-backup-automation.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/backup-automation.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/ebs-snapshots.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "daily",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-backups.sh",
+        "acceptance_criteria": "All EBS volumes containing ePHI have automated snapshot policies with encryption"
+      },
+      "evidence": {
+        "type": "snapshot_policy",
+        "location": "GP-DATA/active/security/HEALTHCARE/hipaa/164.310(d)(2)(iv)-media-backup.json",
+        "retention_days": 2190
+      }
+    },
+    {
+      "requirement_id": "164.312(a)(2)(iv)",
+      "title": "Technical Safeguards - Encryption and Decryption",
+      "description": "Implement a mechanism to encrypt and decrypt ePHI",
+      "category": "Technical Safeguards",
+      "priority": "P0",
+      "implementation_spec": "Addressable",
+      "universal_controls": ["UC-001", "UC-003"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_16",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-rds-security.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/database-encryption.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/rds-encrypted.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-encryption.sh",
+        "acceptance_criteria": "100% of ePHI at rest encrypted with AES-256-GCM using KMS CMKs"
+      },
+      "evidence": {
+        "type": "encryption_audit",
+        "location": "GP-DATA/active/security/HEALTHCARE/hipaa/164.312(a)(2)(iv)-encryption.json",
+        "retention_days": 2190
+      }
+    },
+    {
+      "requirement_id": "164.312(b)",
+      "title": "Audit Controls",
+      "description": "Implement hardware, software, and/or procedural mechanisms that record and examine activity in systems with ePHI",
+      "category": "Technical Safeguards",
+      "priority": "P0",
+      "implementation_spec": "Required",
+      "universal_controls": ["UC-005"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-cloudwatch.sh",
+        "scan_rule": "CLOUDWATCH_LOG_GROUP_ENCRYPTED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-cloudwatch-logging.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/logging-enabled.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/cloudwatch-logs.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-logging.sh",
+        "acceptance_criteria": "All systems with ePHI have audit logging enabled with 180-day retention and encryption"
+      },
+      "evidence": {
+        "type": "audit_log_configuration",
+        "location": "GP-DATA/active/security/HEALTHCARE/hipaa/164.312(b)-audit-controls.json",
+        "retention_days": 2190
+      }
+    },
+    {
+      "requirement_id": "164.312(e)(1)",
+      "title": "Transmission Security",
+      "description": "Implement technical security measures to guard against unauthorized access to ePHI transmitted over electronic networks",
+      "category": "Technical Safeguards",
+      "priority": "P0",
+      "implementation_spec": "Required",
+      "universal_controls": ["UC-004"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_260",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-security-groups.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/security-group-lockdown.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/security-groups-restrictive.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-network.sh",
+        "acceptance_criteria": "All ePHI transmissions use TLS 1.2+ with security groups restricting access to authorized systems only"
+      },
+      "evidence": {
+        "type": "network_security_config",
+        "location": "GP-DATA/active/security/HEALTHCARE/hipaa/164.312(e)(1)-transmission-security.json",
+        "retention_days": 2190
+      }
+    },
+    {
+      "requirement_id": "164.312(e)(2)(ii)",
+      "title": "Transmission Security - Encryption",
+      "description": "Implement a mechanism to encrypt ePHI whenever deemed appropriate",
+      "category": "Technical Safeguards",
+      "priority": "P0",
+      "implementation_spec": "Addressable",
+      "universal_controls": ["UC-003"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_19",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-s3-encryption.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/s3-encryption.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/s3-encrypted.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-s3.sh",
+        "acceptance_criteria": "100% of S3 buckets storing ePHI have SSL/TLS enforcement and encryption in transit"
+      },
+      "evidence": {
+        "type": "encryption_in_transit",
+        "location": "GP-DATA/active/security/HEALTHCARE/hipaa/164.312(e)(2)(ii)-transmission-encryption.json",
+        "retention_days": 2190
+      }
+    }
+  ],
+  "compliance_summary": {
+    "total_requirements": 10,
+    "required_specs": 5,
+    "addressable_specs": 5,
+    "automated_validation": 10,
+    "manual_validation": 0,
+    "universal_control_coverage": {
+      "UC-001": ["164.312(a)(2)(iv)"],
+      "UC-002": ["164.308(a)(3)(i)", "164.308(a)(4)(ii)(B)"],
+      "UC-003": ["164.312(a)(2)(iv)", "164.312(e)(2)(ii)"],
+      "UC-004": ["164.312(e)(1)"],
+      "UC-005": ["164.312(b)"],
+      "UC-006": ["164.308(a)(3)(i)", "164.308(a)(4)(ii)(B)", "164.308(a)(4)(ii)(C)"],
+      "UC-007": ["164.308(a)(5)(ii)(B)"],
+      "UC-008": ["164.308(a)(7)(ii)(A)", "164.310(d)(2)(iv)"]
+    }
+  },
+  "risk_analysis": {
+    "frequency": "annually",
+    "method": "NIST SP 800-30",
+    "last_assessment": "2025-01-15",
+    "next_assessment": "2026-01-15",
+    "risk_register": "GP-DATA/active/security/HEALTHCARE/hipaa/risk-register.json"
+  },
+  "breach_notification": {
+    "notification_timeline_hours": 72,
+    "affected_individuals": "Required if breach affects 500+ individuals",
+    "hhs_notification": "Required within 60 days",
+    "media_notification": "Required if breach affects 500+ individuals in same state",
+    "incident_response_plan": "GP-CONSULTING/secops/5-validators/incident-response/playbooks/hipaa-breach-response.yaml"
+  },
+  "reporting": {
+    "executive_summary": "GP-CONSULTING/secops/6-reports/compliance/hipaa-executive-summary.md",
+    "detailed_report": "GP-CONSULTING/secops/6-reports/compliance/hipaa-detailed-report.pdf",
+    "security_risk_assessment": "GP-DATA/active/security/HEALTHCARE/hipaa/SRA-2025.pdf"
+  }
+}

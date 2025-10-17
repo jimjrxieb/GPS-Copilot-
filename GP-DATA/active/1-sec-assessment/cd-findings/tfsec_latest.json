@@ -1,0 +1,28 @@
+{
+  "findings": [],
+  "summary": {
+    "total": 0,
+    "terraform_files_scanned": 3
+  },
+  "target": "GP-Projects/Terraform_CICD_Setup",
+  "tool": "tfsec",
+  "timestamp": "2025-09-24T09:22:31.990374",
+  "scan_id": "tfsec_20250924_092231_990",
+  "terraform_context": {
+    "terraform_files_count": 3,
+    "tfvars_files_count": 0,
+    "has_main_tf": true,
+    "has_variables_tf": true,
+    "has_outputs_tf": false,
+    "has_terraform_directory": false,
+    "has_state_files": false,
+    "providers_detected": [
+      "aws"
+    ],
+    "terraform_files": [
+      "main.tf",
+      "variables.tf",
+      "test_clean.tf"
+    ]
+  }
+}

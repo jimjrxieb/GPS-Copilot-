@@ -1,0 +1,150 @@
+# Pre-commit Security Hooks
+# Catches security issues BEFORE committing to git
+#
+# Installation:
+#   pip install pre-commit
+#   pre-commit install
+#
+# Usage:
+#   # Runs automatically on git commit
+#   git commit -m "your message"
+#
+#   # Or run manually
+#   pre-commit run --all-files
+
+repos:
+  # ============================================================================
+  # Secrets Detection
+  # ============================================================================
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.0
+    hooks:
+      - id: gitleaks
+        name: Detect hardcoded secrets
+        entry: gitleaks detect --source . --no-git --verbose --redact
+        language: system
+        pass_filenames: false
+
+  # ============================================================================
+  # Python Security
+  # ============================================================================
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        name: Bandit security linter
+        args: ['-ll', '--recursive', '--skip', 'B101']  # Skip assert_used
+        exclude: ^tests/
+
+  # ============================================================================
+  # Dependency Security
+  # ============================================================================
+  - repo: https://github.com/pyupio/safety
+    rev: 2.3.5
+    hooks:
+      - id: safety
+        name: Check Python dependencies for vulnerabilities
+        args: ['--json']
+
+  # ============================================================================
+  # Code Quality (Security Related)
+  # ============================================================================
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+      - id: detect-private-key
+        name: Detect private keys
+      - id: check-case-conflict
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  # ============================================================================
+  # SQL Injection Detection
+  # ============================================================================
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 2.3.5
+    hooks:
+      - id: sqlfluff-lint
+        name: SQL linting (prevents injection)
+        args: ['--dialect', 'postgres']
+
+  # ============================================================================
+  # Secrets in Code
+  # ============================================================================
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        name: Detect secrets in code
+        args: ['--baseline', '.secrets.baseline']
+        exclude: package-lock.json
+
+  # ============================================================================
+  # Terraform Security (if using IaC)
+  # ============================================================================
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.83.6
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate
+      - id: terraform_tflint
+        args: ['--args=--minimum-failure-severity=error']
+      - id: terraform_tfsec
+        name: TFSec security scanner
+
+  # ============================================================================
+  # Docker Security
+  # ============================================================================
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint-docker
+        name: Dockerfile linter
+
+# ============================================================================
+# Custom Local Hooks (Fast Checks)
+# ============================================================================
+  - repo: local
+    hooks:
+      # Check for common insecure patterns
+      - id: check-unsafe-code
+        name: Check for unsafe code patterns
+        entry: bash -c 'grep -r "eval(" --include="*.py" --include="*.js" . && exit 1 || exit 0'
+        language: system
+        pass_filenames: false
+
+      # Check for debug statements
+      - id: check-debug-statements
+        name: Check for debug statements
+        entry: bash -c 'grep -r "console.log\|print(" --include="*.py" --include="*.js" src/ && exit 1 || exit 0'
+        language: system
+        pass_filenames: false
+
+      # Check for TODO/FIXME with security context
+      - id: check-security-todos
+        name: Check for security TODOs
+        entry: bash -c 'grep -r "TODO.*security\|FIXME.*security" --include="*.py" --include="*.js" . && exit 1 || exit 0'
+        language: system
+        pass_filenames: false
+        always_run: true
+
+# ============================================================================
+# Configuration
+# ============================================================================
+default_language_version:
+  python: python3.11
+
+# Skip these hooks in CI (they're run separately)
+ci:
+  skip: [gitleaks, bandit, safety]
+
+# Fail fast - stop on first failure
+fail_fast: false
+
+# Run hooks in parallel for speed
+default_stages: [commit]

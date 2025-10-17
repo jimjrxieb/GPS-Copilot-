@@ -1,0 +1,364 @@
+{
+  "meta": {
+    "framework": "PCI-DSS",
+    "version": "4.0",
+    "effective_date": "2024-03-31",
+    "description": "Payment Card Industry Data Security Standard v4.0 - For FINANCE project",
+    "project": "FINANCE",
+    "industry": "Financial Services",
+    "cardholder_data_environment": true,
+    "last_updated": "2025-10-13"
+  },
+  "project_requirements": {
+    "backup_retention_days": 30,
+    "log_retention_days": 90,
+    "encryption_algorithm": "AES-256-GCM",
+    "mfa_required": true,
+    "network_segmentation": true,
+    "annual_penetration_test": true,
+    "quarterly_vulnerability_scans": true
+  },
+  "requirements": [
+    {
+      "requirement_id": "1.2.1",
+      "title": "Configuration standards for network security controls",
+      "description": "Network security controls must be configured based on industry-accepted standards",
+      "category": "Build and Maintain a Secure Network and Systems",
+      "priority": "P0",
+      "universal_controls": ["UC-004"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_260",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-security-groups.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/security-group-lockdown.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/security-groups-restrictive.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-network.sh",
+        "acceptance_criteria": "Zero security groups with 0.0.0.0/0 ingress on ports 22, 3389, 3306, 5432"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/1.2.1-network-config.json",
+        "retention_days": 365
+      }
+    },
+    {
+      "requirement_id": "1.3.1",
+      "title": "Restrict inbound traffic to only necessary protocols",
+      "description": "Inbound traffic to the cardholder data environment is restricted to only what is necessary",
+      "category": "Build and Maintain a Secure Network and Systems",
+      "priority": "P0",
+      "universal_controls": ["UC-004"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_24",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-security-groups.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/ingress-restriction.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/vpc-isolation.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-network.sh",
+        "acceptance_criteria": "All security groups follow least-privilege principle with documented business justification"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/1.3.1-ingress-restriction.json",
+        "retention_days": 365
+      }
+    },
+    {
+      "requirement_id": "3.4",
+      "title": "Strong cryptography to render PAN unreadable",
+      "description": "PAN is rendered unreadable anywhere it is stored using strong cryptography",
+      "category": "Protect Account Data",
+      "priority": "P0",
+      "universal_controls": ["UC-001", "UC-003"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_16",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-rds-security.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/database-encryption.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/rds-encrypted.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-encryption.sh",
+        "acceptance_criteria": "100% of databases have encryption at rest enabled with KMS CMK"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/3.4-database-encryption.json",
+        "retention_days": 365
+      }
+    },
+    {
+      "requirement_id": "3.5.1",
+      "title": "Cryptographic keys are defined and documented",
+      "description": "Procedures are defined and implemented to protect cryptographic keys used for encryption of account data",
+      "category": "Protect Account Data",
+      "priority": "P0",
+      "universal_controls": ["UC-001", "UC-003"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_7",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-kms-keys.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/kms-key-rotation.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/kms-keys.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "daily",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-kms.sh",
+        "acceptance_criteria": "All KMS keys have automatic rotation enabled, documented usage, and restricted access"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/3.5.1-key-management.json",
+        "retention_days": 365
+      }
+    },
+    {
+      "requirement_id": "3.6.1",
+      "title": "Procedures are defined and implemented to protect cryptographic keys",
+      "description": "Access to cleartext cryptographic key components is restricted to the fewest number of custodians necessary",
+      "category": "Protect Account Data",
+      "priority": "P0",
+      "universal_controls": ["UC-003"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_33",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-kms-keys.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/kms-least-privilege.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/kms-policy.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "daily",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-kms.sh",
+        "acceptance_criteria": "KMS key policies restrict access to specific IAM roles with MFA required for administrative actions"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/3.6.1-key-access-control.json",
+        "retention_days": 365
+      }
+    },
+    {
+      "requirement_id": "6.2",
+      "title": "Bespoke and custom software are developed securely",
+      "description": "Software development processes are defined and followed to ensure secure coding practices",
+      "category": "Develop and Maintain Secure Systems and Software",
+      "priority": "P1",
+      "universal_controls": ["UC-007"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/ci/bandit_scanner.py",
+        "scan_rule": "B201-B999",
+        "fixer": "GP-CONSULTING/secops/3-fixers/ci-fixes/fix-code-vulnerabilities.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/securebank/opa-conftest/secure-coding.rego",
+        "terraform_module": "N/A"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "every_commit",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-code-quality.sh",
+        "acceptance_criteria": "Zero HIGH/CRITICAL severity vulnerabilities in code before production deployment"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/6.2-secure-development.json",
+        "retention_days": 365
+      }
+    },
+    {
+      "requirement_id": "6.3.2",
+      "title": "An inventory of bespoke and custom software is maintained",
+      "description": "All custom software and components are catalogued with security assessment results",
+      "category": "Develop and Maintain Secure Systems and Software",
+      "priority": "P1",
+      "universal_controls": ["UC-007"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/trivy_scanner.py",
+        "scan_rule": "SBOM",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-container-vulns.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/securebank/opa-gatekeeper/image-scanning-required.yaml",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/ecr-scanning.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "daily",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-containers.sh",
+        "acceptance_criteria": "100% of container images scanned with SBOM generated and no HIGH/CRITICAL CVEs"
+      },
+      "evidence": {
+        "type": "sbom",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/6.3.2-software-inventory.json",
+        "retention_days": 365
+      }
+    },
+    {
+      "requirement_id": "7.1.1",
+      "title": "Processes are defined for granting access based on job classification and function",
+      "description": "Access control systems are configured to enforce least-privilege based on job role",
+      "category": "Restrict Access to System Components and Account Data",
+      "priority": "P0",
+      "universal_controls": ["UC-002", "UC-006"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_62",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-iam-wildcards.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/iam-least-privilege.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/iam-restrictive.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-iam.sh",
+        "acceptance_criteria": "Zero IAM policies with Action:* and Resource:* combination"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/7.1.1-access-control.json",
+        "retention_days": 365
+      }
+    },
+    {
+      "requirement_id": "7.2.1",
+      "title": "User access is limited to least privilege necessary",
+      "description": "Users can only access resources necessary for their job function",
+      "category": "Restrict Access to System Components and Account Data",
+      "priority": "P0",
+      "universal_controls": ["UC-002", "UC-006"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_111",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-iam-wildcards.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/iam-least-privilege.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/iam-roles.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-iam.sh",
+        "acceptance_criteria": "All IAM roles follow least-privilege with documented business justification for permissions"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/7.2.1-least-privilege.json",
+        "retention_days": 365
+      }
+    },
+    {
+      "requirement_id": "9.6.3",
+      "title": "Backups are secured and tested",
+      "description": "Backup media is properly secured and restoration procedures are tested",
+      "category": "Maintain a Vulnerability Management Program",
+      "priority": "P1",
+      "universal_controls": ["UC-008"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-backups.sh",
+        "scan_rule": "RDS_BACKUP_ENABLED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-backup-automation.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/backup-automation.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/rds-backup.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "daily",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-backups.sh",
+        "acceptance_criteria": "All RDS instances have automated backups enabled with 30-day retention and encrypted with KMS"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/9.6.3-backup-security.json",
+        "retention_days": 365
+      }
+    },
+    {
+      "requirement_id": "10.2.1",
+      "title": "Audit logs capture all access to system components and account data",
+      "description": "All individual access to cardholder data is logged and monitored",
+      "category": "Maintain an Information Security Policy",
+      "priority": "P0",
+      "universal_controls": ["UC-005"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-cloudwatch.sh",
+        "scan_rule": "CLOUDWATCH_LOG_GROUP_ENCRYPTED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-cloudwatch-logging.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/logging-enabled.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/cloudwatch-logs.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-logging.sh",
+        "acceptance_criteria": "All CloudWatch log groups have 90-day retention and encryption enabled"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/10.2.1-audit-logging.json",
+        "retention_days": 365
+      }
+    },
+    {
+      "requirement_id": "10.3.1",
+      "title": "Audit log entries contain sufficient detail for reconstruction",
+      "description": "Log records include user identification, type of event, date/time, success/failure, origination, and identity of affected resource",
+      "category": "Maintain an Information Security Policy",
+      "priority": "P0",
+      "universal_controls": ["UC-005"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-cloudtrail.sh",
+        "scan_rule": "CLOUDTRAIL_ENABLED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-cloudtrail.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/cloudtrail-enabled.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/cloudtrail.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-logging.sh",
+        "acceptance_criteria": "CloudTrail enabled in all regions with log file validation and S3 bucket encryption"
+      },
+      "evidence": {
+        "type": "scan_results",
+        "location": "GP-DATA/active/security/FINANCE/pci-dss/10.3.1-audit-detail.json",
+        "retention_days": 365
+      }
+    }
+  ],
+  "compliance_summary": {
+    "total_requirements": 12,
+    "critical_requirements": 8,
+    "automated_validation": 12,
+    "manual_validation": 0,
+    "universal_control_coverage": {
+      "UC-001": ["3.4", "3.5.1"],
+      "UC-002": ["7.1.1", "7.2.1"],
+      "UC-003": ["3.4", "3.6.1"],
+      "UC-004": ["1.2.1", "1.3.1"],
+      "UC-005": ["10.2.1", "10.3.1"],
+      "UC-006": ["7.1.1", "7.2.1"],
+      "UC-007": ["6.2", "6.3.2"],
+      "UC-008": ["9.6.3"]
+    }
+  },
+  "assessment_schedule": {
+    "self_assessment": "quarterly",
+    "external_assessment": "annually",
+    "penetration_test": "annually",
+    "vulnerability_scan": "quarterly",
+    "next_external_assessment": "2026-01-15",
+    "assessor": "TBD"
+  },
+  "reporting": {
+    "executive_summary": "GP-CONSULTING/secops/6-reports/compliance/pci-dss-executive-summary.md",
+    "detailed_report": "GP-CONSULTING/secops/6-reports/compliance/pci-dss-detailed-report.pdf",
+    "attestation_of_compliance": "GP-DATA/active/security/FINANCE/pci-dss/AOC-2025.pdf"
+  }
+}

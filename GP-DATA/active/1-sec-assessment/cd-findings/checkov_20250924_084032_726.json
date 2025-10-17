@@ -1,0 +1,28 @@
+{
+  "findings": [],
+  "summary": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "frameworks_scanned": [
+      "terraform"
+    ],
+    "severity_breakdown": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    }
+  },
+  "target": "GP-Projects/Terraform_CICD_Setup",
+  "tool": "checkov",
+  "timestamp": "2025-09-24T08:40:32.726501",
+  "scan_id": "checkov_20250924_084032_726",
+  "metadata": {
+    "frameworks_detected": [
+      "terraform"
+    ],
+    "scan_duration": null
+  }
+}

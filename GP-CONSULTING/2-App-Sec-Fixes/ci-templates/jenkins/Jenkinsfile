@@ -1,0 +1,267 @@
+// Jenkins Pipeline for Security Scanning and Auto-Fix
+// Comprehensive security assessment with automated remediation
+
+pipeline {
+    agent any
+
+    parameters {
+        booleanParam(name: 'RUN_AUTO_FIX', defaultValue: true, description: 'Run automated security fixes')
+        booleanParam(name: 'FAIL_ON_CRITICAL', defaultValue: true, description: 'Fail build on critical findings')
+        choice(name: 'SCAN_LEVEL', choices: ['full', 'quick', 'critical-only'], description: 'Scan depth')
+    }
+
+    environment {
+        PYTHON_VERSION = '3.11'
+        NODE_VERSION = '18'
+        SCAN_RESULTS_DIR = 'security-results'
+    }
+
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        buildDiscarder(logRotator(numToKeepStr: '30'))
+        timestamps()
+    }
+
+    stages {
+        stage('Setup') {
+            steps {
+                script {
+                    echo "🔧 Setting up security scanning environment..."
+                    sh "mkdir -p ${SCAN_RESULTS_DIR}"
+                }
+            }
+        }
+
+        stage('Security Scan - Python') {
+            when {
+                expression { fileExists('**/*.py') }
+            }
+            steps {
+                script {
+                    echo "→ Running Bandit (Python SAST)..."
+                    sh """
+                        pip install bandit
+                        bandit -r . -f json -o ${SCAN_RESULTS_DIR}/bandit-results.json || true
+                    """
+
+                    if (fileExists("${SCAN_RESULTS_DIR}/bandit-results.json")) {
+                        def results = readJSON file: "${SCAN_RESULTS_DIR}/bandit-results.json"
+                        def count = results.results.size()
+                        env.BANDIT_FINDINGS = count.toString()
+                        echo "✅ Bandit: ${count} findings"
+                    }
+                }
+            }
+        }
+
+        stage('Security Scan - Secrets') {
+            steps {
+                script {
+                    echo "→ Running Gitleaks (Secrets detection)..."
+                    sh """
+                        wget -q https://github.com/gitleaks/gitleaks/releases/download/v8.18.0/gitleaks_8.18.0_linux_x64.tar.gz
+                        tar -xzf gitleaks_8.18.0_linux_x64.tar.gz
+                        ./gitleaks detect --source . --report-format json --report-path ${SCAN_RESULTS_DIR}/gitleaks-results.json --no-git || true
+                    """
+
+                    if (fileExists("${SCAN_RESULTS_DIR}/gitleaks-results.json")) {
+                        def results = readJSON file: "${SCAN_RESULTS_DIR}/gitleaks-results.json"
+                        env.GITLEAKS_FINDINGS = results.size().toString()
+                        echo "✅ Gitleaks: ${results.size()} secrets found"
+                    } else {
+                        env.GITLEAKS_FINDINGS = '0'
+                    }
+                }
+            }
+        }
+
+        stage('Security Scan - Multi-Language') {
+            steps {
+                script {
+                    echo "→ Running Semgrep (Multi-language SAST)..."
+                    sh """
+                        pip install semgrep
+                        semgrep --config auto --json --output ${SCAN_RESULTS_DIR}/semgrep-results.json . || true
+                    """
+
+                    if (fileExists("${SCAN_RESULTS_DIR}/semgrep-results.json")) {
+                        def results = readJSON file: "${SCAN_RESULTS_DIR}/semgrep-results.json"
+                        def count = results.results?.size() ?: 0
+                        env.SEMGREP_FINDINGS = count.toString()
+                        echo "✅ Semgrep: ${count} findings"
+                    }
+                }
+            }
+        }
+
+        stage('Security Scan - Dependencies') {
+            parallel {
+                stage('npm audit') {
+                    when {
+                        expression { fileExists('package.json') }
+                    }
+                    steps {
+                        script {
+                            echo "→ Running npm audit..."
+                            sh """
+                                npm audit --json > ${SCAN_RESULTS_DIR}/npm-audit-results.json || true
+                            """
+
+                            if (fileExists("${SCAN_RESULTS_DIR}/npm-audit-results.json")) {
+                                def results = readJSON file: "${SCAN_RESULTS_DIR}/npm-audit-results.json"
+                                env.NPM_CRITICAL = results.metadata?.vulnerabilities?.critical ?: 0
+                                env.NPM_HIGH = results.metadata?.vulnerabilities?.high ?: 0
+                                echo "✅ npm audit: ${env.NPM_CRITICAL} critical, ${env.NPM_HIGH} high"
+                            }
+                        }
+                    }
+                }
+
+                stage('pip audit') {
+                    when {
+                        expression { fileExists('requirements.txt') }
+                    }
+                    steps {
+                        script {
+                            echo "→ Running pip-audit..."
+                            sh """
+                                pip install pip-audit
+                                pip-audit --format json > ${SCAN_RESULTS_DIR}/pip-audit-results.json || true
+                            """
+
+                            if (fileExists("${SCAN_RESULTS_DIR}/pip-audit-results.json")) {
+                                def results = readJSON file: "${SCAN_RESULTS_DIR}/pip-audit-results.json"
+                                env.PIP_FINDINGS = results.size().toString()
+                                echo "✅ pip-audit: ${env.PIP_FINDINGS} vulnerabilities"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Security Analysis') {
+            steps {
+                script {
+                    echo "📊 Analyzing security findings..."
+
+                    def critical = (env.GITLEAKS_FINDINGS as Integer) ?: 0
+                    def high = ((env.BANDIT_FINDINGS as Integer) ?: 0) +
+                               ((env.SEMGREP_FINDINGS as Integer) ?: 0) +
+                               ((env.NPM_HIGH as Integer) ?: 0)
+
+                    env.TOTAL_CRITICAL = critical.toString()
+                    env.TOTAL_HIGH = high.toString()
+
+                    echo """
+                    ╔══════════════════════════════════════╗
+                    ║     Security Scan Summary            ║
+                    ╚══════════════════════════════════════╝
+                    Critical: ${critical} (secrets)
+                    High:     ${high}
+
+                    Breakdown:
+                    • Bandit:  ${env.BANDIT_FINDINGS ?: 0}
+                    • Semgrep: ${env.SEMGREP_FINDINGS ?: 0}
+                    • Gitleaks: ${env.GITLEAKS_FINDINGS ?: 0}
+                    • npm:     ${env.NPM_HIGH ?: 0} high
+                    • pip:     ${env.PIP_FINDINGS ?: 0}
+                    """
+                }
+            }
+        }
+
+        stage('Auto-Fix') {
+            when {
+                expression { params.RUN_AUTO_FIX == true }
+                expression { (env.TOTAL_CRITICAL as Integer) > 0 || (env.TOTAL_HIGH as Integer) > 0 }
+            }
+            steps {
+                script {
+                    echo "🔧 Applying automated security fixes..."
+
+                    def fixesApplied = 0
+
+                    // Fix npm vulnerabilities
+                    if (fileExists('package.json') && ((env.NPM_CRITICAL as Integer) > 0 || (env.NPM_HIGH as Integer) > 0)) {
+                        echo "  → Fixing npm vulnerabilities..."
+                        sh "npm audit fix --force || true"
+                        fixesApplied++
+                    }
+
+                    // Fix pip vulnerabilities
+                    if (fileExists('requirements.txt') && ((env.PIP_FINDINGS as Integer) > 0)) {
+                        echo "  → Fixing pip vulnerabilities..."
+                        sh "pip-audit --fix || true"
+                        fixesApplied++
+                    }
+
+                    env.FIXES_APPLIED = fixesApplied.toString()
+                    echo "✅ Applied ${fixesApplied} automated fixes"
+                }
+            }
+        }
+
+        stage('Security Gate') {
+            steps {
+                script {
+                    def critical = (env.TOTAL_CRITICAL as Integer) ?: 0
+                    def high = (env.TOTAL_HIGH as Integer) ?: 0
+
+                    if (params.FAIL_ON_CRITICAL && critical > 0) {
+                        error("❌ SECURITY GATE FAILED: ${critical} critical security issues (secrets) found!")
+                    }
+
+                    if (high > 10) {
+                        unstable("⚠️  WARNING: ${high} high security issues found")
+                    }
+
+                    echo "✅ Security gate passed"
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                // Archive scan results
+                archiveArtifacts artifacts: "${SCAN_RESULTS_DIR}/*.json", allowEmptyArchive: true
+
+                // Publish results
+                publishHTML([
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: SCAN_RESULTS_DIR,
+                    reportFiles: '*.json',
+                    reportName: 'Security Scan Results'
+                ])
+            }
+        }
+
+        success {
+            echo "✅ Security pipeline completed successfully"
+        }
+
+        failure {
+            echo "❌ Security pipeline failed"
+            emailext(
+                subject: "Security Scan Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                Security scan failed for ${env.JOB_NAME} build #${env.BUILD_NUMBER}
+
+                Critical: ${env.TOTAL_CRITICAL ?: 0}
+                High: ${env.TOTAL_HIGH ?: 0}
+
+                Check console output: ${env.BUILD_URL}console
+                """,
+                to: "${env.CHANGE_AUTHOR_EMAIL ?: 'security@example.com'}"
+            )
+        }
+
+        unstable {
+            echo "⚠️  Security pipeline completed with warnings"
+        }
+    }
+}

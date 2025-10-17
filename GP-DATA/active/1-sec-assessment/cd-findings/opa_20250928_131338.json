@@ -1,0 +1,34 @@
+{
+  "findings": [],
+  "summary": {
+    "total": 0,
+    "files_scanned": 2,
+    "severity_breakdown": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "policy_package": "security"
+  },
+  "target": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/INTERVIEW-DEMO",
+  "tool": "opa",
+  "timestamp": "2025-09-28T13:13:38.322000",
+  "scan_id": "opa_20250928_131338_322",
+  "metadata": {
+    "policy_directory": "/home/jimmie/linkops-industries/GP-copilot/GP-CONSULTING-AGENTS/policies/opa",
+    "policies_available": [
+      "security",
+      "cicd-security",
+      "image-security",
+      "terraform-security",
+      "network-policies",
+      "rbac",
+      "secrets-management",
+      "pod-security",
+      "network",
+      "compliance-controls",
+      "kubernetes"
+    ]
+  }
+}

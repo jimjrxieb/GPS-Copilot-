@@ -1,0 +1,18 @@
+{
+  "scanner_name": "trivy-config",
+  "start_time": "2025-10-16T00:35:11.992188",
+  "end_time": "2025-10-16T00:35:20.778225",
+  "duration_seconds": 8.79,
+  "exit_code": 0,
+  "total_issues": 123,
+  "severity_breakdown": {
+    "CRITICAL": 4,
+    "HIGH": 17,
+    "MEDIUM": 29,
+    "LOW": 73,
+    "INFO": 0
+  },
+  "retry_count": 0,
+  "status": "success",
+  "scan_mode": "config"
+}

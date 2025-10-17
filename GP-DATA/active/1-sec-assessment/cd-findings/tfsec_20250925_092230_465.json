@@ -1,0 +1,133 @@
+{
+  "findings": [
+    {
+      "rule_id": "AVD-AZU-0041",
+      "rule_category": "AVD",
+      "severity": "critical",
+      "normalized_severity": "critical",
+      "title": "Cluster does not limit API access to specific IP addresses.",
+      "message": "Cluster does not limit API access to specific IP addresses.",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/LinkOps-Arise/shared-modules/aks/main.tf",
+      "line_start": 37,
+      "line_end": 87,
+      "impact": "Any IP can interact with the API server",
+      "resolution": "Limit the access to the API server to a limited IP range",
+      "resource": "module.aks",
+      "provider": "azure",
+      "links": [
+        "https://aquasecurity.github.io/tfsec/v1.28.1/checks/azure/container/limit-authorized-ips/",
+        "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#api_server_authorized_ip_ranges"
+      ]
+    },
+    {
+      "rule_id": "AVD-AZU-0041",
+      "rule_category": "AVD",
+      "severity": "critical",
+      "normalized_severity": "critical",
+      "title": "Cluster does not limit API access to specific IP addresses.",
+      "message": "Cluster does not limit API access to specific IP addresses.",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/LinkOps-Arise/shared-modules/aks/main.tf",
+      "line_start": 37,
+      "line_end": 87,
+      "impact": "Any IP can interact with the API server",
+      "resolution": "Limit the access to the API server to a limited IP range",
+      "resource": "module.aks",
+      "provider": "azure",
+      "links": [
+        "https://aquasecurity.github.io/tfsec/v1.28.1/checks/azure/container/limit-authorized-ips/",
+        "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#api_server_authorized_ip_ranges"
+      ]
+    },
+    {
+      "rule_id": "AVD-AZU-0041",
+      "rule_category": "AVD",
+      "severity": "critical",
+      "normalized_severity": "critical",
+      "title": "Cluster does not limit API access to specific IP addresses.",
+      "message": "Cluster does not limit API access to specific IP addresses.",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/LinkOps-Arise/shared-modules/aks/main.tf",
+      "line_start": 37,
+      "line_end": 87,
+      "impact": "Any IP can interact with the API server",
+      "resolution": "Limit the access to the API server to a limited IP range",
+      "resource": "azurerm_kubernetes_cluster.main",
+      "provider": "azure",
+      "links": [
+        "https://aquasecurity.github.io/tfsec/v1.28.1/checks/azure/container/limit-authorized-ips/",
+        "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#api_server_authorized_ip_ranges"
+      ]
+    }
+  ],
+  "summary": {
+    "total": 3,
+    "terraform_files_scanned": 28,
+    "severity_breakdown": {
+      "critical": 3,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "rule_categories": {
+      "AVD": 3
+    },
+    "providers_with_issues": [
+      "azure"
+    ],
+    "providers_detected": [
+      "azure"
+    ]
+  },
+  "target": "GP-PROJECTS/LinkOps-Arise",
+  "tool": "tfsec",
+  "timestamp": "2025-09-25T09:22:30.465004",
+  "scan_id": "tfsec_20250925_092230_465",
+  "terraform_context": {
+    "terraform_files_count": 28,
+    "tfvars_files_count": 0,
+    "has_main_tf": true,
+    "has_variables_tf": true,
+    "has_outputs_tf": true,
+    "has_terraform_directory": false,
+    "has_state_files": false,
+    "providers_detected": [
+      "azure"
+    ],
+    "terraform_files": [
+      "sandbox-env/terraform/main.tf",
+      "sandbox-env/terraform/variables.tf",
+      "sandbox-env/terraform/backend.tf",
+      "sandbox-env/terraform/providers.tf",
+      "sandbox-env/terraform/outputs.tf",
+      "personal/terraform/main.tf",
+      "personal/terraform/variables.tf",
+      "personal/terraform/backend.tf",
+      "personal/terraform/providers.tf",
+      "personal/terraform/outputs.tf",
+      "shared-modules/aks/main.tf",
+      "shared-modules/aks/variables.tf",
+      "shared-modules/aks/providers.tf",
+      "shared-modules/aks/outputs.tf",
+      "GP-copilot/backups/demo-modified/terraform/main.tf",
+      "GP-copilot/backups/demo-modified/terraform/variables.tf",
+      "GP-copilot/backups/demo-modified/terraform/backend.tf",
+      "GP-copilot/backups/demo-modified/terraform/providers.tf",
+      "GP-copilot/backups/demo-modified/terraform/outputs.tf",
+      "GP-copilot/backups/personal-modified/terraform/main.tf",
+      "GP-copilot/backups/personal-modified/terraform/variables.tf",
+      "GP-copilot/backups/personal-modified/terraform/backend.tf",
+      "GP-copilot/backups/personal-modified/terraform/providers.tf",
+      "GP-copilot/backups/personal-modified/terraform/outputs.tf",
+      "GP-copilot/backups/shared-modules-modified/aks/main.tf",
+      "GP-copilot/backups/shared-modules-modified/aks/variables.tf",
+      "GP-copilot/backups/shared-modules-modified/aks/providers.tf",
+      "GP-copilot/backups/shared-modules-modified/aks/outputs.tf"
+    ]
+  },
+  "metadata": {
+    "tfsec_version": "latest",
+    "scan_performance": {
+      "files_scanned": 28,
+      "total_findings": 3
+    }
+  }
+}

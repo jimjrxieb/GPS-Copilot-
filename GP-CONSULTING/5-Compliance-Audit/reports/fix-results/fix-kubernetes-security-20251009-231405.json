@@ -1,0 +1,109 @@
+{
+  "fixer": "fix-kubernetes-security",
+  "timestamp": "20251009-231405",
+  "target_dir": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/k8s",
+  "backup_dir": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/k8s.backup.20251009-231404",
+  "changes": [
+    {
+      "description": "Added security context to prometheus in monitoring.yaml",
+      "severity": "HIGH",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/k8s/monitoring.yaml",
+      "compliance": [
+        "CIS Kubernetes 5.2.1",
+        "CIS Kubernetes 5.2.6",
+        "PCI-DSS 2.2.4"
+      ],
+      "changes": "Added runAsNonRoot, dropped capabilities, read-only filesystem, resource limits"
+    },
+    {
+      "description": "Added security context to grafana in monitoring.yaml",
+      "severity": "HIGH",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/k8s/monitoring.yaml",
+      "compliance": [
+        "CIS Kubernetes 5.2.1",
+        "CIS Kubernetes 5.2.6",
+        "PCI-DSS 2.2.4"
+      ],
+      "changes": "Added runAsNonRoot, dropped capabilities, read-only filesystem, resource limits"
+    },
+    {
+      "description": "Added security context to backend in deployment-local.yaml",
+      "severity": "HIGH",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/k8s/deployment-local.yaml",
+      "compliance": [
+        "CIS Kubernetes 5.2.1",
+        "CIS Kubernetes 5.2.6",
+        "PCI-DSS 2.2.4"
+      ],
+      "changes": "Added runAsNonRoot, dropped capabilities, read-only filesystem, resource limits"
+    },
+    {
+      "description": "Added security context to postgres in deployment-local.yaml",
+      "severity": "HIGH",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/k8s/deployment-local.yaml",
+      "compliance": [
+        "CIS Kubernetes 5.2.1",
+        "CIS Kubernetes 5.2.6",
+        "PCI-DSS 2.2.4"
+      ],
+      "changes": "Added runAsNonRoot, dropped capabilities, read-only filesystem, resource limits"
+    },
+    {
+      "description": "Added security context to redis in deployment-local.yaml",
+      "severity": "HIGH",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/k8s/deployment-local.yaml",
+      "compliance": [
+        "CIS Kubernetes 5.2.1",
+        "CIS Kubernetes 5.2.6",
+        "PCI-DSS 2.2.4"
+      ],
+      "changes": "Added runAsNonRoot, dropped capabilities, read-only filesystem, resource limits"
+    },
+    {
+      "description": "Added security context to backend in deployment.yaml",
+      "severity": "HIGH",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/k8s/deployment.yaml",
+      "compliance": [
+        "CIS Kubernetes 5.2.1",
+        "CIS Kubernetes 5.2.6",
+        "PCI-DSS 2.2.4"
+      ],
+      "changes": "Added runAsNonRoot, dropped capabilities, read-only filesystem, resource limits"
+    },
+    {
+      "description": "Added security context to frontend in deployment.yaml",
+      "severity": "HIGH",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/k8s/deployment.yaml",
+      "compliance": [
+        "CIS Kubernetes 5.2.1",
+        "CIS Kubernetes 5.2.6",
+        "PCI-DSS 2.2.4"
+      ],
+      "changes": "Added runAsNonRoot, dropped capabilities, read-only filesystem, resource limits"
+    },
+    {
+      "description": "Added security context to postgres in deployment.yaml",
+      "severity": "HIGH",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/k8s/deployment.yaml",
+      "compliance": [
+        "CIS Kubernetes 5.2.1",
+        "CIS Kubernetes 5.2.6",
+        "PCI-DSS 2.2.4"
+      ],
+      "changes": "Added runAsNonRoot, dropped capabilities, read-only filesystem, resource limits"
+    },
+    {
+      "description": "Added security context to redis in deployment.yaml",
+      "severity": "HIGH",
+      "file": "/home/jimmie/linkops-industries/GP-copilot/GP-PROJECTS/FINANCE-project/infrastructure/k8s/deployment.yaml",
+      "compliance": [
+        "CIS Kubernetes 5.2.1",
+        "CIS Kubernetes 5.2.6",
+        "PCI-DSS 2.2.4"
+      ],
+      "changes": "Added runAsNonRoot, dropped capabilities, read-only filesystem, resource limits"
+    }
+  ],
+  "total_changes": 9,
+  "diff": ""
+}

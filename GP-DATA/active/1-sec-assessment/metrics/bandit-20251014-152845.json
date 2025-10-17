@@ -1,0 +1,17 @@
+{
+  "scanner_name": "bandit",
+  "start_time": "2025-10-14T15:28:45.504860",
+  "end_time": "2025-10-14T15:28:45.618271",
+  "duration_seconds": 0.11,
+  "exit_code": 0,
+  "total_issues": 0,
+  "severity_breakdown": {
+    "CRITICAL": 0,
+    "HIGH": 0,
+    "MEDIUM": 0,
+    "LOW": 0,
+    "INFO": 0
+  },
+  "retry_count": 0,
+  "status": "success"
+}

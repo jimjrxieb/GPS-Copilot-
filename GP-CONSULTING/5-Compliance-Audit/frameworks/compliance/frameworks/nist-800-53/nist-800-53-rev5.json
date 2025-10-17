@@ -1,0 +1,628 @@
+{
+  "meta": {
+    "framework": "NIST 800-53",
+    "version": "Revision 5",
+    "effective_date": "2020-09-23",
+    "description": "NIST Special Publication 800-53 Rev 5 - Security and Privacy Controls for Information Systems - For DEFENSE project",
+    "project": "DEFENSE",
+    "industry": "Defense / Government Contracting",
+    "classified_information": false,
+    "cui_required": true,
+    "fedramp_moderate": true,
+    "last_updated": "2025-10-13"
+  },
+  "project_requirements": {
+    "backup_retention_days": 365,
+    "log_retention_days": 365,
+    "encryption_algorithm": "AES-256-GCM",
+    "fips_140_2_required": true,
+    "mfa_required": true,
+    "continuous_monitoring": true,
+    "vulnerability_scan_frequency_days": 30,
+    "penetration_test_frequency_days": 365,
+    "configuration_management": "strict",
+    "change_control_board": true
+  },
+  "control_families": {
+    "AC": "Access Control",
+    "AU": "Audit and Accountability",
+    "CP": "Contingency Planning",
+    "RA": "Risk Assessment",
+    "SC": "System and Communications Protection",
+    "SI": "System and Information Integrity",
+    "CM": "Configuration Management"
+  },
+  "requirements": [
+    {
+      "control_id": "AC-4",
+      "title": "Information Flow Enforcement",
+      "description": "Enforce approved authorizations for controlling the flow of information within the system and between connected systems",
+      "family": "Access Control",
+      "priority": "P1",
+      "baseline": ["LOW", "MODERATE", "HIGH"],
+      "universal_controls": ["UC-004"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_260",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-security-groups.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/security-group-lockdown.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/security-groups-restrictive.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-network.sh",
+        "acceptance_criteria": "Network segmentation enforced with security groups allowing only authorized traffic flows"
+      },
+      "evidence": {
+        "type": "network_topology_diagram",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/AC-4-information-flow.json",
+        "retention_days": 2555
+      },
+      "discussion": "Information flow control regulates where information can travel within a system and between systems. This includes network traffic filtering via security groups and NACLs."
+    },
+    {
+      "control_id": "AC-6",
+      "title": "Least Privilege",
+      "description": "Employ the principle of least privilege, allowing only authorized accesses for users which are necessary to accomplish assigned organizational tasks",
+      "family": "Access Control",
+      "priority": "P0",
+      "baseline": ["LOW", "MODERATE", "HIGH"],
+      "universal_controls": ["UC-002", "UC-006"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_62",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-iam-wildcards.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/iam-least-privilege.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/iam-restrictive.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-iam.sh",
+        "acceptance_criteria": "Zero IAM policies with Action:* and Resource:* combination; all roles follow least-privilege"
+      },
+      "evidence": {
+        "type": "privilege_review",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/AC-6-least-privilege.json",
+        "retention_days": 2555
+      },
+      "discussion": "Organizations employ least privilege for specific duties and systems. The principle of least privilege is applied with the goal of authorized privileges no higher than necessary to accomplish required organizational missions or business functions."
+    },
+    {
+      "control_id": "AC-6(1)",
+      "title": "Least Privilege | Authorize Access to Security Functions",
+      "description": "Authorize access for individuals and roles to security-relevant information and security functions",
+      "family": "Access Control",
+      "priority": "P0",
+      "baseline": ["MODERATE", "HIGH"],
+      "universal_controls": ["UC-002"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_111",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-iam-wildcards.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/iam-least-privilege.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/iam-roles.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-iam.sh",
+        "acceptance_criteria": "Security function access restricted to explicitly authorized individuals with MFA enforcement"
+      },
+      "evidence": {
+        "type": "security_function_access_matrix",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/AC-6(1)-security-functions.json",
+        "retention_days": 2555
+      },
+      "discussion": "Security functions include establishing system accounts, configuring access authorizations, setting events to be audited, and setting intrusion detection parameters."
+    },
+    {
+      "control_id": "AC-6(2)",
+      "title": "Least Privilege | Non-privileged Access for Nonsecurity Functions",
+      "description": "Require that users of system accounts with access to security functions use non-privileged accounts when accessing nonsecurity functions",
+      "family": "Access Control",
+      "priority": "P1",
+      "baseline": ["HIGH"],
+      "universal_controls": ["UC-002"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/scan_kubernetes.py",
+        "scan_rule": "K8S_PRIVILEGED_CONTAINER",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-k8s-rbac.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/securebank/opa-gatekeeper/rbac-least-privilege.yaml",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/eks-rbac.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-k8s.sh",
+        "acceptance_criteria": "No containers run with privileged mode; service accounts use least-privilege RBAC"
+      },
+      "evidence": {
+        "type": "container_security_policy",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/AC-6(2)-non-privileged.json",
+        "retention_days": 2555
+      },
+      "discussion": "Requiring the use of non-privileged accounts when accessing nonsecurity functions limits exposure when operating from within privileged accounts or roles."
+    },
+    {
+      "control_id": "AC-6(5)",
+      "title": "Least Privilege | Privileged Accounts",
+      "description": "Restrict privileged accounts on the system to designated personnel or roles",
+      "family": "Access Control",
+      "priority": "P0",
+      "baseline": ["MODERATE", "HIGH"],
+      "universal_controls": ["UC-006"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/scan_kubernetes.py",
+        "scan_rule": "K8S_RBAC_ENABLED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-k8s-rbac.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/securebank/opa-gatekeeper/rbac-least-privilege.yaml",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/eks-rbac.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "daily",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-k8s.sh",
+        "acceptance_criteria": "Privileged accounts limited to designated security personnel with quarterly access reviews"
+      },
+      "evidence": {
+        "type": "privileged_account_registry",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/AC-6(5)-privileged-accounts.json",
+        "retention_days": 2555
+      },
+      "discussion": "Privileged accounts, including super user accounts, are typically described as system administrator for various types of commercial off-the-shelf operating systems."
+    },
+    {
+      "control_id": "AU-2",
+      "title": "Event Logging",
+      "description": "Identify the types of events that the system is capable of logging and coordinate event logging with other organizational entities",
+      "family": "Audit and Accountability",
+      "priority": "P0",
+      "baseline": ["LOW", "MODERATE", "HIGH"],
+      "universal_controls": ["UC-005"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-cloudwatch.sh",
+        "scan_rule": "CLOUDWATCH_LOG_GROUP_ENCRYPTED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-cloudwatch-logging.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/logging-enabled.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/cloudwatch-logs.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-logging.sh",
+        "acceptance_criteria": "All systems log security-relevant events with 365-day retention and encryption"
+      },
+      "evidence": {
+        "type": "audit_log_configuration",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/AU-2-event-logging.json",
+        "retention_days": 2555
+      },
+      "discussion": "Event logging is a critical component of system security. Organizations define the types of events to be logged based on the types of threats and the classification of the data."
+    },
+    {
+      "control_id": "AU-6",
+      "title": "Audit Record Review, Analysis, and Reporting",
+      "description": "Review and analyze system audit records for indications of inappropriate or unusual activity",
+      "family": "Audit and Accountability",
+      "priority": "P0",
+      "baseline": ["LOW", "MODERATE", "HIGH"],
+      "universal_controls": ["UC-005"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-cloudtrail.sh",
+        "scan_rule": "CLOUDTRAIL_ENABLED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-cloudtrail.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/cloudtrail-enabled.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/cloudtrail.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-logging.sh",
+        "acceptance_criteria": "CloudTrail enabled in all regions with log file validation, S3 encryption, and automated analysis"
+      },
+      "evidence": {
+        "type": "audit_review_report",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/AU-6-audit-review.json",
+        "retention_days": 2555
+      },
+      "discussion": "Audit record review, analysis, and reporting covers information security- and privacy-related logging performed by organizations, including logging that results from monitoring system and network traffic."
+    },
+    {
+      "control_id": "AU-11",
+      "title": "Audit Record Retention",
+      "description": "Retain audit records for a time period consistent with records retention policy to provide support for after-the-fact investigations",
+      "family": "Audit and Accountability",
+      "priority": "P1",
+      "baseline": ["MODERATE", "HIGH"],
+      "universal_controls": ["UC-005"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-cloudwatch.sh",
+        "scan_rule": "CLOUDWATCH_RETENTION_365",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-cloudwatch-logging.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/log-retention.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/cloudwatch-logs.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "daily",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-logging.sh",
+        "acceptance_criteria": "All audit logs retained for minimum 365 days with archival to S3 Glacier for long-term retention"
+      },
+      "evidence": {
+        "type": "retention_policy",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/AU-11-retention.json",
+        "retention_days": 2555
+      },
+      "discussion": "Organizations retain audit records until it is determined that the records are no longer needed for administrative, legal, audit, or other operational purposes."
+    },
+    {
+      "control_id": "CP-9",
+      "title": "System Backup",
+      "description": "Conduct backups of user-level and system-level information contained in the system",
+      "family": "Contingency Planning",
+      "priority": "P0",
+      "baseline": ["LOW", "MODERATE", "HIGH"],
+      "universal_controls": ["UC-008"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-backups.sh",
+        "scan_rule": "RDS_BACKUP_ENABLED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-backup-automation.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/backup-automation.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/rds-backup.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "daily",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-backups.sh",
+        "acceptance_criteria": "All critical systems have automated backups with 365-day retention and quarterly restoration testing"
+      },
+      "evidence": {
+        "type": "backup_verification",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/CP-9-system-backup.json",
+        "retention_days": 2555
+      },
+      "discussion": "System-level information includes system-state information, operating system software, middleware, application software, and licenses."
+    },
+    {
+      "control_id": "CP-9(1)",
+      "title": "System Backup | Testing for Reliability and Integrity",
+      "description": "Test backup information to verify media reliability and information integrity",
+      "family": "Contingency Planning",
+      "priority": "P1",
+      "baseline": ["MODERATE", "HIGH"],
+      "universal_controls": ["UC-008"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-backups.sh",
+        "scan_rule": "BACKUP_TESTED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-backup-automation.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/backup-testing.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/rds-backup.tf"
+      },
+      "validation": {
+        "method": "manual",
+        "frequency": "quarterly",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-backups.sh",
+        "acceptance_criteria": "Quarterly restoration tests documented with success criteria and lessons learned"
+      },
+      "evidence": {
+        "type": "backup_test_report",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/CP-9(1)-backup-testing.json",
+        "retention_days": 2555
+      },
+      "discussion": "Testing backup information verifies the integrity of backup files and the reliability of backup media. Organizations can satisfy this control by ensuring backups are tested as part of training exercises or drills."
+    },
+    {
+      "control_id": "CP-10",
+      "title": "System Recovery and Reconstitution",
+      "description": "Provide for the recovery and reconstitution of the system to a known state within organization-defined time periods",
+      "family": "Contingency Planning",
+      "priority": "P1",
+      "baseline": ["LOW", "MODERATE", "HIGH"],
+      "universal_controls": ["UC-008"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/runtime/query-backups.sh",
+        "scan_rule": "RDS_PITR_ENABLED",
+        "fixer": "GP-CONSULTING/secops/3-fixers/runtime-fixes/fix-backup-automation.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/disaster-recovery.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/rds-backup.tf"
+      },
+      "validation": {
+        "method": "manual",
+        "frequency": "annually",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-disaster-recovery.sh",
+        "acceptance_criteria": "RTO < 4 hours, RPO < 1 hour for critical systems with documented DR procedures"
+      },
+      "evidence": {
+        "type": "dr_test_report",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/CP-10-recovery.json",
+        "retention_days": 2555
+      },
+      "discussion": "Recovery and reconstitution to a known state means that all system parameters are restored to previous configurations and system documentation is current and available."
+    },
+    {
+      "control_id": "RA-5",
+      "title": "Vulnerability Monitoring and Scanning",
+      "description": "Monitor and scan for vulnerabilities in the system and hosted applications and when new vulnerabilities potentially affecting the system are identified",
+      "family": "Risk Assessment",
+      "priority": "P0",
+      "baseline": ["LOW", "MODERATE", "HIGH"],
+      "universal_controls": ["UC-007"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/trivy_scanner.py",
+        "scan_rule": "CVE_SCAN",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-container-vulns.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/securebank/opa-gatekeeper/image-scanning-required.yaml",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/ecr-scanning.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-containers.sh",
+        "acceptance_criteria": "Vulnerability scans every 30 days minimum; HIGH/CRITICAL findings remediated within 30 days"
+      },
+      "evidence": {
+        "type": "vulnerability_scan_results",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/RA-5-vulnerability-scanning.json",
+        "retention_days": 2555
+      },
+      "discussion": "Security categorization of information and systems guides the frequency and comprehensiveness of vulnerability monitoring. Organizations determine the required vulnerability monitoring for system components, ensuring sufficient coverage occurs."
+    },
+    {
+      "control_id": "SC-7",
+      "title": "Boundary Protection",
+      "description": "Monitor and control communications at the external managed interfaces to the system and at key internal managed interfaces within the system",
+      "family": "System and Communications Protection",
+      "priority": "P0",
+      "baseline": ["LOW", "MODERATE", "HIGH"],
+      "universal_controls": ["UC-004"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_24",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-security-groups.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/security-group-lockdown.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/vpc-isolation.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-network.sh",
+        "acceptance_criteria": "Network boundaries defined and enforced with security groups, NACLs, and VPC peering controls"
+      },
+      "evidence": {
+        "type": "network_architecture",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/SC-7-boundary-protection.json",
+        "retention_days": 2555
+      },
+      "discussion": "Managed interfaces include gateways, routers, firewalls, guards, network-based malicious code analysis, virtualization systems, or encrypted tunnels implemented within a security architecture."
+    },
+    {
+      "control_id": "SC-7(5)",
+      "title": "Boundary Protection | Deny by Default - Allow by Exception",
+      "description": "Deny network communications traffic by default and allow network communications traffic by exception",
+      "family": "System and Communications Protection",
+      "priority": "P0",
+      "baseline": ["MODERATE", "HIGH"],
+      "universal_controls": ["UC-004"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_260",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-security-groups.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/zero-trust-sg/deny-by-default.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/security-groups-restrictive.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-network.sh",
+        "acceptance_criteria": "All security groups configured with explicit allow rules; default deny policy enforced"
+      },
+      "evidence": {
+        "type": "security_group_audit",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/SC-7(5)-deny-by-default.json",
+        "retention_days": 2555
+      },
+      "discussion": "Denying by default and allowing by exception prevents unauthorized connections. This applies to inbound and outbound network communications traffic."
+    },
+    {
+      "control_id": "SC-13",
+      "title": "Cryptographic Protection",
+      "description": "Implement FIPS-validated cryptography for storing and transmitting information",
+      "family": "System and Communications Protection",
+      "priority": "P0",
+      "baseline": ["LOW", "MODERATE", "HIGH"],
+      "universal_controls": ["UC-003"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_19",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-s3-encryption.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/s3-encryption.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/s3-encrypted.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-encryption.sh",
+        "acceptance_criteria": "100% of data encrypted with FIPS 140-2 validated cryptographic modules (AES-256-GCM)"
+      },
+      "evidence": {
+        "type": "cryptographic_inventory",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/SC-13-cryptographic-protection.json",
+        "retention_days": 2555
+      },
+      "discussion": "Cryptographic standards include FIPS-validated cryptography and NSA-approved cryptography. Organizations that rely on cryptographic mechanisms for protecting information establish specific management controls for cryptographic protocols."
+    },
+    {
+      "control_id": "SC-28",
+      "title": "Protection of Information at Rest",
+      "description": "Protect the confidentiality and integrity of information at rest",
+      "family": "System and Communications Protection",
+      "priority": "P0",
+      "baseline": ["MODERATE", "HIGH"],
+      "universal_controls": ["UC-001", "UC-003"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_16",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-rds-security.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/database-encryption.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/rds-encrypted.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-encryption.sh",
+        "acceptance_criteria": "100% of data at rest encrypted with KMS CMKs and automatic key rotation enabled"
+      },
+      "evidence": {
+        "type": "encryption_at_rest_audit",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/SC-28-protection-at-rest.json",
+        "retention_days": 2555
+      },
+      "discussion": "Information at rest refers to the state of information when it is not in process or in transit and is located on storage devices as specific components of systems."
+    },
+    {
+      "control_id": "SC-28(1)",
+      "title": "Protection of Information at Rest | Cryptographic Protection",
+      "description": "Implement cryptographic mechanisms to prevent unauthorized disclosure and modification of information at rest",
+      "family": "System and Communications Protection",
+      "priority": "P0",
+      "baseline": ["MODERATE", "HIGH"],
+      "universal_controls": ["UC-001"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/checkov_scanner.py",
+        "scan_rule": "CKV_AWS_7",
+        "fixer": "GP-CONSULTING/secops/3-fixers/auto-fixers/fix-kms-keys.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/cloud-security-patterns/kms-key-rotation.rego",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/kms-keys.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-kms.sh",
+        "acceptance_criteria": "All KMS keys have automatic rotation, CloudTrail logging, and restricted access policies"
+      },
+      "evidence": {
+        "type": "kms_configuration",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/SC-28(1)-cryptographic-protection.json",
+        "retention_days": 2555
+      },
+      "discussion": "The selection of cryptographic mechanisms is based on the need to protect the confidentiality and integrity of organizational information. The strength of mechanism is commensurate with the security category or classification of the information."
+    },
+    {
+      "control_id": "SI-2",
+      "title": "Flaw Remediation",
+      "description": "Identify, report, and correct system flaws including installation of security-relevant software and firmware updates",
+      "family": "System and Information Integrity",
+      "priority": "P0",
+      "baseline": ["LOW", "MODERATE", "HIGH"],
+      "universal_controls": ["UC-007"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/trivy_scanner.py",
+        "scan_rule": "CVE_REMEDIATION",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-container-vulns.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/securebank/opa-gatekeeper/vulnerability-remediation.yaml",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/ecr-scanning.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-containers.sh",
+        "acceptance_criteria": "CRITICAL vulnerabilities remediated within 15 days; HIGH within 30 days; MEDIUM within 90 days"
+      },
+      "evidence": {
+        "type": "remediation_tracking",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/SI-2-flaw-remediation.json",
+        "retention_days": 2555
+      },
+      "discussion": "Organizations identify systems affected by announced software and firmware flaws including potential vulnerabilities resulting from those flaws and report this information to designated organizational personnel with information security and privacy responsibilities."
+    },
+    {
+      "control_id": "SI-2(2)",
+      "title": "Flaw Remediation | Automated Flaw Remediation Status",
+      "description": "Determine if system components have applicable security-relevant software and firmware updates installed using automated mechanisms",
+      "family": "System and Information Integrity",
+      "priority": "P1",
+      "baseline": ["MODERATE", "HIGH"],
+      "universal_controls": ["UC-007"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/trivy_scanner.py",
+        "scan_rule": "CVE_TRACKING",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-container-vulns.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/securebank/opa-gatekeeper/automated-remediation.yaml",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/ecr-scanning.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-patch-compliance.sh",
+        "acceptance_criteria": "Automated vulnerability tracking dashboard showing real-time remediation status for all systems"
+      },
+      "evidence": {
+        "type": "patch_compliance_dashboard",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/SI-2(2)-automated-status.json",
+        "retention_days": 2555
+      },
+      "discussion": "Automated mechanisms can track and determine the status of known flaws for system components. This capability is particularly important with the increasing number and frequency of software and firmware updates."
+    },
+    {
+      "control_id": "CM-7",
+      "title": "Least Functionality",
+      "description": "Configure the system to provide only mission-essential capabilities and prohibit or restrict the use of specified functions, ports, protocols, and/or services",
+      "family": "Configuration Management",
+      "priority": "P1",
+      "baseline": ["LOW", "MODERATE", "HIGH"],
+      "universal_controls": ["UC-006"],
+      "implementation": {
+        "scanner": "GP-CONSULTING/secops/1-scanners/cd/scan_kubernetes.py",
+        "scan_rule": "K8S_LEAST_FUNCTIONALITY",
+        "fixer": "GP-CONSULTING/secops/3-fixers/cd-fixes/fix-k8s-security-context.sh",
+        "opa_policy": "GP-CONSULTING/GP-POL-AS-CODE/securebank/opa-gatekeeper/least-functionality.yaml",
+        "terraform_module": "GP-CONSULTING/GP-POL-AS-CODE/securebank/terraform/eks-security.tf"
+      },
+      "validation": {
+        "method": "automated",
+        "frequency": "continuous",
+        "tool": "GP-CONSULTING/secops/5-validators/validate-k8s.sh",
+        "acceptance_criteria": "Containers run with read-only root filesystem, drop all capabilities except required, and use non-root users"
+      },
+      "evidence": {
+        "type": "configuration_baseline",
+        "location": "GP-DATA/active/security/DEFENSE/nist-800-53/CM-7-least-functionality.json",
+        "retention_days": 2555
+      },
+      "discussion": "Providing only mission-essential capabilities removes unnecessary functions that can be exploited by adversaries. Restricting functions, ports, protocols, and services can be achieved through policy or technical means."
+    }
+  ],
+  "compliance_summary": {
+    "total_controls": 22,
+    "fedramp_moderate_baseline": 22,
+    "automated_validation": 21,
+    "manual_validation": 1,
+    "universal_control_coverage": {
+      "UC-001": ["SC-28", "SC-28(1)"],
+      "UC-002": ["AC-6", "AC-6(1)", "AC-6(2)"],
+      "UC-003": ["SC-13", "SC-28"],
+      "UC-004": ["AC-4", "SC-7", "SC-7(5)"],
+      "UC-005": ["AU-2", "AU-6", "AU-11"],
+      "UC-006": ["AC-6", "AC-6(5)", "CM-7"],
+      "UC-007": ["RA-5", "SI-2", "SI-2(2)"],
+      "UC-008": ["CP-9", "CP-9(1)", "CP-10"]
+    }
+  },
+  "fedramp_requirements": {
+    "authorization_level": "Moderate",
+    "continuous_monitoring": true,
+    "monthly_vulnerability_scans": true,
+    "annual_assessment": true,
+    "conmon_reporting_frequency_days": 30,
+    "significant_change_request_required": true,
+    "3pao_assessment": "Required annually"
+  },
+  "reporting": {
+    "executive_summary": "GP-CONSULTING/secops/6-reports/compliance/nist-800-53-executive-summary.md",
+    "detailed_report": "GP-CONSULTING/secops/6-reports/compliance/nist-800-53-detailed-report.pdf",
+    "ssp": "GP-DATA/active/security/DEFENSE/nist-800-53/SSP-2025.pdf",
+    "poam": "GP-DATA/active/security/DEFENSE/nist-800-53/POAM-2025.xlsx"
+  }
+}

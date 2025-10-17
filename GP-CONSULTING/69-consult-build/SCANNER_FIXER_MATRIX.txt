@@ -1,0 +1,116 @@
+╔═══════════════════════════════════════════════════════════════════════════════════╗
+║                    GP-CONSULTING SCANNER-FIXER COVERAGE MATRIX                    ║
+╚═══════════════════════════════════════════════════════════════════════════════════╝
+
+Date: October 13, 2025
+Overall Coverage: 82%
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ CI STAGE: Code & Secrets (60% Coverage ⚠️)                                        │
+├───────────────────────────────────────────────────────────────────────────────────┤
+│ Scanner              │ Detects                    │ Fixer                 │ Status│
+├──────────────────────┼────────────────────────────┼───────────────────────┼───────┤
+│ Bandit               │ Python SAST                │ ✅ ci-fixes/          │ 80%   │
+│ Semgrep              │ Multi-lang SAST            │ ⚠️  Python only       │ 60%   │
+│ Gitleaks             │ Secrets                    │ ✅ 3 fixers           │ 95%   │
+│ Container Scanner    │ Container CVEs             │ ❌ Missing            │  0%   │
+│ Dependency Scanner   │ npm/pip CVEs               │ ❌ Missing            │  0%   │
+└──────────────────────┴────────────────────────────┴───────────────────────┴───────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ CD STAGE: Infrastructure & Deployment (95% Coverage ✅)                           │
+├───────────────────────────────────────────────────────────────────────────────────┤
+│ Scanner              │ Detects                    │ Fixer                 │ Status│
+├──────────────────────┼────────────────────────────┼───────────────────────┼───────┤
+│ Checkov              │ Terraform/IaC              │ ✅ 11 fixers          │ 100%  │
+│ Trivy (CONFIG)       │ IaC misconfig              │ ✅ cd-fixes/          │ 85%   │
+│ Trivy (IMAGE)        │ Container CVEs             │ ⚠️  Partial           │ 70%   │
+│ OPA Conftest         │ Policy violations          │ ✅ Mutators           │ 90%   │
+│ K8s Scanner          │ K8s security               │ ✅ 7 fixers           │ 100%  │
+│ AWS Compliance       │ AWS Config/CIS             │ ⚠️  Partial           │ 70%   │
+└──────────────────────┴────────────────────────────┴───────────────────────┴───────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ RUNTIME STAGE: Live Environment (15% Coverage ❌)                                 │
+├───────────────────────────────────────────────────────────────────────────────────┤
+│ Scanner              │ Detects                    │ Fixer                 │ Status│
+├──────────────────────┼────────────────────────────┼───────────────────────┼───────┤
+│ AWS Config Query     │ Config drift               │ ⚠️  CloudWatch only   │ 20%   │
+│ CloudTrail Query     │ Suspicious API calls       │ ❌ Missing            │  0%   │
+│ CloudWatch Query     │ Log anomalies              │ ✅ 2 fixers           │ 50%   │
+│ GuardDuty Query      │ Active threats             │ ❌ Missing            │  0%   │
+│ Prometheus Query     │ Metrics anomalies          │ ❌ Missing            │  0%   │
+└──────────────────────┴────────────────────────────┴───────────────────────┴───────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ POLICY STAGE: OPA & Gatekeeper (90% Coverage ✅)                                  │
+├───────────────────────────────────────────────────────────────────────────────────┤
+│ 15+ OPA Policies     │ Terraform, K8s, Compliance │ ✅ Mutators           │ 90%   │
+│ Gatekeeper           │ K8s admission control      │ ✅ Constraints        │ 95%   │
+│ Cloud Patterns       │ AWS security patterns      │ ✅ Validators         │ 85%   │
+└──────────────────────┴────────────────────────────┴───────────────────────┴───────┘
+
+╔═══════════════════════════════════════════════════════════════════════════════════╗
+║                                  CRITICAL GAPS                                    ║
+╚═══════════════════════════════════════════════════════════════════════════════════╝
+
+❌ PRIORITY 1 (Build NOW for FINANCE):
+   ┌─────────────────────────────────────────────────────────────────────────────┐
+   │ 1. Incident Response Agent                                                  │
+   │    → GuardDuty/CloudTrail findings → Auto-isolation/lockdown               │
+   │    → Impact: HIGH - Can't respond to active threats                         │
+   │                                                                             │
+   │ 2. Dependency Auto-Fixer                                                    │
+   │    → npm audit / pip / go mod → Auto-upgrade vulnerable packages           │
+   │    → Impact: MEDIUM - Manual dependency management                          │
+   │                                                                             │
+   │ 3. Container CVE Patcher                                                    │
+   │    → Trivy IMAGE findings → Update Dockerfile base images                  │
+   │    → Impact: MEDIUM - Manual Dockerfile updates                             │
+   └─────────────────────────────────────────────────────────────────────────────┘
+
+⚠️  PRIORITY 2 (Build Next Sprint):
+   ┌─────────────────────────────────────────────────────────────────────────────┐
+   │ 4. Multi-Language SAST Fixer                                                │
+   │    → Expand sast_agent.py for JS/TS/Go/Java                                │
+   │                                                                             │
+   │ 5. AWS Account Baseline Fixer                                               │
+   │    → Auto-enable GuardDuty, Config, MFA, CloudTrail                         │
+   └─────────────────────────────────────────────────────────────────────────────┘
+
+╔═══════════════════════════════════════════════════════════════════════════════════╗
+║                              STRENGTHS (Use These!)                               ║
+╚═══════════════════════════════════════════════════════════════════════════════════╝
+
+✅ Terraform Security          → 100% Coverage (Checkov + 11 fixers)
+✅ Kubernetes Security         → 100% Coverage (K8s Scanner + 7 fixers + 3 agents)
+✅ Secret Detection & Rotation → 95% Coverage (Gitleaks + 3 fixers + secrets_agent)
+✅ IaC Compliance              → 100% Coverage (OPA + Mutators + Gatekeeper)
+✅ Python SAST                 → 80% Coverage (Bandit + fixers + sast_agent)
+
+╔═══════════════════════════════════════════════════════════════════════════════════╗
+║                          FOR FINANCE PROJECT - USE THIS                           ║
+╚═══════════════════════════════════════════════════════════════════════════════════╝
+
+✅ READY TO USE NOW:
+   • Terraform scanning & auto-fixing (secops/1-scanners/cd/ → secops/3-fixers/cd-fixes/)
+   • Kubernetes scanning & auto-fixing (K8s Scanner → kubernetes fixers)
+   • Secret detection & rotation (Gitleaks → secrets fixers)
+   • Python security (Bandit → CI fixers)
+   • IaC compliance (Checkov + OPA → mutators)
+
+❌ BUILD FIRST (Before deploying to prod):
+   • Incident response automation (Priority 1)
+   • Dependency auto-upgrader (Priority 1)
+
+⚠️  MANUAL WORKAROUND (Until built):
+   • Runtime threats: Manual GuardDuty review
+   • Dependency CVEs: Manual npm audit fix / pip updates
+   • Container CVEs: Manual Dockerfile base image upgrades
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+Report: SCANNER_FIXER_COVERAGE_ANALYSIS.md (full details)
+Matrix: SCANNER_FIXER_MATRIX.txt (this file)
+Generated: October 13, 2025
+

@@ -1,0 +1,17 @@
+{
+  "scanner_name": "gitleaks",
+  "start_time": "2025-10-15T12:47:32.522423",
+  "end_time": "2025-10-15T12:47:32.853561",
+  "duration_seconds": 0.33,
+  "exit_code": 0,
+  "total_issues": 55,
+  "severity_breakdown": {
+    "CRITICAL": 55,
+    "HIGH": 0,
+    "MEDIUM": 0,
+    "LOW": 0,
+    "INFO": 0
+  },
+  "retry_count": 0,
+  "status": "success"
+}
