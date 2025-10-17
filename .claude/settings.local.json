@@ -223,7 +223,8 @@
       "Bash(bin/kubescape version:*)",
       "Bash(FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch:*)",
       "Bash(git for-each-ref:*)",
-      "Bash(git update-ref:*)"
+      "Bash(git update-ref:*)",
+      "Bash(git rev-list:*)"
     ],
     "deny": [],
     "ask": []
